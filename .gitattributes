@@ -4,3 +4,5 @@ overlay/** -text
 *.sh text eol=lf
 *.py text eol=lf
 *.xml text eol=lf
+# Source overlays are exact-byte snapshots, including XML line endings.
+overlay/** -text
