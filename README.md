@@ -4,6 +4,16 @@
 
 AOSPA Calcite / Android 17，产品 `aospa_pudding`。源码获取、设备适配、SM8850 平台补丁、输入校验和构建打包入口集中在本仓库。
 
+## 上游来源与致谢
+
+本项目基于 [lolipuru](https://github.com/lolipuru) 的 Xiaomi 17（pudding）LineageOS 设备适配，移植到 AOSPA Calcite / Android 17，并整合本地修改。使用的上游包括：
+
+- [pudding 设备树](https://github.com/lolipuru/android_device_xiaomi_pudding)：`device/xiaomi/pudding`。
+- [SM8850 公共设备树](https://github.com/lolipuru/android_device_xiaomi_sm8850-common)：`device/xiaomi/sm8850-common`。
+- [SM8850 公共 Vendor](https://github.com/lolipuru/android_vendor_xiaomi_sm8850-common)：`vendor/xiaomi/sm8850-common`。
+
+**感谢 lolipuru 的设备适配与维护工作，也感谢 AOSPA、LineageOS 及相关上游贡献者。** 原始版权和许可证保留，基础提交见 [source-origins.json](source-origins.json)，本仓库的适配修改见 `patches/` 和 `overlay/`。
+
 ## 环境
 
 Ubuntu 22.04 / 24.04，x86_64，建议 64 GB 内存、500 GB 可用磁盘。

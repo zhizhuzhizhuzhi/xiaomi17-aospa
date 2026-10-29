@@ -4,6 +4,16 @@
 
 One build-source kit for AOSPA Calcite / Android 17: pinned AOSPA/device/SM8850 sources, patches, overlays, prepared-input hashes, and build/packaging tools. Original upstream attribution is retained.
 
+## Upstream sources and acknowledgements
+
+This project builds on [lolipuru](https://github.com/lolipuru)'s LineageOS device bring-up for Xiaomi 17 (pudding), adapted for AOSPA Calcite / Android 17 with local integration changes. It uses these upstream repositories:
+
+- [Pudding device tree](https://github.com/lolipuru/android_device_xiaomi_pudding): `device/xiaomi/pudding`.
+- [SM8850 common device tree](https://github.com/lolipuru/android_device_xiaomi_sm8850-common): `device/xiaomi/sm8850-common`.
+- [SM8850 common vendor](https://github.com/lolipuru/android_vendor_xiaomi_sm8850-common): `vendor/xiaomi/sm8850-common`.
+
+**Thank you to lolipuru for the device bring-up and maintenance, and to AOSPA, LineageOS and the other upstream contributors.** Original copyrights and licenses are retained. Base commits are recorded in [source-origins.json](source-origins.json); local adaptation changes are in `patches/` and `overlay/`.
+
 ## Checkout
 
 Use Ubuntu 22.04/24.04 x86_64 with Android build dependencies, git-lfs and repo installed. 64 GB RAM and 500 GB free storage are recommended.
