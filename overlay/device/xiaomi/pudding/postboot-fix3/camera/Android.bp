@@ -1,0 +1,40 @@
+// Rebuild all preserved camera payload edits; android_app_import signs the result.
+python_binary_host {
+    name: "pudding_camera_packager",
+    main: "rebuild_camera.py",
+    srcs: ["rebuild_camera.py"],
+}
+
+genrule {
+    name: "pudding_camera_runtime_apk",
+    tools: ["pudding_camera_packager"],
+    srcs: ["input/MiuiCamera-input-platform.apk", "camera-recipe.json", "camera-payload-delta.zip"],
+    out: ["MiuiCamera.apk"],
+    cmd: "$(location pudding_camera_packager) --input $(location input/MiuiCamera-input-platform.apk) " +
+         "--recipe $(location camera-recipe.json) --delta $(location camera-payload-delta.zip) --out $(out)",
+}
+
+android_app_import {
+    name: "MiuiCameraPudding",
+    overrides: ["Aperture", "ApertureFrameworksBaseOverlay"],
+    apk: ":pudding_camera_runtime_apk",
+    certificate: "platform",
+    privileged: true,
+    dex_preopt: { enabled: false },
+}
+cc_prebuilt_library_shared {
+    name: "libcamera_algoup_jni.pudding",
+    stem: "libcamera_algoup_jni.xiaomi",
+    srcs: ["libcamera_algoup_jni.xiaomi.so"],
+    compile_multilib: "64",
+    strip: { none: true },
+    shared_libs: ["libbinder", "libcamera_client", "libcamera_metadata", "libcutils", "libgui", "liblog", "libutils", "libvndksupport", "libandroid", "libandroid_runtime", "libbase", "libmedia_jni_utils", "libnativehelper", "libnativewindow", "libui", "android.hidl.token@1.0-utils", "libc++", "libc", "libm", "libdl"],
+}
+cc_prebuilt_library_shared {
+    name: "libcamera_mianode_jni.pudding",
+    stem: "libcamera_mianode_jni.xiaomi",
+    srcs: ["libcamera_mianode_jni.xiaomi.so"],
+    compile_multilib: "64",
+    strip: { none: true },
+    shared_libs: ["libbinder", "libcamera_client", "libcamera_metadata", "libcutils", "libgui", "liblog", "libutils", "libvndksupport", "libxml2", "libandroid", "libmedia_jni_utils", "libui", "libc++", "libc", "libm", "libdl"],
+}

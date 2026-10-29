@@ -1,0 +1,112 @@
+diff --git a/aps/Android.mk b/aps/Android.mk
+index 299ce135440ddb36bb8dcff08366a85a9310b9bb..10535147346a0d7f1e5a90c789c3bc22c63d4e44 100644
+--- a/aps/Android.mk
++++ b/aps/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -33,3 +35,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel
+diff --git a/offload/Android.mk b/offload/Android.mk
+index 1ef95f55d4f64b38011eb8450e1b16cf8db4eac6..19a7d8805f9af35b56cdc790b3a71bed33a61900 100644
+--- a/offload/Android.mk
++++ b/offload/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -38,3 +40,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel
+diff --git a/perf/Android.mk b/perf/Android.mk
+index 15c9d7ecc1e3f39790e83e78a42510de945f4c26..8251986db1b3c429e8c7b83989f15d7f0cedf0b1 100644
+--- a/perf/Android.mk
++++ b/perf/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -51,3 +53,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel
+diff --git a/perf_tether/Android.mk b/perf_tether/Android.mk
+index 518b595c45aca28c0afda300eb77076bd6a76332..ceb790a0034a3277d4521b68164c18d9c8b459ec 100644
+--- a/perf_tether/Android.mk
++++ b/perf_tether/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -39,3 +41,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel
+diff --git a/sch/Android.mk b/sch/Android.mk
+index 41611d394914118d3fd533d8aa01f3e19848413e..7c406f21957043035d0c4a58d828cdbd9d2a1159 100644
+--- a/sch/Android.mk
++++ b/sch/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -21,3 +23,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel
+diff --git a/shs/Android.mk b/shs/Android.mk
+index bec2595b8d07dba2536a2048c8beb01561efed1f..3ae3f8011e713b07085329afa05461c01dff66ff 100644
+--- a/shs/Android.mk
++++ b/shs/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ RMNET_SHS_DLKM_PLATFORMS_LIST := lahaina
+ RMNET_SHS_DLKM_PLATFORMS_LIST += taro
+@@ -39,3 +41,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ 
+ endif #End of Check for target
+ endif #End of Check for qssi target
++
++endif # pudding prebuilt kernel
+diff --git a/wlan/Android.mk b/wlan/Android.mk
+index dbd4548e39321fe11b37d6bd6b6ea7e39cd7e64c..9e786d21ae2365b705da9f7d3cb675e831844cd4 100644
+--- a/wlan/Android.mk
++++ b/wlan/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_AUTO),true)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ 
+@@ -42,3 +44,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #End of check for target
+ endif #End of Check for qssi target
+ endif #End of check for AUTO Target
++
++endif # pudding prebuilt kernel

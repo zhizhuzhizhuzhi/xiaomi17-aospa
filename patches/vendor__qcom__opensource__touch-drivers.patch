@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index 9149b8e22f36cf1740dea5188fde687fa38a7f79..e5f05a6b9c1b534f6928e946669ea591bdd2c95f 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ # Android makefile for display kernel modules
+ 
+ TOUCH_DLKM_ENABLE := true
+@@ -530,3 +532,5 @@ else
+ endif #kona
+        endif # DLKM check
+ endif
++
++endif # pudding prebuilt kernel

@@ -1,0 +1,33 @@
+diff --git a/Android.bp b/Android.bp
+index 6d39a3fcf16f3a45ace4ba7281e36d6a6a871811..78234a6db5d8e9c82f206e71fda85f8bdf3be670 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -23,10 +23,7 @@ cc_library_headers {
+     defaults: ["generated_kernel_header_defaults"],
+ }
+ 
+-cc_library_headers {
+-    name: "qti_kernel_headers",
+-    defaults: ["generated_kernel_header_defaults"],
+-}
++// qti_kernel_headers is supplied by AOSPA kernel/qcom-headers.
+ 
+ cc_library_headers {
+     name: "smmu_proxy_uapi_header",
+@@ -963,3 +960,16 @@ prebuilt_hidl_interfaces {
+         "vendor.qti.hardware.wigig.netperftuner@1.0::INetPerfTuner",
+     ],
+ }
++
++// Bridge the CAF header aliases to AOSPA's kernel_headers module.
++cc_defaults {
++    name: "generated_kernel_header_defaults",
++    vendor_available: true,
++    recovery_available: true,
++    header_libs: ["qti_kernel_headers"],
++    export_header_lib_headers: ["qti_kernel_headers"],
++}
++cc_library_headers {
++    name: "generated_kernel_headers",
++    defaults: ["generated_kernel_header_defaults"],
++}

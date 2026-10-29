@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index f31cf0109aa4aced654816937956fe7e01b58c00..2b283c197603b169b86e9299855953451a49d899 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ # Android Makefile for WLAN platform modules
+ 
+ ENABLE_WLAN_PLATFORM_DLKM := false
+@@ -133,3 +135,5 @@ LOCAL_MODULE_DEBUG_ENABLE := true
+ LOCAL_MODULE_PATH         := $(KERNEL_MODULES_OUT)
+ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif #ENABLE_WLAN_PLATFORM_DLKM
++
++endif # pudding prebuilt kernel

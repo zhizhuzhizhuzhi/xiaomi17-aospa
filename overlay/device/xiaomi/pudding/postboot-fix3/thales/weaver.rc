@@ -1,0 +1,5 @@
+service vendor.weaver_nxp /vendor/bin/hw/pudding.weaver-service.thales
+    interface aidl android.hardware.weaver.IWeaver/default
+    class hal
+    user vendor_thales_weaver
+    group vendor_thales_weaver system drmrpc

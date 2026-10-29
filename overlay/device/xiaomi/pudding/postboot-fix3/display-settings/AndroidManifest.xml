@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xiaomi.settings.puddingdisplay" android:sharedUserId="android.uid.system"
+    android:versionCode="1" android:versionName="1.0">
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <application android:enabled="false" android:label="调光模式" android:directBootAware="true"
+        android:defaultToDeviceProtectedStorage="true" android:theme="@android:style/Theme.DeviceDefault.Settings">
+        <activity android:name=".DimmingActivity" android:exported="true" android:label="调光模式">
+            <intent-filter><action android:name="com.android.settings.action.IA_SETTINGS" /></intent-filter>
+            <meta-data android:name="com.android.settings.category" android:value="com.android.settings.category.ia.display" />
+            <meta-data android:name="com.android.settings.order" android:value="-11" />
+        </activity>
+        <receiver android:name=".BootReceiver" android:exported="true" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

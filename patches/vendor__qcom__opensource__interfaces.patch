@@ -1,0 +1,26 @@
+diff --git a/btconfigstore/1.0/Android.bp b/btconfigstore/1.0/Android.bp
+index 2c0f21f0eb1274a4cbea5bb78b56a7c3391c0e2e..274a0529bc355f0ffa04a342bf662a15e4762b6d 100644
+--- a/btconfigstore/1.0/Android.bp
++++ b/btconfigstore/1.0/Android.bp
+@@ -12,4 +12,8 @@ hidl_interface {
+         "android.hidl.base@1.0",
+     ],
+     gen_java: true,
++    apex_available: [
++        "//apex_available:platform",
++        "com.android.bt",
++    ],
+ }
+diff --git a/btconfigstore/2.0/Android.bp b/btconfigstore/2.0/Android.bp
+index 2dbca581dced025bd45f81e532e63e4e8ad1954b..45acad76d5fe4c1cb83b24ad1a063d1e6b1e1395 100644
+--- a/btconfigstore/2.0/Android.bp
++++ b/btconfigstore/2.0/Android.bp
+@@ -12,4 +12,8 @@ hidl_interface {
+         "android.hidl.base@1.0",
+     ],
+     gen_java: true,
++    apex_available: [
++        "//apex_available:platform",
++        "com.android.bt",
++    ],
+ }

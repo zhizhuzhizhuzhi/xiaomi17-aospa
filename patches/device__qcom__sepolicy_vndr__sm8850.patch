@@ -1,0 +1,125 @@
+diff --git a/generic/vendor/common/file.te b/generic/vendor/common/file.te
+index bb33f3a7b315a48bc1b79ce1a55758a0bd865c3d..00dd6720e06c47aabdf1a001ff95ea09c38dd0ed 100644
+--- a/generic/vendor/common/file.te
++++ b/generic/vendor/common/file.te
+@@ -282,7 +282,7 @@ type vendor_sysfs_cpsk_power, sysfs_type, fs_type;
+ type vendor_mpam_data_file, file_type, data_file_type;
+ type vendor_sysfs_mpam, fs_type, sysfs_type;
+ 
+-until_board_api(209904, `
++until_board_api(202604, `
+     type vendor_sysfs_powercap, fs_type, sysfs_type;
+ ')
+ 
+diff --git a/generic/vendor/common/genfs_contexts b/generic/vendor/common/genfs_contexts
+index 02bb2d1787dc36b15364ec1b32351e825a6c159a..40e794d220c79fcc3b7d1bf7a90fb23f37398217 100644
+--- a/generic/vendor/common/genfs_contexts
++++ b/generic/vendor/common/genfs_contexts
+@@ -271,7 +271,7 @@ genfscon sysfs /devices/soc0/npu u:object_r:vendor_sys_sp_comp:s0
+ 
+ genfscon sysfs /devices/platform/soc/soc:qcom,cache-allocation              u:object_r:vendor_sysfs_mpam:s0
+ 
+-until_board_api(209904, `
++until_board_api(202604, `
+     genfscon sysfs /devices/virtual/powercap u:object_r:vendor_sysfs_powercap:s0
+     genfscon sysfs /class/powercap           u:object_r:vendor_sysfs_powercap:s0
+ ')
+diff --git a/generic/vendor/common/hal_power_stats_default.te b/generic/vendor/common/hal_power_stats_default.te
+index 9268f65b92d5b2cac379e7c5bfc37ab52d963b4f..2afbffaf0d31da352762be3f6abe31d99cd672a9 100644
+--- a/generic/vendor/common/hal_power_stats_default.te
++++ b/generic/vendor/common/hal_power_stats_default.te
+@@ -30,7 +30,11 @@
+ # SPDX-License-Identifier: BSD-3-Clause-Clear
+ 
+ # This is required for powercap sysfs access
+-until_board_api(209904, `
++until_board_api(202604, `
+     allow hal_power_stats_default vendor_sysfs_powercap:dir r_dir_perms;
+     allow hal_power_stats_default vendor_sysfs_powercap:file r_file_perms;
+ ')
++starting_at_board_api(202604, `
++    allow hal_power_stats_default sysfs_powercap:dir r_dir_perms;
++    allow hal_power_stats_default sysfs_powercap:file r_file_perms;
++')
+diff --git a/generic/vendor/common/qlm-service.te b/generic/vendor/common/qlm-service.te
+index 6cc151c92849c8a3c5ce95afdbbafeeedb53d372..23b379705379ecf7beeca19c15b8f77cfda14052 100644
+--- a/generic/vendor/common/qlm-service.te
++++ b/generic/vendor/common/qlm-service.te
+@@ -17,7 +17,11 @@ r_dir_file(vendor_qlm_service, sysfs_thermal)
+ allow vendor_qlm_service sysfs_thermal:lnk_file r_file_perms;
+ 
+ # This is required for power telemetry sysfs access
+-until_board_api(209904, `
++until_board_api(202604, `
+ 	allow vendor_qlm_service vendor_sysfs_powercap:dir r_dir_perms;
+ 	allow vendor_qlm_service vendor_sysfs_powercap:file r_file_perms;
+ ')
++starting_at_board_api(202604, `
++	allow vendor_qlm_service sysfs_powercap:dir r_dir_perms;
++	allow vendor_qlm_service sysfs_powercap:file r_file_perms;
++')
+diff --git a/generic/vendor/common/thermal-engine.te b/generic/vendor/common/thermal-engine.te
+index 22faa73710615af6bffec842aba5e195f786cc3f..f4d1a573f4631c5ca377dafd7be9cb68da6e3626 100644
+--- a/generic/vendor/common/thermal-engine.te
++++ b/generic/vendor/common/thermal-engine.te
+@@ -113,10 +113,14 @@ allow vendor_thermal-engine block_device:dir r_dir_perms;
+ allow vendor_thermal-engine vendor_limits_block_device:blk_file rw_file_perms;
+ 
+ # This is required for power telemetry sysfs access
+-until_board_api(209904, `
++until_board_api(202604, `
+ 	allow vendor_thermal-engine vendor_sysfs_powercap:dir r_dir_perms;
+ 	allow vendor_thermal-engine vendor_sysfs_powercap:file rw_file_perms;
+ ')
++starting_at_board_api(202604, `
++	allow vendor_thermal-engine sysfs_powercap:dir r_dir_perms;
++	allow vendor_thermal-engine sysfs_powercap:file rw_file_perms;
++')
+ 
+ #This is required to read the UFS sysfs
+ allow vendor_thermal-engine vendor_sysfs_scsi_host:dir r_dir_perms;
+diff --git a/qva/vendor/common/hal_soter_qti.te b/qva/vendor/common/hal_soter_qti.te
+index db83bce9b2fbb988a3edc7ae04e08abddd99c11a..8230dba05c887c101396aff71c01452e25846360 100644
+--- a/qva/vendor/common/hal_soter_qti.te
++++ b/qva/vendor/common/hal_soter_qti.te
+@@ -54,5 +54,25 @@ allow vendor_hal_soter_qti vendor_dmabuf_qseecom_ta_heap_device:chr_file r_file_
+ #Allow soter HAL to interract with DMABUF
+ allow vendor_hal_soter_qti vendor_dmabuf_qseecom_heap_device:chr_file r_file_perms;
+ 
+-hal_attribute_service(vendor_hal_soter, vendor_hal_soteraidl_service)
++# Soter is intentionally callable by ordinary applications on this product.
++# Keep the legacy HIDL service protected; expose only the declared AIDL service.
++allow vendor_hal_soter_client vendor_hal_soteraidl_service:service_manager find;
++add_service(vendor_hal_soter_server, vendor_hal_soteraidl_service)
++allow untrusted_app_all vendor_hal_soteraidl_service:service_manager find;
++binder_call(untrusted_app_all, vendor_hal_soter_server)
++
++# Preserve the original service-lookup test for non-application domains.
++build_test_only(`
++  neverallow {
++    domain
++    -vendor_hal_soter_client
++    -vendor_hal_soter_server
++    -untrusted_app_all
++    -atrace
++    -dumpstate
++    -shell
++    -system_app
++    -traceur_app
++  } vendor_hal_soteraidl_service:service_manager find;
++')
+ binder_call(vendor_hal_soter_qti, servicemanager);
+diff --git a/qva/vendor/common/service.te b/qva/vendor/common/service.te
+index bba907183ccb7d92d6e211264a7f7aef3a957be4..d8829d1630e762ecd9c99ecccc16a43b9ddf7b4f 100644
+--- a/qva/vendor/common/service.te
++++ b/qva/vendor/common/service.te
+@@ -60,7 +60,8 @@ type vendor_tsa_hdcpvndservice,          service_manager_type;
+ type hal_wificfr_service,                hal_service_type, protected_service, service_manager_type;
+ type vendor_hal_mwqemadapter_aidlservice,hal_service_type,protected_service,service_manager_type;
+ type vendor_hal_dpmaidl_service,hal_service_type, protected_service, service_manager_type;
+-type vendor_hal_soteraidl_service,       hal_service_type, protected_service, service_manager_type;
++# Public Soter AIDL capability and signing API; application access is intentional.
++type vendor_hal_soteraidl_service,       hal_service_type, service_manager_type;
+ type vendor_aidl_hal_pasrmanager_memory_service,	service_manager_type, hal_service_type, protected_service;
+ type vendor_hal_authsecret_service,      hal_service_type,protected_service,service_manager_type;
+ type vendor_hal_secureprocessor_aidl_service, hal_service_type,  protected_service, service_manager_type;

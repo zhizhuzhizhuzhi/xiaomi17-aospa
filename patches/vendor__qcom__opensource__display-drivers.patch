@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index f4d3fa2ad9039895ad92b52859d2946d752f5b14..cdf58ab5f4a7f3dc2f8015fdb812d18436b71e57 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ # Android makefile for display kernel modules
+ DISPLAY_DLKM_ENABLE := true
+ ifeq ($(TARGET_KERNEL_DLKM_DISABLE), true)
+@@ -10,3 +12,5 @@ ifeq ($(DISPLAY_DLKM_ENABLE),  true)
+ 	LOCAL_PATH := $(call my-dir)
+ 	include $(LOCAL_PATH)/msm/Android.mk
+ endif
++
++endif # pudding prebuilt kernel

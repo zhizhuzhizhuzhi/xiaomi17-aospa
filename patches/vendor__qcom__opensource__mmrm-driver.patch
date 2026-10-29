@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index 6d7da2833427327ff847e0d1544ec205a123716b..e6597573b65d71a05f5aabe017b168a6fee4d6a2 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ TARGET_MMRM_ENABLE := false
+ ifeq ($(TARGET_KERNEL_DLKM_DISABLE),true)
+ 	ifeq ($(TARGET_KERNEL_DLKM_MMRM_OVERRIDE),true)
+@@ -72,3 +74,5 @@ ifeq ($(CONFIG_MSM_MMRM_VM),y)
+ 	include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif
+ endif
++
++endif # pudding prebuilt kernel

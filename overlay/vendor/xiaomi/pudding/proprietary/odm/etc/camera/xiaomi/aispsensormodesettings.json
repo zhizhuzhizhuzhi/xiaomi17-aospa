@@ -1,0 +1,114 @@
+{
+    "CameraIdList": {
+        "CameraId": [
+            {
+                //CameraId:rear wide
+                "PhysicalId": 1,
+                //ALGO Definition AISP_BAYER_BGGR
+                "BayerPattern": 2,
+                "AispSensorModeInfoMap":[
+                    {
+                        //aisp sensor mode: normal binning
+                        "aispSensorMode": 0,
+                        "SensorModeList": [1, 11, 21]
+                    },
+                    {
+                        //aisp sensor mode: quad(12.5M)
+                        "aispSensorMode": 15,
+                        "isInSensorZoom": 1,
+                        "SensorModeList": [2, 12]
+                    },
+                    {
+                        //aisp sensor mode: dxg combine
+                        "aispSensorMode": 2,
+                        "SensorModeList": [3, 13]
+                    },
+                    {
+                        //aisp sensor mode: DOL2 + binning
+                        "aispSensorMode": 5,
+                        "SensorModeList": [4, 14]
+                    },
+                    {
+                        //aisp sensor mode: quad(50M)
+                        "aispSensorMode": 4,
+                        "qcfaFactor": 2,
+                        "SensorModeList": [6, 16]
+                    },
+                    {
+                        //aisp sensor mode: lbmf + isz quad
+                        "aispSensorMode": 9,
+                        "isInSensorZoom": 1,
+                        "SensorModeList": [26, 27]
+                    },
+                    {
+                        //aisp sensor mode: lbmf + binning
+                        "aispSensorMode": 10,
+                        "SensorModeList": [5, 15]
+                    }
+                ]
+            },
+            {
+                //CameraId:rear tele
+                "PhysicalId": 2,
+                //ALGO Definition AISP_BAYER_GBRG
+                "BayerPattern": 3,
+                "AispSensorModeInfoMap":[
+                    {
+                        //aisp sensor mode: binning
+                        "aispSensorMode": 0,
+                        "SensorModeList": [1, 9]
+                    },
+                    {
+                        //aisp sensor mode: quad(12.5M)
+                        "aispSensorMode": 15,
+                        "isInSensorZoom": 1,
+                        "SensorModeList": [2, 10]
+                    },
+                    {
+                        //aisp sensor mode: quad(50M)
+                        "aispSensorMode": 4,
+                        "qcfaFactor": 2,
+                        "SensorModeList": [4, 12]
+                    },
+                    {
+                        //aisp sensor mode: LBMF + binning
+                        "aispSensorMode": 10,
+                        "SensorModeList": [3, 11]
+                    }
+                ]
+            },
+            {
+                //CameraId:rear ultra
+                "PhysicalId": 3,
+                //ALGO Definition AISP_BAYER_BGGR
+                "BayerPattern": 2,
+                "AispSensorModeInfoMap":[
+                    {
+                        //aisp sensor mode: binning
+                        "aispSensorMode": 0,
+                        "SensorModeList": [1, 4, 7, 9]
+                    },
+                    {
+                        //aisp sensor mode: quad(50M)
+                        "aispSensorMode": 4,
+                        "qcfaFactor": 2,
+                        "SensorModeList": [8]
+                    }
+                ]
+            },
+            {
+                //CameraId:front
+                "PhysicalId": 17,
+                //ALGO Definition AISP_BAYER_RGGB
+                "BayerPattern": 0,
+                "AispSensorModeInfoMap":[
+                    {
+                        //aisp sensor mode: binning
+                        "aispSensorMode": 0,
+                        "SensorModeList": [1, 2]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,187 @@
+{
+  "status": "PASS",
+  "scope": "Three real DEX rejection regions interpreted for boundary cases; full ART/device validation still required",
+  "original_policy_sha256": "f9f71c808f1ea5bd2113852e59d439f1295a6677829150a2ac9211bd53500210",
+  "derived_policy_sha256": "d68d13e2cd1a92a503a35b7c675bf8401c77305739ca3a9d39c1cd2c8da7f4f9",
+  "classes": 30,
+  "unchanged_classes": 29,
+  "only_changed_class": "com/xiaomi/pudding/brightness/stock/DualSensorPolicy.smali",
+  "added_slow_confirmations": 3,
+  "production_instructions_added": 9,
+  "native_timers_and_switching_instructions_unchanged": true,
+  "roundtrip_canonical_smali_exact": true,
+  "test_cases": [
+    {
+      "path": "dual_main",
+      "scenario": "brief_shadow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_main",
+      "scenario": "sustained_dark",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "dual_main",
+      "scenario": "debounce_pending",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_main",
+      "scenario": "fast_recovered",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_main",
+      "scenario": "slow_at_threshold",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "dual_main",
+      "scenario": "slow_still_bright",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_main",
+      "scenario": "invalid_fast",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_main",
+      "scenario": "invalid_slow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "brief_shadow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "sustained_dark",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "debounce_pending",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "fast_recovered",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "slow_at_threshold",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "slow_still_bright",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "invalid_fast",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "dual_assist",
+      "scenario": "invalid_slow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "brief_shadow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "sustained_dark",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "single_main",
+      "scenario": "debounce_pending",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "fast_recovered",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "slow_at_threshold",
+      "before_allows_darkening": true,
+      "after_allows_darkening": true,
+      "expected": true
+    },
+    {
+      "path": "single_main",
+      "scenario": "slow_still_bright",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "invalid_fast",
+      "before_allows_darkening": false,
+      "after_allows_darkening": false,
+      "expected": false
+    },
+    {
+      "path": "single_main",
+      "scenario": "invalid_slow",
+      "before_allows_darkening": true,
+      "after_allows_darkening": false,
+      "expected": false
+    }
+  ],
+  "tool_sha256": {
+    "baksmali": "9b821ea330526f97231888402664b50617b81561e8b2d6bc21c55c358bc8440f",
+    "smali": "b8f790266a640a0de35391dc91fc12c7519ae4c5501f12496b138003fe4631ef"
+  }
+}

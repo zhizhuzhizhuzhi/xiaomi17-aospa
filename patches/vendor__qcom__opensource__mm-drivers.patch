@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index 86e3104278ae4ccf71e0c3bbb88de27d1ac40d00..ca7f2d0506d1250006935409b48f6f49c03e798d 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ MM_DRIVER_PATH := $(call my-dir)
+ 
+ MM_DRV_DLKM_ENABLE := true
+@@ -14,3 +16,5 @@ ifeq ($(MM_DRV_DLKM_ENABLE), true)
+ 		include $(MM_DRIVER_PATH)/sync_fence/Android.mk
+ 	endif
+ endif
++
++endif # pudding prebuilt kernel

@@ -1,0 +1,11 @@
+{
+  "status": "SOURCE_INTEGRATED_AND_CHECKED_NOT_FLASHED",
+  "jar_sha256": "d89723c6f3d77b48c817b8b54dbe2d2e16c2e9f01916982cd070fae73dba9ca1",
+  "original_classes_preserved": 30,
+  "framework_integration_compile": "AutomaticBrightnessController + XiaomiBrightnessPolicy passed javac against current AOSPA framework and services headers",
+  "actual_device": "b0f603a8 / pudding",
+  "hardware_read_test": "Both ALS channels registered. User tests showed rear takeover at01:39:22 rearFast3634.3855 lux and return to front at01:39:28 rear1.2639492 front9.847622. Read-only: no display brightness writes.",
+  "final_jar_device_test": "Probe --verify completed ORIGINAL_POLICY_LIFECYCLE_LINK_TEST_PASS.",
+  "limitations": "Not flashed; actual screen brightness behavior under this policy still requires unified image reboot and physical validation. Original AON helper app absent; original scene detector bytecode retained but AON capability gated until helper service is available.",
+  "authorization": "Original Xiaomi brightness policy internal scheduling retained as explicitly requested. No unrelated polling introduced."
+}

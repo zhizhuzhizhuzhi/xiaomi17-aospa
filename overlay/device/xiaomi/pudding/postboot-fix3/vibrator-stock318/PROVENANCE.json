@@ -1,0 +1,13 @@
+{
+  "source": "Verified original HyperOS318 partition backup; mounted read-only on device b0f603a8",
+  "sha256": {
+    "libaachaptics.so": "2d0145f9960673e1f3ac1fac970b6cfc3410bfef7bf0d50056e2b710c4c3d2b3",
+    "libagmdevice.so": "18506d06223e1b01baaeb9ce4b8de80bbe3a3dc279d90f0a7c1b7ae40e6fdc89",
+    "vendor.hardware.vibratorCL.impl.so": "d3890e75d00b671cbb720b8d929aaa849bdcef2cbfc475d57f6268bc66007d1a",
+    "vendor.hardware.vibratorfeature.IVibratorExt-V1-ndk.so": "2b15946ff4aecd90d20cb1b4e549bda99ecf1cfc2639f1ac8a42748429abf945",
+    "vendor.xiaomi.hardware.vibratorfeature.service": "f7bfdc2763d988ffd8d22b6f36f8bacff69d39e2da73b55cae4476a968748ae5",
+    "vendor.xiaomi.hardware.vibratorfeature.service.rc": "0f8310f5559b8bdac1d0290e7290247f8a440e9b00657a3a7cd1fc6241731f8e",
+    "vendor.xiaomi.hardware.vibratorfeature.service.xml": "9d9e02baaff1c260a165e769614a9addf91beeefae47edb1e8d13a95e548265f",
+    "vibrator-stock318-waves.tar": "da6bdfa1d3994d1e165630538c2f0c4aaab9224ade282ae984f89854db928470"
+  }
+}

@@ -1,0 +1,5 @@
+service vendor.pudding-misys /vendor/bin/pudding-misys-service
+    class hal
+    user system
+    group system cameraserver
+    interface aidl vendor.xiaomi.hardware.misys.common.IMiSysImpl/default

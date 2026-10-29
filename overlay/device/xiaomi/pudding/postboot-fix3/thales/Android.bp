@@ -1,0 +1,147 @@
+cc_prebuilt_binary {
+    name: "PuddingThalesStrongbox",
+    vintf_fragments: ["strongbox-keymint.xml", "strongbox-sharedsecret.xml"],
+    required: ["android.hardware.hardware_keystore.jc-strongbox-keymint3.nxp.xml"],
+    overrides: ["android.hardware.security.keymint3-service.strongbox.nxp"],
+    stem: "pudding.strongbox-service.thales",
+    srcs: ["runtime/android.hardware.security.keymint-service.strongbox-thales"],
+    shared_libs: ["android.hardware.security.keymint-V3-ndk", "android.hardware.security.rkp-V3-ndk", "android.hardware.security.sharedsecret-V1-ndk", "lib_android_keymaster_keymint_utils_V3", "libbase", "libbinder_ndk", "PuddingThales_libcppbor_external", "libcrypto", "libkeymaster_portable", "PuddingThales_libjc_keymint_thales", "PuddingThales_libjc_keymint_transport_thales", "liblog", "libutils", "android.se.omapi-V1-ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "PuddingThalesWeaver",
+    vintf_fragments: ["weaver.xml"],
+    overrides: ["android.hardware.weaver-service.nxp"],
+    stem: "pudding.weaver-service.thales",
+    srcs: ["runtime/android.hardware.weaver-service.thales"],
+    shared_libs: ["android.hardware.weaver-V2-ndk", "PuddingThales_ese_weaver_thales", "libbase", "liblog", "libbinder_ndk", "PuddingThales_vendor_xiaomi_hardware_miauthsecretd_V1_ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_ese_weaver_thales",
+    stem: "ese_weaver_thales",
+    srcs: ["runtime/ese_weaver_thales.so"],
+    shared_libs: ["android.se.omapi-V1-ndk", "android.hardware.secure_element-V1-ndk", "libcutils", "PuddingThales_libjc_weaver_transport", "libhardware", "libhidlbase", "libutils", "liblog", "libbinder_ndk", "libmisight", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libcppbor",
+    stem: "libcppbor",
+    srcs: ["runtime/libcppbor.so"],
+    shared_libs: ["libbase", "libcrypto", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libcppbor_external",
+    stem: "libcppbor_external",
+    srcs: ["runtime/libcppbor_external.so"],
+    shared_libs: ["libbase", "libcrypto", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_keymint_thales",
+    stem: "libjc_keymint-thales",
+    srcs: ["runtime/libjc_keymint-thales.so"],
+    shared_libs: ["android.hardware.security.keymint-V3-ndk", "android.hardware.security.rkp-V3-ndk", "android.hardware.security.secureclock-V1-ndk", "android.hardware.security.sharedsecret-V1-ndk", "lib_android_keymaster_keymint_utils_V3", "libbase", "PuddingThales_libcppbor_external", "libkeymaster_portable", "libkeymaster_messages", "libsoft_attestation_cert", "liblog", "libcrypto", "libcutils", "PuddingThales_libjc_keymint_transport_thales", "libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_keymint_transport_thales",
+    stem: "libjc_keymint_transport-thales",
+    srcs: ["runtime/libjc_keymint_transport-thales.so"],
+    shared_libs: ["libbinder", "libbase", "liblog", "libbinder_ndk", "android.se.omapi-V1-ndk", "libhardware", "libhardware_legacy", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_weaver_transport",
+    stem: "libjc_weaver_transport",
+    srcs: ["runtime/libjc_weaver_transport.so"],
+    shared_libs: ["android.hardware.secure_element-V1-ndk", "android.se.omapi-V1-ndk", "libbase", "liblog", "libcutils", "libutils", "libhardware", "libhidlbase", "libbinder_ndk", "libbinder", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libkeymint_empty_thales",
+    stem: "libkeymint_empty-thales",
+    srcs: ["runtime/libkeymint_empty-thales.so"],
+    shared_libs: ["android.se.omapi-V1-ndk", "lib_android_keymaster_keymint_utils_V3", "PuddingThales_libcppbor_external", "libcppcose_rkp", "libkeymaster_portable", "libsoft_attestation_cert", "android.hardware.security.rkp-V3-ndk", "android.hardware.security.sharedsecret-V1-ndk", "android.hardware.security.keymint-V3-ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libweaver_empty_thales",
+    stem: "libweaver_empty-thales",
+    srcs: ["runtime/libweaver_empty-thales.so"],
+    shared_libs: ["android.hardware.weaver-V2-ndk", "libbinder_ndk", "PuddingThales_vendor_xiaomi_hardware_miauthsecretd_V1_ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_vendor_xiaomi_hardware_miauthsecretd_V1_ndk",
+    stem: "vendor.xiaomi.hardware.miauthsecretd-V1-ndk",
+    srcs: ["runtime/vendor.xiaomi.hardware.miauthsecretd-V1-ndk.so"],
+    shared_libs: ["libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}

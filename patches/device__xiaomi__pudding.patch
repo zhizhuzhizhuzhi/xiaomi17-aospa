@@ -1,0 +1,1410 @@
+diff --git a/Android.bp b/Android.bp
+index 5eb082ce233d23c1acbf4cb7f33e89975e90e7cf..8058622e683d5c0810999d285cbf7400be1cff3d 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -5,4 +5,5 @@
+ //
+ 
+ soong_namespace {
++    imports: ["hardware/nxp/keymint/generic", "vendor/xiaomi/sm8850-common", "vendor/xiaomi/pudding"],
+ }
+diff --git a/AndroidProducts.mk b/AndroidProducts.mk
+index fa48b9dbde75898904c440ba2855f2feefd5adb6..658b8fecaa1f2b6b0e82c3fbf2f1a42393777c2d 100644
+--- a/AndroidProducts.mk
++++ b/AndroidProducts.mk
+@@ -1,8 +1,2 @@
+-#
+-# Copyright (C) 2023 The Android Open Source Project
+-#
+-# SPDX-License-Identifier: Apache-2.0
+-#
+-
+-PRODUCT_MAKEFILES := \
+-    $(LOCAL_DIR)/lineage_pudding.mk
+\ No newline at end of file
++PRODUCT_MAKEFILES := $(LOCAL_DIR)/aospa_pudding.mk
++COMMON_LUNCH_CHOICES := aospa_pudding-userdebug aospa_pudding-user
+diff --git a/BoardConfig.mk b/BoardConfig.mk
+index b32ea1a98200cda9049901074320e0a57b37c4e3..e19c0cb307e3ad51034520920441af3e7f4fc4db 100644
+--- a/BoardConfig.mk
++++ b/BoardConfig.mk
+@@ -5,13 +5,13 @@
+ #
+ 
+ DEVICE_PATH := device/xiaomi/pudding
+-KERNEL_PATH := $(DEVICE_PATH)-kernel
++KERNEL_PATH := $(DEVICE_PATH)-kernel-os4
+ 
+ # Inherit from sm8650-common
+ include device/xiaomi/sm8850-common/BoardConfigCommon.mk
+ 
+ # Display
+-TARGET_SCREEN_DENSITY := 420
++TARGET_SCREEN_DENSITY := 520
+ 
+ # Dtb/o
+ BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
+@@ -31,11 +31,24 @@ PRODUCT_COPY_FILES += \
+     $(call find-copy-subdir-files,*,$(KERNEL_PATH)/vendor_dlkm/,$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules) \
+     $(call find-copy-subdir-files,*,$(KERNEL_PATH)/vendor_ramdisk/,$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/modules) \
+     $(call find-copy-subdir-files,*,$(KERNEL_PATH)/system_dlkm_flatten/,$(TARGET_COPY_OUT_SYSTEM_DLKM)/flatten/lib/modules) \
+-    $(call find-copy-subdir-files,*,$(KERNEL_PATH)/system_dlkm/,$(TARGET_COPY_OUT_SYSTEM_DLKM)/lib/modules/6.12.23-android16-5-g316453da9a9e-abogki441133159-4k)
++    $(call find-copy-subdir-files,*,$(KERNEL_PATH)/system_dlkm/,$(TARGET_COPY_OUT_SYSTEM_DLKM)/lib/modules/6.12.69-android16-6-g43b5ab7e247d-abogki561813157-4k)
+ 
+ # Properties
++TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/properties/product.prop
+ TARGET_ODM_PROP += $(DEVICE_PATH)/configs/properties/odm.prop
+ TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/properties/vendor.prop
+ 
+ # Inherit from the proprietary version
+-include vendor/xiaomi/pudding/BoardConfigVendor.mk
+\ No newline at end of file
++include vendor/xiaomi/pudding/BoardConfigVendor.mk
++TARGET_BOARD_KERNEL_HEADERS += device/xiaomi/pudding-kernel-os4/kernel-headers
++
++# Dedicated recovery partition; no legacy recovery-from-boot patch.
++BOARD_USES_FULL_RECOVERY_IMAGE := true
++
++# Development AVB key; release builders may select their own existing key.
++PUDDING_AVB_KEY_PATH ?= external/avb/test/data/testkey_rsa4096.pem
++BOARD_AVB_KEY_PATH := $(PUDDING_AVB_KEY_PATH)
++BOARD_AVB_ALGORITHM := SHA256_RSA4096
++BOARD_AVB_BOOT_KEY_PATH := $(PUDDING_AVB_KEY_PATH)
++BOARD_AVB_RECOVERY_KEY_PATH := $(PUDDING_AVB_KEY_PATH)
++BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := $(PUDDING_AVB_KEY_PATH)
+diff --git a/configs/properties/odm.prop b/configs/properties/odm.prop
+index 0c1cd95d5cbf64b67d93dbfa16fa26f95341956d..2811ed0f7ec2d25bd4e4dfb49d43e5a0c92e28f8 100644
+--- a/configs/properties/odm.prop
++++ b/configs/properties/odm.prop
+@@ -10,7 +10,17 @@ persist.vendor.fingerprint.type=udfps
+ persist.vendor.fingerprint.sensor_location=600|1900|109
+ 
+ # Marketname
+-ro.product.marketname=Xiaomi 17
+ 
+ # USB
+ vendor.usb.product_string=Xiaomi 17
++
++# Payment fingerprint metadata from this device's OS4 factory image.
++ro.hardware.fp.fod=true
++persist.vendor.sys.fp.fod.location.X_Y=528,1889
++persist.vendor.sys.fp.fod.size.width_height=163,163
++persist.vendor.sys.fp.udfps.location.X_Y=528,1889
++persist.vendor.sys.fp.udfps.size.width_height=163,163
++
++# Restore stock screen-content notifications and backlight scale for under-display ALS.
++vendor.display.enable_cwb_notify_sensor=1
++ro.vendor.sensor.maxbrightness=8191
+diff --git a/device.mk b/device.mk
+index 7d47167104ac118c64f3aad968a8718c7c7c1715..0ff185e8a1483713c66538cbc4eab10e6e8fd8c7 100644
+--- a/device.mk
++++ b/device.mk
+@@ -11,6 +11,9 @@ $(call inherit-product, device/xiaomi/sm8850-common/common.mk)
+ # Get non-open-source specific aspects
+ $(call inherit-product, vendor/xiaomi/pudding/pudding-vendor.mk)
+ 
++# Use the native HWUI Skia Vulkan pipeline by default.
++PRODUCT_SYSTEM_PROPERTIES += ro.hwui.use_vulkan=true
++
+ # Camera
+ PRODUCT_PACKAGES += \
+     android.hardware.graphics.allocator-V1-ndk.vendor \
+@@ -23,7 +26,6 @@ PRODUCT_PACKAGES += \
+ 
+ # Overlays
+ PRODUCT_PACKAGES += \
+-    ApertureOverlayPudding \
+     FrameworksResPudding \
+     NfcOverlayMyron \
+     PuddingEuiccOverlay \
+@@ -35,3 +37,30 @@ PRODUCT_PACKAGES += \
+ # Soong namespaces
+ PRODUCT_SOONG_NAMESPACES += \
+     $(LOCAL_PATH)
++
++# Compatibility for absolute ODM paths used by the stock camera stack.
++$(call inherit-product, device/xiaomi/pudding/camera-odm-compat/packages.mk)
++
++# Signed fingerprint TA matches the Global335 TZ while retaining CN318 radio firmware.
++PRODUCT_COPY_FILES += \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b00:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b00 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b01:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b01 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b02:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b02 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b03:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b03 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b04:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b04 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b05:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b05 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b06:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b06 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b07:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b07 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.b08:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.b08 \
++    device/xiaomi/pudding/firmware-fingerprint/gfus_v1.mdt:$(TARGET_COPY_OUT_ODM)/firmware/gfus_v1.mdt
++
++$(call inherit-product, device/xiaomi/pudding/postboot-fix3/postboot-fix3.mk)
++
++# Product priority999 overrides AOSPA Sense priority600 for the working native Face HAL.
++PRODUCT_PACKAGES += PuddingNativeFaceSettingsOverlay
++
++# IFAA application Binder frontend for the stock AIDL mlipay HAL.
++PRODUCT_PACKAGES += IFAAService
++
++# Use the Xiaomi camera with the original AOSPA camera icon.
++TARGET_CAMERA_PACKAGE_NAME := com.android.camera
+diff --git a/extract-files.py b/extract-files.py
+index ac306e111806ad6e3a643ba1d585f50828b7c052..8a7b673d0b5e7f59974ba7951a0100e7efe3dbde 100755
+--- a/extract-files.py
++++ b/extract-files.py
+@@ -19,6 +19,15 @@ from extract_utils.main import (
+     ExtractUtilsModule,
+ )
+ 
++import importlib.util
++from pathlib import Path
++
++_pudding_spec = importlib.util.spec_from_file_location(
++    "pudding_blob_fixups", Path(__file__).resolve().parent.parent /
++    "sm8850-common" / "pudding_blob_fixups.py")
++_pudding_fixups = importlib.util.module_from_spec(_pudding_spec)
++_pudding_spec.loader.exec_module(_pudding_fixups)
++
+ namespace_imports = [
+     'device/xiaomi/sm8850-common',
+     'hardware/qcom-caf/sm8850',
+@@ -128,6 +137,10 @@ blob_fixups: blob_fixups_user_type = {
+             'libtinyxml2.so',
+             'libtinyxml2-v36.so'
+         ),
++    'vendor/etc/perf/perfboostselection.xml': blob_fixup().call(
++        _pudding_fixups.fixup, 'vendor/etc/perf/perfboostselection.xml'),
++    'vendor/etc/perf/qapeboostsconfig.xml': blob_fixup().call(
++        _pudding_fixups.fixup, 'vendor/etc/perf/qapeboostsconfig.xml'),
+ }  # fmt: skip
+ 
+ 
+diff --git a/overlays/ApertureOverlayPudding/AndroidManifest.xml b/overlays/ApertureOverlayPudding/AndroidManifest.xml
+index 5b1ee69435307fab4ef883e00d3a181f861954cc..838f3e84c75282d3247581233d31dec909fc043d 100644
+--- a/overlays/ApertureOverlayPudding/AndroidManifest.xml
++++ b/overlays/ApertureOverlayPudding/AndroidManifest.xml
+@@ -1,8 +1,8 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    package="org.lineageos.aperture.overlay.pudding">
++    package="org.aospa.aperture.overlay.pudding">
+     <application android:hasCode="false" />
+     <overlay android:isStatic="true"
+              android:priority="1"
+-             android:targetPackage="org.lineageos.aperture"
++             android:targetPackage="org.aospa.aperture"
+              android:targetName="PuddingApertureOverlay" />
+ </manifest>
+\ No newline at end of file
+diff --git a/overlays/FrameworksResPudding/res/values/config.xml b/overlays/FrameworksResPudding/res/values/config.xml
+index dd0edcf39446a1da44d9c3ad5dc6869671931022..0ae4369ca5b74b5b06a16ad01fb040349c2f5c8b 100644
+--- a/overlays/FrameworksResPudding/res/values/config.xml
++++ b/overlays/FrameworksResPudding/res/values/config.xml
+@@ -18,131 +18,131 @@
+          overridden in platform specific overlays -->
+     <array name="config_autoBrightnessDisplayValuesNits">
+         <item>1</item>
+-        <item>6.43</item>
+-        <item>10.87</item>
+-        <item>15.3</item>
+-        <item>19.73</item>
+-        <item>24.17</item>
+-        <item>28.6</item>
+-        <item>30.84</item>
+-        <item>32.07</item>
+-        <item>33.54</item>
+-        <item>35.01</item>
+-        <item>36.59</item>
+-        <item>38.24</item>
+-        <item>39.99</item>
+-        <item>41.82</item>
+-        <item>43.74</item>
+-        <item>45.75</item>
+-        <item>47.85</item>
+-        <item>50.04</item>
+-        <item>52.31</item>
+-        <item>55.27</item>
+-        <item>57.12</item>
+-        <item>59.66</item>
+-        <item>62.28</item>
+-        <item>65.78</item>
+-        <item>67.8</item>
+-        <item>70.69</item>
+-        <item>73.67</item>
+-        <item>76.73</item>
+-        <item>79.89</item>
+-        <item>83.13</item>
+-        <item>83.59</item>
+-        <item>84.04</item>
+-        <item>84.51</item>
+-        <item>84.95</item>
+-        <item>85.4</item>
+-        <item>85.84</item>
+-        <item>86.28</item>
+-        <item>86.73</item>
+-        <item>87.19</item>
+-        <item>87.62</item>
+-        <item>88.05</item>
+-        <item>88.49</item>
+-        <item>88.92</item>
+-        <item>89.36</item>
+-        <item>90.81</item>
+-        <item>92.27</item>
+-        <item>93.72</item>
+-        <item>95.25</item>
+-        <item>96.63</item>
+-        <item>98.09</item>
+-        <item>99.55</item>
+-        <item>101</item>
+-        <item>102.46</item>
+-        <item>103.91</item>
+-        <item>105.37</item>
+-        <item>106.82</item>
+-        <item>108.28</item>
+-        <item>109.74</item>
+-        <item>111.26</item>
+-        <item>112.65</item>
+-        <item>114.1</item>
+-        <item>115.58</item>
+-        <item>117.09</item>
+-        <item>118.6</item>
+-        <item>126.14</item>
+-        <item>135.8</item>
+-        <item>155.12</item>
+-        <item>175.34</item>
+-        <item>196.77</item>
+-        <item>218.67</item>
+-        <item>241.05</item>
+-        <item>263.84</item>
+-        <item>275.4</item>
+-        <item>335.38</item>
+-        <item>397.98</item>
+-        <item>463.49</item>
+-        <item>532.43</item>
+-        <item>603.83</item>
+-        <item>678.4</item>
+-        <item>740.72</item>
+-        <item>802.54</item>
+-        <item>864.49</item>
+-        <item>924.83</item>
+-        <item>988.76</item>
+-        <item>1000</item>
+-        <item>1060</item>
+-        <item>1120</item>
+-        <item>1180</item>
+-        <item>1240</item>
+-        <item>1300</item>
+-        <item>1360</item>
+-        <item>1420</item>
+-        <item>1480</item>
+-        <item>1540</item>
+-        <item>1600</item>
+-        <item>1660</item>
+-        <item>1720</item>
+-        <item>1780</item>
+-        <item>1840</item>
+-        <item>1900</item>
+-        <item>2020</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2175</item>
+-        <item>2282.09</item>
+-        <item>2415.95</item>
+-        <item>2473.32</item>
+-        <item>2664.55</item>
+-        <item>2855.78</item>
+-        <item>3047.01</item>
+-        <item>3200.0</item>
+-        <item>3429.48</item>
++        <item>9.145</item>
++        <item>15.805</item>
++        <item>22.45</item>
++        <item>29.095</item>
++        <item>35.755</item>
++        <item>42.40</item>
++        <item>45.760</item>
++        <item>47.605</item>
++        <item>49.810</item>
++        <item>52.015</item>
++        <item>54.385</item>
++        <item>56.860</item>
++        <item>59.485</item>
++        <item>62.230</item>
++        <item>65.110</item>
++        <item>68.125</item>
++        <item>71.275</item>
++        <item>74.560</item>
++        <item>77.965</item>
++        <item>82.405</item>
++        <item>85.180</item>
++        <item>88.990</item>
++        <item>92.920</item>
++        <item>98.170</item>
++        <item>101.20</item>
++        <item>105.535</item>
++        <item>110.005</item>
++        <item>114.595</item>
++        <item>119.335</item>
++        <item>124.195</item>
++        <item>124.885</item>
++        <item>125.560</item>
++        <item>126.265</item>
++        <item>126.925</item>
++        <item>127.60</item>
++        <item>128.260</item>
++        <item>128.920</item>
++        <item>129.595</item>
++        <item>130.285</item>
++        <item>130.930</item>
++        <item>131.575</item>
++        <item>132.235</item>
++        <item>132.880</item>
++        <item>133.540</item>
++        <item>135.715</item>
++        <item>137.905</item>
++        <item>140.080</item>
++        <item>142.375</item>
++        <item>144.445</item>
++        <item>146.635</item>
++        <item>148.825</item>
++        <item>151.0</item>
++        <item>153.190</item>
++        <item>155.365</item>
++        <item>157.555</item>
++        <item>159.730</item>
++        <item>161.920</item>
++        <item>164.110</item>
++        <item>166.390</item>
++        <item>168.475</item>
++        <item>170.65</item>
++        <item>172.870</item>
++        <item>175.135</item>
++        <item>177.40</item>
++        <item>188.710</item>
++        <item>203.20</item>
++        <item>232.180</item>
++        <item>262.510</item>
++        <item>294.655</item>
++        <item>327.505</item>
++        <item>361.075</item>
++        <item>395.260</item>
++        <item>412.60</item>
++        <item>502.570</item>
++        <item>596.470</item>
++        <item>694.735</item>
++        <item>798.145</item>
++        <item>905.245</item>
++        <item>1017.10</item>
++        <item>1110.580</item>
++        <item>1203.310</item>
++        <item>1296.235</item>
++        <item>1386.745</item>
++        <item>1482.640</item>
++        <item>1499.5</item>
++        <item>1589.5</item>
++        <item>1679.5</item>
++        <item>1769.5</item>
++        <item>1859.5</item>
++        <item>1949.5</item>
++        <item>2039.5</item>
++        <item>2129.5</item>
++        <item>2219.5</item>
++        <item>2309.5</item>
++        <item>2399.5</item>
++        <item>2489.5</item>
++        <item>2579.5</item>
++        <item>2669.5</item>
++        <item>2759.5</item>
++        <item>2849.5</item>
++        <item>3029.5</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3262.0</item>
++        <item>3422.635</item>
++        <item>3500</item>
++        <item>3500</item>
++        <item>3500</item>
++        <item>3500</item>
++        <item>3500</item>
++        <item>3500</item>
++        <item>3500</item>
+         <item>3500</item>
+         <item>3500</item>
+         <item>3500</item>
+@@ -502,4 +502,24 @@
+          non-zero. -->
+     <integer name="config_defaultPeakRefreshRate">120</integer>
+ 
++    <!-- Native AOSPA DC dimming page and policy, stock Xiaomi hardware backend. -->
++    <bool name="config_deviceDcDimmingUseXiaomiAidl">true</bool>
++    <integer name="config_screenBrightnessIdleDimDurationMillis">800</integer>
++    <string name="config_deviceDcDimmingSysfsNode" translatable="false">/sys/class/mi_display/disp-DSI-0/disp_param</string>
++    <!-- Front ALS only: use the native AOSPA single-sensor controller. -->
++    <bool name="config_useXiaomiDualAlsPolicy">false</bool>
++    <string name="config_displayLightSensorType" translatable="false">android.sensor.light</string>
++    <!-- Existing verified incompatible/private endpoints; device-scoped, not a common blacklist. -->
++    <string-array name="config_systemPropertyNotificationExcludedServices" translatable="false">
++        <item>vendor.qspmsvc</item><item>suspend_control</item>
++        <item>suspend_control_internal</item><item>tracing.proxy</item>
++        <item>android.os.casefoldingremover</item><item>storaged</item>
++        <item>storaged_pri</item><item>wifinl80211</item>
++    </string-array>
++    <bool name="config_enableImeTouchBoost">true</bool>
++    <!-- Automatic mobile-data switching is disabled; data SIM selection stays manual. -->
++    <integer name="auto_data_switch_availability_stability_time_threshold_millis">-1</integer>
++    <integer name="auto_data_switch_performance_stability_time_threshold_millis">-1</integer>
++    <!-- Optional ON_CHANGE rear ALS used only to veto suspected front-occlusion darkening. -->
++    <integer name="config_rearLightDarkeningGuardSensorType">33171055</integer>
+ </resources>
+\ No newline at end of file
+diff --git a/overlays/SettingsOverlayPudding/res/values/config.xml b/overlays/SettingsOverlayPudding/res/values/config.xml
+index 0d0aa385383f5eb170a550315fd5985093bf5df6..18776dd5f38384ebd1474b98709b28dbfe72a039 100644
+--- a/overlays/SettingsOverlayPudding/res/values/config.xml
++++ b/overlays/SettingsOverlayPudding/res/values/config.xml
+@@ -8,4 +8,6 @@
+     <integer name="config_udfpsEnrollProgressBar">
+         80
+     </integer>
++    <!-- Use native enrollment with the stock hardware Face HAL. -->
++    <string name="config_face_enroll" translatable="false"></string>
+ </resources>
+\ No newline at end of file
+diff --git a/overlays/SystemUIResPudding/res/values/dimens.xml b/overlays/SystemUIResPudding/res/values/dimens.xml
+index bebc5e07932d8bcdfe7f4659bd7c9b2bc4a036da..7945786e442767cd6d043783d92994baa6af720c 100644
+--- a/overlays/SystemUIResPudding/res/values/dimens.xml
++++ b/overlays/SystemUIResPudding/res/values/dimens.xml
+@@ -4,8 +4,8 @@
+      SPDX-License-Identifier: Apache-2.0
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <!-- the padding on the top of the statusbar (usually 0) -->
+-    <dimen name="status_bar_padding_top">36px</dimen>
++    <!-- Center status content in the 150px physical bar at the HyperOS density. -->
++    <dimen name="status_bar_padding_top">0px</dimen>
+ 
+     <!-- the padding on the start of the statusbar -->
+     <dimen name="status_bar_padding_start">4dp</dimen>
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index 9cfcc30ab203f1ca0f279400c6fccaa8ad88ef26..deb4030217f7b10e3353907f29b63f4835f33f3b 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -1,5 +1,5 @@
+ ## All proprietary files from this list, unless pinned and noted otherwise,
+-## are from Xiaomi 17 (OS3.0.335.0.XPCMIXM). 
++## are from Xiaomi 17 (OS4.0.4.0.XPCCNXM). 
+ 
+ # acdbdata
+ odm/etc/acdbdata/Mi/Ext_AiOff_fixed.eai
+@@ -125,42 +125,42 @@ odm/lib64/bm6a81v08s14n97.bin
+ odm/lib64/bm6a81v08s14n98.bin
+ odm/lib64/bm6a81v08s14n99.bin
+ vendor/lib/rfsa/adsp/chre_qsh_shim.so
+-vendor/lib/rfsa/adsp/libadsp_jpege_skel.so
+-vendor/lib/rfsa/adsp/libarc_htp_driver_skel.so
+-vendor/lib/rfsa/adsp/libCalculator_skel.so
+-vendor/lib/rfsa/adsp/libdsp_streamer_binning.so
+-vendor/lib/rfsa/adsp/libhme_dsp_skel.so
+-vendor/lib/rfsa/adsp/libmctfengine_skel.so
++odm/lib/rfsa/adsp/libadsp_jpege_skel.so:vendor/lib/rfsa/adsp/libadsp_jpege_skel.so
++odm/lib/rfsa/adsp/libarc_htp_driver_skel.so:vendor/lib/rfsa/adsp/libarc_htp_driver_skel.so
++odm/lib/rfsa/adsp/libCalculator_skel.so:vendor/lib/rfsa/adsp/libCalculator_skel.so
++odm/lib/rfsa/adsp/libdsp_streamer_binning.so:vendor/lib/rfsa/adsp/libdsp_streamer_binning.so
++odm/lib/rfsa/adsp/libhme_dsp_skel.so:vendor/lib/rfsa/adsp/libhme_dsp_skel.so
++odm/lib/rfsa/adsp/libmctfengine_skel.so:vendor/lib/rfsa/adsp/libmctfengine_skel.so
+ vendor/lib/rfsa/adsp/libmi_vvc_lpf_skel.so
+-vendor/lib/rfsa/adsp/libmialgo_basic_cdsp_skel.so
+-vendor/lib/rfsa/adsp/libmialgo_rfs_cdsp_skel.so
+-vendor/lib/rfsa/adsp/libmlawbpostproc_dsp_skel.so
+-vendor/lib/rfsa/adsp/libQnnHexagonSkel_dspApp.so
+-vendor/lib/rfsa/adsp/libQnnHtpV81.so
+-vendor/lib/rfsa/adsp/libQnnHtpV81Skel.so
+-vendor/lib/rfsa/adsp/libQnnNetRunDirectV81Skel.so
+-vendor/lib/rfsa/adsp/libQnnSaver.so
+-vendor/lib/rfsa/adsp/libQnnSystem.so
+-vendor/lib/rfsa/adsp/libSnpeHtpV81Skel.so
+-vendor/lib64/rfs/dsp/libapn_dsp_skel.so
+-vendor/lib64/rfs/dsp/libbitml_nsp_81na_skel.so
+-vendor/lib64/rfs/dsp/libbitml_nsp_skel.so
++odm/lib/rfsa/adsp/libmialgo_basic_cdsp_skel.so:vendor/lib/rfsa/adsp/libmialgo_basic_cdsp_skel.so
++odm/lib/rfsa/adsp/libmialgo_rfs_cdsp_skel.so:vendor/lib/rfsa/adsp/libmialgo_rfs_cdsp_skel.so
++odm/lib/rfsa/adsp/libmlawbpostproc_dsp_skel.so:vendor/lib/rfsa/adsp/libmlawbpostproc_dsp_skel.so
++odm/lib/rfsa/adsp/libQnnHexagonSkel_dspApp.so:vendor/lib/rfsa/adsp/libQnnHexagonSkel_dspApp.so
++odm/lib/rfsa/adsp/libQnnHtpV81.so:vendor/lib/rfsa/adsp/libQnnHtpV81.so
++odm/lib/rfsa/adsp/libQnnHtpV81Skel.so:vendor/lib/rfsa/adsp/libQnnHtpV81Skel.so
++odm/lib/rfsa/adsp/libQnnNetRunDirectV81Skel.so:vendor/lib/rfsa/adsp/libQnnNetRunDirectV81Skel.so
++odm/lib/rfsa/adsp/libQnnSaver.so:vendor/lib/rfsa/adsp/libQnnSaver.so
++odm/lib/rfsa/adsp/libQnnSystem.so:vendor/lib/rfsa/adsp/libQnnSystem.so
++odm/lib/rfsa/adsp/libSnpeHtpV81Skel.so:vendor/lib/rfsa/adsp/libSnpeHtpV81Skel.so
++odm/lib64/rfs/dsp/libapn_dsp_skel.so:vendor/lib64/rfs/dsp/libapn_dsp_skel.so
++odm/lib64/rfs/dsp/libbitml_nsp_81na_skel.so:vendor/lib64/rfs/dsp/libbitml_nsp_81na_skel.so
++odm/lib64/rfs/dsp/libbitml_nsp_skel.so:vendor/lib64/rfs/dsp/libbitml_nsp_skel.so
+ vendor/lib64/rfs/dsp/libDLDPP_skel.so
+ vendor/lib64/rfs/dsp/libdspCV_skel.so
+ vendor/lib64/rfs/dsp/libfastcvadsp.so
+ vendor/lib64/rfs/dsp/libfastcvdsp_skel.so
+-vendor/lib64/rfs/dsp/libffthelper_skel.so
+-vendor/lib64/rfs/dsp/libhdr_skel.so
++odm/lib64/rfs/dsp/libffthelper_skel.so:vendor/lib64/rfs/dsp/libffthelper_skel.so
++odm/lib64/rfs/dsp/libhdr_skel.so:vendor/lib64/rfs/dsp/libhdr_skel.so
+ vendor/lib64/rfs/dsp/libHexlpQnnHtp.so
+ vendor/lib64/rfs/dsp/libHexlpQnnSystem.so
+-vendor/lib64/rfs/dsp/libmobilenet_dsp_frc_networks.so
+-vendor/lib64/rfs/dsp/libmobilenet_dsp_frc.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/rfs/dsp/libmobilenet_dsp_frc_networks.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/rfs/dsp/libmobilenet_dsp_frc.so
+ vendor/lib64/rfs/dsp/libnsp_ipc_cdsp_skel.so
+ vendor/lib64/rfs/dsp/libnspextensioncopyprovider.so
+ vendor/lib64/rfs/dsp/libnspextensionfrcprovider.so
+ vendor/lib64/rfs/dsp/libnspextensiongenericqnnprovider.so
+ vendor/lib64/rfs/dsp/libnspextensionsuperresolutionprovider.so
+-vendor/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so
++odm/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so:vendor/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so
+ vendor/lib64/rfs/dsp/libscveT2T_skel.so
+ vendor/lib64/rfs/dsp/libsvDescMatch_dsp.so
+ vendor/lib64/rfs/dsp/libsvDescMatchImpl_dsp_skel.so
+@@ -195,7 +195,7 @@ odm/firmware/cs35l43-dsp1-spk-prot.wmfw
+ 
+ # Camera
+ odm/bin/hw/misensor_camera
+-vendor/bin/hw/vendor.qti.camera.provider-service_64
++odm/bin/hw/vendor.qti.camera.provider-service_64:vendor/bin/hw/vendor.qti.camera.provider-service_64
+ 
+ # Camera Resources
+ odm/etc/camera/af_class_all.dlc
+@@ -808,7 +808,7 @@ odm/lib64/libLMSceneSeg.so
+ odm/lib64/libmage.so
+ odm/lib64/libmetadataHelper.so
+ odm/lib64/libmi_aialign_raw.so
+-odm/lib64/libmi_authsecretd.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: odm/lib64/libmi_authsecretd.so
+ odm/lib64/libmi_computationalOptics_def.so
+ odm/lib64/libmi_supernight_raw.so
+ odm/lib64/libmiaio_det_sceneseg.so
+@@ -1015,393 +1015,393 @@ odm/lib64/camera/zsl/com.xiaomi.zsl.sr.so
+ # Camera (vendor)
+ vendor/etc/camera/cameraopt_perf.json
+ vendor/etc/camera/cameraopt_vendor.json
+-vendor/lib64/camera/bitmlconfig.bin
+-vendor/lib64/camera/camxfl115indices.bin
+-vendor/lib64/camera/camxfl300v1indices.bin
+-vendor/lib64/camera/camxfl300v2indices.bin
+-vendor/lib64/camera/camxflcustom300indices.bin
+-vendor/lib64/camera/chifdnodeconfig.bin
+-vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin
+-vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin
+-vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin
+-vendor/lib64/camera/com.qti.ofe.profiledb.default.bin
+-vendor/lib64/camera/com.qti.ofe.profiledb.sm8850.bin
+-vendor/lib64/camera/com.qti.tuned.default.canoe.bin
+-vendor/lib64/camera/components/com.mi.node.fd.so
+-vendor/lib64/camera/components/com.mi.node.mimovie.so
+-vendor/lib64/camera/components/com.mi.node.mioisverify.so
+-vendor/lib64/camera/components/com.qti.eisv2.so
+-vendor/lib64/camera/components/com.qti.eisv3.so
+-vendor/lib64/camera/components/com.qti.hvx.addconstant.so
+-vendor/lib64/camera/components/com.qti.hvx.binning.so
+-vendor/lib64/camera/components/com.qti.hwcfg.bps.so
+-vendor/lib64/camera/components/com.qti.hwcfg.ife.so
+-vendor/lib64/camera/components/com.qti.hwcfg.ipe.so
+-vendor/lib64/camera/components/com.qti.hwcfg.mctfe.so
+-vendor/lib64/camera/components/com.qti.hwcfg.ofe.so
+-vendor/lib64/camera/components/com.qti.node.afbfusion.so
+-vendor/lib64/camera/components/com.qti.node.aon.so
+-vendor/lib64/camera/components/com.qti.node.customhwnode.so
+-vendor/lib64/camera/components/com.qti.node.depth.so
+-vendor/lib64/camera/components/com.qti.node.depthprovider.so
+-vendor/lib64/camera/components/com.qti.node.dewarp.so;DISABLE_DEPS
+-vendor/lib64/camera/components/com.qti.node.dummydepth.so
+-vendor/lib64/camera/components/com.qti.node.dummyrtb.so
+-vendor/lib64/camera/components/com.qti.node.dummysat.so
+-vendor/lib64/camera/components/com.qti.node.eisv2.so
+-vendor/lib64/camera/components/com.qti.node.eisv3.so
+-vendor/lib64/camera/components/com.qti.node.evadepth.so
+-vendor/lib64/camera/components/com.qti.node.evaitof.so
+-vendor/lib64/camera/components/com.qti.node.evawarp.so
+-vendor/lib64/camera/components/com.qti.node.evs.so
+-vendor/lib64/camera/components/com.qti.node.fcv.so
+-vendor/lib64/camera/components/com.qti.node.fd.so
+-vendor/lib64/camera/components/com.qti.node.formatconversion.so
+-vendor/lib64/camera/components/com.qti.node.frc.so
+-vendor/lib64/camera/components/com.qti.node.gme.so
+-vendor/lib64/camera/components/com.qti.node.gpu.so
+-vendor/lib64/camera/components/com.qti.node.gyrornn.so
+-vendor/lib64/camera/components/com.qti.node.hdl.so
+-vendor/lib64/camera/components/com.qti.node.hdr10pgen.so
+-vendor/lib64/camera/components/com.qti.node.hdr10phist.so
+-vendor/lib64/camera/components/com.qti.node.hdralign.so
+-vendor/lib64/camera/components/com.qti.node.hybrid.so
+-vendor/lib64/camera/components/com.qti.node.itofpreprocess.so
+-vendor/lib64/camera/components/com.qti.node.mctfalign.so
+-vendor/lib64/camera/components/com.qti.node.memcpy.so
+-vendor/lib64/camera/components/com.qti.node.ml.so
+-vendor/lib64/camera/components/com.qti.node.mlinference.so
+-vendor/lib64/camera/components/com.qti.node.mmfalign.so
+-vendor/lib64/camera/components/com.qti.node.multiport.so
+-vendor/lib64/camera/components/com.qti.node.muxer.so
+-vendor/lib64/camera/components/com.qti.node.pixelstats.so
+-vendor/lib64/camera/components/com.qti.node.qsatalign.so
+-vendor/lib64/camera/components/com.qti.node.rectification.so
+-vendor/lib64/camera/components/com.qti.node.remosaic.so
+-vendor/lib64/camera/components/com.qti.node.sat.so
+-vendor/lib64/camera/components/com.qti.node.scorr.so
+-vendor/lib64/camera/components/com.qti.node.seg.so
+-vendor/lib64/camera/components/com.qti.node.spdepth.so
+-vendor/lib64/camera/components/com.qti.node.stich.so
+-vendor/lib64/camera/components/com.qti.node.swaidenoiser.so
+-vendor/lib64/camera/components/com.qti.node.swaisr.so
+-vendor/lib64/camera/components/com.qti.node.swbestats.so
+-vendor/lib64/camera/components/com.qti.node.swcac.so
+-vendor/lib64/camera/components/com.qti.node.swec.so
+-vendor/lib64/camera/components/com.qti.node.swef.so
+-vendor/lib64/camera/components/com.qti.node.swfusion.so
+-vendor/lib64/camera/components/com.qti.node.swhme.so
+-vendor/lib64/camera/components/com.qti.node.swlsc.so
+-vendor/lib64/camera/components/com.qti.node.swmctf.so
+-vendor/lib64/camera/components/com.qti.node.swmlremosaic.so
+-vendor/lib64/camera/components/com.qti.node.swpdpc.so
+-vendor/lib64/camera/components/com.qti.node.swpreprocess.so
+-vendor/lib64/camera/components/com.qti.node.swregistration.so
+-vendor/lib64/camera/components/com.qti.node.swvrt.so
+-vendor/lib64/camera/components/com.qti.stats.aec.so
+-vendor/lib64/camera/components/com.qti.stats.aecexternal.so
+-vendor/lib64/camera/components/com.qti.stats.aecexternallib.so
+-vendor/lib64/camera/components/com.qti.stats.aecwrapper.so
+-vendor/lib64/camera/components/com.qti.stats.aecxcore.so
+-vendor/lib64/camera/components/com.qti.stats.af.so
+-vendor/lib64/camera/components/com.qti.stats.afc.so
+-vendor/lib64/camera/components/com.qti.stats.afd.so
+-vendor/lib64/camera/components/com.qti.stats.afwrapper.so
+-vendor/lib64/camera/components/com.qti.stats.asd.so
+-vendor/lib64/camera/components/com.qti.stats.awb.so
+-vendor/lib64/camera/components/com.qti.stats.awbr.so
+-vendor/lib64/camera/components/com.qti.stats.awbwrapper.so
+-vendor/lib64/camera/components/com.qti.stats.caflogicaldriver.so
+-vendor/lib64/camera/components/com.qti.stats.cnndriver.so
+-vendor/lib64/camera/components/com.qti.stats.exampleaf.so
+-vendor/lib64/camera/components/com.qti.stats.haf.so
+-vendor/lib64/camera/components/com.qti.stats.hafoverride.so
+-vendor/lib64/camera/components/com.qti.stats.localhistogram.so
+-vendor/lib64/camera/components/com.qti.stats.pdlib.so
+-vendor/lib64/camera/components/com.qti.stats.pdlibsony.so
+-vendor/lib64/camera/components/com.qti.stats.pdlibwrapper.so
+-vendor/lib64/camera/components/com.qti.stats.roimixer.so
+-vendor/lib64/camera/components/com.qti.stats.roimixerlib.so
+-vendor/lib64/camera/components/com.qti.stats.statsgenerator.so
+-vendor/lib64/camera/components/com.qti.stats.tracker.so
+-vendor/lib64/camera/components/com.qtistatic.stats.aec.so
+-vendor/lib64/camera/components/com.qtistatic.stats.af.so
+-vendor/lib64/camera/components/com.qtistatic.stats.awb.so
+-vendor/lib64/camera/components/com.qtistatic.stats.pdlib.so
+-vendor/lib64/camera/components/com.xiaomi.node.misv2.so
+-vendor/lib64/camera/components/com.xiaomi.node.misv3.so
+-vendor/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so
+-vendor/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so
+-vendor/lib64/camera/components/libcamxdummysatwrapper.so
+-vendor/lib64/camera/components/libcamxevainterface.so
+-vendor/lib64/camera/components/libcamxoemsatwrapper.so
+-vendor/lib64/camera/components/libdepthmapwrapper_itof.so
+-vendor/lib64/camera/components/libdepthmapwrapper_secure.so
+-vendor/lib64/camera/fdconfigoffline.bin
+-vendor/lib64/camera/fdconfigpreview.bin
+-vendor/lib64/camera/fdconfigpreviewlite.bin
+-vendor/lib64/camera/fdconfigsecure.bin
+-vendor/lib64/camera/fdconfigvideo.bin
+-vendor/lib64/camera/fdconfigvideolite.bin
+-vendor/lib64/camera/libmicamvendorcustom.so
+-vendor/lib64/camera/qfdserviceconfig.bin
+-vendor/lib64/camx.device-impl.so
+-vendor/lib64/camx.provider-impl.so
+-vendor/lib64/com.qti.camx.chiiqutils.so
+-vendor/lib64/com.qti.chifeaturecompatibility.so
+-vendor/lib64/com.qti.chiusecaseselector.so
+-vendor/lib64/com.qti.custom.settings.so
+-vendor/lib64/com.qti.feature2.afbrckt.so
+-vendor/lib64/com.qti.feature2.anchorsync.so
+-vendor/lib64/com.qti.feature2.demux.so
+-vendor/lib64/com.qti.feature2.derivedoffline.so
+-vendor/lib64/com.qti.feature2.enhancedhdr.so
+-vendor/lib64/com.qti.feature2.frc.so
+-vendor/lib64/com.qti.feature2.fusion.so
+-vendor/lib64/com.qti.feature2.generic.so
+-vendor/lib64/com.qti.feature2.gs.sm8850.so
+-vendor/lib64/com.qti.feature2.hdr.so
+-vendor/lib64/com.qti.feature2.mcreprocrt.so
+-vendor/lib64/com.qti.feature2.memcpy.so
+-vendor/lib64/com.qti.feature2.metadataserializer.so
+-vendor/lib64/com.qti.feature2.mfsr.so
+-vendor/lib64/com.qti.feature2.mfsr.titan.so
+-vendor/lib64/com.qti.feature2.ml.so
+-vendor/lib64/com.qti.feature2.mux.so
+-vendor/lib64/com.qti.feature2.qcfa.so
+-vendor/lib64/com.qti.feature2.raw2yuvhdr.so
+-vendor/lib64/com.qti.feature2.rawhdr.so
+-vendor/lib64/com.qti.feature2.realtimeserializer.so
+-vendor/lib64/com.qti.feature2.rt.so
+-vendor/lib64/com.qti.feature2.rtmcx.so
+-vendor/lib64/com.qti.feature2.rtpostproc.so
+-vendor/lib64/com.qti.feature2.serializer.so
+-vendor/lib64/com.qti.feature2.statsregeneration.so
+-vendor/lib64/com.qti.feature2.stub.so
+-vendor/lib64/com.qti.feature2.swmf.so
+-vendor/lib64/com.qti.platformsettings.sm8850.so
+-vendor/lib64/com.qti.qseeaon.so
+-vendor/lib64/com.qti.qseeutils.so
+-vendor/lib64/com.qti.settings.sm8850.so
+-vendor/lib64/com.qti.sfw.settings.so
+-vendor/lib64/com.qti.stats.common.so
+-vendor/lib64/com.qti.stats.sotr.so
+-vendor/lib64/com.qualcomm.mcx.distortionmapper.so
+-vendor/lib64/com.qualcomm.mcx.linearmapper.so
+-vendor/lib64/com.qualcomm.mcx.nonlinearmapper.so
+-vendor/lib64/com.qualcomm.mcx.policy.mfl.so
+-vendor/lib64/com.qualcomm.mcx.policy.sfl.so
+-vendor/lib64/com.qualcomm.qti.cslcustomhw.so
+-vendor/lib64/com.qualcomm.qti.mcx.usecase.extension.so
+-vendor/lib64/com.xiaomi.camdfx.so
+-vendor/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so
+-vendor/lib64/com.xiaomi.camhal.extmodel.ec_executor.so
+-vendor/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so
+-vendor/lib64/com.xiaomi.camhal.overlap.so
+-vendor/lib64/com.xiaomi.camhal.submodel.camxfrag.so
+-vendor/lib64/com.xiaomi.camhal.submodel.chifrag.so
+-vendor/lib64/com.xiaomi.camhal.submodel.ecfrag.so
+-vendor/lib64/com.xiaomi.camhal.use_overlap.so
+-vendor/lib64/com.xiaomi.customlogger.so
+-vendor/lib64/com.xiaomi.immunesystem.bigdata.so
+-vendor/lib64/com.xiaomi.immunesystem.bigdata2.so
+-vendor/lib64/com.xiaomi.immunesystem.client.so
+-vendor/lib64/com.xiaomi.immunesystem.config.so
+-vendor/lib64/com.xiaomi.immunesystem.core.so
+-vendor/lib64/com.xiaomi.immunesystem.hook.camx.so
+-vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so
+-vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so
+-vendor/lib64/com.xiaomi.messagecenter.so
+-vendor/lib64/com.xiaomi.stub.camx.so
+-vendor/lib64/com.xiaomi.stub.chi.so
+-vendor/lib64/com.xiaomi.stubv1.camx.so
+-vendor/lib64/com.xiaomi.stubv1.chi.so
+-vendor/lib64/com.xiaomi.xmdevprotection.tokmd.so
+-vendor/lib64/com.xiaomi.xmxmessage2center.so
+-vendor/lib64/hw/camera.qcom.core.so
+-vendor/lib64/hw/camera.qcom.sm8850.so
+-vendor/lib64/hw/camera.qcom.so
+-vendor/lib64/hw/com.qti.chi.offline.so
+-vendor/lib64/hw/com.qti.chi.override.so
+-vendor/lib64/immunesystem.db.sqlite3.so
+-vendor/lib64/libAF.so
+-vendor/lib64/libaidenoiser.so
+-vendor/lib64/libaidenoiserv2.so
++odm/lib64/camera/bitmlconfig.bin:vendor/lib64/camera/bitmlconfig.bin
++odm/lib64/camera/camxfl115indices.bin:vendor/lib64/camera/camxfl115indices.bin
++odm/lib64/camera/camxfl300v1indices.bin:vendor/lib64/camera/camxfl300v1indices.bin
++odm/lib64/camera/camxfl300v2indices.bin:vendor/lib64/camera/camxfl300v2indices.bin
++odm/lib64/camera/camxflcustom300indices.bin:vendor/lib64/camera/camxflcustom300indices.bin
++odm/lib64/camera/chifdnodeconfig.bin:vendor/lib64/camera/chifdnodeconfig.bin
++odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin:vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin
++odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin:vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin
++odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin:vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin
++odm/lib64/camera/com.qti.ofe.profiledb.default.bin:vendor/lib64/camera/com.qti.ofe.profiledb.default.bin
++odm/lib64/camera/com.qti.ofe.profiledb.sm8850.bin:vendor/lib64/camera/com.qti.ofe.profiledb.sm8850.bin
++odm/lib64/camera/com.qti.tuned.default.canoe.bin:vendor/lib64/camera/com.qti.tuned.default.canoe.bin
++odm/lib64/camera/components/com.mi.node.fd.so:vendor/lib64/camera/components/com.mi.node.fd.so
++odm/lib64/camera/components/com.mi.node.mimovie.so:vendor/lib64/camera/components/com.mi.node.mimovie.so
++odm/lib64/camera/components/com.mi.node.mioisverify.so:vendor/lib64/camera/components/com.mi.node.mioisverify.so
++odm/lib64/camera/components/com.qti.eisv2.so:vendor/lib64/camera/components/com.qti.eisv2.so
++odm/lib64/camera/components/com.qti.eisv3.so:vendor/lib64/camera/components/com.qti.eisv3.so
++odm/lib64/camera/components/com.qti.hvx.addconstant.so:vendor/lib64/camera/components/com.qti.hvx.addconstant.so
++odm/lib64/camera/components/com.qti.hvx.binning.so:vendor/lib64/camera/components/com.qti.hvx.binning.so
++odm/lib64/camera/components/com.qti.hwcfg.bps.so:vendor/lib64/camera/components/com.qti.hwcfg.bps.so
++odm/lib64/camera/components/com.qti.hwcfg.ife.so:vendor/lib64/camera/components/com.qti.hwcfg.ife.so
++odm/lib64/camera/components/com.qti.hwcfg.ipe.so:vendor/lib64/camera/components/com.qti.hwcfg.ipe.so
++odm/lib64/camera/components/com.qti.hwcfg.mctfe.so:vendor/lib64/camera/components/com.qti.hwcfg.mctfe.so
++odm/lib64/camera/components/com.qti.hwcfg.ofe.so:vendor/lib64/camera/components/com.qti.hwcfg.ofe.so
++odm/lib64/camera/components/com.qti.node.afbfusion.so:vendor/lib64/camera/components/com.qti.node.afbfusion.so
++odm/lib64/camera/components/com.qti.node.aon.so:vendor/lib64/camera/components/com.qti.node.aon.so
++odm/lib64/camera/components/com.qti.node.customhwnode.so:vendor/lib64/camera/components/com.qti.node.customhwnode.so
++odm/lib64/camera/components/com.qti.node.depth.so:vendor/lib64/camera/components/com.qti.node.depth.so
++odm/lib64/camera/components/com.qti.node.depthprovider.so:vendor/lib64/camera/components/com.qti.node.depthprovider.so
++odm/lib64/camera/components/com.qti.node.dewarp.so:vendor/lib64/camera/components/com.qti.node.dewarp.so;DISABLE_DEPS
++odm/lib64/camera/components/com.qti.node.dummydepth.so:vendor/lib64/camera/components/com.qti.node.dummydepth.so
++odm/lib64/camera/components/com.qti.node.dummyrtb.so:vendor/lib64/camera/components/com.qti.node.dummyrtb.so
++odm/lib64/camera/components/com.qti.node.dummysat.so:vendor/lib64/camera/components/com.qti.node.dummysat.so
++odm/lib64/camera/components/com.qti.node.eisv2.so:vendor/lib64/camera/components/com.qti.node.eisv2.so
++odm/lib64/camera/components/com.qti.node.eisv3.so:vendor/lib64/camera/components/com.qti.node.eisv3.so
++odm/lib64/camera/components/com.qti.node.evadepth.so:vendor/lib64/camera/components/com.qti.node.evadepth.so
++odm/lib64/camera/components/com.qti.node.evaitof.so:vendor/lib64/camera/components/com.qti.node.evaitof.so
++odm/lib64/camera/components/com.qti.node.evawarp.so:vendor/lib64/camera/components/com.qti.node.evawarp.so
++odm/lib64/camera/components/com.qti.node.evs.so:vendor/lib64/camera/components/com.qti.node.evs.so
++odm/lib64/camera/components/com.qti.node.fcv.so:vendor/lib64/camera/components/com.qti.node.fcv.so
++odm/lib64/camera/components/com.qti.node.fd.so:vendor/lib64/camera/components/com.qti.node.fd.so
++odm/lib64/camera/components/com.qti.node.formatconversion.so:vendor/lib64/camera/components/com.qti.node.formatconversion.so
++odm/lib64/camera/components/com.qti.node.frc.so:vendor/lib64/camera/components/com.qti.node.frc.so
++odm/lib64/camera/components/com.qti.node.gme.so:vendor/lib64/camera/components/com.qti.node.gme.so
++odm/lib64/camera/components/com.qti.node.gpu.so:vendor/lib64/camera/components/com.qti.node.gpu.so
++odm/lib64/camera/components/com.qti.node.gyrornn.so:vendor/lib64/camera/components/com.qti.node.gyrornn.so
++odm/lib64/camera/components/com.qti.node.hdl.so:vendor/lib64/camera/components/com.qti.node.hdl.so
++odm/lib64/camera/components/com.qti.node.hdr10pgen.so:vendor/lib64/camera/components/com.qti.node.hdr10pgen.so
++odm/lib64/camera/components/com.qti.node.hdr10phist.so:vendor/lib64/camera/components/com.qti.node.hdr10phist.so
++odm/lib64/camera/components/com.qti.node.hdralign.so:vendor/lib64/camera/components/com.qti.node.hdralign.so
++odm/lib64/camera/components/com.qti.node.hybrid.so:vendor/lib64/camera/components/com.qti.node.hybrid.so
++odm/lib64/camera/components/com.qti.node.itofpreprocess.so:vendor/lib64/camera/components/com.qti.node.itofpreprocess.so
++odm/lib64/camera/components/com.qti.node.mctfalign.so:vendor/lib64/camera/components/com.qti.node.mctfalign.so
++odm/lib64/camera/components/com.qti.node.memcpy.so:vendor/lib64/camera/components/com.qti.node.memcpy.so
++odm/lib64/camera/components/com.qti.node.ml.so:vendor/lib64/camera/components/com.qti.node.ml.so
++odm/lib64/camera/components/com.qti.node.mlinference.so:vendor/lib64/camera/components/com.qti.node.mlinference.so
++odm/lib64/camera/components/com.qti.node.mmfalign.so:vendor/lib64/camera/components/com.qti.node.mmfalign.so
++odm/lib64/camera/components/com.qti.node.multiport.so:vendor/lib64/camera/components/com.qti.node.multiport.so
++odm/lib64/camera/components/com.qti.node.muxer.so:vendor/lib64/camera/components/com.qti.node.muxer.so
++odm/lib64/camera/components/com.qti.node.pixelstats.so:vendor/lib64/camera/components/com.qti.node.pixelstats.so
++odm/lib64/camera/components/com.qti.node.qsatalign.so:vendor/lib64/camera/components/com.qti.node.qsatalign.so
++odm/lib64/camera/components/com.qti.node.rectification.so:vendor/lib64/camera/components/com.qti.node.rectification.so
++odm/lib64/camera/components/com.qti.node.remosaic.so:vendor/lib64/camera/components/com.qti.node.remosaic.so
++odm/lib64/camera/components/com.qti.node.sat.so:vendor/lib64/camera/components/com.qti.node.sat.so
++odm/lib64/camera/components/com.qti.node.scorr.so:vendor/lib64/camera/components/com.qti.node.scorr.so
++odm/lib64/camera/components/com.qti.node.seg.so:vendor/lib64/camera/components/com.qti.node.seg.so
++odm/lib64/camera/components/com.qti.node.spdepth.so:vendor/lib64/camera/components/com.qti.node.spdepth.so
++odm/lib64/camera/components/com.qti.node.stich.so:vendor/lib64/camera/components/com.qti.node.stich.so
++odm/lib64/camera/components/com.qti.node.swaidenoiser.so:vendor/lib64/camera/components/com.qti.node.swaidenoiser.so
++odm/lib64/camera/components/com.qti.node.swaisr.so:vendor/lib64/camera/components/com.qti.node.swaisr.so
++odm/lib64/camera/components/com.qti.node.swbestats.so:vendor/lib64/camera/components/com.qti.node.swbestats.so
++odm/lib64/camera/components/com.qti.node.swcac.so:vendor/lib64/camera/components/com.qti.node.swcac.so
++odm/lib64/camera/components/com.qti.node.swec.so:vendor/lib64/camera/components/com.qti.node.swec.so
++odm/lib64/camera/components/com.qti.node.swef.so:vendor/lib64/camera/components/com.qti.node.swef.so
++odm/lib64/camera/components/com.qti.node.swfusion.so:vendor/lib64/camera/components/com.qti.node.swfusion.so
++odm/lib64/camera/components/com.qti.node.swhme.so:vendor/lib64/camera/components/com.qti.node.swhme.so
++odm/lib64/camera/components/com.qti.node.swlsc.so:vendor/lib64/camera/components/com.qti.node.swlsc.so
++odm/lib64/camera/components/com.qti.node.swmctf.so:vendor/lib64/camera/components/com.qti.node.swmctf.so
++odm/lib64/camera/components/com.qti.node.swmlremosaic.so:vendor/lib64/camera/components/com.qti.node.swmlremosaic.so
++odm/lib64/camera/components/com.qti.node.swpdpc.so:vendor/lib64/camera/components/com.qti.node.swpdpc.so
++odm/lib64/camera/components/com.qti.node.swpreprocess.so:vendor/lib64/camera/components/com.qti.node.swpreprocess.so
++odm/lib64/camera/components/com.qti.node.swregistration.so:vendor/lib64/camera/components/com.qti.node.swregistration.so
++odm/lib64/camera/components/com.qti.node.swvrt.so:vendor/lib64/camera/components/com.qti.node.swvrt.so
++odm/lib64/camera/components/com.qti.stats.aec.so:vendor/lib64/camera/components/com.qti.stats.aec.so
++odm/lib64/camera/components/com.qti.stats.aecexternal.so:vendor/lib64/camera/components/com.qti.stats.aecexternal.so
++odm/lib64/camera/components/com.qti.stats.aecexternallib.so:vendor/lib64/camera/components/com.qti.stats.aecexternallib.so
++odm/lib64/camera/components/com.qti.stats.aecwrapper.so:vendor/lib64/camera/components/com.qti.stats.aecwrapper.so
++odm/lib64/camera/components/com.qti.stats.aecxcore.so:vendor/lib64/camera/components/com.qti.stats.aecxcore.so
++odm/lib64/camera/components/com.qti.stats.af.so:vendor/lib64/camera/components/com.qti.stats.af.so
++odm/lib64/camera/components/com.qti.stats.afc.so:vendor/lib64/camera/components/com.qti.stats.afc.so
++odm/lib64/camera/components/com.qti.stats.afd.so:vendor/lib64/camera/components/com.qti.stats.afd.so
++odm/lib64/camera/components/com.qti.stats.afwrapper.so:vendor/lib64/camera/components/com.qti.stats.afwrapper.so
++odm/lib64/camera/components/com.qti.stats.asd.so:vendor/lib64/camera/components/com.qti.stats.asd.so
++odm/lib64/camera/components/com.qti.stats.awb.so:vendor/lib64/camera/components/com.qti.stats.awb.so
++odm/lib64/camera/components/com.qti.stats.awbr.so:vendor/lib64/camera/components/com.qti.stats.awbr.so
++odm/lib64/camera/components/com.qti.stats.awbwrapper.so:vendor/lib64/camera/components/com.qti.stats.awbwrapper.so
++odm/lib64/camera/components/com.qti.stats.caflogicaldriver.so:vendor/lib64/camera/components/com.qti.stats.caflogicaldriver.so
++odm/lib64/camera/components/com.qti.stats.cnndriver.so:vendor/lib64/camera/components/com.qti.stats.cnndriver.so
++odm/lib64/camera/components/com.qti.stats.exampleaf.so:vendor/lib64/camera/components/com.qti.stats.exampleaf.so
++odm/lib64/camera/components/com.qti.stats.haf.so:vendor/lib64/camera/components/com.qti.stats.haf.so
++odm/lib64/camera/components/com.qti.stats.hafoverride.so:vendor/lib64/camera/components/com.qti.stats.hafoverride.so
++odm/lib64/camera/components/com.qti.stats.localhistogram.so:vendor/lib64/camera/components/com.qti.stats.localhistogram.so
++odm/lib64/camera/components/com.qti.stats.pdlib.so:vendor/lib64/camera/components/com.qti.stats.pdlib.so
++odm/lib64/camera/components/com.qti.stats.pdlibsony.so:vendor/lib64/camera/components/com.qti.stats.pdlibsony.so
++odm/lib64/camera/components/com.qti.stats.pdlibwrapper.so:vendor/lib64/camera/components/com.qti.stats.pdlibwrapper.so
++odm/lib64/camera/components/com.qti.stats.roimixer.so:vendor/lib64/camera/components/com.qti.stats.roimixer.so
++odm/lib64/camera/components/com.qti.stats.roimixerlib.so:vendor/lib64/camera/components/com.qti.stats.roimixerlib.so
++odm/lib64/camera/components/com.qti.stats.statsgenerator.so:vendor/lib64/camera/components/com.qti.stats.statsgenerator.so
++odm/lib64/camera/components/com.qti.stats.tracker.so:vendor/lib64/camera/components/com.qti.stats.tracker.so
++odm/lib64/camera/components/com.qtistatic.stats.aec.so:vendor/lib64/camera/components/com.qtistatic.stats.aec.so
++odm/lib64/camera/components/com.qtistatic.stats.af.so:vendor/lib64/camera/components/com.qtistatic.stats.af.so
++odm/lib64/camera/components/com.qtistatic.stats.awb.so:vendor/lib64/camera/components/com.qtistatic.stats.awb.so
++odm/lib64/camera/components/com.qtistatic.stats.pdlib.so:vendor/lib64/camera/components/com.qtistatic.stats.pdlib.so
++odm/lib64/camera/components/com.xiaomi.node.misv2.so:vendor/lib64/camera/components/com.xiaomi.node.misv2.so
++odm/lib64/camera/components/com.xiaomi.node.misv3.so:vendor/lib64/camera/components/com.xiaomi.node.misv3.so
++odm/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so:vendor/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so
++odm/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so:vendor/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so
++odm/lib64/camera/components/libcamxdummysatwrapper.so:vendor/lib64/camera/components/libcamxdummysatwrapper.so
++odm/lib64/camera/components/libcamxevainterface.so:vendor/lib64/camera/components/libcamxevainterface.so
++odm/lib64/camera/components/libcamxoemsatwrapper.so:vendor/lib64/camera/components/libcamxoemsatwrapper.so
++odm/lib64/camera/components/libdepthmapwrapper_itof.so:vendor/lib64/camera/components/libdepthmapwrapper_itof.so
++odm/lib64/camera/components/libdepthmapwrapper_secure.so:vendor/lib64/camera/components/libdepthmapwrapper_secure.so
++odm/lib64/camera/fdconfigoffline.bin:vendor/lib64/camera/fdconfigoffline.bin
++odm/lib64/camera/fdconfigpreview.bin:vendor/lib64/camera/fdconfigpreview.bin
++odm/lib64/camera/fdconfigpreviewlite.bin:vendor/lib64/camera/fdconfigpreviewlite.bin
++odm/lib64/camera/fdconfigsecure.bin:vendor/lib64/camera/fdconfigsecure.bin
++odm/lib64/camera/fdconfigvideo.bin:vendor/lib64/camera/fdconfigvideo.bin
++odm/lib64/camera/fdconfigvideolite.bin:vendor/lib64/camera/fdconfigvideolite.bin
++odm/lib64/camera/libmicamvendorcustom.so:vendor/lib64/camera/libmicamvendorcustom.so
++odm/lib64/camera/qfdserviceconfig.bin:vendor/lib64/camera/qfdserviceconfig.bin
++odm/lib64/camx.device-impl.so:vendor/lib64/camx.device-impl.so
++odm/lib64/camx.provider-impl.so:vendor/lib64/camx.provider-impl.so
++odm/lib64/com.qti.camx.chiiqutils.so:vendor/lib64/com.qti.camx.chiiqutils.so
++odm/lib64/com.qti.chifeaturecompatibility.so:vendor/lib64/com.qti.chifeaturecompatibility.so
++odm/lib64/com.qti.chiusecaseselector.so:vendor/lib64/com.qti.chiusecaseselector.so
++odm/lib64/com.qti.custom.settings.so:vendor/lib64/com.qti.custom.settings.so
++odm/lib64/com.qti.feature2.afbrckt.so:vendor/lib64/com.qti.feature2.afbrckt.so
++odm/lib64/com.qti.feature2.anchorsync.so:vendor/lib64/com.qti.feature2.anchorsync.so
++odm/lib64/com.qti.feature2.demux.so:vendor/lib64/com.qti.feature2.demux.so
++odm/lib64/com.qti.feature2.derivedoffline.so:vendor/lib64/com.qti.feature2.derivedoffline.so
++odm/lib64/com.qti.feature2.enhancedhdr.so:vendor/lib64/com.qti.feature2.enhancedhdr.so
++odm/lib64/com.qti.feature2.frc.so:vendor/lib64/com.qti.feature2.frc.so
++odm/lib64/com.qti.feature2.fusion.so:vendor/lib64/com.qti.feature2.fusion.so
++odm/lib64/com.qti.feature2.generic.so:vendor/lib64/com.qti.feature2.generic.so
++odm/lib64/com.qti.feature2.gs.sm8850.so:vendor/lib64/com.qti.feature2.gs.sm8850.so
++odm/lib64/com.qti.feature2.hdr.so:vendor/lib64/com.qti.feature2.hdr.so
++odm/lib64/com.qti.feature2.mcreprocrt.so:vendor/lib64/com.qti.feature2.mcreprocrt.so
++odm/lib64/com.qti.feature2.memcpy.so:vendor/lib64/com.qti.feature2.memcpy.so
++odm/lib64/com.qti.feature2.metadataserializer.so:vendor/lib64/com.qti.feature2.metadataserializer.so
++odm/lib64/com.qti.feature2.mfsr.so:vendor/lib64/com.qti.feature2.mfsr.so
++odm/lib64/com.qti.feature2.mfsr.titan.so:vendor/lib64/com.qti.feature2.mfsr.titan.so
++odm/lib64/com.qti.feature2.ml.so:vendor/lib64/com.qti.feature2.ml.so
++odm/lib64/com.qti.feature2.mux.so:vendor/lib64/com.qti.feature2.mux.so
++odm/lib64/com.qti.feature2.qcfa.so:vendor/lib64/com.qti.feature2.qcfa.so
++odm/lib64/com.qti.feature2.raw2yuvhdr.so:vendor/lib64/com.qti.feature2.raw2yuvhdr.so
++odm/lib64/com.qti.feature2.rawhdr.so:vendor/lib64/com.qti.feature2.rawhdr.so
++odm/lib64/com.qti.feature2.realtimeserializer.so:vendor/lib64/com.qti.feature2.realtimeserializer.so
++odm/lib64/com.qti.feature2.rt.so:vendor/lib64/com.qti.feature2.rt.so
++odm/lib64/com.qti.feature2.rtmcx.so:vendor/lib64/com.qti.feature2.rtmcx.so
++odm/lib64/com.qti.feature2.rtpostproc.so:vendor/lib64/com.qti.feature2.rtpostproc.so
++odm/lib64/com.qti.feature2.serializer.so:vendor/lib64/com.qti.feature2.serializer.so
++odm/lib64/com.qti.feature2.statsregeneration.so:vendor/lib64/com.qti.feature2.statsregeneration.so
++odm/lib64/com.qti.feature2.stub.so:vendor/lib64/com.qti.feature2.stub.so
++odm/lib64/com.qti.feature2.swmf.so:vendor/lib64/com.qti.feature2.swmf.so
++odm/lib64/com.qti.platformsettings.sm8850.so:vendor/lib64/com.qti.platformsettings.sm8850.so
++odm/lib64/com.qti.qseeaon.so:vendor/lib64/com.qti.qseeaon.so
++odm/lib64/com.qti.qseeutils.so:vendor/lib64/com.qti.qseeutils.so
++odm/lib64/com.qti.settings.sm8850.so:vendor/lib64/com.qti.settings.sm8850.so
++odm/lib64/com.qti.sfw.settings.so:vendor/lib64/com.qti.sfw.settings.so
++odm/lib64/com.qti.stats.common.so:vendor/lib64/com.qti.stats.common.so
++odm/lib64/com.qti.stats.sotr.so:vendor/lib64/com.qti.stats.sotr.so
++odm/lib64/com.qualcomm.mcx.distortionmapper.so:vendor/lib64/com.qualcomm.mcx.distortionmapper.so
++odm/lib64/com.qualcomm.mcx.linearmapper.so:vendor/lib64/com.qualcomm.mcx.linearmapper.so
++odm/lib64/com.qualcomm.mcx.nonlinearmapper.so:vendor/lib64/com.qualcomm.mcx.nonlinearmapper.so
++odm/lib64/com.qualcomm.mcx.policy.mfl.so:vendor/lib64/com.qualcomm.mcx.policy.mfl.so
++odm/lib64/com.qualcomm.mcx.policy.sfl.so:vendor/lib64/com.qualcomm.mcx.policy.sfl.so
++odm/lib64/com.qualcomm.qti.cslcustomhw.so:vendor/lib64/com.qualcomm.qti.cslcustomhw.so
++odm/lib64/com.qualcomm.qti.mcx.usecase.extension.so:vendor/lib64/com.qualcomm.qti.mcx.usecase.extension.so
++odm/lib64/com.xiaomi.camdfx.so:vendor/lib64/com.xiaomi.camdfx.so
++odm/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so:vendor/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so
++odm/lib64/com.xiaomi.camhal.extmodel.ec_executor.so:vendor/lib64/com.xiaomi.camhal.extmodel.ec_executor.so
++odm/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so:vendor/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so
++odm/lib64/com.xiaomi.camhal.overlap.so:vendor/lib64/com.xiaomi.camhal.overlap.so
++odm/lib64/com.xiaomi.camhal.submodel.camxfrag.so:vendor/lib64/com.xiaomi.camhal.submodel.camxfrag.so
++odm/lib64/com.xiaomi.camhal.submodel.chifrag.so:vendor/lib64/com.xiaomi.camhal.submodel.chifrag.so
++odm/lib64/com.xiaomi.camhal.submodel.ecfrag.so:vendor/lib64/com.xiaomi.camhal.submodel.ecfrag.so
++odm/lib64/com.xiaomi.camhal.use_overlap.so:vendor/lib64/com.xiaomi.camhal.use_overlap.so
++odm/lib64/com.xiaomi.customlogger.so:vendor/lib64/com.xiaomi.customlogger.so
++odm/lib64/com.xiaomi.immunesystem.bigdata.so:vendor/lib64/com.xiaomi.immunesystem.bigdata.so
++odm/lib64/com.xiaomi.immunesystem.bigdata2.so:vendor/lib64/com.xiaomi.immunesystem.bigdata2.so
++odm/lib64/com.xiaomi.immunesystem.client.so:vendor/lib64/com.xiaomi.immunesystem.client.so
++odm/lib64/com.xiaomi.immunesystem.config.so:vendor/lib64/com.xiaomi.immunesystem.config.so
++odm/lib64/com.xiaomi.immunesystem.core.so:vendor/lib64/com.xiaomi.immunesystem.core.so
++odm/lib64/com.xiaomi.immunesystem.hook.camx.so:vendor/lib64/com.xiaomi.immunesystem.hook.camx.so
++odm/lib64/com.xiaomi.immunesystem.hook.mivi.so:vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so
++odm/lib64/com.xiaomi.immunesystem.hook.mtkhal.so:vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so
++odm/lib64/com.xiaomi.messagecenter.so:vendor/lib64/com.xiaomi.messagecenter.so
++odm/lib64/com.xiaomi.stub.camx.so:vendor/lib64/com.xiaomi.stub.camx.so
++odm/lib64/com.xiaomi.stub.chi.so:vendor/lib64/com.xiaomi.stub.chi.so
++odm/lib64/com.xiaomi.stubv1.camx.so:vendor/lib64/com.xiaomi.stubv1.camx.so
++odm/lib64/com.xiaomi.stubv1.chi.so:vendor/lib64/com.xiaomi.stubv1.chi.so
++odm/lib64/com.xiaomi.xmdevprotection.tokmd.so:vendor/lib64/com.xiaomi.xmdevprotection.tokmd.so
++odm/lib64/com.xiaomi.xmxmessage2center.so:vendor/lib64/com.xiaomi.xmxmessage2center.so
++odm/lib64/hw/camera.qcom.core.so:vendor/lib64/hw/camera.qcom.core.so
++odm/lib64/hw/camera.qcom.sm8850.so:vendor/lib64/hw/camera.qcom.sm8850.so
++odm/lib64/hw/camera.qcom.so:vendor/lib64/hw/camera.qcom.so
++odm/lib64/hw/com.qti.chi.offline.so:vendor/lib64/hw/com.qti.chi.offline.so
++odm/lib64/hw/com.qti.chi.override.so:vendor/lib64/hw/com.qti.chi.override.so
++odm/lib64/immunesystem.db.sqlite3.so:vendor/lib64/immunesystem.db.sqlite3.so
++odm/lib64/libAF.so:vendor/lib64/libAF.so
++odm/lib64/libaidenoiser.so:vendor/lib64/libaidenoiser.so
++odm/lib64/libaidenoiserv2.so:vendor/lib64/libaidenoiserv2.so
+ vendor/lib64/libAIHDIcon.so
+-vendor/lib64/libaisr.so
+-vendor/lib64/libauto_focus_stark.so
+-vendor/lib64/libbitmlengine.so
+-vendor/lib64/libbitmlenginev2.so
+-vendor/lib64/libcamera.xiaomi.catchlog.so
++odm/lib64/libaisr.so:vendor/lib64/libaisr.so
++odm/lib64/libauto_focus_stark.so:vendor/lib64/libauto_focus_stark.so
++odm/lib64/libbitmlengine.so:vendor/lib64/libbitmlengine.so
++odm/lib64/libbitmlenginev2.so:vendor/lib64/libbitmlenginev2.so
++odm/lib64/libcamera.xiaomi.catchlog.so:vendor/lib64/libcamera.xiaomi.catchlog.so
+ vendor/lib64/libcamera2ndk_vendor.so
+-vendor/lib64/libcamerabuffer.so
+-vendor/lib64/libcameraheif.so
++odm/lib64/libcamerabuffer.so:vendor/lib64/libcamerabuffer.so
++odm/lib64/libcameraheif.so:vendor/lib64/libcameraheif.so
+ vendor/lib64/libcameraobserver.so
+-vendor/lib64/libcameraopt_stub.so
++odm/lib64/libcameraopt_stub.so:vendor/lib64/libcameraopt_stub.so
+ vendor/lib64/libcameraopt.so
+-vendor/lib64/libcamlog.so
+-vendor/lib64/libcamxasyncdumpmanager.so
+-vendor/lib64/libcamxcommonutils.so
+-vendor/lib64/libcamxcoreutils.so
+-vendor/lib64/libcamxcsl.so
+-vendor/lib64/libcamxcslhw.so
+-vendor/lib64/libcamxdumpinforecorder.so
+-vendor/lib64/libcamxexternalformatutils.so
+-vendor/lib64/libcamxfdengine.so
+-vendor/lib64/libcamxhexlpservicebase.so
+-vendor/lib64/libcamxhwlfrontend.so
+-vendor/lib64/libcamxhwlipedriver.so
+-vendor/lib64/libcamxhwnodecontext.so
+-vendor/lib64/libcamxhwquery.so
+-vendor/lib64/libcamxifestriping.so
+-vendor/lib64/libcamximageformatutils.so
+-vendor/lib64/libcamxmetadata.so
+-vendor/lib64/libcamxncsdatafactory.so
+-vendor/lib64/libcamxods.so
+-vendor/lib64/libcamxofehwl.so
+-vendor/lib64/libcamxofeswl.so
+-vendor/lib64/libcamxqsatalgo.so
+-vendor/lib64/libcamxsettingsmanager.so
+-vendor/lib64/libcamxsocketclientutil.so
+-vendor/lib64/libcamxsocketserverutil.so
+-vendor/lib64/libcamxswispiqmodule.so
+-vendor/lib64/libcamxswlipedriver.so
+-vendor/lib64/libcamxswprocessalgo.so
+-vendor/lib64/libcamxtintlessalgo.so
+-vendor/lib64/libcamxvppservicebase.so
+-vendor/lib64/libchicore.so
+-vendor/lib64/libchifeature2.so
+-vendor/lib64/libchilog.so
+-vendor/lib64/libchinodeevautils.so
+-vendor/lib64/libchinodehmeutils.so
+-vendor/lib64/libcom.qti.chinodeutils.so
+-vendor/lib64/libcom.xiaomi.attribute.so
+-vendor/lib64/libcom.xiaomi.cam.miexifmgr.so
+-vendor/lib64/libcom.xiaomi.debug.so
+-vendor/lib64/libcom.xiaomi.dsac.so
+-vendor/lib64/libcom.xiaomi.ecoenginemonitor.so
+-vendor/lib64/libcom.xiaomi.eventcallback.so
+-vendor/lib64/libcom.xiaomi.grallocutils.so
+-vendor/lib64/libcom.xiaomi.ionutils.so
+-vendor/lib64/libcom.xiaomi.mawutils.so
+-vendor/lib64/libcom.xiaomi.mawutilsold.so
+-vendor/lib64/libcom.xiaomi.message_bridge.so
+-vendor/lib64/libcom.xiaomi.metadatautils.so
+-vendor/lib64/libcom.xiaomi.mivid.so
+-vendor/lib64/libcom.xiaomi.offcamadapter.so
+-vendor/lib64/libcom.xiaomi.offlinefeatureintf.so
+-vendor/lib64/libcom.xiaomi.pluginutils.so
+-vendor/lib64/libcom.xiaomi.qcomHalInsertion.so
+-vendor/lib64/libcom.xiaomi.qimagebuffer.so
+-vendor/lib64/libcom.xiaomi.sensorpolicy.so
+-vendor/lib64/libcom.xiaomi.signaltrigger.so
+-vendor/lib64/libcom.xiaomi.threadpool.so
+-vendor/lib64/libcom.xiaomi.timer.so
+-vendor/lib64/libDlhookDumpStates.so
++odm/lib64/libcamlog.so:vendor/lib64/libcamlog.so
++odm/lib64/libcamxasyncdumpmanager.so:vendor/lib64/libcamxasyncdumpmanager.so
++odm/lib64/libcamxcommonutils.so:vendor/lib64/libcamxcommonutils.so
++odm/lib64/libcamxcoreutils.so:vendor/lib64/libcamxcoreutils.so
++odm/lib64/libcamxcsl.so:vendor/lib64/libcamxcsl.so
++odm/lib64/libcamxcslhw.so:vendor/lib64/libcamxcslhw.so
++odm/lib64/libcamxdumpinforecorder.so:vendor/lib64/libcamxdumpinforecorder.so
++odm/lib64/libcamxexternalformatutils.so:vendor/lib64/libcamxexternalformatutils.so
++odm/lib64/libcamxfdengine.so:vendor/lib64/libcamxfdengine.so
++odm/lib64/libcamxhexlpservicebase.so:vendor/lib64/libcamxhexlpservicebase.so
++odm/lib64/libcamxhwlfrontend.so:vendor/lib64/libcamxhwlfrontend.so
++odm/lib64/libcamxhwlipedriver.so:vendor/lib64/libcamxhwlipedriver.so
++odm/lib64/libcamxhwnodecontext.so:vendor/lib64/libcamxhwnodecontext.so
++odm/lib64/libcamxhwquery.so:vendor/lib64/libcamxhwquery.so
++odm/lib64/libcamxifestriping.so:vendor/lib64/libcamxifestriping.so
++odm/lib64/libcamximageformatutils.so:vendor/lib64/libcamximageformatutils.so
++odm/lib64/libcamxmetadata.so:vendor/lib64/libcamxmetadata.so
++odm/lib64/libcamxncsdatafactory.so:vendor/lib64/libcamxncsdatafactory.so
++odm/lib64/libcamxods.so:vendor/lib64/libcamxods.so
++odm/lib64/libcamxofehwl.so:vendor/lib64/libcamxofehwl.so
++odm/lib64/libcamxofeswl.so:vendor/lib64/libcamxofeswl.so
++odm/lib64/libcamxqsatalgo.so:vendor/lib64/libcamxqsatalgo.so
++odm/lib64/libcamxsettingsmanager.so:vendor/lib64/libcamxsettingsmanager.so
++odm/lib64/libcamxsocketclientutil.so:vendor/lib64/libcamxsocketclientutil.so
++odm/lib64/libcamxsocketserverutil.so:vendor/lib64/libcamxsocketserverutil.so
++odm/lib64/libcamxswispiqmodule.so:vendor/lib64/libcamxswispiqmodule.so
++odm/lib64/libcamxswlipedriver.so:vendor/lib64/libcamxswlipedriver.so
++odm/lib64/libcamxswprocessalgo.so:vendor/lib64/libcamxswprocessalgo.so
++odm/lib64/libcamxtintlessalgo.so:vendor/lib64/libcamxtintlessalgo.so
++odm/lib64/libcamxvppservicebase.so:vendor/lib64/libcamxvppservicebase.so
++odm/lib64/libchicore.so:vendor/lib64/libchicore.so
++odm/lib64/libchifeature2.so:vendor/lib64/libchifeature2.so
++odm/lib64/libchilog.so:vendor/lib64/libchilog.so
++odm/lib64/libchinodeevautils.so:vendor/lib64/libchinodeevautils.so
++odm/lib64/libchinodehmeutils.so:vendor/lib64/libchinodehmeutils.so
++odm/lib64/libcom.qti.chinodeutils.so:vendor/lib64/libcom.qti.chinodeutils.so
++odm/lib64/libcom.xiaomi.attribute.so:vendor/lib64/libcom.xiaomi.attribute.so
++odm/lib64/libcom.xiaomi.cam.miexifmgr.so:vendor/lib64/libcom.xiaomi.cam.miexifmgr.so
++odm/lib64/libcom.xiaomi.debug.so:vendor/lib64/libcom.xiaomi.debug.so
++odm/lib64/libcom.xiaomi.dsac.so:vendor/lib64/libcom.xiaomi.dsac.so
++odm/lib64/libcom.xiaomi.ecoenginemonitor.so:vendor/lib64/libcom.xiaomi.ecoenginemonitor.so
++odm/lib64/libcom.xiaomi.eventcallback.so:vendor/lib64/libcom.xiaomi.eventcallback.so
++odm/lib64/libcom.xiaomi.grallocutils.so:vendor/lib64/libcom.xiaomi.grallocutils.so
++odm/lib64/libcom.xiaomi.ionutils.so:vendor/lib64/libcom.xiaomi.ionutils.so
++odm/lib64/libcom.xiaomi.mawutils.so:vendor/lib64/libcom.xiaomi.mawutils.so
++odm/lib64/libcom.xiaomi.mawutilsold.so:vendor/lib64/libcom.xiaomi.mawutilsold.so
++odm/lib64/libcom.xiaomi.message_bridge.so:vendor/lib64/libcom.xiaomi.message_bridge.so
++odm/lib64/libcom.xiaomi.metadatautils.so:vendor/lib64/libcom.xiaomi.metadatautils.so
++odm/lib64/libcom.xiaomi.mivid.so:vendor/lib64/libcom.xiaomi.mivid.so
++odm/lib64/libcom.xiaomi.offcamadapter.so:vendor/lib64/libcom.xiaomi.offcamadapter.so
++odm/lib64/libcom.xiaomi.offlinefeatureintf.so:vendor/lib64/libcom.xiaomi.offlinefeatureintf.so
++odm/lib64/libcom.xiaomi.pluginutils.so:vendor/lib64/libcom.xiaomi.pluginutils.so
++odm/lib64/libcom.xiaomi.qcomHalInsertion.so:vendor/lib64/libcom.xiaomi.qcomHalInsertion.so
++odm/lib64/libcom.xiaomi.qimagebuffer.so:vendor/lib64/libcom.xiaomi.qimagebuffer.so
++odm/lib64/libcom.xiaomi.sensorpolicy.so:vendor/lib64/libcom.xiaomi.sensorpolicy.so
++odm/lib64/libcom.xiaomi.signaltrigger.so:vendor/lib64/libcom.xiaomi.signaltrigger.so
++odm/lib64/libcom.xiaomi.threadpool.so:vendor/lib64/libcom.xiaomi.threadpool.so
++odm/lib64/libcom.xiaomi.timer.so:vendor/lib64/libcom.xiaomi.timer.so
++odm/lib64/libDlhookDumpStates.so:vendor/lib64/libDlhookDumpStates.so
+ vendor/lib64/libdng_sdk.so:vendor/lib64/libdng_sdk-pudding.so;FIX_SONAME
+-vendor/lib64/libdscaalgo.so
+-vendor/lib64/libecoengine.so
+-vendor/lib64/libfastmessage.so
+-vendor/lib64/libGenie.so
+-vendor/lib64/libheichal.so
+-vendor/lib64/libhme.so
+-vendor/lib64/libhwliqinterface2.so
+-vendor/lib64/libhwlispcffdump.so
+-vendor/lib64/libipebpsstriping.so
+-vendor/lib64/libipebpsstriping170.so
+-vendor/lib64/libipebpsstriping480.so
+-vendor/lib64/libiqdbgmgr.so
+-vendor/lib64/libisphwsetting.so
+-vendor/lib64/liblocalFlickerDet.so
+-vendor/lib64/libmctfengine_stub.so
+-vendor/lib64/libmetatagwrapper.so
+-vendor/lib64/libmfGhostDetection.so
+-vendor/lib64/libmialgo_ai_vision.so
++odm/lib64/libdscaalgo.so:vendor/lib64/libdscaalgo.so
++odm/lib64/libecoengine.so:vendor/lib64/libecoengine.so
++odm/lib64/libfastmessage.so:vendor/lib64/libfastmessage.so
++odm/lib64/libGenie.so:vendor/lib64/libGenie.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/libheichal.so
++odm/lib64/libhme.so:vendor/lib64/libhme.so
++odm/lib64/libhwliqinterface2.so:vendor/lib64/libhwliqinterface2.so
++odm/lib64/libhwlispcffdump.so:vendor/lib64/libhwlispcffdump.so
++odm/lib64/libipebpsstriping.so:vendor/lib64/libipebpsstriping.so
++odm/lib64/libipebpsstriping170.so:vendor/lib64/libipebpsstriping170.so
++odm/lib64/libipebpsstriping480.so:vendor/lib64/libipebpsstriping480.so
++odm/lib64/libiqdbgmgr.so:vendor/lib64/libiqdbgmgr.so
++odm/lib64/libisphwsetting.so:vendor/lib64/libisphwsetting.so
++odm/lib64/liblocalFlickerDet.so:vendor/lib64/liblocalFlickerDet.so
++odm/lib64/libmctfengine_stub.so:vendor/lib64/libmctfengine_stub.so
++odm/lib64/libmetatagwrapper.so:vendor/lib64/libmetatagwrapper.so
++odm/lib64/libmfGhostDetection.so:vendor/lib64/libmfGhostDetection.so
++odm/lib64/libmialgo_ai_vision.so:vendor/lib64/libmialgo_ai_vision.so
+ vendor/lib64/libmialgo.so
+-vendor/lib64/libmialgoengine_custom.so
+-vendor/lib64/libmialgoengine.so
+-vendor/lib64/libmicamera_adapter.so
+-vendor/lib64/libmicamera_aidl_device_adaptor.so;DISABLE_DEPS
+-vendor/lib64/libmicamera_aidl_device.so;DISABLE_DEPS
+-vendor/lib64/libmicamera_aidl_provider.so;DISABLE_DEPS
+-vendor/lib64/libmicamera_aidl_utils.so;DISABLE_DEPS
+-vendor/lib64/libmicamera_fps_checker.so
+-vendor/lib64/libmicamera_hal_core.so
+-vendor/lib64/libmicamera_hal_policy.so
+-vendor/lib64/libmicamGlobalPool.so
+-vendor/lib64/libminikin.xiaomi.so
+-vendor/lib64/libMiPhotoFilter.so
+-vendor/lib64/libmlremosaicengine.so
+-vendor/lib64/libmmcamera_bestats.so
+-vendor/lib64/libmmcamera_cac.so
+-vendor/lib64/libmmcamera_lscv35.so
+-vendor/lib64/libmmcamera_mfnr_t4.so
+-vendor/lib64/libmmcamera_mfnr.so
+-vendor/lib64/libmmcamera_pdpc.so
+-vendor/lib64/libmpbase.so
++odm/lib64/libmialgoengine_custom.so:vendor/lib64/libmialgoengine_custom.so
++odm/lib64/libmialgoengine.so:vendor/lib64/libmialgoengine.so
++odm/lib64/libmicamera_adapter.so:vendor/lib64/libmicamera_adapter.so
++odm/lib64/libmicamera_aidl_device_adaptor.so:vendor/lib64/libmicamera_aidl_device_adaptor.so;DISABLE_DEPS
++odm/lib64/libmicamera_aidl_device.so:vendor/lib64/libmicamera_aidl_device.so;DISABLE_DEPS
++odm/lib64/libmicamera_aidl_provider.so:vendor/lib64/libmicamera_aidl_provider.so;DISABLE_DEPS
++odm/lib64/libmicamera_aidl_utils.so:vendor/lib64/libmicamera_aidl_utils.so;DISABLE_DEPS
++odm/lib64/libmicamera_fps_checker.so:vendor/lib64/libmicamera_fps_checker.so
++odm/lib64/libmicamera_hal_core.so:vendor/lib64/libmicamera_hal_core.so
++odm/lib64/libmicamera_hal_policy.so:vendor/lib64/libmicamera_hal_policy.so
++odm/lib64/libmicamGlobalPool.so:vendor/lib64/libmicamGlobalPool.so
++odm/lib64/libminikin.xiaomi.so:vendor/lib64/libminikin.xiaomi.so
++odm/lib64/libMiPhotoFilter.so:vendor/lib64/libMiPhotoFilter.so
++odm/lib64/libmlremosaicengine.so:vendor/lib64/libmlremosaicengine.so
++odm/lib64/libmmcamera_bestats.so:vendor/lib64/libmmcamera_bestats.so
++odm/lib64/libmmcamera_cac.so:vendor/lib64/libmmcamera_cac.so
++odm/lib64/libmmcamera_lscv35.so:vendor/lib64/libmmcamera_lscv35.so
++odm/lib64/libmmcamera_mfnr_t4.so:vendor/lib64/libmmcamera_mfnr_t4.so
++odm/lib64/libmmcamera_mfnr.so:vendor/lib64/libmmcamera_mfnr.so
++odm/lib64/libmmcamera_pdpc.so:vendor/lib64/libmmcamera_pdpc.so
++odm/lib64/libmpbase.so:vendor/lib64/libmpbase.so
+ vendor/lib64/libnova.so
+-vendor/lib64/libofestriping.so
+-vendor/lib64/libofflinedebugdata.so
+-vendor/lib64/libois_channel_stub.so
+-vendor/lib64/liboischannel.so
++odm/lib64/libofestriping.so:vendor/lib64/libofestriping.so
++odm/lib64/libofflinedebugdata.so:vendor/lib64/libofflinedebugdata.so
++odm/lib64/libois_channel_stub.so:vendor/lib64/libois_channel_stub.so
++odm/lib64/liboischannel.so:vendor/lib64/liboischannel.so
+ vendor/lib64/libopencl_loader.so
+-vendor/lib64/libopencv_core_se.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/libopencv_core_se.so
+ vendor/lib64/libopencv_core.so
+-vendor/lib64/libopencv_imgproc_se.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/libopencv_imgproc_se.so
+ vendor/lib64/libopencv_imgproc.so
+-vendor/lib64/libopencv.so
+-vendor/lib64/libopencv3a.so
+-vendor/lib64/libPlatformValidatorShared.so
+-vendor/lib64/libpostprocinfo.so
++odm/lib64/libopencv.so:vendor/lib64/libopencv.so
++odm/lib64/libopencv3a.so:vendor/lib64/libopencv3a.so
++odm/lib64/libPlatformValidatorShared.so:vendor/lib64/libPlatformValidatorShared.so
++odm/lib64/libpostprocinfo.so:vendor/lib64/libpostprocinfo.so
+ vendor/lib64/libproj_qmot_tracker.so
+ vendor/lib64/libproj_sot.so
+-vendor/lib64/libqsegnet.so
+-vendor/lib64/libqshcamera_sensinghubapi.so
+-vendor/lib64/libqshcamera.so
++odm/lib64/libqsegnet.so:vendor/lib64/libqsegnet.so
++odm/lib64/libqshcamera_sensinghubapi.so:vendor/lib64/libqshcamera_sensinghubapi.so
++odm/lib64/libqshcamera.so:vendor/lib64/libqshcamera.so
+ vendor/lib64/libRecordCNN.so
+-vendor/lib64/libSEGModel.so
+-vendor/lib64/libshadowhook.so
+-vendor/lib64/libsiminputgenutil.so
+-vendor/lib64/libsimulation.so
+-vendor/lib64/libSNPE.so
+-vendor/lib64/libSnpeDspV66Stub.so;FIX_SONAME
+-vendor/lib64/libSnpeHta.so
+-vendor/lib64/libSnpeHtpPrepare.so
+-vendor/lib64/libSnpeHtpV68CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV68Stub.so
+-vendor/lib64/libSnpeHtpV69CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV69Stub.so
+-vendor/lib64/libSnpeHtpV73CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV73Stub.so
+-vendor/lib64/libSnpeHtpV75CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV75Stub.so
+-vendor/lib64/libSnpeHtpV79CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV79Stub.so
+-vendor/lib64/libSnpeHtpV81CalculatorStub.so;FIX_SONAME
+-vendor/lib64/libSnpeHtpV81Stub.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/libSEGModel.so
++odm/lib64/libshadowhook.so:vendor/lib64/libshadowhook.so
++odm/lib64/libsiminputgenutil.so:vendor/lib64/libsiminputgenutil.so
++odm/lib64/libsimulation.so:vendor/lib64/libsimulation.so
++odm/lib64/libSNPE.so:vendor/lib64/libSNPE.so
++odm/lib64/libSnpeDspV66Stub.so:vendor/lib64/libSnpeDspV66Stub.so;FIX_SONAME
++odm/lib64/libSnpeHta.so:vendor/lib64/libSnpeHta.so
++odm/lib64/libSnpeHtpPrepare.so:vendor/lib64/libSnpeHtpPrepare.so
++odm/lib64/libSnpeHtpV68CalculatorStub.so:vendor/lib64/libSnpeHtpV68CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV68Stub.so:vendor/lib64/libSnpeHtpV68Stub.so
++odm/lib64/libSnpeHtpV69CalculatorStub.so:vendor/lib64/libSnpeHtpV69CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV69Stub.so:vendor/lib64/libSnpeHtpV69Stub.so
++odm/lib64/libSnpeHtpV73CalculatorStub.so:vendor/lib64/libSnpeHtpV73CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV73Stub.so:vendor/lib64/libSnpeHtpV73Stub.so
++odm/lib64/libSnpeHtpV75CalculatorStub.so:vendor/lib64/libSnpeHtpV75CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV75Stub.so:vendor/lib64/libSnpeHtpV75Stub.so
++odm/lib64/libSnpeHtpV79CalculatorStub.so:vendor/lib64/libSnpeHtpV79CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV79Stub.so:vendor/lib64/libSnpeHtpV79Stub.so
++odm/lib64/libSnpeHtpV81CalculatorStub.so:vendor/lib64/libSnpeHtpV81CalculatorStub.so;FIX_SONAME
++odm/lib64/libSnpeHtpV81Stub.so:vendor/lib64/libSnpeHtpV81Stub.so
+ vendor/lib64/libSNPESample.so
+-vendor/lib64/libubifocus.so
+-vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so
+-vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so;DISABLE_DEPS
+-vendor/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so
++odm/lib64/libubifocus.so:vendor/lib64/libubifocus.so
++odm/lib64/vendor.qti.hardware.camera.aon-service-impl.so:vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so
++odm/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so:vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so;DISABLE_DEPS
++odm/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so:vendor/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so
+ vendor/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-ndk.so
+-vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so
+-vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so
++odm/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so:vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so
++odm/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so:vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so
+ vendor/lib64/vendor.xiaomi.hardware.aon-V1-ndk.so
+ vendor/lib64/vendor.xiaomi.hardware.aon.auth-V1-ndk.so
+-vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so
+-vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0.so
+-vendor/lib64/vendor.xiaomi.hardware.camera.companion-impl.so
+-vendor/lib64/vendor.xiaomi.hardware.camera.companion-V1-ndk.so
++odm/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so:vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so
++odm/lib64/vendor.xiaomi.hardware.bgservice@1.0.so:vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/vendor.xiaomi.hardware.camera.companion-impl.so
++# Not shipped in verified OS3.0.335.0.XPCMIXM: vendor/lib64/vendor.xiaomi.hardware.camera.companion-V1-ndk.so
+ vendor/lib64/vendor.xiaomi.hardware.camera.injection-client.so
+ vendor/lib64/vendor.xiaomi.hardware.camera.injection-service.so
+ vendor/lib64/vendor.xiaomi.hardware.camera.injection-V1-ndk.so
+-vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so
+-vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so
++odm/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so:vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so
++odm/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so:vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so
+ vendor/lib64/vendor.xiaomi.hardware.camera.synthetic-impl.so
+ vendor/lib64/vendor.xiaomi.hardware.camera.synthetic-V1-ndk.so
+-vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so
+-vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so
++odm/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so:vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so
++odm/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so:vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so
+ vendor/lib64/vendor.xiaomi.sensor.camera-V1-ndk.so
+ 
+ # Display
+@@ -1780,3 +1780,32 @@ odm/firmware/6_ringTone1_P_RTP.bin:vendor/etc/vibrator/primitive_effect_6.bin
+ odm/firmware/7_ringTone2_P_RTP.bin:vendor/etc/vibrator/primitive_effect_7.bin
+ odm/firmware/8_ringTone3_P_RTP.bin:vendor/etc/vibrator/primitive_effect_8.bin
+ odm/firmware/9_ringTone4_P_RTP.bin:vendor/etc/vibrator/primitive_effect_9.bin
++
++# HEIC HAL shipped by OS3.0.335.0.XPCMIXM
++vendor/lib64/libheichal_qcom.so
++
++vendor/lib64/rfs/dsp/libsvswdsp.so
++vendor/lib64/rfs/dsp/libsvswdsp_skel.so
++
++odm/lib64/camera/plugins/com.xiaomi.plugin.watermarkV2.so
++
++odm/lib64/libpendant_wrapper.so
++
++# OS4 OEM VM firmware required by qcvm_config.json
++odm/firmware_oemvm/oemvm/boot/oemvm.elf
++odm/firmware_oemvm/oemvm/oemvm.dtbo
++
++# OS4 production performance configuration
++vendor/etc/perf/avcsysnodesconfigs.xml
++vendor/etc/perf/factorsconfig.xml
++vendor/etc/perf/perfboostselection.xml
++vendor/etc/perf/pinnerconfigstore.xml
++vendor/etc/perf/qapeboostsconfig.xml
++vendor/etc/perf/qapegameconfig.txt
++vendor/etc/perf/thermalbreakboostconfig.xml
++
++# Complete OS4 MiTEE secure application set
++odm/mitee/ta/69e4f326-d5cd-e780-3987619f04784525.ta
++
++# Stock trusted VM read-only userspace disk referenced by qcvm_config.json
++odm/firmware_qtvm/system.img
+diff --git a/proprietary-firmware.txt b/proprietary-firmware.txt
+index 33944a1ffe3b56f3865a9f72044efe27a00f15a8..c294bd49bd005e12be64a6729fd5f50cc0ad19af 100644
+--- a/proprietary-firmware.txt
++++ b/proprietary-firmware.txt
+@@ -1,5 +1,5 @@
+ ## All proprietary files from this list, unless pinned and noted otherwise,
+-## are from Xiaomi 17 (OS3.0.335.0.XPCMIXM). 
++## are from Xiaomi 17 (OS4.0.4.0.XPCCNXM). 
+ 
+ abl.img;AB
+ aop_config.img;AB

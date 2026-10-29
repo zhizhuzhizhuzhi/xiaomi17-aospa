@@ -1,0 +1,2549 @@
+// Preserve stock absolute ODM camera/DSP paths after blob relocation to vendor.
+install_symlink {
+    name: "pudding_odm_compat_a4b8547c6e6e78b1",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libapn_dsp_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libapn_dsp_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_44d80597b22c7024",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libbitml_nsp_81na_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libbitml_nsp_81na_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d71338728c33dc2a",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libbitml_nsp_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libbitml_nsp_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3d2f662ba26e64d2",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libffthelper_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libffthelper_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c148a8751ac69050",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libhdr_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libhdr_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4460e0b5a51754ec",
+    device_specific: true,
+    installed_location: "lib64/rfs/dsp/libqsegnetengine_dsp_skel.so",
+    symlink_target: "/vendor/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7f6b0af5c038eff4",
+    device_specific: true,
+    installed_location: "lib64/camera/bitmlconfig.bin",
+    symlink_target: "/vendor/lib64/camera/bitmlconfig.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_aa7b4d81c7e91932",
+    device_specific: true,
+    installed_location: "lib64/camera/camxfl115indices.bin",
+    symlink_target: "/vendor/lib64/camera/camxfl115indices.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_457f71c6b7b4eb43",
+    device_specific: true,
+    installed_location: "lib64/camera/camxfl300v1indices.bin",
+    symlink_target: "/vendor/lib64/camera/camxfl300v1indices.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a66c6a09016e9592",
+    device_specific: true,
+    installed_location: "lib64/camera/camxfl300v2indices.bin",
+    symlink_target: "/vendor/lib64/camera/camxfl300v2indices.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_87736526fae0a267",
+    device_specific: true,
+    installed_location: "lib64/camera/camxflcustom300indices.bin",
+    symlink_target: "/vendor/lib64/camera/camxflcustom300indices.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1100df0c616b20e1",
+    device_specific: true,
+    installed_location: "lib64/camera/chifdnodeconfig.bin",
+    symlink_target: "/vendor/lib64/camera/chifdnodeconfig.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0f4628799fb84b5e",
+    device_specific: true,
+    installed_location: "lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin",
+    symlink_target: "/vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_26e9fb9a692fce42",
+    device_specific: true,
+    installed_location: "lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin",
+    symlink_target: "/vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ea9b9f6f4cf73c2c",
+    device_specific: true,
+    installed_location: "lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin",
+    symlink_target: "/vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3b9f04584937ccc4",
+    device_specific: true,
+    installed_location: "lib64/camera/com.qti.ofe.profiledb.default.bin",
+    symlink_target: "/vendor/lib64/camera/com.qti.ofe.profiledb.default.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c4f9e80be6b48bbc",
+    device_specific: true,
+    installed_location: "lib64/camera/com.qti.ofe.profiledb.sm8850.bin",
+    symlink_target: "/vendor/lib64/camera/com.qti.ofe.profiledb.sm8850.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9b474f1d626c7a71",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.mi.node.fd.so",
+    symlink_target: "/vendor/lib64/camera/components/com.mi.node.fd.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_de4cc579f5912a6f",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.mi.node.mimovie.so",
+    symlink_target: "/vendor/lib64/camera/components/com.mi.node.mimovie.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b8c0caa7d772e2d0",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.mi.node.mioisverify.so",
+    symlink_target: "/vendor/lib64/camera/components/com.mi.node.mioisverify.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bf1246940f1b632a",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.eisv2.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.eisv2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ba7406199647274e",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.eisv3.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.eisv3.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f68052ce43141d21",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hvx.addconstant.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hvx.addconstant.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a5a6f107e1b5e640",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hvx.binning.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hvx.binning.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bd6204b1c8a852d4",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hwcfg.bps.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hwcfg.bps.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ee7d8bae84058a8e",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hwcfg.ife.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hwcfg.ife.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_879a8aa123b4f232",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hwcfg.ipe.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hwcfg.ipe.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_87e2025de01ed84e",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hwcfg.mctfe.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hwcfg.mctfe.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_130b962b7d61d919",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.hwcfg.ofe.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.hwcfg.ofe.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_659d438789040078",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.afbfusion.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.afbfusion.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5f1102bdc900ec94",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.aon.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.aon.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4945f0ed38d8baed",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.customhwnode.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.customhwnode.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9032632a69e1efad",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.depth.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.depth.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f1d360836f91d7c2",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.depthprovider.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.depthprovider.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_54e013540ff63985",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.dewarp.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.dewarp.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bce9a2d5c3f9f767",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.dummydepth.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.dummydepth.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_34f4eca94a15d0e9",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.dummyrtb.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.dummyrtb.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_901b6702c88b1beb",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.dummysat.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.dummysat.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cdd2a4c38c59d336",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.eisv2.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.eisv2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f08856de038a2e44",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.eisv3.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.eisv3.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c623af7be8872e3a",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.evadepth.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.evadepth.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c8de13723ed41a34",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.evaitof.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.evaitof.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_780eba0af9251bc3",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.evawarp.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.evawarp.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_87cf88eb7ada1cc9",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.evs.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.evs.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7c2474c69d1317b4",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.fcv.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.fcv.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b4d76a81b2342fa8",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.fd.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.fd.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_53fae0ab18c3f226",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.formatconversion.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.formatconversion.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_737ce209684151ca",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.frc.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.frc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_16974f472c9dc661",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.gme.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.gme.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cb0b63f353539d20",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.gpu.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.gpu.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_670b4870435f7495",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.gyrornn.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.gyrornn.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_23e2dc4f13ce11e3",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.hdl.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.hdl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_779e8f0fe41c5f6a",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.hdr10pgen.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.hdr10pgen.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_74eed70662b5ad03",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.hdr10phist.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.hdr10phist.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ef5ee4a72d7765db",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.hdralign.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.hdralign.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3003d917330f540c",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.hybrid.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.hybrid.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a077848063decbd2",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.itofpreprocess.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.itofpreprocess.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_86f1f8c09cd3d353",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.mctfalign.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.mctfalign.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_09badfbd957b8d87",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.memcpy.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.memcpy.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7def69584090e14d",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.ml.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.ml.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6fcabac5e75fb37d",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.mlinference.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.mlinference.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_757bbae19b9f8f35",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.mmfalign.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.mmfalign.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9fd9b70eb24a8ff7",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.multiport.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.multiport.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3837898d5a3de41b",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.muxer.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.muxer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bd8476f02089613c",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.pixelstats.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.pixelstats.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3697700a5865e2db",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.qsatalign.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.qsatalign.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cc50b87c97736e20",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.rectification.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.rectification.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_227cd1f27de1f1ea",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.remosaic.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.remosaic.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b75940198b143530",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.sat.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.sat.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f2fe8dbd81cd7aea",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.scorr.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.scorr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_519fe6e2c2d76e74",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.seg.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.seg.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_db4a6d307a45af26",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.spdepth.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.spdepth.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cfd73528a13ed1ce",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.stich.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.stich.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_95a3f33735dfdc64",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swaidenoiser.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swaidenoiser.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_df8d00e073a866b7",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swaisr.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swaisr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d439d86ea58e056b",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swbestats.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swbestats.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f6c246b43d59bd6d",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swcac.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swcac.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cd8365ff19671b65",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swec.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swec.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1c092d52c15a1bf4",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swef.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swef.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8007b24c65cb5c48",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swfusion.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swfusion.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1b7edc2e2d14cb0d",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swhme.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swhme.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c6fe50ef44233058",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swlsc.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swlsc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_77a172e4ab5a843c",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swmctf.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swmctf.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c450772c042194d4",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swmlremosaic.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swmlremosaic.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ae0ff22db7db1ccc",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swpdpc.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swpdpc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1bfe596e1bf36d30",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swpreprocess.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swpreprocess.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_035017178c6ae5ca",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swregistration.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swregistration.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_357515ffad60f6bd",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.node.swvrt.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.node.swvrt.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4f4a71bbb74042f8",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.aec.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.aec.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d8c3e56c4b780409",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.aecexternal.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.aecexternal.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6d72f2bad9e87536",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.aecexternallib.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.aecexternallib.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8ff2e58434ee6738",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.aecwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.aecwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_246977518ecff992",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.aecxcore.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.aecxcore.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f2c5a71c15e6cf9b",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.af.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.af.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2c23d1f286ecbe98",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.afc.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.afc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c7ca18b6edae4ff3",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.afd.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.afd.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_221e4118c13251fe",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.afwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.afwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_10aacfb8390330d8",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.asd.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.asd.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1d3c54a899ff28bc",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.awb.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.awb.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_debbfdba3e3c5b7b",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.awbr.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.awbr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f349b001755a71e7",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.awbwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.awbwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f0aec1cbc9406e90",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.caflogicaldriver.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.caflogicaldriver.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_edfd5af18e80878a",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.cnndriver.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.cnndriver.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a261b8d0bc4f3c44",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.exampleaf.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.exampleaf.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_02192b7f4be80bf0",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.haf.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.haf.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ccdafbbd34be6b7c",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.hafoverride.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.hafoverride.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_75d559e3318f7275",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.localhistogram.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.localhistogram.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b3653f434f5c68ed",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.pdlib.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.pdlib.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ca5ee355b6b69b42",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.pdlibsony.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.pdlibsony.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b2237bac17f8fa83",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.pdlibwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.pdlibwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e5f2d9cef54821e1",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.roimixer.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.roimixer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2f88ef6fdce40bb2",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.roimixerlib.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.roimixerlib.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cfcc0eebbbc84186",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.statsgenerator.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.statsgenerator.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a345e7675e26b286",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qti.stats.tracker.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qti.stats.tracker.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_52e57e3e80002645",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qtistatic.stats.aec.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qtistatic.stats.aec.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_dfd651c53d8b247f",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qtistatic.stats.af.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qtistatic.stats.af.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c3481a4b649cb6d6",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qtistatic.stats.awb.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qtistatic.stats.awb.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_347d416b05fd0b4d",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.qtistatic.stats.pdlib.so",
+    symlink_target: "/vendor/lib64/camera/components/com.qtistatic.stats.pdlib.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f818fa660f16a50f",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.xiaomi.node.misv2.so",
+    symlink_target: "/vendor/lib64/camera/components/com.xiaomi.node.misv2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_39942c9c932917f0",
+    device_specific: true,
+    installed_location: "lib64/camera/components/com.xiaomi.node.misv3.so",
+    symlink_target: "/vendor/lib64/camera/components/com.xiaomi.node.misv3.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cc471091484b7bed",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_524b30c05ed68fcc",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8009bd06a6bd0d2f",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libcamxdummysatwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/libcamxdummysatwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d38e9b6f427ba061",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libcamxevainterface.so",
+    symlink_target: "/vendor/lib64/camera/components/libcamxevainterface.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8384094283c631bd",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libcamxoemsatwrapper.so",
+    symlink_target: "/vendor/lib64/camera/components/libcamxoemsatwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_dba747e2a9035ac0",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libdepthmapwrapper_itof.so",
+    symlink_target: "/vendor/lib64/camera/components/libdepthmapwrapper_itof.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_80f4d3ba2d0dd4e5",
+    device_specific: true,
+    installed_location: "lib64/camera/components/libdepthmapwrapper_secure.so",
+    symlink_target: "/vendor/lib64/camera/components/libdepthmapwrapper_secure.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_575539dee65387b0",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigoffline.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigoffline.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cf0a87e2ac224720",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigpreview.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigpreview.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_520bce9293228148",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigpreviewlite.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigpreviewlite.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ff9b8f61851db64d",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigsecure.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigsecure.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f40eab70013d5a02",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigvideo.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigvideo.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5ea93ca402538b32",
+    device_specific: true,
+    installed_location: "lib64/camera/fdconfigvideolite.bin",
+    symlink_target: "/vendor/lib64/camera/fdconfigvideolite.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_61eecdc91f99a162",
+    device_specific: true,
+    installed_location: "lib64/camera/libmicamvendorcustom.so",
+    symlink_target: "/vendor/lib64/camera/libmicamvendorcustom.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c1fa59c9258aca81",
+    device_specific: true,
+    installed_location: "lib64/camera/qfdserviceconfig.bin",
+    symlink_target: "/vendor/lib64/camera/qfdserviceconfig.bin",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6441887335086790",
+    device_specific: true,
+    installed_location: "lib64/camx.device-impl.so",
+    symlink_target: "/vendor/lib64/camx.device-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_324546b3d7619fec",
+    device_specific: true,
+    installed_location: "lib64/camx.provider-impl.so",
+    symlink_target: "/vendor/lib64/camx.provider-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ba9a52dcf8c91863",
+    device_specific: true,
+    installed_location: "lib64/com.qti.camx.chiiqutils.so",
+    symlink_target: "/vendor/lib64/com.qti.camx.chiiqutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4832b78c56bb886d",
+    device_specific: true,
+    installed_location: "lib64/com.qti.chifeaturecompatibility.so",
+    symlink_target: "/vendor/lib64/com.qti.chifeaturecompatibility.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ca50742ddff76238",
+    device_specific: true,
+    installed_location: "lib64/com.qti.chiusecaseselector.so",
+    symlink_target: "/vendor/lib64/com.qti.chiusecaseselector.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_46fcc3a6c87faea3",
+    device_specific: true,
+    installed_location: "lib64/com.qti.custom.settings.so",
+    symlink_target: "/vendor/lib64/com.qti.custom.settings.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e44ad69afca12a3b",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.afbrckt.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.afbrckt.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b4503738ccb012aa",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.anchorsync.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.anchorsync.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d5b2541aea2377ad",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.demux.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.demux.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2b53e8eb8b6aa95d",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.derivedoffline.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.derivedoffline.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_af8eddecc4e28123",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.enhancedhdr.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.enhancedhdr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3bb477e060bf1ec0",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.frc.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.frc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2181c2e7701b1016",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.fusion.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.fusion.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3c507a03bc51696f",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.generic.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.generic.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4b867e02d741d144",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.gs.sm8850.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.gs.sm8850.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7ec234af69a25d09",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.hdr.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.hdr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_82bf49a56bb76633",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.mcreprocrt.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.mcreprocrt.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_be28cdcc24bf74fb",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.memcpy.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.memcpy.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7c2357f7f0043153",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.metadataserializer.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.metadataserializer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_841331ea8c9401c8",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.mfsr.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.mfsr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ef28d364840325cf",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.mfsr.titan.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.mfsr.titan.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2c3fd74948c089ab",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.ml.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.ml.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6383dfcd85d71eef",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.mux.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.mux.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b29cc414b1737c79",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.qcfa.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.qcfa.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cb9822bb2b144557",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.raw2yuvhdr.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.raw2yuvhdr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_44a0c1d930457705",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.rawhdr.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.rawhdr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1caca9cc5e21a446",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.realtimeserializer.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.realtimeserializer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0b6988d031a2998a",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.rt.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.rt.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e6fa39c92076aec1",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.rtmcx.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.rtmcx.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d54b8a1ebc396a6c",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.rtpostproc.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.rtpostproc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_aed388ee4c832e6a",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.serializer.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.serializer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ac4f4d296a905017",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.statsregeneration.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.statsregeneration.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_49c93836d9caae9d",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.stub.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_420dbd7c1603f11f",
+    device_specific: true,
+    installed_location: "lib64/com.qti.feature2.swmf.so",
+    symlink_target: "/vendor/lib64/com.qti.feature2.swmf.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b2d32112957b9192",
+    device_specific: true,
+    installed_location: "lib64/com.qti.platformsettings.sm8850.so",
+    symlink_target: "/vendor/lib64/com.qti.platformsettings.sm8850.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_895852160394a5bd",
+    device_specific: true,
+    installed_location: "lib64/com.qti.qseeaon.so",
+    symlink_target: "/vendor/lib64/com.qti.qseeaon.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8593c40bef25d8a2",
+    device_specific: true,
+    installed_location: "lib64/com.qti.qseeutils.so",
+    symlink_target: "/vendor/lib64/com.qti.qseeutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b31bb26acf46442a",
+    device_specific: true,
+    installed_location: "lib64/com.qti.settings.sm8850.so",
+    symlink_target: "/vendor/lib64/com.qti.settings.sm8850.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7688b592782e9a11",
+    device_specific: true,
+    installed_location: "lib64/com.qti.sfw.settings.so",
+    symlink_target: "/vendor/lib64/com.qti.sfw.settings.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_56cec6c7d02fec84",
+    device_specific: true,
+    installed_location: "lib64/com.qti.stats.common.so",
+    symlink_target: "/vendor/lib64/com.qti.stats.common.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_74e6a38d606ab1ed",
+    device_specific: true,
+    installed_location: "lib64/com.qti.stats.sotr.so",
+    symlink_target: "/vendor/lib64/com.qti.stats.sotr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3eb9a92daff6f82b",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.mcx.distortionmapper.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.mcx.distortionmapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0b6a80bf8983b335",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.mcx.linearmapper.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.mcx.linearmapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0df8716374c5c4c0",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.mcx.nonlinearmapper.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.mcx.nonlinearmapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ac48e57138d949d8",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.mcx.policy.mfl.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.mcx.policy.mfl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_84f85d6298a4d091",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.mcx.policy.sfl.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.mcx.policy.sfl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_41930a2e800d4434",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.qti.cslcustomhw.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.qti.cslcustomhw.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a26beaae4672d4d5",
+    device_specific: true,
+    installed_location: "lib64/com.qualcomm.qti.mcx.usecase.extension.so",
+    symlink_target: "/vendor/lib64/com.qualcomm.qti.mcx.usecase.extension.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_85304674fa38c3e0",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camdfx.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camdfx.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d850a446abd11020",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_be3d0cf2861d771f",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.extmodel.ec_executor.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.extmodel.ec_executor.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e59026644f8dca17",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8c97694fe4d61c59",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.overlap.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.overlap.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7cfa9aec487b6bad",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.submodel.camxfrag.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.submodel.camxfrag.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_827e9bfd56d032ac",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.submodel.chifrag.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.submodel.chifrag.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_71b96467a8ed1d9a",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.submodel.ecfrag.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.submodel.ecfrag.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bdf646372b498b15",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.camhal.use_overlap.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.camhal.use_overlap.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_16cd7f0e880308da",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.customlogger.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.customlogger.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bfe0c9aa3db155db",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.bigdata.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.bigdata.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b571b76a558a7762",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.bigdata2.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.bigdata2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2da5127cf422a42c",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.client.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.client.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cc0bec2b5c9918d1",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.config.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.config.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0a6603d0d3ea57f0",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.core.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.core.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f942f138e7598659",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.hook.camx.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.hook.camx.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_93a5c21fdeec9187",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.hook.mivi.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b86099db4ad1e246",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.immunesystem.hook.mtkhal.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_70f4edc6c00bbc19",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.messagecenter.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.messagecenter.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_512943c306af5747",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.stub.camx.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.stub.camx.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ad7109bdd4f1b926",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.stub.chi.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.stub.chi.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_477e580679faac22",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.stubv1.camx.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.stubv1.camx.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f7b78a865e733415",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.stubv1.chi.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.stubv1.chi.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_84f0d09343fab980",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.xmdevprotection.tokmd.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.xmdevprotection.tokmd.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cb25e4471c3f65dd",
+    device_specific: true,
+    installed_location: "lib64/com.xiaomi.xmxmessage2center.so",
+    symlink_target: "/vendor/lib64/com.xiaomi.xmxmessage2center.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8a0ca82c16f5a67b",
+    device_specific: true,
+    installed_location: "lib64/hw/camera.qcom.core.so",
+    symlink_target: "/vendor/lib64/hw/camera.qcom.core.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3bf3ba2591e0bc2d",
+    device_specific: true,
+    installed_location: "lib64/hw/camera.qcom.sm8850.so",
+    symlink_target: "/vendor/lib64/hw/camera.qcom.sm8850.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_09f630cf2da1319b",
+    device_specific: true,
+    installed_location: "lib64/hw/camera.qcom.so",
+    symlink_target: "/vendor/lib64/hw/camera.qcom.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9c47970c74e7be1b",
+    device_specific: true,
+    installed_location: "lib64/hw/com.qti.chi.offline.so",
+    symlink_target: "/vendor/lib64/hw/com.qti.chi.offline.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ec73007f8ef5e72c",
+    device_specific: true,
+    installed_location: "lib64/hw/com.qti.chi.override.so",
+    symlink_target: "/vendor/lib64/hw/com.qti.chi.override.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_aa00595f71dfc798",
+    device_specific: true,
+    installed_location: "lib64/immunesystem.db.sqlite3.so",
+    symlink_target: "/vendor/lib64/immunesystem.db.sqlite3.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7fed7994ae7d84d2",
+    device_specific: true,
+    installed_location: "lib64/libAF.so",
+    symlink_target: "/vendor/lib64/libAF.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0245803a01335ac4",
+    device_specific: true,
+    installed_location: "lib64/libaidenoiser.so",
+    symlink_target: "/vendor/lib64/libaidenoiser.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_679d1ff1fed52316",
+    device_specific: true,
+    installed_location: "lib64/libaidenoiserv2.so",
+    symlink_target: "/vendor/lib64/libaidenoiserv2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_72b473d545bb85bb",
+    device_specific: true,
+    installed_location: "lib64/libaisr.so",
+    symlink_target: "/vendor/lib64/libaisr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_11bcae95796f18c2",
+    device_specific: true,
+    installed_location: "lib64/libauto_focus_stark.so",
+    symlink_target: "/vendor/lib64/libauto_focus_stark.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e42508fc47c4fd04",
+    device_specific: true,
+    installed_location: "lib64/libbitmlengine.so",
+    symlink_target: "/vendor/lib64/libbitmlengine.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3eadb8ced5bb7ab2",
+    device_specific: true,
+    installed_location: "lib64/libbitmlenginev2.so",
+    symlink_target: "/vendor/lib64/libbitmlenginev2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5e8591eb2faa2507",
+    device_specific: true,
+    installed_location: "lib64/libcamera.xiaomi.catchlog.so",
+    symlink_target: "/vendor/lib64/libcamera.xiaomi.catchlog.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_db49efded8982c5c",
+    device_specific: true,
+    installed_location: "lib64/libcamerabuffer.so",
+    symlink_target: "/vendor/lib64/libcamerabuffer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_55e838133eb52a40",
+    device_specific: true,
+    installed_location: "lib64/libcameraheif.so",
+    symlink_target: "/vendor/lib64/libcameraheif.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3f728f018567ea29",
+    device_specific: true,
+    installed_location: "lib64/libcameraopt_stub.so",
+    symlink_target: "/vendor/lib64/libcameraopt_stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f58dd3d7f4f73859",
+    device_specific: true,
+    installed_location: "lib64/libcamlog.so",
+    symlink_target: "/vendor/lib64/libcamlog.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_13abcf125db3a1e6",
+    device_specific: true,
+    installed_location: "lib64/libcamxasyncdumpmanager.so",
+    symlink_target: "/vendor/lib64/libcamxasyncdumpmanager.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_60872907e7f606fc",
+    device_specific: true,
+    installed_location: "lib64/libcamxcommonutils.so",
+    symlink_target: "/vendor/lib64/libcamxcommonutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9a653607804aab02",
+    device_specific: true,
+    installed_location: "lib64/libcamxcoreutils.so",
+    symlink_target: "/vendor/lib64/libcamxcoreutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_94ee342be77c2ba0",
+    device_specific: true,
+    installed_location: "lib64/libcamxcsl.so",
+    symlink_target: "/vendor/lib64/libcamxcsl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0c6db7710bf529fc",
+    device_specific: true,
+    installed_location: "lib64/libcamxcslhw.so",
+    symlink_target: "/vendor/lib64/libcamxcslhw.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_fe994287669df81d",
+    device_specific: true,
+    installed_location: "lib64/libcamxdumpinforecorder.so",
+    symlink_target: "/vendor/lib64/libcamxdumpinforecorder.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2aef0d2293fcf2f6",
+    device_specific: true,
+    installed_location: "lib64/libcamxexternalformatutils.so",
+    symlink_target: "/vendor/lib64/libcamxexternalformatutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0c2f9526405063e0",
+    device_specific: true,
+    installed_location: "lib64/libcamxfdengine.so",
+    symlink_target: "/vendor/lib64/libcamxfdengine.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_30ec6f6eb12bd293",
+    device_specific: true,
+    installed_location: "lib64/libcamxhexlpservicebase.so",
+    symlink_target: "/vendor/lib64/libcamxhexlpservicebase.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9a1cb0f68fd3a975",
+    device_specific: true,
+    installed_location: "lib64/libcamxhwlfrontend.so",
+    symlink_target: "/vendor/lib64/libcamxhwlfrontend.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1ac8bfdcd1f3d49e",
+    device_specific: true,
+    installed_location: "lib64/libcamxhwlipedriver.so",
+    symlink_target: "/vendor/lib64/libcamxhwlipedriver.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_db203c740c4e59b4",
+    device_specific: true,
+    installed_location: "lib64/libcamxhwnodecontext.so",
+    symlink_target: "/vendor/lib64/libcamxhwnodecontext.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_2ce5164b31ea27ad",
+    device_specific: true,
+    installed_location: "lib64/libcamxhwquery.so",
+    symlink_target: "/vendor/lib64/libcamxhwquery.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_068e5115abf2b6da",
+    device_specific: true,
+    installed_location: "lib64/libcamxifestriping.so",
+    symlink_target: "/vendor/lib64/libcamxifestriping.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a0f932d47a587148",
+    device_specific: true,
+    installed_location: "lib64/libcamximageformatutils.so",
+    symlink_target: "/vendor/lib64/libcamximageformatutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_40b713f713fe728d",
+    device_specific: true,
+    installed_location: "lib64/libcamxmetadata.so",
+    symlink_target: "/vendor/lib64/libcamxmetadata.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a92abbeceff8cf3c",
+    device_specific: true,
+    installed_location: "lib64/libcamxncsdatafactory.so",
+    symlink_target: "/vendor/lib64/libcamxncsdatafactory.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4a1296db0e12ac54",
+    device_specific: true,
+    installed_location: "lib64/libcamxods.so",
+    symlink_target: "/vendor/lib64/libcamxods.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f44d2aa71c1c91a9",
+    device_specific: true,
+    installed_location: "lib64/libcamxofehwl.so",
+    symlink_target: "/vendor/lib64/libcamxofehwl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_686465068e5193d0",
+    device_specific: true,
+    installed_location: "lib64/libcamxofeswl.so",
+    symlink_target: "/vendor/lib64/libcamxofeswl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c85de30330e24f20",
+    device_specific: true,
+    installed_location: "lib64/libcamxqsatalgo.so",
+    symlink_target: "/vendor/lib64/libcamxqsatalgo.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3fd3b2e2af4b2ee1",
+    device_specific: true,
+    installed_location: "lib64/libcamxsettingsmanager.so",
+    symlink_target: "/vendor/lib64/libcamxsettingsmanager.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_222efb61ebec309e",
+    device_specific: true,
+    installed_location: "lib64/libcamxsocketclientutil.so",
+    symlink_target: "/vendor/lib64/libcamxsocketclientutil.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f10462b8b4bcdb63",
+    device_specific: true,
+    installed_location: "lib64/libcamxsocketserverutil.so",
+    symlink_target: "/vendor/lib64/libcamxsocketserverutil.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d20c8ad0e4f19195",
+    device_specific: true,
+    installed_location: "lib64/libcamxswispiqmodule.so",
+    symlink_target: "/vendor/lib64/libcamxswispiqmodule.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_982bd45b9ecb9899",
+    device_specific: true,
+    installed_location: "lib64/libcamxswlipedriver.so",
+    symlink_target: "/vendor/lib64/libcamxswlipedriver.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_612c13c5bcfd7cac",
+    device_specific: true,
+    installed_location: "lib64/libcamxswprocessalgo.so",
+    symlink_target: "/vendor/lib64/libcamxswprocessalgo.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_861f5b0e677cf3cf",
+    device_specific: true,
+    installed_location: "lib64/libcamxtintlessalgo.so",
+    symlink_target: "/vendor/lib64/libcamxtintlessalgo.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4414fb8841106f14",
+    device_specific: true,
+    installed_location: "lib64/libcamxvppservicebase.so",
+    symlink_target: "/vendor/lib64/libcamxvppservicebase.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_41f69e1dc041abc8",
+    device_specific: true,
+    installed_location: "lib64/libchicore.so",
+    symlink_target: "/vendor/lib64/libchicore.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_bc6dcae4a41950a0",
+    device_specific: true,
+    installed_location: "lib64/libchifeature2.so",
+    symlink_target: "/vendor/lib64/libchifeature2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d2e10b80e1699da0",
+    device_specific: true,
+    installed_location: "lib64/libchilog.so",
+    symlink_target: "/vendor/lib64/libchilog.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_45322894b5645ef1",
+    device_specific: true,
+    installed_location: "lib64/libchinodeevautils.so",
+    symlink_target: "/vendor/lib64/libchinodeevautils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_16e9c3447b4e7f03",
+    device_specific: true,
+    installed_location: "lib64/libchinodehmeutils.so",
+    symlink_target: "/vendor/lib64/libchinodehmeutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_640741e85fcab267",
+    device_specific: true,
+    installed_location: "lib64/libcom.qti.chinodeutils.so",
+    symlink_target: "/vendor/lib64/libcom.qti.chinodeutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_43e4519245b5af32",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.attribute.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.attribute.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ae3b815e9e1df98f",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.cam.miexifmgr.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.cam.miexifmgr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0a38153713303c8c",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.debug.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.debug.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_48642eede80a3b29",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.dsac.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.dsac.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0fd7d7bb103ae43b",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.ecoenginemonitor.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.ecoenginemonitor.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f5363c14660b3aa2",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.eventcallback.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.eventcallback.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_e1cd1ab5d09f4b55",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.grallocutils.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.grallocutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c7df31c8ae5ab884",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.ionutils.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.ionutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0e6f1a3df267a919",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.mawutils.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.mawutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9f91b9f91dc47ce9",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.mawutilsold.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.mawutilsold.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b0e8310477eb115b",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.message_bridge.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.message_bridge.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_aea7ef1b0c6bcbb6",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.metadatautils.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.metadatautils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c1fae984b9fe9d30",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.mivid.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.mivid.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4032997fb74145c7",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.offcamadapter.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.offcamadapter.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_216674862ee0e225",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.offlinefeatureintf.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.offlinefeatureintf.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0422fe3fe061f903",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.pluginutils.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.pluginutils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a053a23ec1de50ca",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.qcomHalInsertion.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.qcomHalInsertion.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1c1f640a8c50b108",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.qimagebuffer.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.qimagebuffer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_aa47bc4a8159cfcf",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.sensorpolicy.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.sensorpolicy.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4f38a6b96fa351d4",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.signaltrigger.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.signaltrigger.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b0f98c4b416f3f32",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.threadpool.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.threadpool.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_19dc77c2a3c4aa5d",
+    device_specific: true,
+    installed_location: "lib64/libcom.xiaomi.timer.so",
+    symlink_target: "/vendor/lib64/libcom.xiaomi.timer.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5c1d250aeb1a479a",
+    device_specific: true,
+    installed_location: "lib64/libDlhookDumpStates.so",
+    symlink_target: "/vendor/lib64/libDlhookDumpStates.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f817a29630d7f90c",
+    device_specific: true,
+    installed_location: "lib64/libdscaalgo.so",
+    symlink_target: "/vendor/lib64/libdscaalgo.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_df4c61b06868177a",
+    device_specific: true,
+    installed_location: "lib64/libecoengine.so",
+    symlink_target: "/vendor/lib64/libecoengine.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ac0e4b04e729a56f",
+    device_specific: true,
+    installed_location: "lib64/libfastmessage.so",
+    symlink_target: "/vendor/lib64/libfastmessage.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_29350910fb1586cc",
+    device_specific: true,
+    installed_location: "lib64/libGenie.so",
+    symlink_target: "/vendor/lib64/libGenie.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a138165f4eebef8d",
+    device_specific: true,
+    installed_location: "lib64/libhme.so",
+    symlink_target: "/vendor/lib64/libhme.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_70c5dd6bd704fa17",
+    device_specific: true,
+    installed_location: "lib64/libhwliqinterface2.so",
+    symlink_target: "/vendor/lib64/libhwliqinterface2.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_53b228ea7560bca7",
+    device_specific: true,
+    installed_location: "lib64/libhwlispcffdump.so",
+    symlink_target: "/vendor/lib64/libhwlispcffdump.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_74b36943a1612e52",
+    device_specific: true,
+    installed_location: "lib64/libipebpsstriping.so",
+    symlink_target: "/vendor/lib64/libipebpsstriping.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b14b497a196a4b8d",
+    device_specific: true,
+    installed_location: "lib64/libipebpsstriping170.so",
+    symlink_target: "/vendor/lib64/libipebpsstriping170.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cc1eace50ba66c99",
+    device_specific: true,
+    installed_location: "lib64/libipebpsstriping480.so",
+    symlink_target: "/vendor/lib64/libipebpsstriping480.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4a0b8ea173562664",
+    device_specific: true,
+    installed_location: "lib64/libiqdbgmgr.so",
+    symlink_target: "/vendor/lib64/libiqdbgmgr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d4c63148c7f324f0",
+    device_specific: true,
+    installed_location: "lib64/libisphwsetting.so",
+    symlink_target: "/vendor/lib64/libisphwsetting.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_ced619e481333c70",
+    device_specific: true,
+    installed_location: "lib64/liblocalFlickerDet.so",
+    symlink_target: "/vendor/lib64/liblocalFlickerDet.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f0b3d290e341ebc3",
+    device_specific: true,
+    installed_location: "lib64/libmctfengine_stub.so",
+    symlink_target: "/vendor/lib64/libmctfengine_stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b449432b8fd1379a",
+    device_specific: true,
+    installed_location: "lib64/libmetatagwrapper.so",
+    symlink_target: "/vendor/lib64/libmetatagwrapper.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8aafe0e03f0c2752",
+    device_specific: true,
+    installed_location: "lib64/libmfGhostDetection.so",
+    symlink_target: "/vendor/lib64/libmfGhostDetection.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d105ced5fd5c4c45",
+    device_specific: true,
+    installed_location: "lib64/libmialgo_ai_vision.so",
+    symlink_target: "/vendor/lib64/libmialgo_ai_vision.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4636226175648880",
+    device_specific: true,
+    installed_location: "lib64/libmialgoengine_custom.so",
+    symlink_target: "/vendor/lib64/libmialgoengine_custom.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_07bd26e8687d49b2",
+    device_specific: true,
+    installed_location: "lib64/libmialgoengine.so",
+    symlink_target: "/vendor/lib64/libmialgoengine.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3de6a03b55767998",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_adapter.so",
+    symlink_target: "/vendor/lib64/libmicamera_adapter.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f8a7f2bf52233bc3",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_aidl_device_adaptor.so",
+    symlink_target: "/vendor/lib64/libmicamera_aidl_device_adaptor.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3abe8a0d1e378ad2",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_aidl_device.so",
+    symlink_target: "/vendor/lib64/libmicamera_aidl_device.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_114c3ee354de1997",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_aidl_provider.so",
+    symlink_target: "/vendor/lib64/libmicamera_aidl_provider.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1dceb19aa870ad11",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_aidl_utils.so",
+    symlink_target: "/vendor/lib64/libmicamera_aidl_utils.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_26bde42e531c80c1",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_fps_checker.so",
+    symlink_target: "/vendor/lib64/libmicamera_fps_checker.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6800b2bf4f703ff9",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_hal_core.so",
+    symlink_target: "/vendor/lib64/libmicamera_hal_core.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_c4b74a448310c0c6",
+    device_specific: true,
+    installed_location: "lib64/libmicamera_hal_policy.so",
+    symlink_target: "/vendor/lib64/libmicamera_hal_policy.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_30ea92edf04b4c1d",
+    device_specific: true,
+    installed_location: "lib64/libmicamGlobalPool.so",
+    symlink_target: "/vendor/lib64/libmicamGlobalPool.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_50c7edd819eabf99",
+    device_specific: true,
+    installed_location: "lib64/libminikin.xiaomi.so",
+    symlink_target: "/vendor/lib64/libminikin.xiaomi.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5e9bd09a0c8f2783",
+    device_specific: true,
+    installed_location: "lib64/libMiPhotoFilter.so",
+    symlink_target: "/vendor/lib64/libMiPhotoFilter.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_14b9bd48ff46016f",
+    device_specific: true,
+    installed_location: "lib64/libmlremosaicengine.so",
+    symlink_target: "/vendor/lib64/libmlremosaicengine.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_25dcb784c6e73fd4",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_bestats.so",
+    symlink_target: "/vendor/lib64/libmmcamera_bestats.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9e722a2ff5335eee",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_cac.so",
+    symlink_target: "/vendor/lib64/libmmcamera_cac.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d63104549162fb86",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_lscv35.so",
+    symlink_target: "/vendor/lib64/libmmcamera_lscv35.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9c257dd773223af7",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_mfnr_t4.so",
+    symlink_target: "/vendor/lib64/libmmcamera_mfnr_t4.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a89da4230f835fdb",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_mfnr.so",
+    symlink_target: "/vendor/lib64/libmmcamera_mfnr.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b36a3337b6997c89",
+    device_specific: true,
+    installed_location: "lib64/libmmcamera_pdpc.so",
+    symlink_target: "/vendor/lib64/libmmcamera_pdpc.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b3b970cfe1842e85",
+    device_specific: true,
+    installed_location: "lib64/libmpbase.so",
+    symlink_target: "/vendor/lib64/libmpbase.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_87eaa5a6c48802e3",
+    device_specific: true,
+    installed_location: "lib64/libofestriping.so",
+    symlink_target: "/vendor/lib64/libofestriping.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_3d2e1041f05bcbad",
+    device_specific: true,
+    installed_location: "lib64/libofflinedebugdata.so",
+    symlink_target: "/vendor/lib64/libofflinedebugdata.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4e9bd149ed276fdd",
+    device_specific: true,
+    installed_location: "lib64/libois_channel_stub.so",
+    symlink_target: "/vendor/lib64/libois_channel_stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_135ec3e3034ed1c3",
+    device_specific: true,
+    installed_location: "lib64/liboischannel.so",
+    symlink_target: "/vendor/lib64/liboischannel.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_931349af910c748b",
+    device_specific: true,
+    installed_location: "lib64/libopencv.so",
+    symlink_target: "/vendor/lib64/libopencv.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_489b30d0c614452b",
+    device_specific: true,
+    installed_location: "lib64/libopencv3a.so",
+    symlink_target: "/vendor/lib64/libopencv3a.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_098d77be30a6206e",
+    device_specific: true,
+    installed_location: "lib64/libPlatformValidatorShared.so",
+    symlink_target: "/vendor/lib64/libPlatformValidatorShared.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_74903f5f07ef577a",
+    device_specific: true,
+    installed_location: "lib64/libpostprocinfo.so",
+    symlink_target: "/vendor/lib64/libpostprocinfo.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_cdcfeaf125be2be2",
+    device_specific: true,
+    installed_location: "lib64/libqsegnet.so",
+    symlink_target: "/vendor/lib64/libqsegnet.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_50152c52666c7419",
+    device_specific: true,
+    installed_location: "lib64/libqshcamera_sensinghubapi.so",
+    symlink_target: "/vendor/lib64/libqshcamera_sensinghubapi.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_6190a345b5b5c72f",
+    device_specific: true,
+    installed_location: "lib64/libqshcamera.so",
+    symlink_target: "/vendor/lib64/libqshcamera.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9b0501f7ecc534ba",
+    device_specific: true,
+    installed_location: "lib64/libshadowhook.so",
+    symlink_target: "/vendor/lib64/libshadowhook.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_00e2d21b29d760cf",
+    device_specific: true,
+    installed_location: "lib64/libsiminputgenutil.so",
+    symlink_target: "/vendor/lib64/libsiminputgenutil.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_618cfd57b929be2f",
+    device_specific: true,
+    installed_location: "lib64/libsimulation.so",
+    symlink_target: "/vendor/lib64/libsimulation.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_1ac5948c180a3eb5",
+    device_specific: true,
+    installed_location: "lib64/libSNPE.so",
+    symlink_target: "/vendor/lib64/libSNPE.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_7922509072e0b6c9",
+    device_specific: true,
+    installed_location: "lib64/libSnpeDspV66Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeDspV66Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a5ad366bb10e1621",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHta.so",
+    symlink_target: "/vendor/lib64/libSnpeHta.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_37d226137b5e08a0",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpPrepare.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpPrepare.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a29ee6b50f4693ad",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV68CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV68CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_76d013d2f05b20b4",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV68Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV68Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_f31164d37eb10f6a",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV69CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV69CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_8deb0e6a0601a348",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV69Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV69Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4c30366cf7cf6d2c",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV73CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV73CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_5a3fcf41465486ee",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV73Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV73Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d2172eafc47fa7f2",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV75CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV75CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d655c9b92e2d5523",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV75Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV75Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_194972d2487a6b62",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV79CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV79CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_642e58fb359c4706",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV79Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV79Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_d52c8b63c0c9dc95",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV81CalculatorStub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV81CalculatorStub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_02f849318b517bda",
+    device_specific: true,
+    installed_location: "lib64/libSnpeHtpV81Stub.so",
+    symlink_target: "/vendor/lib64/libSnpeHtpV81Stub.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_46d769c4cfd43267",
+    device_specific: true,
+    installed_location: "lib64/libubifocus.so",
+    symlink_target: "/vendor/lib64/libubifocus.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9589d01f18cd3d1f",
+    device_specific: true,
+    installed_location: "lib64/vendor.qti.hardware.camera.aon-service-impl.so",
+    symlink_target: "/vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4d1ffdccc60df5b3",
+    device_specific: true,
+    installed_location: "lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so",
+    symlink_target: "/vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_91cf8f23bfaeb785",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_b0f477d897e31fcd",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a9ff33b1a60bbdd9",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_4f70fbf76a9a21be",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_39c15abfaf29f208",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.bgservice@1.0.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_a0d839985dfafea0",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_9b3cc8a6ba98a9cf",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_0e4c844983d3cc67",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so",
+}
+
+install_symlink {
+    name: "pudding_odm_compat_47692ec9369fa33f",
+    device_specific: true,
+    installed_location: "lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so",
+    symlink_target: "/vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so",
+}
+

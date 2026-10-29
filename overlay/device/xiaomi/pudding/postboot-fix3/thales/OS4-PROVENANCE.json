@@ -1,0 +1,101 @@
+[
+  {
+    "group": "thales",
+    "name": "android.hardware.security.keymint-service.strongbox-thales",
+    "source": "odm/bin/hw/android.hardware.security.keymint-service.strongbox-thales",
+    "stock_sha256": "65c4032ad570f31e35b50643e25b0f89440f3daa36647b1917b6cad37875ed04",
+    "before_sha256": "9bc67b3fa14f04ab55d46084c2d1411cb129c1cccfc378fcca2f1ae3b73ca459",
+    "after_sha256": "9bc67b3fa14f04ab55d46084c2d1411cb129c1cccfc378fcca2f1ae3b73ca459",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "android.hardware.weaver-service.thales",
+    "source": "odm/bin/hw/android.hardware.weaver-service.thales",
+    "stock_sha256": "0e3ce63b091b0c46a4b12999bb900a01dc54fff6b6a068b6d6fc5e0461e7a6dd",
+    "before_sha256": "b8cc9d9bd9b1d9d6017cc609ce1fcddaf64d106f5be2ac146253c55022755723",
+    "after_sha256": "b8cc9d9bd9b1d9d6017cc609ce1fcddaf64d106f5be2ac146253c55022755723",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "ese_weaver_thales.so",
+    "source": "odm/lib64/ese_weaver_thales.so",
+    "stock_sha256": "de1d51885115c1094e8c88a6cdaf3d3a2bc5e5eeb77ee68bded94ce07c3c86d3",
+    "before_sha256": "2c8936452d466f9cb68f4d7bceab0294410cd0b1a7664a7f17e2e139130f8dd0",
+    "after_sha256": "2c8936452d466f9cb68f4d7bceab0294410cd0b1a7664a7f17e2e139130f8dd0",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libcppbor.so",
+    "source": "vendor/lib64/libcppbor.so",
+    "stock_sha256": "1b3c904ab23c79d633561cc8024b6d41224973c41d51f56313f61dd97b69bf25",
+    "before_sha256": "22d62483e4b9ce7107c4f04d6a63a6b9fc0dd51829452e9b12cdc1a9aa70beed",
+    "after_sha256": "22d62483e4b9ce7107c4f04d6a63a6b9fc0dd51829452e9b12cdc1a9aa70beed",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libcppbor_external.so",
+    "source": "vendor/lib64/libcppbor_external.so",
+    "stock_sha256": "e3bede0e0c30b90c1361a791b7786f8b399a111f127ddedae9278d691e7a87cf",
+    "before_sha256": "9276f93c3cdbd8f2471b4bf81a0c1f842e9ad94f12d73a8f793f9a86139a6bf3",
+    "after_sha256": "9276f93c3cdbd8f2471b4bf81a0c1f842e9ad94f12d73a8f793f9a86139a6bf3",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libjc_keymint-thales.so",
+    "source": "odm/lib64/libjc_keymint-thales.so",
+    "stock_sha256": "61a45c8d7ee431dfd497e2d47f9b34c78d46d6c1a2153d4ae1cd99d7056c5c58",
+    "before_sha256": "201b23d1e87861fc9acdbee998264c9449e2081de0a642ea9bf973b225fea5ed",
+    "after_sha256": "201b23d1e87861fc9acdbee998264c9449e2081de0a642ea9bf973b225fea5ed",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libjc_keymint_transport-thales.so",
+    "source": "odm/lib64/libjc_keymint_transport-thales.so",
+    "stock_sha256": "a7cf8dba7088ef7808e035acfecc8d0d5ddc92b53d2ba978b7a6b32676fec4d5",
+    "before_sha256": "9c2518d7203afbb9307e39c4b09dbcb4d911456840d4855c7ed01bd9882e4321",
+    "after_sha256": "9c2518d7203afbb9307e39c4b09dbcb4d911456840d4855c7ed01bd9882e4321",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libjc_weaver_transport.so",
+    "source": "odm/lib64/libjc_weaver_transport.so",
+    "stock_sha256": "86f8e43ca0464fcf9256a9a6917869c94f216cec33087cd64b01e89e941cb164",
+    "before_sha256": "f1cf1b098d16ce1f9220231466f14c4cda7251435b4547122918c668543d771a",
+    "after_sha256": "f1cf1b098d16ce1f9220231466f14c4cda7251435b4547122918c668543d771a",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libkeymint_empty-thales.so",
+    "source": "odm/lib64/libkeymint_empty-thales.so",
+    "stock_sha256": "158a5e02670a4a627eef2122628e042e14a0dcdb2cabbedf10b3a8fcbd251728",
+    "before_sha256": "798235124c871e855bff639def088ab3c4cd460c35cb620a3c095f590c9567d9",
+    "after_sha256": "798235124c871e855bff639def088ab3c4cd460c35cb620a3c095f590c9567d9",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "libweaver_empty-thales.so",
+    "source": "odm/lib64/libweaver_empty-thales.so",
+    "stock_sha256": "bfe6116822dca49becfd50965c8058352970fc5b4478dfd1cd61499dd551ea9a",
+    "before_sha256": "64a08bd010a4d0e7440e92265da94f40eebae7e234c20de474b1ed22168c5da4",
+    "after_sha256": "64a08bd010a4d0e7440e92265da94f40eebae7e234c20de474b1ed22168c5da4",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "thales",
+    "name": "vendor.xiaomi.hardware.miauthsecretd-V1-ndk.so",
+    "source": "odm/lib64/vendor.xiaomi.hardware.miauthsecretd-V1-ndk.so",
+    "stock_sha256": "c0c2cafc0af47ee38dfd6dac988e5f4f9c56f9e1cdefa899e45498c1a7df3780",
+    "before_sha256": "ed48208f2c3f6fdfac063daef529b2ee50903901d3647ed9006fcf5124eeb173",
+    "after_sha256": "ed48208f2c3f6fdfac063daef529b2ee50903901d3647ed9006fcf5124eeb173",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  }
+]

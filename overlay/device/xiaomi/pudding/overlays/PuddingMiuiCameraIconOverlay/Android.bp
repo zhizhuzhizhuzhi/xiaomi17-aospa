@@ -1,0 +1,7 @@
+runtime_resource_overlay {
+    name: "PuddingMiuiCameraIconOverlay",
+    sdk_version: "current",
+    min_sdk_version: "26",
+    product_specific: true,
+    certificate: "platform",
+}

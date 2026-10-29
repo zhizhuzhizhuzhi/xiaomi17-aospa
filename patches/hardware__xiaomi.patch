@@ -1,0 +1,944 @@
+diff --git a/aidl/fingerprint/Fingerprint.cpp b/aidl/fingerprint/Fingerprint.cpp
+index cf98a29689143bb2bce38a961db980719779a651..87c11f1408581a8d4fa1cdb5fb4fe03d5b0de9c8 100644
+--- a/aidl/fingerprint/Fingerprint.cpp
++++ b/aidl/fingerprint/Fingerprint.cpp
+@@ -33,6 +33,7 @@ typedef struct fingerprint_hal {
+ } fingerprint_hal_t;
+ 
+ static const fingerprint_hal_t kModules[] = {
++        {"goodix_us2"}, {"qcom_us"},
+         {"fortsense"},  {"fpc"},         {"fpc_fod"}, {"goodix"}, {"goodix:gf_fingerprint"},
+         {"goodix_fod"}, {"goodix_fod6"}, {"jiiov"},   {"silead"}, {"syna"},
+ };
+@@ -96,6 +97,12 @@ Fingerprint::Fingerprint(std::shared_ptr<FingerprintConfig> config) : mConfig(st
+             if (!mUdfpsHandler) {
+                 ALOGE("Can't create UdfpsHandler");
+             } else {
++                mUdfpsHandler->setErrorCallback([] {
++                    fingerprint_msg_t message = {};
++                    message.type = FINGERPRINT_ERROR;
++                    message.data.error = FINGERPRINT_ERROR_HW_UNAVAILABLE;
++                    Fingerprint::notify(&message);
++                });
+                 mUdfpsHandler->init(mDevice);
+             }
+         }
+@@ -242,6 +249,16 @@ ndk::ScopedAStatus Fingerprint::getSensorProps(std::vector<SensorProps>* out) {
+ ndk::ScopedAStatus Fingerprint::createSession(int32_t /*sensorId*/, int32_t userId,
+                                               const std::shared_ptr<ISessionCallback>& cb,
+                                               std::shared_ptr<ISession>* out) {
++    if (!mDevice || !mDevice->set_active_group) {
++        ALOGE("Cannot create fingerprint session: hardware module unavailable");
++        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
++    }
++
++    if (mUdfpsHandler && !mUdfpsHandler->isHardwareAvailable()) {
++        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                EX_ILLEGAL_STATE, "Fingerprint touch observation unavailable");
++    }
++
+     CHECK(mSession == nullptr || mSession->isClosed()) << "Open session already exists!";
+ 
+     mSession = SharedRefBase::make<Session>(mDevice, mUdfpsHandler, userId, cb, mLockoutTracker);
+diff --git a/aidl/fingerprint/Session.cpp b/aidl/fingerprint/Session.cpp
+index b9357318cbe3bdf3c07d51c25ef0150fbfddec20..533475fde3e2f2cd6cfc029a7425728669c625a8 100644
+--- a/aidl/fingerprint/Session.cpp
++++ b/aidl/fingerprint/Session.cpp
+@@ -61,6 +61,11 @@ ndk::ScopedAStatus Session::revokeChallenge(int64_t challenge) {
+ 
+ ndk::ScopedAStatus Session::enroll(const HardwareAuthToken& hat,
+                                    std::shared_ptr<ICancellationSignal>* out) {
++    if (mUdfpsHandler && !mUdfpsHandler->isHardwareAvailable()) {
++        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                EX_ILLEGAL_STATE, "Fingerprint touch observation unavailable");
++    }
++
+     hw_auth_token_t authToken;
+     translate(hat, authToken);
+ #ifndef IMPL_V2
+@@ -79,6 +84,11 @@ ndk::ScopedAStatus Session::enroll(const HardwareAuthToken& hat,
+ 
+ ndk::ScopedAStatus Session::authenticate(int64_t operationId,
+                                          std::shared_ptr<ICancellationSignal>* out) {
++    if (mUdfpsHandler && !mUdfpsHandler->isHardwareAvailable()) {
++        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                EX_ILLEGAL_STATE, "Fingerprint touch observation unavailable");
++    }
++
+     checkSensorLockout();
+ #ifndef IMPL_V2
+     int error = mDevice->authenticate(mDevice, operationId, mUserId);
+@@ -159,10 +169,13 @@ ndk::ScopedAStatus Session::resetLockout(const HardwareAuthToken& hat) {
+     int resetResult = mDevice->reset_lockout(mDevice, &authToken);
+     if (resetResult != 0) {
+         ALOGE("Failed to reset lockout: %d", resetResult);
++        mCb->onError(Error::UNABLE_TO_PROCESS, resetResult);
++        return ndk::ScopedAStatus::ok();
+     }
+-#endif
+-
++    // V2 reports completion through FINGERPRINT_RESET_LOCKOUT.
++#else
+     clearLockout(true);
++#endif
+     if (mIsLockoutTimerStarted) mIsLockoutTimerAborted = true;
+ 
+     return ndk::ScopedAStatus::ok();
+@@ -170,6 +183,11 @@ ndk::ScopedAStatus Session::resetLockout(const HardwareAuthToken& hat) {
+ 
+ ndk::ScopedAStatus Session::onPointerDown(int32_t /*pointerId*/, int32_t x, int32_t y, float minor,
+                                           float major) {
++    if (mUdfpsHandler && !mUdfpsHandler->isHardwareAvailable()) {
++        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                EX_ILLEGAL_STATE, "Fingerprint touch observation unavailable");
++    }
++
+     if (mUdfpsHandler) {
+         mUdfpsHandler->onFingerDown(x, y, minor, major);
+     }
+@@ -177,6 +195,11 @@ ndk::ScopedAStatus Session::onPointerDown(int32_t /*pointerId*/, int32_t x, int3
+ }
+ 
+ ndk::ScopedAStatus Session::onPointerUp(int32_t /*pointerId*/) {
++    if (mUdfpsHandler && !mUdfpsHandler->isHardwareAvailable()) {
++        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                EX_ILLEGAL_STATE, "Fingerprint touch observation unavailable");
++    }
++
+     if (mUdfpsHandler) {
+         mUdfpsHandler->onFingerUp();
+     }
+diff --git a/fingerprint/include/UdfpsHandler.h b/fingerprint/include/UdfpsHandler.h
+index 78f2368fac8fc6d492b51bb43e8da2249c86435e..63181b1115aadf53667126ac674c848485249425 100644
+--- a/fingerprint/include/UdfpsHandler.h
++++ b/fingerprint/include/UdfpsHandler.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include <stdint.h>
++#include <functional>
+ #ifndef IMPL_V2
+ #include "fingerprint.h"
+ #else
+@@ -18,6 +19,8 @@ class UdfpsHandler {
+     virtual ~UdfpsHandler() = default;
+ 
+     virtual void init(fingerprint_device_t* device) {};
++    virtual bool isHardwareAvailable() const { return true; }
++    virtual void setErrorCallback(std::function<void()> /*callback*/) {}
+     virtual void onFingerDown(uint32_t x, uint32_t y, float minor, float major) {};
+     virtual void onFingerUp() {};
+ 
+diff --git a/packages/EsimSwitcher/Android.bp b/packages/EsimSwitcher/Android.bp
+index fe0a57288972046c2517eb8bcaf29a4ede147416..ca1c8dcd8b6e96fb4b8832a8b13ca0d9479a61e3 100644
+--- a/packages/EsimSwitcher/Android.bp
++++ b/packages/EsimSwitcher/Android.bp
+@@ -15,7 +15,6 @@ android_app {
+     static_libs: [
+         "androidx.core_core",
+         "androidx.preference_preference",
+-        "org.lineageos.settings.resources",
+         "SettingsLib",
+     ],
+     optional_uses_libs: [
+diff --git a/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimController.kt b/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimController.kt
+index 880d88fb85c5c82d08cb107f4abac1d8d0966dba..3f3ee2cfca18d8cae267ea6f25c8cb89d816aef8 100644
+--- a/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimController.kt
++++ b/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimController.kt
+@@ -3,286 +3,166 @@
+  * SPDX-FileCopyrightText: 2026 The LineageOS Project
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-
+ package com.xiaomi.mtb
+ 
+-import android.app.ActivityThread
+ import android.content.Context
+-import android.telephony.SubscriptionManager
++import android.os.Handler
++import android.os.Looper
++import android.os.RemoteException
++import android.telephony.TelephonyFrameworkInitializer
++import com.android.internal.telephony.ISub
+ import android.util.Log
+ import dalvik.system.DexClassLoader
+ import java.io.File
+-import java.lang.reflect.InvocationHandler
+-import java.lang.reflect.Method
+ import java.lang.reflect.Proxy
++import java.util.concurrent.Executors
++import java.util.concurrent.atomic.AtomicBoolean
+ 
+ class EsimController private constructor(private val context: Context) {
++    sealed interface State {
++        data object Connecting : State
++        data class Ready(val enabled: Boolean) : State
++        data class Failed(val error: Exception) : State
++    }
++    private val worker = Executors.newSingleThreadExecutor()
++    private val main = Handler(Looper.getMainLooper())
++    private val connection = RilConnection()
++    private var hook: Any? = null // Accessed only by worker.
++    private var hookClass: Class<*>? = null
++    @Volatile var isReady = false
++        private set
+ 
+     companion object {
+         private const val TAG = "EsimController"
+-        private val DEBUG = Log.isLoggable(TAG, Log.DEBUG)
+-
+-        private const val MIRILHOOK_CLASS_NAME = "com.xiaomi.mirilhook.MiRilHook"
+-        private const val MIRILHOOK_JAR_PATH = "/system_ext/framework/xiaomi-modem-common.jar"
+-        private const val MIRILHOOK_JAR_PATH_FALLBACK = "/system_ext/framework/mirilhook.jar"
+-        private const val MIRILHOOKCALLBACK_CLASS_NAME = "com.xiaomi.mirilhook.MiRilHookCallback"
+-        private const val QCRILHOOK_JAR_PATH = "/system_ext/framework/qcrilhook.jar"
+-        private const val QCRILHOOKCALLBACK_CLASS_NAME = "com.qualcomm.qcrilhook.QcRilHookCallback"
+-
+         @Volatile private var instance: EsimController? = null
+-
+-        fun getInstance(context: Context): EsimController {
+-            return instance
+-                ?: synchronized(this) {
+-                    instance ?: EsimController(context.applicationContext).also { instance = it }
+-                }
++        fun getInstance(context: Context): EsimController = instance ?: synchronized(this) {
++            instance ?: EsimController(context.applicationContext).also { instance = it }
+         }
+     }
+ 
+-    private var miRilHookCallbackClass: Class<*>? = null
+-    private var miRilHookCallbackObj: Any? = null
+-    private var miRilHookClass: Class<*>? = null
+-    private var miRilHookObj: Any? = null
+-    private var miRilJarLoader: DexClassLoader? = null
+-    private var qcRilHookCallbackClass: Class<*>? = null
+-    private var qcRilHookCallbackObj: Any? = null
+-    private var qcRilJarLoader: DexClassLoader? = null
+-
+-    fun onBootCompleted() {
+-        if (DEBUG) Log.d(TAG, "onBootCompleted")
+-        setupHook()
+-    }
+-
+-    fun getEsimActive(): Boolean {
+-        val subscriptionManager =
+-            context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as? SubscriptionManager
+-        val subscriptionInfoList = subscriptionManager?.activeSubscriptionInfoList ?: return false
+-
+-        for (subscriptionInfo in subscriptionInfoList) {
+-            if (subscriptionInfo.isEmbedded) {
+-                if (DEBUG)
+-                    Log.d(
+-                        TAG,
+-                        "Found eSIM profile: ${subscriptionInfo.displayName}, ${subscriptionInfo.carrierName}",
+-                    )
+-                return true
++    private fun setupHook() {
++        if (hook != null) return
++        val primary = "/system_ext/framework/xiaomi-modem-common.jar"
++        val path = if (File(primary).exists()) primary else "/system_ext/framework/mirilhook.jar"
++        check(File(path).isFile) { "MiRilHook JAR unavailable: $path" }
++        val loader = DexClassLoader(path, context.getDir("jar", 0).absolutePath,
++            null, context.classLoader)
++        val clazz = loader.loadClass("com.xiaomi.mirilhook.MiRilHook")
++        val callbackLoader = if (path == primary) loader else DexClassLoader(
++            "/system_ext/framework/qcrilhook.jar", context.getDir("jar", 0).absolutePath,
++            null, context.classLoader)
++        val callbackClass = callbackLoader.loadClass(if (path == primary)
++            "com.xiaomi.mirilhook.MiRilHookCallback" else
++            "com.qualcomm.qcrilhook.QcRilHookCallback")
++        callbackClass.getMethod("onQcRilHookReady")
++        callbackClass.getMethod("onQcRilHookDisconnected")
++        val callback = Proxy.newProxyInstance(callbackLoader, arrayOf(callbackClass)) {
++                proxy, method, args ->
++            when (method.name) {
++                "equals" -> proxy === args?.get(0)
++                "hashCode" -> System.identityHashCode(proxy)
++                "toString" -> "EsimRilCallback"
++                "onQcRilHookReady" -> {
++                    worker.execute { isReady = true; connection.ready() }
++                    null
++                }
++                "onQcRilHookDisconnected" -> {
++                    worker.execute {
++                        isReady = false
++                        connection.disconnected(RemoteException("MiRilHook disconnected"))
++                    }
++                    null
++                }
++                else -> throw UnsupportedOperationException("Unknown MiRilHook callback: $method")
+             }
+         }
+-        if (DEBUG) Log.d(TAG, "No eSIM profiles found.")
+-        return false
+-    }
+-
+-    fun getEsimEnabled(): Boolean {
+-        return (callMiRilHookMethod("onGetEsimStatus", -1) as? Int ?: -1) == 0
++        val created = clazz.getConstructor(Context::class.java, callbackClass, String::class.java)
++            .newInstance(context, callback, context.packageName)
++        hookClass = clazz
++        hook = created
+     }
+ 
+-    fun setEsimEnabled(isEnabled: Boolean) {
+-        if (DEBUG) Log.d(TAG, "setEsimEnabled, isEnabled = $isEnabled")
+-        callMiRilHookMethod("onHookUimPowerReqEx", false, 0, 2, -1)
+-        callMiRilHookMethod("onSetEsimStatus", -1, if (isEnabled) 0 else 1, true)
+-        callMiRilHookMethod("onHookUimPowerReqEx", false, 1, 2, if (isEnabled) 1 else 0)
+-    }
+-
+-    private fun setupHook() {
+-        if (DEBUG) Log.d(TAG, "setupHook, context = $context")
+-
+-        if (File(MIRILHOOK_JAR_PATH).exists()) {
+-            setupHookPrimary()
+-        } else {
+-            setupHookFallback()
++    private fun ensureHook() {
++        try { setupHook() } catch (error: Exception) {
++            isReady = false
++            Log.e(TAG, "MiRilHook initialization failed", error)
++            connection.disconnected(error)
+         }
+     }
+ 
+-    private fun setupHookPrimary() {
+-        if (DEBUG) Log.d(TAG, "setupHookPrimary")
+-
+-        miRilJarLoader =
+-            miRilJarLoader
+-                ?: runCatching {
+-                        DexClassLoader(
+-                            MIRILHOOK_JAR_PATH,
+-                            context.getDir("jar", 0).absolutePath,
+-                            null,
+-                            context.classLoader,
+-                        )
+-                    }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to initialize miRilJarLoader: $e")
+-                    }
+-                    .getOrNull()
+-
+-        miRilHookClass =
+-            miRilHookClass
+-                ?: runCatching { miRilJarLoader?.loadClass(MIRILHOOK_CLASS_NAME) }
+-                    .onFailure { e -> if (DEBUG) Log.d(TAG, "Failed to load miRilHookClass: $e") }
+-                    .getOrNull()
+-
+-        miRilHookCallbackClass =
+-            miRilHookCallbackClass
+-                ?: runCatching { miRilJarLoader?.loadClass(MIRILHOOKCALLBACK_CLASS_NAME) }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to load miRilHookCallbackClass: $e")
+-                    }
+-                    .getOrNull()
+-
+-        miRilHookCallbackObj =
+-            miRilHookCallbackObj
+-                ?: runCatching {
+-                        Proxy.newProxyInstance(
+-                            miRilJarLoader,
+-                            arrayOf(miRilHookCallbackClass),
+-                            MiRilHookCallbackProxy(),
+-                        )
+-                    }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to create miRilHookCallbackObj: $e")
+-                    }
+-                    .getOrNull()
+-
+-        miRilHookObj =
+-            miRilHookObj
+-                ?: miRilHookClass
+-                    ?.getConstructor(
+-                        Context::class.java,
+-                        miRilHookCallbackClass,
+-                        String::class.java,
+-                    )
+-                    ?.let { constructor ->
+-                        runCatching {
+-                                constructor.newInstance(
+-                                    context,
+-                                    miRilHookCallbackObj,
+-                                    context.packageName,
+-                                )
+-                            }
+-                            .onFailure { e ->
+-                                if (DEBUG) Log.d(TAG, "Failed to initialize miRilHookObj: $e")
+-                            }
+-                            .getOrNull()
+-                    }
++    private fun call(name: String, vararg args: Any): Any? {
++        check(connection.state == RilConnection.State.Ready) { "MiRilHook is not ready" }
++        val types = args.map { it.javaClass.kotlin.javaPrimitiveType ?: it.javaClass }.toTypedArray()
++        return checkNotNull(hookClass).getMethod(name, *types).invoke(checkNotNull(hook), *args)
+     }
+ 
+-    private fun setupHookFallback() {
+-        if (DEBUG) Log.d(TAG, "setupHookFallback")
+-
+-        miRilJarLoader =
+-            miRilJarLoader
+-                ?: runCatching {
+-                        DexClassLoader(
+-                            MIRILHOOK_JAR_PATH_FALLBACK,
+-                            context.getDir("jar", 0).absolutePath,
+-                            null,
+-                            context.classLoader,
+-                        )
+-                    }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to initialize miRilJarLoader: $e")
+-                    }
+-                    .getOrNull()
+-
+-        miRilHookClass =
+-            miRilHookClass
+-                ?: runCatching { miRilJarLoader?.loadClass(MIRILHOOK_CLASS_NAME) }
+-                    .onFailure { e -> if (DEBUG) Log.d(TAG, "Failed to load miRilHookClass: $e") }
+-                    .getOrNull()
+-
+-        qcRilJarLoader =
+-            qcRilJarLoader
+-                ?: runCatching {
+-                        DexClassLoader(
+-                            QCRILHOOK_JAR_PATH,
+-                            context.getDir("jar", 0).absolutePath,
+-                            null,
+-                            context.classLoader,
+-                        )
+-                    }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to initialize qcRilJarLoader: $e")
+-                    }
+-                    .getOrNull()
+-
+-        qcRilHookCallbackClass =
+-            qcRilHookCallbackClass
+-                ?: runCatching { qcRilJarLoader?.loadClass(QCRILHOOKCALLBACK_CLASS_NAME) }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to load qcRilHookCallbackClass: $e")
+-                    }
+-                    .getOrNull()
+-
+-        qcRilHookCallbackObj =
+-            qcRilHookCallbackObj
+-                ?: runCatching {
+-                        Proxy.newProxyInstance(
+-                            context.classLoader,
+-                            arrayOf(qcRilHookCallbackClass),
+-                            QcRilHookCbMethodProxy(),
+-                        )
+-                    }
+-                    .onFailure { e ->
+-                        if (DEBUG) Log.d(TAG, "Failed to initialize qcRilHookCallbackObj: $e")
+-                    }
+-                    .getOrNull()
+-
+-        miRilHookObj =
+-            miRilHookObj
+-                ?: miRilHookClass
+-                    ?.getConstructor(
+-                        Context::class.java,
+-                        qcRilHookCallbackClass,
+-                        String::class.java,
+-                    )
+-                    ?.let { constructor ->
+-                        runCatching {
+-                                constructor.newInstance(
+-                                    context,
+-                                    qcRilHookCallbackObj,
+-                                    ActivityThread.currentPackageName(),
+-                                )
+-                            }
+-                            .onFailure { e ->
+-                                if (DEBUG) Log.d(TAG, "Failed to initialize miRilHookObj: $e")
+-                            }
+-                            .getOrNull()
+-                    }
++    private fun readEnabled(): Boolean = when (val status = call("onGetEsimStatus") as Int) {
++        0 -> true
++        1 -> false
++        else -> error("Reading eSIM state failed: $status")
+     }
+ 
+-    private fun callMiRilHookMethod(methodName: String, defObj: Any?, vararg args: Any?): Any? {
+-        return try {
+-            val parameterTypes =
+-                args
+-                    .map { it?.javaClass?.kotlin?.javaPrimitiveType ?: it?.javaClass }
+-                    .toTypedArray()
+-            miRilHookClass?.getMethod(methodName, *parameterTypes)?.invoke(miRilHookObj, *args)
+-        } catch (e: Exception) {
+-            if (DEBUG) Log.d(TAG, "callMiRilHookMethod failed: $methodName, error: $e")
+-            defObj
+-        }
++    private fun <T> result(action: () -> T): Result<T> = try {
++        Result.success(action())
++    } catch (error: Exception) {
++        Log.e(TAG, "eSIM operation failed", error)
++        Result.failure(error)
+     }
+ 
+-    fun dispose() {
+-        if (DEBUG) Log.d(TAG, "dispose")
+-        try {
+-            miRilHookClass?.getMethod("dispose")?.invoke(miRilHookObj)
+-        } catch (e: Exception) {
+-            if (DEBUG) Log.d(TAG, "dispose method failed, error: $e")
++    private fun <T> submit(callback: (Result<T>) -> Unit, action: () -> T) {
++        worker.execute {
++            ensureHook()
++            connection.submit(
++                { val value = result(action); main.post { callback(value) } },
++                { error -> main.post { callback(Result.failure(error)) } })
+         }
+     }
+ 
+-    inner class QcRilHookCbMethodProxy : InvocationHandler {
+-        override fun invoke(proxy: Any, method: Method, args: Array<Any?>?): Any? {
+-            val methodName = method.name
+-            if (DEBUG) Log.d(TAG, "QcRilHookCbMethodProxy callbackMethod name: $methodName")
+-            when (methodName) {
+-                "onQcRilHookReady" -> {}
++    fun onBootCompleted() { worker.execute { ensureHook() } }
++
++    fun observeState(callback: (State) -> Unit): AutoCloseable {
++        val active = AtomicBoolean(true)
++        val key = Any()
++        worker.execute {
++            connection.observe(key) { state ->
++                val value = when (state) {
++                    RilConnection.State.Connecting -> State.Connecting
++                    RilConnection.State.Ready -> try {
++                        State.Ready(readEnabled())
++                    } catch (error: Exception) {
++                        Log.e(TAG, "Reading eSIM state failed", error)
++                        State.Failed(error)
++                    }
++                    is RilConnection.State.Disconnected -> State.Failed(state.error)
++                }
++                main.post { if (active.get()) callback(value) }
+             }
+-            return null
++            ensureHook()
++        }
++        return AutoCloseable {
++            active.set(false)
++            worker.execute { connection.removeObserver(key) }
+         }
+     }
+ 
+-    inner class MiRilHookCallbackProxy : InvocationHandler {
+-        override fun invoke(proxy: Any, method: Method, args: Array<Any?>?): Any? {
+-            if (DEBUG) Log.d(TAG, "MiRilHookCallbackProxy: ${method.name}")
+-            return null
++    fun readEnabled(callback: (Result<Boolean>) -> Unit) = submit(callback) { readEnabled() }
++
++    fun setEsimEnabled(enabled: Boolean, callback: (Result<Unit>) -> Unit) = submit(callback) {
++        val subscription = checkNotNull(ISub.Stub.asInterface(checkNotNull(
++            TelephonyFrameworkInitializer.getTelephonyServiceManager()) {
++            "Telephony service manager unavailable"
++        }.subscriptionServiceRegisterer.get())) {
++            "Subscription service unavailable"
++        }
++        val active = checkNotNull(subscription.getActiveSubscriptionInfoList(
++            context.opPackageName, context.attributionTag, false)) {
++            "Active subscription query returned no result"
++        }
++        check(active.none { it.isEmbedded }) {
++            "An eSIM profile is active; deactivate it before changing the SIM route"
+         }
++        switchEsim(enabled,
++            { state, slot, hotSwap -> call("onHookUimPowerReqEx", state, slot, hotSwap) as Boolean },
++            { level, persist -> call("onSetEsimStatus", level, persist) as Int })
+     }
+ }
+diff --git a/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimSettingsFragment.kt b/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimSettingsFragment.kt
+index 53dae2d27e44e5e853ab17d2b8c82f3855c88cb3..ce0116dbbcc989847c703ce078ec3a8692ac4936 100644
+--- a/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimSettingsFragment.kt
++++ b/packages/EsimSwitcher/src/com/xiaomi/mtb/EsimSettingsFragment.kt
+@@ -22,6 +22,8 @@ class EsimSettingsFragment :
+         private val DEBUG = Log.isLoggable(TAG, Log.DEBUG)
+     }
+ 
++    private var connectionObservation: AutoCloseable? = null
++
+     private val esimController by lazy { EsimController.getInstance(requireContext()) }
+ 
+     private val switchBar by lazy { findPreference<MainSwitchPreference>("esim_enable")!! }
+@@ -32,28 +34,58 @@ class EsimSettingsFragment :
+         setPreferencesFromResource(R.xml.settings_esim, rootKey)
+ 
+         switchBar.onPreferenceChangeListener = this
+-        switchBar.isChecked = esimController.getEsimEnabled()
+-        switchBar.isEnabled = true
++        switchBar.isEnabled = false
+         footerPref.title = getString(R.string.esim_footer_note)
+     }
+ 
++    override fun onStart() {
++        super.onStart()
++        connectionObservation = esimController.observeState { state ->
++            when (state) {
++                EsimController.State.Connecting -> {
++                    switchBar.isEnabled = false
++                    switchBar.summary = null
++                }
++                is EsimController.State.Ready -> {
++                    switchBar.isEnabled = true
++                    switchBar.isChecked = state.enabled
++                    switchBar.summary = null
++                }
++                is EsimController.State.Failed -> {
++                    switchBar.isEnabled = false
++                    switchBar.summary = state.error.message
++                    showError(state.error)
++                }
++            }
++        }
++    }
++
++    override fun onStop() {
++        connectionObservation?.close()
++        connectionObservation = null
++        super.onStop()
++    }
++
+     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+         if (preference == switchBar) {
+             val isChecked = newValue as Boolean
+             if (DEBUG) Log.d(TAG, "onPreferenceChange: $isChecked")
+-            if (esimController.getEsimActive()) {
+-                if (isChecked) return false
+-                AlertDialog.Builder(requireContext())
+-                    .setTitle(R.string.esim_warning_title)
+-                    .setMessage(R.string.esim_warning_message)
+-                    .setPositiveButton(android.R.string.ok, null)
+-                    .setCancelable(false)
+-                    .show()
+-                return false
+-            } else {
+-                esimController.setEsimEnabled(isChecked)
++            switchBar.isEnabled = false
++            esimController.setEsimEnabled(isChecked) { result ->
++                if (!isAdded) return@setEsimEnabled
++                switchBar.isEnabled = esimController.isReady
++                result.fold({ switchBar.isChecked = isChecked }, { showError(it) })
+             }
++            return false
+         }
+         return true
+     }
++
++    private fun showError(error: Throwable) {
++        AlertDialog.Builder(requireContext())
++            .setTitle(android.R.string.dialog_alert_title)
++            .setMessage(error.message ?: error.javaClass.simpleName)
++            .setPositiveButton(android.R.string.ok, null)
++            .show()
++    }
+ }
+diff --git a/packages/Euicc/AndroidManifest.xml b/packages/Euicc/AndroidManifest.xml
+index c6fd641fcdc97d859d214a86bf428ee19385195d..ca370b2d484333466d07f3e7c4426af00694899d 100644
+--- a/packages/Euicc/AndroidManifest.xml
++++ b/packages/Euicc/AndroidManifest.xml
+@@ -4,7 +4,7 @@
+      SPDX-License-Identifier: Apache-2.0
+ -->
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-          package="org.lineageos.euicc.overlay.xiaomi">
+-    <overlay android:targetPackage="org.lineageos.euicc"
++          package="org.aospa.euicc.overlay.xiaomi">
++    <overlay android:targetPackage="org.aospa.euicc"
+              android:isStatic="true" />
+ </manifest>
+diff --git a/packages/IFAAService/src/org/ifaa/aidl/manager/IfaaService.kt b/packages/IFAAService/src/org/ifaa/aidl/manager/IfaaService.kt
+index aa2ca79d24de696ad7262d33ff1ff9278ff5003e..6b4e4a468e8072c8823797cdbf08ae12d5a3ed04 100644
+--- a/packages/IFAAService/src/org/ifaa/aidl/manager/IfaaService.kt
++++ b/packages/IFAAService/src/org/ifaa/aidl/manager/IfaaService.kt
+@@ -6,9 +6,20 @@
+ package org.ifaa.aidl.manager
+ 
+ import android.app.Service
++import android.app.KeyguardManager
++import android.hardware.fingerprint.FingerprintManager
++import android.os.Binder
+ import android.content.Intent
+ import android.os.Build
++import android.os.IBinder
++import android.os.Parcel
++import android.os.RemoteException
++import android.os.ServiceManager
+ import android.os.IHwBinder
++import android.os.IServiceCallback
++import android.os.IServiceManager
++import com.android.internal.os.BinderInternal
++import java.util.concurrent.CompletableFuture
+ import android.os.SystemProperties
+ import android.provider.Settings
+ import android.util.Log
+@@ -16,7 +27,8 @@ import org.json.JSONObject
+ import vendor.xiaomi.hardware.mlipay.V1_1.IMlipayService
+ 
+ class IfaaService : Service() {
+-    private var _mlipayService: IMlipayService? = null
++    @Volatile private var _mlipayService: IMlipayService? = null
++    private val aidlMlipay = MlipayAidlClient()
+ 
+     private val mlipayServiceDeathRecipient =
+         IHwBinder.DeathRecipient {
+@@ -64,28 +76,13 @@ class IfaaService : Service() {
+ 
+             override fun getDeviceModel() = "${Build.MANUFACTURER}-${Build.DEVICE}"
+ 
+-            override fun processCmd(param: ByteArray) =
+-                getMlipayService()?.let { mlipayService ->
+-                    var receiveBuffer: ByteArray? = null
+-
+-                    val paramByteArray =
+-                        ArrayList<Byte>().apply {
+-                            for (byte in param) {
+-                                add(byte)
+-                            }
+-                        }
+-
+-                    try {
+-                        val receiveBufferByteArray =
+-                            mlipayService.invoke_command(paramByteArray, paramByteArray.size)
+-
+-                        receiveBuffer = receiveBufferByteArray.toByteArray()
+-                    } catch (e: Exception) {
+-                        Log.e(LOG_TAG, "processCmdImpl: mlipay invoke_command failed", e)
+-                    }
+-
+-                    receiveBuffer
++            override fun processCmd(param: ByteArray): ByteArray = backendCall("processCmd") {
++                if (aidlMlipay.isDeclared()) {
++                    checkNotNull(aidlMlipay.invokeCommand(param)) { "mlipay command returned no data" }
++                } else {
++                    getMlipayService().invoke_command(ArrayList(param.toList()), param.size).toByteArray()
+                 }
++            }
+ 
+             override fun getVersion() = 4
+ 
+@@ -95,74 +92,71 @@ class IfaaService : Service() {
+                 // Do nothing
+             }
+ 
+-            override fun getEnabled(bioType: Int) =
+-                when (bioType) {
+-                    AUTH_TYPE_FINGERPRINT -> BIOMETRICS_AVAILABLE
+-                    else -> SCREEN_LOCK_NONE
+-                }
+-
+-            override fun getIDList(bioType: Int): IntArray {
+-                var idList = IntArray(0)
+-
+-                getMlipayService()?.let { mlipayService ->
+-                    try {
+-                        val idListAL = mlipayService.ifaa_get_idlist(bioType)
+-
+-                        idList = idListAL.toIntArray()
+-                    } catch (e: Exception) {
+-                        Log.e(LOG_TAG, "getIDListImpl: mlipay ifaa_get_idlist failed", e)
++            override fun getEnabled(bioType: Int): Int {
++                if (bioType != AUTH_TYPE_FINGERPRINT) return AUTH_TYPE_NOT_SUPPORT
++                val identity = Binder.clearCallingIdentity()
++                try {
++                    val keyguard = checkNotNull(getSystemService(KeyguardManager::class.java))
++                    if (!keyguard.isDeviceSecure) return SCREEN_LOCK_NONE
++                    val fingerprint = getSystemService(FingerprintManager::class.java)
++                        ?: return BIOMETRICS_UNAVAILABLE
++                    if (!fingerprint.isHardwareDetected) return BIOMETRICS_UNAVAILABLE
++                    if (!fingerprint.hasEnrolledFingerprints() || getIDList(bioType).isEmpty()) {
++                        return BIOMETRICS_NOT_ENROLLED
+                     }
+-                }
++                    return BIOMETRICS_AVAILABLE
++                } finally { Binder.restoreCallingIdentity(identity) }
++            }
+ 
+-                return idList
++            override fun getIDList(bioType: Int): IntArray = backendCall("getIDList") {
++                if (aidlMlipay.isDeclared()) aidlMlipay.getIdList(bioType)
++                else getMlipayService().ifaa_get_idlist(bioType).toIntArray()
+             }
+         }
+ 
+     override fun onBind(intent: Intent) = mBinder
+ 
+-    private fun getMlipayService() =
+-        _mlipayService
+-            ?: runCatching { IMlipayService.getService(true) }
+-                .onSuccess {
+-                    _mlipayService = it
+-                    it.linkToDeath(mlipayServiceDeathRecipient, 0)
+-                }
+-                .getOrNull()
+-
+-    private fun initExtString(): String {
+-        val obj = JSONObject()
+-        val keyInfo = JSONObject()
+-
+-        val xy = SystemProperties.get(UDFPS_LOCATION_X_Y_PROP, "")
+-        val wh = SystemProperties.get(UDFPS_SIZE_W_H_PROP, "")
+-
+-        try {
+-            if (!validateVal(xy) || !validateVal(wh)) {
+-                Log.e(LOG_TAG, "initExtString: invalidate, xy: $xy, wh: $wh")
+-                return ""
+-            }
+-
+-            val split = xy.split(",")
+-            val split2 = wh.split(",")
++    private fun <T> backendCall(operation: String, call: () -> T): T {
++        try { return call() }
++        catch (e: Exception) {
++            Log.e(LOG_TAG, "IFAA $operation backend failed", e)
++            throw IllegalStateException("IFAA $operation backend failed", e)
++        }
++    }
+ 
+-            keyInfo.put("startX", split[0].toInt())
+-            keyInfo.put("startY", split[1].toInt())
+-            keyInfo.put("width", split2[0].toInt())
+-            keyInfo.put("height", split2[1].toInt())
+-            keyInfo.put("navConflict", true)
++    @Synchronized private fun getMlipayService(): IMlipayService {
++        _mlipayService?.let { return it }
++        val service = checkNotNull(IMlipayService.getService(false)) {
++            "HIDL mlipay service unavailable"
++        }
++        check(service.linkToDeath(mlipayServiceDeathRecipient, 0)) {
++            "Could not observe HIDL mlipay service lifetime"
++        }
++        _mlipayService = service
++        return service
++    }
+ 
+-            obj.put("type", 0)
+-            obj.put("fullView", keyInfo)
++    private fun coordinatePair(property: String): Pair<Int, Int> {
++        val parts = SystemProperties.get(property, "").split(",")
++        require(parts.size == 2) { "IFAA coordinate property must contain two values: $property" }
++        return Pair(parts[0].trim().toInt(), parts[1].trim().toInt())
++    }
+ 
+-            return obj.toString()
+-        } catch (e: Exception) {
+-            Log.e(LOG_TAG, "initExtString: Exception, xy: $xy, wh: $wh", e)
+-            return ""
++    private fun initExtString(): String {
++        val (x, y) = coordinatePair(UDFPS_LOCATION_X_Y_PROP)
++        val (width, height) = coordinatePair(UDFPS_SIZE_W_H_PROP)
++        require(x >= 0 && y >= 0 && width > 0 && height > 0) {
++            "Invalid IFAA fingerprint geometry"
+         }
++        val keyInfo = JSONObject()
++        keyInfo.put("startX", x)
++        keyInfo.put("startY", y)
++        keyInfo.put("width", width)
++        keyInfo.put("height", height)
++        keyInfo.put("navConflict", true)
++        return JSONObject().put("type", 0).put("fullView", keyInfo).toString()
+     }
+ 
+-    private fun validateVal(str: String) = !"".equals(str, ignoreCase = true) && str.contains(",")
+-
+     companion object {
+         private val LOG_TAG = IfaaService::class.simpleName!!
+ 
+@@ -172,6 +166,8 @@ class IfaaService : Service() {
+         private const val AUTH_TYPE_OPTICAL_FINGERPRINT = 1.shl(2)
+ 
+         private const val BIOMETRICS_AVAILABLE = 1000
++        private const val BIOMETRICS_UNAVAILABLE = 1001
++        private const val BIOMETRICS_NOT_ENROLLED = 1002
+         private const val SCREEN_LOCK_NONE = 1003
+ 
+         private const val COMMAND_OK = 0
+@@ -186,3 +182,80 @@ class IfaaService : Service() {
+         private val invalidFpVendors = arrayOf("", "none")
+     }
+ }
++
++/** Stable AIDL V1 wire ABI verified against the pudding OS4 vendor proxy.
++ * Only IFAA's ID-list and opaque command transport are exposed. No key provisioning.
++ * A declared AIDL backend never falls back to the incompatible HIDL interface.
++ */
++private class MlipayAidlClient {
++    companion object {
++        private const val DESCRIPTOR = "vendor.xiaomi.hardware.mlipay.IMlipayService"
++        private const val SERVICE = "$DESCRIPTOR/default"
++        private const val GET_ID_LIST = IBinder.FIRST_CALL_TRANSACTION
++        private const val INVOKE_COMMAND = IBinder.FIRST_CALL_TRANSACTION + 5
++    }
++    private var cached: IBinder? = null
++    fun isDeclared() = ServiceManager.isDeclared(SERVICE)
++    @Synchronized private fun service(): IBinder {
++        cached?.let { return it }
++        val b = connectLazyService()
++        check(b.interfaceDescriptor == DESCRIPTOR) { "Unexpected mlipay descriptor" }
++        val data = Parcel.obtain(); val reply = Parcel.obtain()
++        try {
++            data.writeInterfaceToken(DESCRIPTOR)
++            if (!b.transact(16777215, data, reply, 0)) throw RemoteException("No stable AIDL version")
++            reply.readException()
++            check(reply.readInt() == 1) { "Unsupported mlipay AIDL version" }
++        } finally { data.recycle(); reply.recycle() }
++        b.linkToDeath({ synchronized(this) { if (cached === b) cached = null } }, 0)
++        cached = b
++        return b
++    }
++    /** Subscribe before the one start request, so registration cannot race the caller.
++     * Use the raw AIDL manager: Java ServiceManager's legacy proxy only checks availability.
++     * Await the registration event without a timed lookup/retry loop.
++     */
++    private fun connectLazyService(): IBinder {
++        val manager = IServiceManager.Stub.asInterface(
++            Binder.allowBlocking(BinderInternal.getContextObject()))
++        val connected = CompletableFuture<IBinder>()
++        val notification = object : IServiceCallback.Stub() {
++            override fun onRegistration(name: String, service: IBinder) {
++                connected.complete(service)
++            }
++        }
++        manager.registerForNotifications(SERVICE, notification)
++        return AutoCloseable {
++            manager.unregisterForNotifications(SERVICE, notification)
++        }.use {
++            val published = manager.getService2(SERVICE).getServiceWithMetadata().service
++            if (published != null) connected.complete(published)
++            try {
++                Binder.allowBlocking(connected.get())
++            } catch (error: InterruptedException) {
++                Thread.currentThread().interrupt()
++                throw error
++            }
++        }
++    }
++
++    fun getIdList(bioType: Int): IntArray {
++        val b = service(); val data = Parcel.obtain(); val reply = Parcel.obtain()
++        try {
++            data.writeInterfaceToken(DESCRIPTOR); data.writeInt(bioType)
++            if (!b.transact(GET_ID_LIST, data, reply, 0)) throw RemoteException("ID-list transaction unavailable")
++            reply.readException()
++            return checkNotNull(reply.createIntArray()) { "mlipay returned a null ID list" }
++        } finally { data.recycle(); reply.recycle() }
++    }
++    fun invokeCommand(command: ByteArray): ByteArray? {
++        val b = service(); val data = Parcel.obtain(); val reply = Parcel.obtain()
++        try {
++            data.writeInterfaceToken(DESCRIPTOR)
++            data.writeByteArray(command); data.writeInt(command.size)
++            if (!b.transact(INVOKE_COMMAND, data, reply, 0)) throw RemoteException("Command transaction unavailable")
++            reply.readException()
++            return reply.createByteArray()
++        } finally { data.recycle(); reply.recycle() }
++    }
++}

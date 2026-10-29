@@ -1,0 +1,21 @@
+diff --git a/thermal.cpp b/thermal.cpp
+index 0a122d1d83e5fb08240600d26b436e3b9ee46467..58f0d61f338bf02d37500b4ae425a8611ea88644 100644
+--- a/thermal.cpp
++++ b/thermal.cpp
+@@ -178,12 +178,12 @@ ScopedAStatus Thermal::getTemperatureThresholdsWithType(
+ 
+ 	std::vector<TemperatureThreshold> thresh;
+ 
+-	if (!utils.isSensorInitialized(in_type))
++	if (!utils.isSensorInitialized())
+ 		return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_STATE,
+-					"ThermalHAL given sensor type not initialized.");
++					"ThermalHAL for sensor not initialized.");
+ 	else{
+-		if (utils.readTemperatureThreshold(in_type, thresh) <= 0)
+-			LOG(VERBOSE) << __func__ << "Sensor Threshold read failure or type not supported.";
++		if (utils.readTemperatureThreshold(in_type, thresh) < 0)
++			LOG(VERBOSE) << __func__ << "Sensor Threshold read failure.";
+ 	}
+ 
+ 	if (out_temp_thresh != nullptr)

@@ -1,0 +1,14 @@
+Production build: m PuddingStockBrightness
+
+Entry.java, StockHelpers.java, ResourceOverrides.java and the explicit adapter sources
+are compiled by PuddingStockBrightnessBridge. The compile-api library is only a javac
+dependency. package_policy.py rejects duplicate stock classes (including leaked stubs)
+and development probes. The installed runtime contains separate stock/bridge DEX files.
+
+stock-policy.jar contains only the 30 original, namespace-relocated Xiaomi implementation
+and AON IPC classes. It is pinned by SHA256 and stock-policy-provenance.json; it contains
+no custom bridge implementation. Updating it requires reviewing the original-class
+preservation audit and updating the pinned SHA256 explicitly.
+
+The old development script and prebuilt complete JAR are historical evidence, not
+production build inputs. No external unified-fix3 working directory is used by m.

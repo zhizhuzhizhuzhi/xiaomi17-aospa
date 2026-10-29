@@ -1,0 +1,394 @@
+{
+  "stage": "passed",
+  "project_records": 77,
+  "exact_text_file_checks": 1543,
+  "source_checkouts_modified": false,
+  "public_private_key_defaults_adjusted": true,
+  "checks": [
+    {
+      "path": "build/blueprint",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "build/make",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "build/soong",
+      "files": 7,
+      "passed": true
+    },
+    {
+      "path": "device/qcom/common",
+      "files": 12,
+      "passed": true
+    },
+    {
+      "path": "device/qcom/sepolicy",
+      "files": 25,
+      "passed": true
+    },
+    {
+      "path": "device/qcom/sepolicy_vndr/sm8850",
+      "files": 7,
+      "passed": true
+    },
+    {
+      "path": "device/xiaomi/pudding",
+      "files": 434,
+      "passed": true
+    },
+    {
+      "path": "device/xiaomi/sepolicy",
+      "files": 5,
+      "passed": true
+    },
+    {
+      "path": "device/xiaomi/sm8850-common",
+      "files": 45,
+      "passed": true
+    },
+    {
+      "path": "external/kotlin-compose-compiler",
+      "files": 4,
+      "passed": true
+    },
+    {
+      "path": "external/tinyalsa",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "external/wpa_supplicant_8",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "frameworks/av",
+      "files": 8,
+      "passed": true
+    },
+    {
+      "path": "frameworks/base",
+      "files": 178,
+      "passed": true
+    },
+    {
+      "path": "frameworks/native",
+      "files": 4,
+      "passed": true
+    },
+    {
+      "path": "frameworks/opt/telephony",
+      "files": 4,
+      "passed": true
+    },
+    {
+      "path": "hardware/interfaces",
+      "files": 5,
+      "passed": true
+    },
+    {
+      "path": "hardware/qcom-caf/common",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "hardware/qcom-caf/thermal",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "hardware/qcom-caf/wlan",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "hardware/qcom/display",
+      "files": 4,
+      "passed": true
+    },
+    {
+      "path": "hardware/qcom/gps",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "hardware/xiaomi",
+      "files": 10,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/build/kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/external/dtc",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/msm-kernel",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/prebuilts/asuite",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/prebuilts/build-tools",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/prebuilts/clang/host/linux-x86",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/prebuilts/ndk-r23",
+      "files": 16,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/prebuilts/tradefed",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "kernel_platform/tools/mkbootimg",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "packages/apps/Launcher3",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "packages/apps/ParanoidSettings",
+      "files": 5,
+      "passed": true
+    },
+    {
+      "path": "packages/apps/Settings",
+      "files": 6,
+      "passed": true
+    },
+    {
+      "path": "packages/modules/Bluetooth",
+      "files": 13,
+      "passed": true
+    },
+    {
+      "path": "packages/modules/Connectivity",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "packages/modules/ModuleMetadata",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "packages/modules/Wifi",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "system/core",
+      "files": 6,
+      "passed": true
+    },
+    {
+      "path": "system/libbase",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "system/logging",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "system/media",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "system/memory/libdmabufheap",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "system/memory/libmeminfo",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "system/netd",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "system/sepolicy",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "vendor/aospa",
+      "files": 69,
+      "passed": true
+    },
+    {
+      "path": "vendor/google/gms",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "vendor/google/pixel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/common",
+      "files": 10,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/audio-hal/primary-hal",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/audio-kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/bt-kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/camera-kernel",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/core-utils",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/dataipa",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/datarmnet",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/datarmnet-ext",
+      "files": 7,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/display-drivers",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/eva-kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/graphics-kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/interfaces",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/mm-drivers",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/mmrm-driver",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/power",
+      "files": 2,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/securemsm-kernel",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/thermal-hal",
+      "files": 5,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/touch-drivers",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/video-driver",
+      "files": 3,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/wlan/platform",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/opensource/wlan/qcacld-3.0",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/qcom/proprietary/devicetree",
+      "files": 1,
+      "passed": true
+    },
+    {
+      "path": "vendor/xiaomi/pudding",
+      "files": 409,
+      "passed": true
+    },
+    {
+      "path": "vendor/xiaomi/sm8850-common",
+      "files": 140,
+      "passed": true
+    },
+    {
+      "path": "device/xiaomi/pudding-kernel-os4",
+      "files": 0,
+      "passed": true
+    },
+    {
+      "path": ".",
+      "files": 29,
+      "passed": true
+    }
+  ]
+}

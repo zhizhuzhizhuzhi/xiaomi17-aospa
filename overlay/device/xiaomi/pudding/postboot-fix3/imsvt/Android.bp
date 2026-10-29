@@ -1,0 +1,20 @@
+// Exact OS4 IMS VT daemon and AIDL ABI. Required by the stock IMS client.
+cc_prebuilt_binary {
+    name: "pudding-imsvtdaemon",
+    stem: "imsvtdaemon",
+    system_ext_specific: true,
+    compile_multilib: "64",
+    srcs: ["bin/imsvtdaemon"],
+    strip: { none: true },
+    init_rc: ["etc/init/imsvtdaemon.rc"],
+    shared_libs: ["liblog", "libcutils", "libdiag_system", "libutils", "libbinder_ndk", "libbinder", "pudding-imsvt-aidl", "libavservices_minijail", "libnativewindow", "libgui", "lib-imsvt", "lib-imsvideocodec", "libmediandk", "libdmabufheap", "lib-imsvtutils", "libandroid", "libc++", "libc", "libm", "libdl"],
+}
+cc_prebuilt_library_shared {
+    name: "pudding-imsvt-aidl",
+    stem: "vendor.qti.ImsVtService-ndk",
+    system_ext_specific: true,
+    compile_multilib: "64",
+    srcs: ["lib64/vendor.qti.ImsVtService-ndk.so"],
+    strip: { none: true },
+    shared_libs: ["libbinder_ndk", "libnativewindow", "libc++", "libc", "libm", "libdl"],
+}

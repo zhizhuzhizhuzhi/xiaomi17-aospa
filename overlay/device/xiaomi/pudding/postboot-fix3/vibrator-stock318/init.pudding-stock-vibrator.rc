@@ -1,0 +1,19 @@
+service vendor.qti.vibrator /vendor/bin/hw/pudding.vibrator-service.stock318
+    interface aidl android.hardware.vibrator.IVibrator/default
+    class hal
+    user system
+    group system input audio wakelock
+    capabilities BLOCK_SUSPEND
+    setenv RICHTAP_DEVICE_PATH /dev/qcom_haptic
+    setenv ENV_RICHTAP_CONFIG_PATH /odm/etc/aac_richtap.config
+
+on property:sys.boot_completed=1
+    setprop vendor.haptic.calibrate.done 1
+    setprop vendor.aihaptic.interaction.transient_intensity 100
+    setprop vendor.aihaptic.interaction.transient_sharpness 56
+    setprop vendor.aihaptic.interaction.continuous_intensity 100
+    setprop vendor.aihaptic.interaction.continuous_sharpness 56
+    setprop vendor.aihaptic.warn.transient_intensity 100
+    setprop vendor.aihaptic.warn.transient_sharpness 56
+    setprop vendor.aihaptic.warn.continuous_intensity 65
+    setprop vendor.aihaptic.warn.continuous_sharpness 56

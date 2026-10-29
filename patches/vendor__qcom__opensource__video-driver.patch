@@ -1,0 +1,50 @@
+diff --git a/Android.mk b/Android.mk
+index f83590b151b0cd3bd83042923604c37c6b12df4c..ad07abfa261abba6cfadec51619a761f5e38ff73 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ # SPDX-License-Identifier: GPL-2.0-only
+ TARGET_VIDC_ENABLE := false
+ ifeq ($(TARGET_KERNEL_DLKM_DISABLE), true)
+@@ -46,3 +48,5 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(call intermediates-dir-for,DLKM,mmrm-module-s
+ # BOARD_VENDOR_KERNEL_MODULES += $(LOCAL_MODULE_PATH)/$(LOCAL_MODULE)
+ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ endif
++
++endif # pudding prebuilt kernel
+diff --git a/Kbuild b/Kbuild
+index c24e6d37eee7a734ff53822eb1889b56afe4b477..6398bf79d9dd1e0716b47d3520990bf6565e7e8a 100644
+--- a/Kbuild
++++ b/Kbuild
+@@ -32,7 +32,8 @@ LINUXINCLUDE    += -include $(VIDEO_ROOT)/config/crow_video.h \
+                    -I$(VIDEO_ROOT)/driver/platform/crow/inc
+ endif
+ 
+-LINUXINCLUDE    += -I$(VIDEO_ROOT)/driver/vidc/inc \
++LINUXINCLUDE    += -I$(VIDEO_GEN_DIR) \
++                   -I$(VIDEO_ROOT)/driver/vidc/inc \
+                    -I$(VIDEO_ROOT)/driver/platform/common/inc \
+                    -I$(VIDEO_ROOT)/include/uapi/vidc
+ 
+diff --git a/Makefile b/Makefile
+index 92b3f7f075e16332fb937cf3e1c00c46b2654fa2..dba488bdc7cfaafef140f2701eb9063fd1eb4741 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,11 +5,14 @@ KBUILD_OPTIONS+= VIDEO_ROOT=$(KERNEL_SRC)/$(M)
+ VIDEO_COMPILE_TIME = $(shell date)
+ VIDEO_COMPILE_BY = $(shell whoami | sed 's/\\/\\\\/')
+ VIDEO_COMPILE_HOST = $(shell uname -n)
+-VIDEO_GEN_PATH = $(VIDEO_ROOT)/driver/vidc/inc/video_generated_h
++VIDEO_GEN_DIR := $(abspath $(O)/$(M))/generated
++VIDEO_GEN_PATH = $(VIDEO_GEN_DIR)/video_generated_h
++KBUILD_OPTIONS += VIDEO_GEN_DIR=$(VIDEO_GEN_DIR)
+ 
+ all: modules
+ 
+ $(VIDEO_GEN_PATH): $(shell find . -type f \( -iname \*.c -o -iname \*.h -o -iname \*.mk \))
++	mkdir -p $(VIDEO_GEN_DIR)
+ 	echo '#define VIDEO_COMPILE_TIME "$(VIDEO_COMPILE_TIME)"' > $(VIDEO_GEN_PATH)
+ 	echo '#define VIDEO_COMPILE_BY "$(VIDEO_COMPILE_BY)"' >> $(VIDEO_GEN_PATH)
+ 	echo '#define VIDEO_COMPILE_HOST "$(VIDEO_COMPILE_HOST)"' >> $(VIDEO_GEN_PATH)

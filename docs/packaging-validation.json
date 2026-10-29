@@ -1,0 +1,12 @@
+{
+  "stage": "passed",
+  "checks": [
+    "core + RADIO + PREBUILT_IMAGES included and hash-checked",
+    "existing package is not overwritten",
+    "wrong device rejected",
+    "missing A/B image rejected",
+    "foreign board alternative rejected",
+    "public signing defaults require no private certificate directory",
+    "explicit private signing options preserved"
+  ]
+}

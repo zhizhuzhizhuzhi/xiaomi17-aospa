@@ -1,0 +1,1 @@
+package com.xiaomi.pudding.brightness.miui; public final class MiuiMultiDisplayTypeInfo { public static boolean isIndependentRearDevice(){return false;} }

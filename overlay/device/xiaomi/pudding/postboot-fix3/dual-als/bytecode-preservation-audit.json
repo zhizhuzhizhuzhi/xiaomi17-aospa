@@ -1,0 +1,122 @@
+{
+  "com/xiaomi/aon/IAONFlareService$Stub$Proxy.smali": {
+    "source_sha256": "3d268e8e624694fb3d77ff6b518b61d56965bcaa2a5d9c407a38ef9ca5ad39cd",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IMiAONListener.smali": {
+    "source_sha256": "8c89bed7ccc8efc9665fc46f274ce2328fb0efaaee958324b5227860ebb1eb57",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IMiAONListener$Stub$Proxy.smali": {
+    "source_sha256": "97e64a54cc8afcf9b4ef4b5776ee0b7ababcdda2af63ba26ec97e0e89d29af2c",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IAONFlareService.smali": {
+    "source_sha256": "8e7ed31050cf460da2f7bef096726fa6e306e3f03711de64d02f7c90ed95bd7d",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IAONFlareService$Stub.smali": {
+    "source_sha256": "81f2c89b1cc53fd0f7b84cfc2ba05c491da516c9ef8581e7ea22a1b3d61f234e",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IMiAONListener$Default.smali": {
+    "source_sha256": "1d913b83871ad7117e28927d2703c7c2bdd3a5509c90fd6bf0e5e14dc3502e21",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IAONFlareService$Default.smali": {
+    "source_sha256": "a2a965a731fc1fbcd44a2f2288ffc1b386a521e197fffd182d32781171a9b769",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/aon/IMiAONListener$Stub.smali": {
+    "source_sha256": "ff86a68fd8265c6a825822b7e7c84db55be50507125ecf68e3fcf73d55bf7a45",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$1.smali": {
+    "source_sha256": "8d01e8f959f7af3008d2e22eb1f0f725581c9983d5d40e5dfc006c84fe41998c",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$$ExternalSyntheticLambda3.smali": {
+    "source_sha256": "08f2300bac4ac14b7d32773e49a5f95ee7f7080e10f4ecbdce0b51c10769ae46",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/DualSensorPolicy$DualSensorPolicyHandler.smali": {
+    "source_sha256": "f8a2c501bfbd384d5ae6b084276b7166df28086f0a4fdedcebbfd82f665b7746",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/HysteresisLevelsImpl.smali": {
+    "source_sha256": "c5825023dc7dad218d4214330acd17381f9f2a14d918973eefdec39baab91001",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$$ExternalSyntheticLambda2.smali": {
+    "source_sha256": "8771a3fe27d797a6b1b7029647726330403edea013354502dc832c29181d2249",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$$ExternalSyntheticLambda1.smali": {
+    "source_sha256": "ce0524061ac558150332106315060ca657817da207109b5abb868e2cbd0aa04d",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$3.smali": {
+    "source_sha256": "398c059c308e9909d7fc13e9674adea15b112b9ac093ea1f990207293612fddc",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/DualSensorPolicy$1.smali": {
+    "source_sha256": "b9beca3b9dde6c70c68009078a43bf37562cec9c63bf5ee4e0b8c1c3a4c80b0a",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "9d31942d9021be5091f52223b34b3604d21c84d9cc48d0a4cbd69751d7b70186",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$2.smali": {
+    "source_sha256": "59545aa444f95639cee5469dc944ada4cbedc523f100c02f56728737d69b4766",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/DualSensorPolicy.smali": {
+    "source_sha256": "fcee20c7f1b7c2a297f80b54eb198033d2fc23ad95d456dfe43d52b4da8ac438",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$4$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "79bd63a22c62779e7f980229d8186806ecb01565e822ccd5b310a607fe5fb981",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$4.smali": {
+    "source_sha256": "10ad5aac5644e7ab60a32537cb03525832a2649dfedb472b930499829ba4b87e",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$SceneDetectorHandler.smali": {
+    "source_sha256": "36303ce22bbf1dbc0bdfccc342e9d20866f83ac191f2d3ca1e0e5c7250eb6a69",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/AmbientLightRingBuffer.smali": {
+    "source_sha256": "c7bc97890dd41a238e39fabfabc84d3c1899d467c0daa04476792397a57151bf",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector.smali": {
+    "source_sha256": "39d01042d3a5744730951f6715e45c841af065fa2bdab8a3d1666cea337c6df1",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$3$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "5789e3597037e37907d2bae9d6ee6857adc342a5565a02365ce192d9d7efb122",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$2$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "ca53af7bd583c3656a6c7aea28ae2db59e3ea9d7d1036221399a86a1a3f3f82e",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$SceneDetectorHandler$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "4f51b3ac4c4e3daf39f55a9026138f945bfd7fa20cdb745c4842990e4792edc2",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$$ExternalSyntheticLambda4.smali": {
+    "source_sha256": "8b1cadf49c229f4223b01b28ecb74e169f4543155516230e982e78366ae6154b",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$2$$ExternalSyntheticLambda1.smali": {
+    "source_sha256": "13946ecdf4511e2ab7b841748854777b498b68142236bca331cefa057fc3cda3",
+    "namespace_relocation_only": true
+  },
+  "com/xiaomi/pudding/brightness/stock/SceneDetector$1$$ExternalSyntheticLambda0.smali": {
+    "source_sha256": "a61613f34ebbb8313fc700932b149ecf9d0badcf162e59c6a725f77f8f485cf4",
+    "namespace_relocation_only": true
+  }
+}

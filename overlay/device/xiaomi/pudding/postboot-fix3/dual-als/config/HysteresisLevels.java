@@ -1,0 +1,1 @@
+package com.xiaomi.pudding.brightness.stock.config; public class HysteresisLevels { public float getBrighteningThreshold(float v){throw new IllegalStateException("stock curve unavailable");} public float getDarkeningThreshold(float v){throw new IllegalStateException("stock curve unavailable");}}

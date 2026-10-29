@@ -1,0 +1,4 @@
+runtime_resource_overlay {
+    name: "PuddingNativeFaceSettingsOverlay",
+    product_specific: true,
+}

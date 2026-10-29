@@ -1,0 +1,150 @@
+{
+  "hardware/qcom-caf/bootctrl": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom_bootctrl",
+    "revision": "25092672e644459db328b43fd1c7c57cbff65c91"
+  },
+  "tools/extract-utils": {
+    "url": "https://github.com/LineageOS/android_tools_extract-utils",
+    "revision": "78ba5d58c4b06712e18bb387a2a72eac8fbc8d70"
+  },
+  "hardware/qcom-caf/common": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom-caf_common",
+    "revision": "c7eda1ff7fd99f29999abbe19922ce59a41ee000"
+  },
+  "device/qcom/sepolicy_vndr/sm8850": {
+    "url": "https://github.com/LineageOS/android_device_qcom_sepolicy_vndr",
+    "revision": "08110cc1a7e540367543d9cfac489be2b1517f49"
+  },
+  "hardware/qcom-caf/sm8850/audio/agm": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_agm",
+    "revision": "ddb43619de0aee37b95f2e1720cc9f186355ad1e"
+  },
+  "hardware/qcom-caf/sm8850/audio/graphservices": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_audioreach-graphservices",
+    "revision": "80098a6384e3447fdf2dfb3bec0e9c61b950f42b"
+  },
+  "hardware/qcom-caf/sm8850/audio/pal": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_arpal-lx",
+    "revision": "f75d1c5fa09e4ed507670fda90a5d6ac082f4dfd"
+  },
+  "hardware/qcom-caf/sm8850/audio/primary-hal": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom_audio-ar",
+    "revision": "adc0fb9abe4add0b5b9a202ec36c21668da796c6"
+  },
+  "hardware/qcom-caf/sm8850/data-ipa-cfg-mgr": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr",
+    "revision": "7609751c45981edb1a2c1be1e638b4748525c171"
+  },
+  "hardware/qcom-caf/sm8850/dataipa": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_dataipa",
+    "revision": "4b9d4eccbe0ffc0bc1d89bb0eb0642a1365c34b0"
+  },
+  "hardware/qcom-caf/sm8850/display/core": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_display-core",
+    "revision": "3f56965f0690fee568903083f09a8349a803da31"
+  },
+  "hardware/qcom-caf/sm8850/display/intf": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_display-intf",
+    "revision": "70a4f1221f36758cb22595470571fcee5b976561"
+  },
+  "hardware/qcom-caf/thermal": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom_thermal",
+    "revision": "a54c4bef6ae6df53684ec538e9fdd713775238cb"
+  },
+  "vendor/qcom/opensource/audio-hal/st-hal-ar": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar",
+    "revision": "2b05733d2d7c0e6f3813d51ae0216160f4fef681"
+  },
+  "hardware/qcom-caf/wlan": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom_wlan",
+    "revision": "9a49c02e9a8bb865319b506364ffb7e3695b500a"
+  },
+  "hardware/qcom-caf/sm8850/display/hal": {
+    "url": "https://github.com/LineageOS/android_hardware_qcom_display",
+    "revision": "511d5ca4731479f58c398150ff7f4a59615759f8"
+  },
+  "vendor/qcom/opensource/commonsys-intf/audio": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_audio-commonsys-intf",
+    "revision": "50598b206c44cf5366dc6b00cb7173c616f233ec"
+  },
+  "vendor/qcom/opensource/commonsys-intf/display": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_display-commonsys-intf",
+    "revision": "fbd3e92a492a2d192595e6ae0237cc5eb32f74cb"
+  },
+  "vendor/qcom/opensource/commonsys/display": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_display-commonsys",
+    "revision": "6ce6b29f83971ac0dca528ca45e27bf8ef5075b9"
+  },
+  "vendor/qcom/opensource/commonsys/audio": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_audio",
+    "revision": "d73c0cdc4877aea38e4f159fde9991022c8740d9"
+  },
+  "vendor/qcom/opensource/core-utils-vendor": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_core-utils-vendor",
+    "revision": "414fa42592568a6d9537f804c3d7dd4a95fcfd86"
+  },
+  "vendor/qcom/opensource/core-utils-sys": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_core-utils-sys",
+    "revision": "c149e22f0750751d34e42380e43087a3340f2288"
+  },
+  "vendor/qcom/opensource/commonsys/fm": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_fm-commonsys",
+    "revision": "9ec99f94c26bff0bb9859985f445326a61d09ded"
+  },
+  "vendor/qcom/opensource/healthd-ext": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_healthd-ext",
+    "revision": "9bdd090e6b5797d339e96b060c03412f36993554"
+  },
+  "vendor/qcom/opensource/dataservices": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_dataservices",
+    "revision": "86a07cbb22386860173943ab55720461981f47b2"
+  },
+  "vendor/qcom/opensource/interfaces": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_interfaces",
+    "revision": "b75ec20e94b35e067f3af67e628df294b49505d0"
+  },
+  "vendor/qcom/opensource/thermal-engine": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_thermal-engine",
+    "revision": "0815f34094ebc952c8e1dd3619e384c7f9d1195b"
+  },
+  "vendor/qcom/opensource/power": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_power",
+    "revision": "2a237fa09a5f410e559ec8b7b3473969ac64d9bb"
+  },
+  "vendor/qcom/opensource/vibrator": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_vibrator",
+    "revision": "97d88ab231d84ba0b5549e6d6148522d6d73ee24"
+  },
+  "vendor/qcom/opensource/usb": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_usb",
+    "revision": "0d32cd0034b767aa8a6b5fbc8516570af8cf3e5f"
+  },
+  "hardware/xiaomi": {
+    "url": "https://github.com/LineageOS/android_hardware_xiaomi",
+    "revision": "7dd87795288bf6713795f112056b1bf549355c81"
+  },
+  "device/qcom/sepolicy": {
+    "url": "https://github.com/LineageOS/android_device_qcom_sepolicy",
+    "revision": "98d96fe9b1f4ea0b35a8bb5ce0ac2ae3bf766647"
+  },
+  "vendor/qcom/opensource/libvmmem": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_libvmmem",
+    "revision": "a4a0b08614eb1de238dd1fbe4cef94213560d5f1"
+  },
+  "vendor/qcom/opensource/libqspa": {
+    "url": "https://github.com/LineageOS/android_vendor_qcom_opensource_libqspa",
+    "revision": "5349531e2b04b1fb3562cbf7298670210f89d676"
+  },
+  "device/xiaomi/pudding": {
+    "url": "https://github.com/lolipuru/android_device_xiaomi_pudding",
+    "revision": "3055cd99e6420c6c78f7f791b81ebfbd323532a8"
+  },
+  "device/xiaomi/sm8850-common": {
+    "url": "https://github.com/lolipuru/android_device_xiaomi_sm8850-common",
+    "revision": "dd93f815f5264532f1286d7287ee730c1794480d"
+  },
+  "vendor/xiaomi/sm8850-common": {
+    "url": "https://github.com/lolipuru/android_vendor_xiaomi_sm8850-common",
+    "revision": "37e7d18ec3548bee2c729b17d20c19b029fc7b8c"
+  }
+}

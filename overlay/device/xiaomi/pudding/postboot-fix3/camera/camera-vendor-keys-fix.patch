@@ -1,0 +1,15 @@
+--- smali/l8/d.smali
++++ smali/l8/d.smali
+@@ -1990,9 +1990,9 @@
+ 
+     iput-object p2, p0, Ll8/d;->f:Ljava/util/HashSet;
+ 
+-    invoke-static {}, LAa/c;->i()Z
+-
+-    move-result p2
++    # On AOSP the request-key list omits read-only vendor characteristics.
++    # Enumerate the HAL vendor descriptors, as the original MIUI path does.
++    const/4 p2, 0x1
+ 
+     if-eqz p2, :cond_1
+ 

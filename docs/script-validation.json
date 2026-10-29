@@ -1,0 +1,11 @@
+{
+  "stage": "passed",
+  "checks": [
+    "verify rejects unapplied tree without writes",
+    "check performs no writes",
+    "all-project preflight prevents early partial writes",
+    "apply and repeat apply preserve expected files",
+    "conflicting overlay is preserved and rejected",
+    "input copy/hash verification and wrong-file refusal"
+  ]
+}

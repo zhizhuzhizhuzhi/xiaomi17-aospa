@@ -1,0 +1,16 @@
+diff --git a/qcom/fuxi-sm8550.dtsi b/qcom/fuxi-sm8550.dtsi
+index c2f2e983e59373404c0bfa0d110a5795f34dcd3e..e241456032efd567805e16d075902ca1a22f3d7a 100644
+--- a/qcom/fuxi-sm8550.dtsi
++++ b/qcom/fuxi-sm8550.dtsi
+@@ -393,6 +393,11 @@
+ };
+ 
+ &thermal_zones {
++        /* Bind the battery-depletion zone to its power-supply notifier sensor. */
++        socd {
++                thermal-sensors = <&bcl_soc>;
++        };
++
+ 	quiet_therm {
+ 		polling-delay-passive = <0>;
+ 		polling-delay = <0>;

@@ -1,0 +1,45 @@
+{
+  "source": "verified stock Global335 ODM",
+  "files": [
+    {
+      "name": "pudding_ofilm_s5kjn5_bu24619_tele_ii_ois.prog",
+      "bytes": 2296,
+      "sha256": "20a1f88e90edd58a244da08a015ca8703ab1ce8d0f38254dccc6fde28066e7aa"
+    },
+    {
+      "name": "pudding_sunny_s5kjn5_bu24619_tele_i_ois.coeff",
+      "bytes": 364,
+      "sha256": "7283e063937a48e74862e19dd9570c14fbaea4370df6da871c778cc9306bcd08"
+    },
+    {
+      "name": "pudding_ofilm_s5kjn5_bu24619_tele_ii_ois.coeff",
+      "bytes": 364,
+      "sha256": "0a60f05cc74944ac559c1c4a13ad6a241981c4b6fb889282cfbdc1de38699263"
+    },
+    {
+      "name": "pudding_sunny_s5kjn5_bu24619_tele_i_ois.pher",
+      "bytes": 28,
+      "sha256": "8ff0674adf7ee8da0bf8406908dd57321376284cba170654163e8eabb04d81e7"
+    },
+    {
+      "name": "pudding_ofilm_s5kjn5_bu24619_tele_ii_ois.mem",
+      "bytes": 1024,
+      "sha256": "c1cb3f804e04fd5fdc58b1f9302df34ef8e9374663be472a459b8a8407e654df"
+    },
+    {
+      "name": "pudding_sunny_s5kjn5_bu24619_tele_i_ois.prog",
+      "bytes": 2296,
+      "sha256": "20a1f88e90edd58a244da08a015ca8703ab1ce8d0f38254dccc6fde28066e7aa"
+    },
+    {
+      "name": "pudding_ofilm_s5kjn5_bu24619_tele_ii_ois.pher",
+      "bytes": 28,
+      "sha256": "8ff0674adf7ee8da0bf8406908dd57321376284cba170654163e8eabb04d81e7"
+    },
+    {
+      "name": "pudding_sunny_s5kjn5_bu24619_tele_i_ois.mem",
+      "bytes": 1024,
+      "sha256": "c1cb3f804e04fd5fdc58b1f9302df34ef8e9374663be472a459b8a8407e654df"
+    }
+  ]
+}

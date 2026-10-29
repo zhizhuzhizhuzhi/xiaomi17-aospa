@@ -1,0 +1,1 @@
+package com.xiaomi.pudding.brightness.stock.config; public class HighBrightnessModeData { public float minimumLux; }

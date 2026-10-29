@@ -1,0 +1,59 @@
+cc_prebuilt_binary {
+    name: "PuddingStockVibrator",
+    stem: "vendor.qti.hardware.vibrator.service",
+    srcs: ["runtime/vendor.xiaomi.hardware.vibratorfeature.service"],
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Original factory blobs: exact dependency paths and playback verified on pudding.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingStockVibratorCL",
+    stem: "vendor.hardware.vibratorCL.impl",
+    srcs: ["runtime/vendor.hardware.vibratorCL.impl.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-vibrator",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Original factory blobs: exact dependency paths and playback verified on pudding.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingStockVibratorExt",
+    stem: "vendor.hardware.vibratorfeature.IVibratorExt-V1-ndk",
+    srcs: ["runtime/vendor.hardware.vibratorfeature.IVibratorExt-V1-ndk.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-vibrator",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Original factory blobs: exact dependency paths and playback verified on pudding.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingStockAacHaptics",
+    stem: "libaachaptics",
+    srcs: ["runtime/libaachaptics.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-vibrator",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Original factory blobs: exact dependency paths and playback verified on pudding.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingStockAgmDevice",
+    stem: "libagmdevice",
+    srcs: ["runtime/libagmdevice.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-vibrator",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Original factory blobs: exact dependency paths and playback verified on pudding.
+    check_elf_files: false,
+}

@@ -1,0 +1,11 @@
+Current camera reproduction is declared in ../camera-recipe.json and ../Android.bp.
+The input is the preserved 2026-10-23 platform-signed baseline, before payload edits;
+it is intentionally not the newer OS4 factory camera APK.
+rebuild_camera.py validates its SHA256 and reconstructs the exact final payload set,
+including vendor metadata compatibility, adaptive launcher resources, resource
+renames and the 16 camera asset path fixes. Old signatures are removed; the build
+signs the generated APK using the existing platform release key.
+Original launcher art: AOSPA Aperture; The LineageOS Project, Apache-2.0.
+replace_apk_launcher_png.py is an archived PNG-only development tool, not the
+current build recipe. No statement that resources.arsc is unchanged applies to
+the full adaptive-resource migration. Original implementation authors retained.

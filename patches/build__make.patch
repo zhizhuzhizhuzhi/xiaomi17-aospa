@@ -1,0 +1,70 @@
+diff --git a/core/config.mk b/core/config.mk
+index 75d5bedc6c3ae8f69663f9d6305490d9fa5ef156..fbc8b90ce4d20f4b9c38713da3da6befabca7dba 100644
+--- a/core/config.mk
++++ b/core/config.mk
+@@ -1366,6 +1366,10 @@ endif
+ # when the target-files is signed in a post-build step.
+ ifeq ($(DEFAULT_SYSTEM_DEV_CERTIFICATE),build/make/target/product/security/testkey)
+ BUILD_KEYS := test-keys
++else ifneq (,$(filter BuildKeys=release-keys,$(PRODUCT_BUILD_PROP_OVERRIDES)))
++# Products signed directly with release certificates must use the same key tag
++# in fingerprint files, image AVB metadata and generated build properties.
++BUILD_KEYS := release-keys
+ else
+ BUILD_KEYS := dev-keys
+ endif
+diff --git a/core/packaging/flags.mk b/core/packaging/flags.mk
+index a9538b872be9fe27d9d4cb066883156bc65298bd..0c9eb2b898e664e396b85178cc87e77182e02fb8 100644
+--- a/core/packaging/flags.mk
++++ b/core/packaging/flags.mk
+@@ -37,6 +37,7 @@ $(strip $(1)): $(ACONFIG) $(strip $(4))
+ 		$$(ACONFIG) dump --dedup --format protobuf --out $$(PRIVATE_OUT) \
+ 			--filter container:$(strip $(3))+state:ENABLED \
+ 			--filter container:$(strip $(3))+permission:READ_WRITE \
++			--filter container:$(strip $(3))+is_exported:true \
+ 			$$(addprefix --cache ,$$(PRIVATE_IN)), \
+ 		echo -n > $$(PRIVATE_OUT) \
+ 	)
+diff --git a/tools/aconfig/aconfig/src/commands.rs b/tools/aconfig/aconfig/src/commands.rs
+index a983e3cb4e12404bf2f0bebde8b12cf6228d22b6..1156ae08a57cbc04494e6fa6eabf9f6afd4ce593 100644
+--- a/tools/aconfig/aconfig/src/commands.rs
++++ b/tools/aconfig/aconfig/src/commands.rs
+@@ -587,7 +587,8 @@ pub fn should_include_flag(pf: &ProtoParsedFlag) -> bool {
+     let is_disabled_ro = pf.state == Some(ProtoFlagState::DISABLED.into())
+         && pf.permission == Some(ProtoFlagPermission::READ_ONLY.into());
+ 
+-    !(is_platform_container && is_disabled_ro)
++    // Exported clients resolve flag names at runtime even when the value is read-only.
++    pf.is_exported() || !(is_platform_container && is_disabled_ro)
+ }
+ 
+ #[cfg(test)]
+@@ -595,6 +596,28 @@ mod tests {
+     use super::*;
+     use aconfig_protos::ProtoFlagPurpose;
+ 
++    #[test]
++    fn test_exported_disabled_read_only_flags_have_storage() {
++        for container in ["system", "system_ext", "product", "vendor", "com.android.test"] {
++            for exported in [false, true] {
++                for state in [ProtoFlagState::DISABLED, ProtoFlagState::ENABLED] {
++                    for permission in [ProtoFlagPermission::READ_ONLY, ProtoFlagPermission::READ_WRITE] {
++                        let mut flag = ProtoParsedFlag::new();
++                        flag.set_container(container.to_owned());
++                        flag.set_is_exported(exported);
++                        flag.set_state(state);
++                        flag.set_permission(permission);
++                        let expected = exported || container == "com.android.test"
++                            || state == ProtoFlagState::ENABLED
++                            || permission == ProtoFlagPermission::READ_WRITE;
++                        assert_eq!(should_include_flag(&flag), expected,
++                            "container={container}, exported={exported}, state={state:?}, permission={permission:?}");
++                    }
++                }
++            }
++        }
++    }
++
+     #[test]
+     fn test_offset_fingerprint() {
+         let parsed_flags = crate::test::parse_test_flags();

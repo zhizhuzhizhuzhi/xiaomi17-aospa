@@ -1,0 +1,1487 @@
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index f3f543fc4ad53fef05fff7e553801b03bcaa9857..b3a8838e5ec086fd09b8adb757e9c5e792795741 100644
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -84,9 +84,9 @@ BOARD_KERNEL_IMAGE_NAME := Image
+ BOARD_KERNEL_CMDLINE := \
+     video=vfb:640x400,bpp=32,memsize=3072000 \
+     lz4asm.support=1 \
+-    swinfo.fingerprint=$(LINEAGE_VERSION) \
+-    mtdoops.fingerprint=$(LINEAGE_VERSION) \
+-    bootmonitor.fingerprint=$(LINEAGE_VERSION)
++    swinfo.fingerprint=$(AOSPA_VERSION) \
++    mtdoops.fingerprint=$(AOSPA_VERSION) \
++    bootmonitor.fingerprint=$(AOSPA_VERSION)
+ 
+ BOARD_BOOTCONFIG := \
+     androidboot.hardware=qcom \
+@@ -162,7 +162,7 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
+ BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
+ 
+ # Security
+-BOOT_SECURITY_PATCH := 2026-09-01
++BOOT_SECURITY_PATCH := 2026-10-01
+ VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+ 
+ # Verified Boot
+@@ -187,12 +187,12 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
+ 
+ # VINTF
+-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
++DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+     $(COMMON_PATH)/configs/vintf/compatibility_matrix.device.xml \
+     $(COMMON_PATH)/configs/vintf/compatibility_matrix.xiaomi.xml \
+     hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml
+ 
+-DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix_aidl.xml
++DEVICE_MATRIX_FILE += hardware/qcom-caf/common/compatibility_matrix_aidl.xml
+ 
+ DEVICE_MANIFEST_SKUS := canoe
+ DEVICE_MANIFEST_CANOE_FILES := \
+@@ -216,3 +216,13 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
+ 
+ # Inherit from the proprietary version
+ include vendor/xiaomi/sm8850-common/BoardConfigVendor.mk
++
++# AOSPA prebuilt-kernel integration.
++TARGET_PREBUILT_KERNEL := device/xiaomi/pudding-kernel/kernel
++TARGET_KERNEL_VERSION := 6.12
++TARGET_POWERSHARE_NODE := /sys/class/xm_power/charger/wls_rev_charge/reverse_chg_mode
++TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/xm_power/charger/smart_charge/smart_night
++TARGET_HEALTH_CHARGING_CONTROL_CHARGING_DISABLED := 1
++TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED := 0
++TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
++include hardware/qcom-caf/common/BoardConfigQcom.mk
+diff --git a/aidl/micharge/service.cpp b/aidl/micharge/service.cpp
+index f5525419ebb38e42fe0cd79bc66ebf29fc19bbf0..f9119845d7a99325da66e695d5a3310a21125e60 100644
+--- a/aidl/micharge/service.cpp
++++ b/aidl/micharge/service.cpp
+@@ -15,148 +15,114 @@ using ::ndk::ScopedAStatus;
+ 
+ struct MiChargeService : public BnMiCharge {
+     ::ndk::ScopedAStatus getBatteryAuthentic(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryCapacity(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryChargeFull(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryChargeType(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryCycleCount(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryIbat(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryResistance(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatterySoh(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryTbat(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryThermaLevel(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryVbat(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBtTransferStartState(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getCarChargingType(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getChargingPowerMax(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getCoolModeState(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getFastChargeModeStatus(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getInputSuspendState(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getMiChargePath(const std::string& in_path, std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getNightChargingState(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getPSValue(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getPdApdoMax(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getPdAuthentication(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getQuickChargeType(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getSBState(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getSocDecimal(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getSocDecimalRate(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getTxAdapt(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getUsbCurrent(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getUsbVoltage(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getWirelessChargingStatus(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getWirelessFwStatus(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getWirelessReverseStatus(std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus isBatteryLifeFunctionSupported(bool* _aidl_return) override {
+         *_aidl_return = false;
+         return ScopedAStatus::ok();
+     }
+     ::ndk::ScopedAStatus isDPConnected(bool* _aidl_return) override {
+-        *_aidl_return = false;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus isFunctionSupported(const std::string& in_function, bool* _aidl_return) override {
+         *_aidl_return = false;
+         return ScopedAStatus::ok();
+     }
+     ::ndk::ScopedAStatus isUSB32(bool* _aidl_return) override {
+-        *_aidl_return = false;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus isWirelessChargingSupported(bool* _aidl_return) override {
+         *_aidl_return = false;
+@@ -167,76 +133,58 @@ struct MiChargeService : public BnMiCharge {
+         return ScopedAStatus::ok();
+     }
+     ::ndk::ScopedAStatus setBtState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setBtTransferStartState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setCoolModeState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setInputSuspendState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setMiChargePath(const std::string& in_path, const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setNightChargingState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setRxCr(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setSBState(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setSmCountReset(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setUpdateWirelessFw(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setWirelessChargingEnabled(bool in_enabled, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setWlsTxSpeed(const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getTypeCCommonInfo(const std::string& in_key, std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setTypeCCommonInfo(const std::string& in_key, const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getChargeCommonInfo(const std::string& in_key, std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setChargeCommonInfo(const std::string& in_key, const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus getBatteryCommonInfo(const std::string& in_key, std::string* _aidl_return) override {
+-        *_aidl_return = "";
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+     ::ndk::ScopedAStatus setBatteryCommonInfo(const std::string& in_key, const std::string& in_value, int32_t* _aidl_return) override {
+-        *_aidl_return = 0;
+-        return ScopedAStatus::ok();
++        return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+     }
+ };
+ 
+diff --git a/common.mk b/common.mk
+index 2a09d03e26d3c5c4dbc2fdd2205290e8c4537c23..d085801add4c47d04839258091d7a453d8c5c48e 100644
+--- a/common.mk
++++ b/common.mk
+@@ -239,13 +239,13 @@ PRODUCT_COPY_FILES += \
+     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
+ 
+ # Lineage Health
+-$(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
+-$(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
+-$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/xm_power/charger/smart_charge/smart_night)
+-$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
++$(call soong_config_set,aospa_health,charging_control_charging_disabled,1)
++$(call soong_config_set,aospa_health,charging_control_charging_enabled,0)
++$(call soong_config_set,aospa_health,charging_control_charging_path,/sys/class/xm_power/charger/smart_charge/smart_night)
++$(call soong_config_set_bool,aospa_health,charging_control_supports_bypass,false)
+ 
+ PRODUCT_PACKAGES += \
+-    vendor.lineage.health-service.default
++    vendor.aospa.health-service.default
+ 
+ # Memtrack
+ PRODUCT_PACKAGES += \
+@@ -316,7 +316,7 @@ $(call soong_config_set,qtipower,mode_ext_lib,//$(LOCAL_PATH):libpowermode-ext-x
+ 
+ # PowerShare
+ PRODUCT_PACKAGES += \
+-    vendor.lineage.powershare-service.default
++    vendor.aospa.powershare-service
+ 
+ $(call soong_config_set,lineage_powershare,powershare_path,/sys/class/xm_power/charger/wls_rev_charge/reverse_chg_mode)
+ 
+@@ -344,7 +344,6 @@ PRODUCT_PACKAGES += \
+ 
+ # Sensors
+ PRODUCT_PACKAGES += \
+-    alsd \
+     android.hardware.sensors-service.xiaomi-multihal
+ 
+ PRODUCT_COPY_FILES += \
+diff --git a/configs/perf/perfconfigstore.xml b/configs/perf/perfconfigstore.xml
+index 5c561dfe4fe14b6e95b4dc77e67a115d3c1363df..ae582c7b862c9639a27e39958f390515cf9945c3 100644
+--- a/configs/perf/perfconfigstore.xml
++++ b/configs/perf/perfconfigstore.xml
+@@ -12,7 +12,9 @@
+         <Prop Name="ro.vendor.perf.attach.hint.ll" Value="false" />
+         <Prop Name="ro.vendor.perf.semiautopipeline" Value="false" />
+         <Prop Name="ro.vendor.perf.autopipeline" Value="false" />
+-        <Prop Name="ro.vendor.perf.enable.wlclite" Value="false" />
++        <Prop Name="ro.vendor.perf.enable.wlclite" Value="true" />
+         <Prop Name="vendor.perf.fps_switch_hyst_time_secs" Value="10" />
++        <!-- Enable the native SurfaceFlinger color-conversion performance hint. -->
++        <Prop Name="vendor.perf.expensive_rendering" Value="1" />
+     </PerfConfigs>
+ </PerfConfigsStore>
+diff --git a/configs/properties/vendor.prop b/configs/properties/vendor.prop
+index e051cc5480ddeedfc5db9af767fc5288dde96154..152285288eb5c616d90dd6e109e8d305cb95b8e4 100644
+--- a/configs/properties/vendor.prop
++++ b/configs/properties/vendor.prop
+@@ -263,7 +263,7 @@ persist.vendor.rcs.singlereg.feature=1
+ ro.com.android.dataroaming=true
+ ro.telephony.default_network=33,33
+ ro.vendor.radio.build_profile=miui
+-ro.vendor.radio.build_region=global
++ro.vendor.radio.build_region=cn
+ 
+ # Secureprocessor
+ vendor.secureprocessor.service_start=1
+@@ -293,3 +293,6 @@ ro.config.vc_call_vol_steps=11
+ 
+ # WLAN
+ wifi.aware.interface=wifi-aware0
++
++# Keep composer validation enabled with the Android 17 composition protocol.
++vendor.display.disable_skip_validate=1
+diff --git a/extract-files.py b/extract-files.py
+index 25e6686f25e7e8d0b3767b0b55bae0b406f1a9e1..7b57c00eab379661e1d78315ec0c3b4615605126 100755
+--- a/extract-files.py
++++ b/extract-files.py
+@@ -48,6 +48,15 @@ def blob_fixup_miface_weak_nonsecure(
+             f.seek(0)
+             f.write(content)
+ 
++import importlib.util
++from pathlib import Path
++
++_pudding_spec = importlib.util.spec_from_file_location(
++    "pudding_blob_fixups", Path(__file__).with_name("pudding_blob_fixups.py"))
++_pudding_fixups = importlib.util.module_from_spec(_pudding_spec)
++_pudding_spec.loader.exec_module(_pudding_fixups)
++fixup_storage = _pudding_fixups.fixup_storage
++
+ namespace_imports = [
+     'device/xiaomi/sm8850-common',
+     'hardware/qcom-caf/sm8850',
+@@ -79,6 +88,11 @@ lib_fixups: lib_fixups_user_type = {
+ }
+ 
+ blob_fixups: blob_fixups_user_type = {
++    'vendor/etc/perf/targetresourceconfigs.xml': blob_fixup().call(fixup_storage),
++
++    "odm/etc/init/vendor.qti.camera.provider-service_64.rc": blob_fixup().regex_replace(r"/odm/bin/hw/vendor\.qti\.camera\.provider-service_64", "/vendor/bin/hw/vendor.qti.camera.provider-service_64"),
++    'vendor/bin/vppservice': blob_fixup()
++        .add_needed('libpudding_vpp_legacy_route.so'),
+     'system_ext/etc/init/qspa_system.rc': blob_fixup()
+         .regex_replace(r'\$\{ro\.boot\.vendor\.qspa:-default\}', 'default'),
+     (
+@@ -141,6 +155,13 @@ blob_fixups: blob_fixups_user_type = {
+         .replace_needed('android.media.audio.common.types-V4-cpp.so', 'android.media.audio.common.types-V5-cpp.so'),
+     'odm/lib64/libmiface.so': blob_fixup()
+         .call(blob_fixup_miface_weak_nonsecure),
++    # Apply after the ABI dependency fixups; code and constant sections are pinned.
++    'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl': blob_fixup().call(
++        _pudding_fixups.fixup, 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'),
++    'vendor/bin/hw/android.hardware.powerstats-service.qti': blob_fixup().call(
++        _pudding_fixups.fixup, 'vendor/bin/hw/android.hardware.powerstats-service.qti'),
++    'vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh': blob_fixup().call(
++        _pudding_fixups.fixup, 'vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh'),
+ }  # fmt: skip
+ 
+ module = ExtractUtilsModule(
+diff --git a/parts/Android.bp b/parts/Android.bp
+index 6452d6b75dcf1b0f1fabc557a0fa8f7919c84060..d405a2a16d3359f39e5d0f20b9a4e9aaa44457cc 100644
+--- a/parts/Android.bp
++++ b/parts/Android.bp
+@@ -14,7 +14,6 @@ android_app {
+     static_libs: [
+         "androidx.core_core",
+         "androidx.preference_preference",
+-        "org.lineageos.settings.resources",
+         "vendor.xiaomi.hw.touchfeature-V1-java",
+     ],
+ }
+diff --git a/parts/src/com/xiaomi/settings/touch/TouchFeatureWrapper.kt b/parts/src/com/xiaomi/settings/touch/TouchFeatureWrapper.kt
+index f3285e49677bceb4fe65d4496197355a67545337..1093e4d5e73072552d919c32200bfe5452e5bb1c 100644
+--- a/parts/src/com/xiaomi/settings/touch/TouchFeatureWrapper.kt
++++ b/parts/src/com/xiaomi/settings/touch/TouchFeatureWrapper.kt
+@@ -1,57 +1,36 @@
+-/*
+- * SPDX-FileCopyrightText: The LineageOS Project
+- * SPDX-License-Identifier: Apache-2.0
+- */
+-
+ package com.xiaomi.settings.touch
+ 
+ import android.os.IBinder
+ import android.os.ServiceManager
+-import android.util.Log
+ import vendor.xiaomi.hw.touchfeature.ITouchFeature
+ 
+ object TouchFeatureWrapper {
+-
+-    private const val TAG = "TouchFeatureWrapper"
+-    private val DEBUG = Log.isLoggable(TAG, Log.DEBUG)
+-
+     @Volatile private var touchFeature: ITouchFeature? = null
+-
+-    private val deathRecipient =
+-        IBinder.DeathRecipient {
+-            if (DEBUG) Log.d(TAG, "serviceDied")
+-            touchFeature = null
+-        }
++    private val deathRecipient = IBinder.DeathRecipient { touchFeature = null }
+ 
+     @Synchronized
+-    private fun getTouchFeature(): ITouchFeature? =
+-        touchFeature
+-            ?: runCatching {
+-                val fqName = "${ITouchFeature.DESCRIPTOR}/default"
+-                val binder =
+-                    android.os.Binder.allowBlocking(
+-                        ServiceManager.waitForDeclaredService(fqName)
+-                    )
+-                ITouchFeature.Stub.asInterface(binder).apply {
+-                    asBinder().linkToDeath(deathRecipient, 0)
+-                }
+-            }
+-            .onSuccess { touchFeature = it }
+-            .onFailure { e -> Log.e(TAG, "getTouchFeature failed!", e) }
+-            .getOrNull()
++    private fun getTouchFeature(): ITouchFeature {
++        touchFeature?.let { return it }
++        val name = "${ITouchFeature.DESCRIPTOR}/default"
++        val binder = ServiceManager.checkService(name)
++            ?: error("Touch HAL is not registered")
++        val service = checkNotNull(ITouchFeature.Stub.asInterface(binder))
++        binder.linkToDeath(deathRecipient, 0)
++        touchFeature = service
++        return service
++    }
+ 
+-    fun isServiceAvailable(): Boolean =
+-        ServiceManager.isDeclared("${ITouchFeature.DESCRIPTOR}/default")
++    fun getReportRate(): Boolean {
++        val service = getTouchFeature()
++        val active = service.getModeCurValue(0, 202)
++        check(active in 0..1) {
++            "Touch report-rate state is unavailable: $active"
++        }
++        return active == 1
++    }
+ 
+     fun setModeValue(type: Int, mode: Int, value: Int) {
+-        val tf =
+-            getTouchFeature()
+-                ?: run {
+-                    Log.e(TAG, "touchFeature is null!")
+-                    return
+-                }
+-        if (DEBUG) Log.d(TAG, "setModeValue: type=$type, mode=$mode, value=$value")
+-        runCatching { tf.setModeValue(type, mode, value) }
+-            .onFailure { e -> Log.e(TAG, "setModeValue failed!", e) }
++        val result = getTouchFeature().setModeValue(type, mode, value)
++        check(result == 0) { "Touch HAL mode $mode failed: $result" }
+     }
+ }
+diff --git a/parts/src/com/xiaomi/settings/touch/TouchReportRateService.kt b/parts/src/com/xiaomi/settings/touch/TouchReportRateService.kt
+index 326015c5e6f1b1dda5581165b9f185720504859a..15d41eb6b39e541807c8463a0e6bdbbc17326eed 100644
+--- a/parts/src/com/xiaomi/settings/touch/TouchReportRateService.kt
++++ b/parts/src/com/xiaomi/settings/touch/TouchReportRateService.kt
+@@ -8,6 +8,7 @@ package com.xiaomi.settings.touch
+ import android.app.Service
+ import android.content.BroadcastReceiver
+ import android.content.Context
++import android.content.ContentResolver
+ import android.content.Intent
+ import android.content.IntentFilter
+ import android.database.ContentObserver
+@@ -17,6 +18,7 @@ import android.os.Looper
+ import android.os.UserHandle
+ import android.provider.Settings
+ import android.util.Log
++import java.util.concurrent.Executors
+ 
+ class TouchReportRateService : Service() {
+ 
+@@ -78,19 +80,41 @@ class TouchReportRateService : Service() {
+ 
+         private const val MODE_GAME_MODE = 0
+         private const val MODE_ACTIVE_MODE = 202
++        private val worker = Executors.newSingleThreadExecutor()
++        private val main = Handler(Looper.getMainLooper())
++
++        private fun <T> execute(callback: (Result<T>) -> Unit, operation: () -> T) {
++            worker.execute {
++                val result = runCatching(operation)
++                result.exceptionOrNull()?.let { Log.e(TAG, "Touch report-rate operation failed", it) }
++                main.post { callback(result) }
++            }
++        }
+ 
+-        fun isReportRateWritable(): Boolean = TouchFeatureWrapper.isServiceAvailable()
++        fun readReportRate(callback: (Result<Boolean>) -> Unit) = execute(callback) {
++            TouchFeatureWrapper.getReportRate()
++        }
++
++        fun setReportRate(resolver: ContentResolver, value: Int, callback: (Result<Unit>) -> Unit) =
++            execute(callback) {
++                applyHardware(value)
++                check(Settings.System.putIntForUser(resolver, SETTING_KEY, value,
++                    UserHandle.USER_CURRENT)) { "Touch mode applied, but preference persistence failed" }
++            }
+ 
+         fun applyReportRate(context: Context) {
+-            val value =
+-                Settings.System.getIntForUser(
+-                    context.contentResolver,
+-                    SETTING_KEY,
+-                    DEFAULT_VALUE,
+-                    UserHandle.USER_CURRENT,
+-                )
+-            if (DEBUG) Log.d(TAG, "applyReportRate: $value")
++            val resolver = context.applicationContext.contentResolver
++            execute({}) {
++                // Read inside the same executor as UI writes, so queued events cannot
++                // replay a stale preference after a newer successful user operation.
++                val value = Settings.System.getIntForUser(resolver, SETTING_KEY,
++                    DEFAULT_VALUE, UserHandle.USER_CURRENT)
++                applyHardware(value)
++            }
++        }
+ 
++        private fun applyHardware(value: Int) {
++            require(value == 0 || value == 1) { "Invalid touch report-rate setting: $value" }
+             if (value == 1) {
+                 TouchFeatureWrapper.setModeValue(TOUCH_ID, MODE_GAME_MODE, 1)
+                 TouchFeatureWrapper.setModeValue(TOUCH_ID, MODE_ACTIVE_MODE, 1)
+diff --git a/parts/src/com/xiaomi/settings/touch/TouchSettingsFragment.kt b/parts/src/com/xiaomi/settings/touch/TouchSettingsFragment.kt
+index 0d6720d6394ad5ecb9c2b61a6fc567fc19170704..d8c23cb262d14b5c50c7da493571e627a29e5c97 100644
+--- a/parts/src/com/xiaomi/settings/touch/TouchSettingsFragment.kt
++++ b/parts/src/com/xiaomi/settings/touch/TouchSettingsFragment.kt
+@@ -6,6 +6,7 @@
+ package com.xiaomi.settings.touch
+ 
+ import android.os.Bundle
++import androidx.appcompat.app.AlertDialog
+ import android.os.UserHandle
+ import android.provider.Settings
+ import android.util.Log
+@@ -30,16 +31,15 @@ class TouchSettingsFragment :
+         if (DEBUG) Log.d(TAG, "onCreatePreferences")
+         setPreferencesFromResource(R.xml.settings_touch, rootKey)
+ 
+-        val isEnabled =
+-            Settings.System.getIntForUser(
+-                requireContext().contentResolver,
+-                TouchReportRateService.SETTING_KEY,
+-                0,
+-                UserHandle.USER_CURRENT,
+-            ) == 1
+-
+-        switchBar.isChecked = isEnabled
+-        switchBar.isEnabled = TouchReportRateService.isReportRateWritable()
++        switchBar.isEnabled = false
++        TouchReportRateService.readReportRate { result ->
++            if (!isAdded) return@readReportRate
++            switchBar.isEnabled = result.isSuccess
++            result.fold({ switchBar.isChecked = it; switchBar.summary = null }, {
++                switchBar.summary = it.message
++                showError(it)
++            })
++        }
+         switchBar.onPreferenceChangeListener = this
+     }
+ 
+@@ -47,13 +47,22 @@ class TouchSettingsFragment :
+         if (preference == switchBar) {
+             val isChecked = newValue as Boolean
+             if (DEBUG) Log.d(TAG, "onPreferenceChange: $isChecked")
+-            Settings.System.putIntForUser(
+-                requireContext().contentResolver,
+-                TouchReportRateService.SETTING_KEY,
+-                if (isChecked) 1 else 0,
+-                UserHandle.USER_CURRENT,
+-            )
++            val resolver = requireContext().applicationContext.contentResolver
++            switchBar.isEnabled = false
++            TouchReportRateService.setReportRate(resolver, if (isChecked) 1 else 0) { result ->
++                if (!isAdded) return@setReportRate
++                switchBar.isEnabled = true
++                result.fold({ switchBar.isChecked = isChecked }, { showError(it) })
++            }
++            return false
+         }
+         return true
+     }
++
++    private fun showError(error: Throwable) {
++        AlertDialog.Builder(requireContext())
++            .setTitle(android.R.string.dialog_alert_title)
++            .setMessage(error.message ?: error.javaClass.simpleName)
++            .setPositiveButton(android.R.string.ok, null).show()
++    }
+ }
+diff --git a/power/power-mode.cpp b/power/power-mode.cpp
+index 84526e11bc6d766bfec390a5aff1ec78ae33fa02..18aeef796e711ff75722755a521c645ae3882227 100644
+--- a/power/power-mode.cpp
++++ b/power/power-mode.cpp
+@@ -8,6 +8,9 @@
+ #include <android-base/file.h>
+ #include <android-base/logging.h>
+ #include <sys/ioctl.h>
++#include <android-base/unique_fd.h>
++#include <fcntl.h>
++#include <unistd.h>
+ 
+ #define CMD_DATA_BUF_SIZE 256
+ #define COMMON_DATA_CMD 0
+@@ -52,29 +55,47 @@ bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
+ bool setDeviceSpecificMode(Mode type, bool enabled) {
+     switch (type) {
+         case Mode::DOUBLE_TAP_TO_WAKE: {
+-            int fd = open(TOUCH_DEV_PATH, O_RDWR);
+-            ioctl(fd, TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID);
++            ::android::base::unique_fd fd(open(TOUCH_DEV_PATH, O_RDWR | O_CLOEXEC));
++            if (fd.get() < 0) {
++                PLOG(ERROR) << "Opening touch device";
++                return false;
++            }
++            if (ioctl(fd.get(), TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID) < 0) {
++                PLOG(ERROR) << "Selecting touch device";
++                return false;
++            }
+             touch_data data = {};
+             data.touch_id = TOUCH_ID;
+             data.cmd = SET_CUR_VALUE;
+             data.mode = TOUCH_DOUBLETAP_MODE;
+             data.data_len = 1;
+             data.data_buf[0] = enabled ? 1 : 0;
+-            ioctl(fd, TOUCH_IOC_COMMON_DATA, &data);
+-            close(fd);
++            if (ioctl(fd.get(), TOUCH_IOC_COMMON_DATA, &data) < 0) {
++                PLOG(ERROR) << "Applying touch mode " << data.mode;
++                return false;
++            }
+             return true;
+         }
+         case Mode::DISPLAY_INACTIVE: {
+-            int fd = open(TOUCH_DEV_PATH, O_RDWR);
+-            ioctl(fd, TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID);
++            ::android::base::unique_fd fd(open(TOUCH_DEV_PATH, O_RDWR | O_CLOEXEC));
++            if (fd.get() < 0) {
++                PLOG(ERROR) << "Opening touch device";
++                return false;
++            }
++            if (ioctl(fd.get(), TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID) < 0) {
++                PLOG(ERROR) << "Selecting touch device";
++                return false;
++            }
+             touch_data data = {};
+             data.touch_id = TOUCH_ID;
+             data.cmd = SET_CUR_VALUE;
+             data.mode = TOUCH_FOD_ENABLE_MODE;
+             data.data_len = 1;
+             data.data_buf[0] = enabled ? 1 : 0;
+-            ioctl(fd, TOUCH_IOC_COMMON_DATA, &data);
+-            close(fd);
++            if (ioctl(fd.get(), TOUCH_IOC_COMMON_DATA, &data) < 0) {
++                PLOG(ERROR) << "Applying touch mode " << data.mode;
++                return false;
++            }
+             return true;
+         }
+         default:
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index 27879d48406448aceb645f5d913f1e8426a7a603..e9d290127aa33e9de92e8ae55bbce057c49ba496 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -1,5 +1,7 @@
++# PAL/AGM audio backend entries pinned below are from Xiaomi17 OS4.0.4.0.XPCCNXM,
++# matching device ACDB and the complete Stream/Session/Device class ABI group.
+ ## All proprietary files from this list, unless pinned and noted otherwise,
+-## are from Xiaomi 17 Pro Max (OS4.0.0.20.XPBCNXM). 
++## are from Xiaomi 17 (OS4.0.4.0.XPCCNXM). 
+ 
+ # libmialgo.so and libcamxcommonutils are on device specific
+ 
+@@ -99,10 +101,10 @@ vendor/lib64/libadsprpc.so
+ vendor/lib64/libloadalgo_stub.so
+ 
+ # AGM
+-vendor/lib64/libagm.so
+-vendor/lib64/libagmclient.so
+-vendor/lib64/libagmipcservice.so
+-vendor/lib64/libagmmixer.so
++vendor/lib64/libagm.so|b88ab249decb6d1252b15b3a3cb8df73f07f5829
++vendor/lib64/libagmclient.so|5c9554ec112de454b01047496e91194cb3aecb77
++vendor/lib64/libagmipcservice.so|3ffcc9915a2623f4cf47a408ea3a463c894a2f3a
++vendor/lib64/libagmmixer.so|5512f7f5f20f1d88446150863908ee96743cafbf
+ 
+ # Audio
+ odm/etc/audio/silent-3sec.wav
+@@ -135,10 +137,10 @@ vendor/lib64/hw/libaudioeffecthal.qti.so;DISABLE_DEPS;REQUIRED=audioeffectservic
+ vendor/lib64/hw/libsoundtriggerhal.qti.so
+ vendor/lib64/lib_lvacfs.so
+ vendor/lib64/libadm.so
+-vendor/lib64/libar-acdb.so
+-vendor/lib64/libar-gpr.so
+-vendor/lib64/libar-gsl.so
+-vendor/lib64/libar-pal.so
++vendor/lib64/libar-acdb.so|7bcb0c2c9383823d97a6543f07b0921f42e32052
++vendor/lib64/libar-gpr.so|cfc223733daa67199ee155a83702a0a74bbc08bb
++vendor/lib64/libar-gsl.so|1dba04875b0586077b1e1f65cdea52500aa1f0ae
++vendor/lib64/libar-pal.so|e0ebb6f99b38d10cbbdb0e900461a95ef17141dc
+ vendor/lib64/libarmemlog.so
+ vendor/lib64/libats.so
+ vendor/lib64/libaudio_log_utils.so
+@@ -154,30 +156,30 @@ vendor/lib64/libcapiv2svacnnvendor.so
+ vendor/lib64/libcapiv2svarnnvendor.so
+ vendor/lib64/libcapiv2udk7vendor.so
+ vendor/lib64/libcapiv2uvvendor.so
+-vendor/lib64/libdev_bt.so
+-vendor/lib64/libdev_display.so
+-vendor/lib64/libdev_dummy.so
+-vendor/lib64/libdev_ec_ref.so
+-vendor/lib64/libdev_ext_ec.so
+-vendor/lib64/libdev_fm.so
+-vendor/lib64/libdev_handset_mic.so
+-vendor/lib64/libdev_handset_va.so
+-vendor/lib64/libdev_handset.so
+-vendor/lib64/libdev_haptics.so
+-vendor/lib64/libdev_headphone.so
+-vendor/lib64/libdev_headset_mic.so
+-vendor/lib64/libdev_headset_va.so
+-vendor/lib64/libdev_proxy.so
+-vendor/lib64/libdev_speaker_mic.so
+-vendor/lib64/libdev_speaker.so
+-vendor/lib64/libdev_tiantongrx.so
+-vendor/lib64/libdev_tiantongtx.so
+-vendor/lib64/libdev_ultrasound.so
+-vendor/lib64/libdev_usb.so
++vendor/lib64/libdev_bt.so|489eec0de26d3867efe94261e3452c719da6ed10
++vendor/lib64/libdev_display.so|3e859f12effbe2c0dd0879db3f442265b4263628
++vendor/lib64/libdev_dummy.so|703dd13890153ece88fbd12f5c59c80e1e6f28ce
++vendor/lib64/libdev_ec_ref.so|0cce315c0db26747f98c19d968c1f96fb0ba3c4c
++vendor/lib64/libdev_ext_ec.so|2da14fa9e99decbd6e22d96cf103ec5e273bbcea
++vendor/lib64/libdev_fm.so|0de29c24ac4fa22fc156a4c198edf701010e49c1
++vendor/lib64/libdev_handset_mic.so|d87fede8baa63b0a5ebacadb5c19ffb89e0cf5c7
++vendor/lib64/libdev_handset_va.so|da1fec1cf8b0b9d75babc3de7ed02d66f3e4997d
++vendor/lib64/libdev_handset.so|17c138224b58c1a7dd0c7b8b0ef5cec45cde4e26
++vendor/lib64/libdev_haptics.so|1dcb945c6ca52482190ee8455e7202a8ae2c82db
++vendor/lib64/libdev_headphone.so|f44c9065ecfc154cd08eca7167c41d7447f1f994
++vendor/lib64/libdev_headset_mic.so|7a3191cd952d669f0eb4564668153f60965ac45a
++vendor/lib64/libdev_headset_va.so|178e0bcf947c4930fa07af9eff22a00870954e03
++vendor/lib64/libdev_proxy.so|bff521f175549af7dba3e41c9aa1dc5c770b2e39
++vendor/lib64/libdev_speaker_mic.so|93b76da0f7a6f5a43200fb1339e1cf6b784a7467
++vendor/lib64/libdev_speaker.so|321a364326c9c27431c5f1ca4556cc8f67f7d6d3
++vendor/lib64/libdev_tiantongrx.so|44e928f0599c2a2c941af2d20e5f9039c6ac90e4
++vendor/lib64/libdev_tiantongtx.so|cff8cc3ba85ae7548f879bb53b42685257377e34
++vendor/lib64/libdev_ultrasound.so|698a32bd6af6cec14ed1b6b4a20f2b39d6fdd993
++vendor/lib64/libdev_usb.so|78efdd486a9af83bb81c9253fd0ebee864fd2fa0
+ vendor/lib64/libdlbpreg.so
+ vendor/lib64/liblvacfs_wrapper.so
+-vendor/lib64/liblx-ar_util.so
+-vendor/lib64/liblx-osal.so
++vendor/lib64/liblx-ar_util.so|353cf0a82a9b2ace8cb8fcbfba309e9d871be882
++vendor/lib64/liblx-osal.so|f73ac3135976abd4cc6500b8d9ba62f9f5d9b6b5
+ vendor/lib64/libmcs.so
+ vendor/lib64/libmikaraoke.so
+ vendor/lib64/libmis6.so
+@@ -188,34 +190,34 @@ vendor/lib64/libmisoundfx_aosp_aidl_ext.so;SYMLINK=vendor/lib64/soundfx/libmisou
+ vendor/lib64/libmisoundsa_multichannel.so
+ vendor/lib64/libmisoundsa_sve.so
+ vendor/lib64/libpal_net_if.so
+-vendor/lib64/libpal_sounddose.so
++vendor/lib64/libpal_sounddose.so|021cdc4fadae2e0b9eb4bc4602e29108eaab5a19
+ vendor/lib64/libpalclient.so
+ vendor/lib64/libqasr.so
+ vendor/lib64/libqtigefar.so;DISABLE_DEPS
+-vendor/lib64/libsession_agm.so
+-vendor/lib64/libsession_ar.so
+-vendor/lib64/libsession_compress_config.so
+-vendor/lib64/libsession_compress.so
+-vendor/lib64/libsession_pcm_config.so
+-vendor/lib64/libsession_pcm.so
+-vendor/lib64/libsession_voice_config.so
+-vendor/lib64/libsession_voice.so
+-vendor/lib64/libstream_acd.so
+-vendor/lib64/libstream_asr.so
+-vendor/lib64/libstream_calltranslation.so
+-vendor/lib64/libstream_common.so
+-vendor/lib64/libstream_commonproxy.so
+-vendor/lib64/libstream_compress.so
+-vendor/lib64/libstream_contextproxy.so
+-vendor/lib64/libstream_dummy.so
+-vendor/lib64/libstream_haptics.so
+-vendor/lib64/libstream_incall.so
+-vendor/lib64/libstream_nontunnel.so
+-vendor/lib64/libstream_pcm.so
+-vendor/lib64/libstream_sensorpcmdata.so
+-vendor/lib64/libstream_sensorrenderer.so
+-vendor/lib64/libstream_soundtrigger.so
+-vendor/lib64/libstream_ultrasound.so
++vendor/lib64/libsession_agm.so|d2062a064ca1d74bcbaa5efe17ee5bbd31ad9f05
++vendor/lib64/libsession_ar.so|ffa5a5e4300cf8bb794c489a5f3d02468ac3b336
++vendor/lib64/libsession_compress_config.so|fe90a0d775b52da5b0c9ce4567558daa1a8ab39e
++vendor/lib64/libsession_compress.so|9c02715c83c04c5ad9dba7d91a613f22a1617d83
++vendor/lib64/libsession_pcm_config.so|2354eb9fa5715f643369e69efb3c7108d6b5ba12
++vendor/lib64/libsession_pcm.so|700684683c4a8123eaecec1a9af2c71d446be158
++vendor/lib64/libsession_voice_config.so|b12b00303ec4c496876b3e94a7072204cbcd3711
++vendor/lib64/libsession_voice.so|c23f5b1527761ccf40acbc4b3f1ecdf90f32fff2
++vendor/lib64/libstream_acd.so|3ba8a40b2b21d715400ecf404cce2bd61ec43b6a
++vendor/lib64/libstream_asr.so|ed181c252240a83e9e7e66ae5b7ca88c5c2c6162
++vendor/lib64/libstream_calltranslation.so|8852f1d7cf6492edb192305f1a1838de383a5688
++vendor/lib64/libstream_common.so|9eadf465c2963bb63ec8ba56ff7a812d4da03337
++vendor/lib64/libstream_commonproxy.so|78fe1bfbeb689e653afff50c625c7b7e917b771d
++vendor/lib64/libstream_compress.so|27eda28ec3fa144d71161667713c303d99a8923b
++vendor/lib64/libstream_contextproxy.so|ec604284ad6a07557a7a64d4bedcbe6fce0636a4
++vendor/lib64/libstream_dummy.so|cb0b76503f513a53fb293dab38a69b4373cc102b
++vendor/lib64/libstream_haptics.so|84c8dd9467ea5f43f66d4ca6c05c1c0076417dfd
++vendor/lib64/libstream_incall.so|bca69bf9088740aba65292649ebcec200da8e066
++vendor/lib64/libstream_nontunnel.so|fbd5042cf46faedb706c6bf2be130a3068e44ac3
++vendor/lib64/libstream_pcm.so|dd09981056cdbc5289da6b87bf8ae38ea2970b2f
++vendor/lib64/libstream_sensorpcmdata.so|35f1a753f376112e74b774fb97531480a7373cc9
++vendor/lib64/libstream_sensorrenderer.so|f18ea25c1459f49e8bddb1235cdaa2bcfd30f25b
++vendor/lib64/libstream_soundtrigger.so|8c9ad54c570917e9cc5b651f765912677e4158a2
++vendor/lib64/libstream_ultrasound.so|4ff6c37890f0ef8b3138d7e9bb9007aac34a3ed5
+ vendor/lib64/libtensorflowlite_c_qcom.so
+ vendor/lib64/libtiantongpal.so
+ vendor/lib64/libultrasound_notify.so
+@@ -825,8 +827,10 @@ vendor/lib64/vendor.xiaomi.hardware.fx.tunnel-V1-ndk.so
+ vendor/lib64/vendor.qti.hardware.fingerprint-V1-ndk.so
+ 
+ # FM
+-vendor/lib64/vendor.qti.hardware.fm@1.0.so
+-vendor/lib64/vendor.qti.hardware.fm-V1-ndk.so
++# AOSPA generates the same versioned FM Binder interface; avoid duplicate vendor output.
++# vendor/lib64/vendor.qti.hardware.fm@1.0.so;MODULE_SUFFIX=_vendor
++# AOSPA generates the same versioned FM Binder interface; avoid duplicate vendor output.
++# vendor/lib64/vendor.qti.hardware.fm-V1-ndk.so;MODULE_SUFFIX=_vendor
+ 
+ # Gatekeeper
+ vendor/bin/hw/android.hardware.gatekeeper-rust-service-qti
+@@ -1071,8 +1075,8 @@ vendor/etc/android.hardware.security.onekeymint-service-qti.rc
+ # Listen
+ vendor/lib64/libeai_fixed.so
+ vendor/lib64/libeai_float.so
+-vendor/lib64/libfmpal.so
+-vendor/lib64/libhfp_pal.so
++vendor/lib64/libfmpal.so|2bbb55428f6e0995a21f4448b4ddd1839f730c50
++vendor/lib64/libhfp_pal.so|0cb8ef97aaaffee6473739c68880d43d85f7012f
+ vendor/lib64/liblistensoundmodel2vendor.so
+ vendor/lib64/liblistensoundmodelaidl.so
+ vendor/lib64/vendor.qti.hardware.ListenSoundModelAidl-V1-ndk.so
+@@ -1085,7 +1089,7 @@ odm/lib64/libteecli.so
+ 
+ # Media
+ system_ext/lib64/libmmosal.so
+-system_ext/lib64/libmmparser_lite.so
++system_ext/lib64/libwfdparserlite.so
+ vendor/bin/hw/qconfigservice
+ vendor/bin/hw/vendor.qti.media.c2@1.0-service
+ vendor/bin/init.qti.media.sh
+@@ -1239,7 +1243,7 @@ odm/lib64/libQnnTFLiteDelegate.so
+ 
+ # NFC
+ odm/etc/libnfc-nci.conf:vendor/etc/libnfc-nci.conf
+-odm/etc/libnfc-nxp.conf:vendor/etc/libnfc-nxp.conf
++# Pudding uses ST NFC; no libnfc-nxp.conf is shipped in the verified CN OS4 package.
+ odm/lib64/nfc_nci.st21nfc.st.so
+ system_ext/etc/permissions/com.nxp.nfc.nq.xml
+ vendor/bin/nqnfcinfo
+@@ -1730,7 +1734,7 @@ vendor/lib64/vendor.qti.snapdragonServices-V2-ndk.so
+ vendor/lib64/vendor.qti.snapdragonServices.qape-V1-ndk.so
+ 
+ # Soter
+-mi_ext/product/app/SoterService/SoterService.apk:product/app/SoterService/SoterService.apk
++product/app/SoterService/SoterService.apk:product/app/SoterService/SoterService.apk
+ vendor/bin/hw/vendor.qti.hardware.soter-service
+ vendor/bin/vendor.qti.hardware.soter-provision
+ vendor/etc/init/vendor.qti.hardware.soter-service.rc
+@@ -1905,34 +1909,34 @@ vendor/etc/wifi/wpa_supplicant_overlay.conf
+ vendor/lib64/libWlanServiceJni.so
+ 
+ # WiFi Display (system) - from CPH2745_11_C_OTA_1020_all_Qyq7GC_00011011
+-system/framework/WfdCommon.jar;BOOT_JAR|b9fd0baae787d8bc4041e7d79411c3a452e094a8
+-system_ext/bin/wfdservice64|d67839393c709f8c4d7bd536f0e5cf2a9c18a7e8
++system/framework/WfdCommon.jar;BOOT_JAR|c3b24e2d668c84ec878efccc148cf55e68a29d4b
++system_ext/bin/wfdservice64|6b738758fe3d21d6d53d3fb522e1321b54592fa9
+ system_ext/etc/init/wfdservice.rc|907def8565d8f91f531ca7dfad880af05d540b0c
+ system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml|6669d5ee462c981663b8ac573d84d334e4eed96c
+-system_ext/etc/seccomp_policy/wfdservice64.policy|8fbe45e7c1468dc12021bb030af3b5bc81062e0e
++system_ext/etc/seccomp_policy/wfdservice64.policy|1e331272649395423b11c575892e0bdc9433b820
+ system_ext/etc/wfdconfigsink.xml|7bbf8092ff574be7ed951b1a4026471f51e4b6f5
+-system_ext/lib64/libmmrtpdecoder.so|7971b5de27f7105fd77a15e5fca5401ad8b878a6
+-system_ext/lib64/libmmrtpencoder.so|660417edcd28d0a89b87b34609fdb5f89856b8f5
+-system_ext/lib64/libwfdavenhancements.so|c460b1f585902fa1cc1bd4386b5017e252939526
+-system_ext/lib64/libwfdclient.so|8c24d161dace8c5f089574cca278072a72c3467c
+-system_ext/lib64/libwfdcommonutils.so|8ea632b424023b4facbbdadaf90fc30d5f2631e7
+-system_ext/lib64/libwfdconfigutils.so|2ba443281a75baf4c40a0bfcbfcd2db296405658
+-system_ext/lib64/libwfddisplayconfig.so|f83142f12c2aaef34178b4091d5e03cb563a31ad
+-system_ext/lib64/libwfdmminterface.so|e97b771999cc69a76a2918f014ac0aac8e0872c6
+-system_ext/lib64/libwfdmmsink.so|d2aa9d4663c4c2fbadcac91724167955ae6a3bac
+-system_ext/lib64/libwfdmmsrc_system.so|ab23a6ce749d1ecc9bef869fae0eb3a0e293d389|ab23a6ce749d1ecc9bef869fae0eb3a0e293d389
+-system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|f3c438b50e32156d630cb2f6ba608104fe5be421
+-system_ext/lib64/libwfdrtsp.so|4595976a1897782e22fc7d519c7293d0a81b4d15
+-system_ext/lib64/libwfdservice.so|9450ceb1750849a7aca7e38d1203e1e0277c76b0|9450ceb1750849a7aca7e38d1203e1e0277c76b0
+-system_ext/lib64/libwfdsinksm.so|18fa4c0fed1b5bc4c34a5c29ed11f67891c54ad3
+-system_ext/lib64/libwfduibcinterface.so|1d0377b18ca2d204cb30c705cc5f7297308ba733
+-system_ext/lib64/libwfduibcsink.so|c3508c6b7bf37d0efa8c5b688faf8345b06a546b
+-system_ext/lib64/libwfduibcsinkinterface.so|b6630e84f5596fbd08b9de4e519b3907e4924e15
+-system_ext/lib64/libwfduibcsrc.so|94ab48fac2d95bb7ca7b3291166540304ea5fe97
+-system_ext/lib64/libwfduibcsrcinterface.so|8174319b25aedf98a5e33d9dc4f12b0ced90c07c
+-system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so|b6b0026a1a839ef6345508e6f350ef1e99e5e7fd
+-system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V2-ndk.so|5885489e48c606ae98307410cd0ccefdc01a363d
+-system_ext/priv-app/WfdService/WfdService.apk|0fcb88dd5d08c0ee13a5683071926549077410b4
++system_ext/lib64/libmmrtpdecoder.so|51c486b525879c1239062f0fa6b591c3e0abaaa0
++system_ext/lib64/libmmrtpencoder.so|946d85b6b852ee95e17b40b00c4c85ebfa72c85c
++system_ext/lib64/libwfdavenhancements.so|68ab62308ade51f517dd03d06efb24820be793f0
++system_ext/lib64/libwfdclient.so|ae443c8657e680558cce30039409cee1e6ab5505
++system_ext/lib64/libwfdcommonutils.so|27c411978b486ccc075862fa2eff450990b9d47a
++system_ext/lib64/libwfdconfigutils.so|ffac37cc7b93538d25af6304d02ecf0062ec1f00
++system_ext/lib64/libwfddisplayconfig.so|2717202736b678390be7518ce6f69a63079e4217
++system_ext/lib64/libwfdmminterface.so|b560306dbc7b2bffb734c8eb6439dd3721f75c12
++system_ext/lib64/libwfdmmsink.so|4e4cce93cdc63c681e2dd9d42afdbf92170278fe
++system_ext/lib64/libwfdmmsrc_system.so|69e08746a9557ee5fba3e02a8170032db0fa0105
++system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|932441e979fbbacdb6924a773f1c611b0304ee1e
++system_ext/lib64/libwfdrtsp.so|14eec96c4fa615096c473d5a269ba315a53cfd00
++system_ext/lib64/libwfdservice.so|429839b831a8b16fb858179241dc6183c50bdf13
++system_ext/lib64/libwfdsinksm.so|880550313eb874f7ca0dac67e221a1252996155c
++system_ext/lib64/libwfduibcinterface.so|62a596c93efa57bdc79b078d74a3ccf4d19d1f58
++system_ext/lib64/libwfduibcsink.so|a6fc5d0245e23648812a535f7338d562c9317f09
++system_ext/lib64/libwfduibcsinkinterface.so|2db07ec7a9a6206d2782439e247b35fbe62a550f
++system_ext/lib64/libwfduibcsrc.so|ac3e0988fb5c36c6c4561f04e0e5d53d7de2ad76
++system_ext/lib64/libwfduibcsrcinterface.so|d19e9b5c35f61cc696a9c999dce6eb11d781bd8c
++system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so|f195cfd660ea47c211ccb5890072f7217649c23b
++system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V2-ndk.so|8fbb064b3ab56bf4bfe74de11006c10b06c39b23
++system_ext/priv-app/WfdService/WfdService.apk|3837139f985d835cd1148d44bf6985b801f6c1ed
+ 
+ # WiFi Display (vendor)
+ vendor/bin/wfdhdcphalservice
+@@ -1976,3 +1980,45 @@ vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
+ 
+ # Xiaomi MAC address
+ vendor/bin/nv_mac
++
++# Previously installed pudding runtime components, now sourced from matching CN OS4.
++vendor/lib64/libaodoptfeature.so
++vendor/lib64/libcamerapoweroptfeature.so
++vendor/lib64/libgamepoweroptfeature.so
++vendor/lib64/liblearningmodule.so
++vendor/lib64/liblmutils-ns.so
++vendor/lib64/libmemperfd.so
++vendor/lib64/libmeters-ns.so
++vendor/lib64/libmeters.so
++vendor/lib64/liboffscreenpoweroptfeature.so
++vendor/lib64/libperfdb.so
++vendor/lib64/libpowercallback.so
++vendor/lib64/libpowercore.so
++vendor/lib64/libprefapps.so
++vendor/lib64/libprocomp.so
++vendor/lib64/libpsmoptfeature.so
++vendor/lib64/libqesdk2_0.so
++vendor/lib64/libqesdk_manager.so
++vendor/lib64/libqesdk_qshsession.so
++vendor/lib64/libqesdoem_query_sys.so
++vendor/lib64/libqti-appclassifier.so
++vendor/lib64/libqti-jankrescue.so
++vendor/lib64/libqti-lllite.so
++vendor/lib64/libqti-perfextn-intf.so
++vendor/lib64/libqti-qape-engine.so
++vendor/lib64/libqti-qesdk-secure.so
++vendor/lib64/libqti-utils.so
++vendor/lib64/libreffeature.so
++vendor/lib64/libskewknob.so
++vendor/lib64/libstandbyfeature.so
++vendor/lib64/libvideooptfeature.so
++vendor/lib64/vendor.qti.hardware.power.powermodule-V1-ndk.so
++vendor/lib64/vendor.qti.qesdhal-impl.so
++vendor/lib64/vendor.qti.qesdhal@1.0.so
++vendor/lib64/vendor.qti.qesdhal@1.1.so
++vendor/lib64/vendor.qti.qesdhal@1.2.so
++vendor/lib64/vendor.qti.qesdhal@1.3.so
++vendor/lib64/vendor.qti.qesdhalaidl-V2-ndk.so
++vendor/lib64/vendor.qti.qesdsys-V3-ndk.so
++vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml
++vendor/bin/poweropt-service
+diff --git a/sepolicy/private/esimswitcher_app.te b/sepolicy/private/esimswitcher_app.te
+index c57b554eb0a211c3fc7fb696b072754af925a9fa..b8c70e1f71afccc87fa385c9538009465f85e622 100644
+--- a/sepolicy/private/esimswitcher_app.te
++++ b/sepolicy/private/esimswitcher_app.te
+@@ -12,4 +12,8 @@ allow esimswitcher_app voiceinteraction_service:service_manager find;
+ 
+ allow esimswitcher_app system_app_data_file:dir create_dir_perms;
+ allow esimswitcher_app system_app_data_file:file create_file_perms;
+-allow esimswitcher_app system_app_data_file:lnk_file create_file_perms;
+\ No newline at end of file
++allow esimswitcher_app system_app_data_file:lnk_file create_file_perms;
++# GPU configuration and Xiaomi performance client used during app startup.
++allow esimswitcher_app gpu_service:service_manager find;
++allow esimswitcher_app vendor_perf_service:service_manager find;
++binder_call(esimswitcher_app, vendor_perfservice)
+diff --git a/sepolicy/private/parts_app.te b/sepolicy/private/parts_app.te
+index 5652653df089237c8640abed5f0536e33fa78a47..8a7bf298fe1b00f074d4a27ddf30dc57fe5a5851 100644
+--- a/sepolicy/private/parts_app.te
++++ b/sepolicy/private/parts_app.te
+@@ -13,3 +13,8 @@ binder_call(parts_app, hal_touchfeature_xiaomi_default)
+ allow parts_app system_app_data_file:dir create_dir_perms;
+ allow parts_app system_app_data_file:file create_file_perms;
+ allow parts_app system_app_data_file:lnk_file create_file_perms;
++
++# GPU configuration and Xiaomi performance client used during app startup.
++allow parts_app gpu_service:service_manager find;
++allow parts_app vendor_perf_service:service_manager find;
++binder_call(parts_app, vendor_perfservice)
+diff --git a/sepolicy/vendor/file.te b/sepolicy/vendor/file.te
+index a3369d63e3a95a5d9fc74a0fdd8d6ef5fa4ee16a..a90c638ecd261bf172230910e42f0e8381f88a1b 100644
+--- a/sepolicy/vendor/file.te
++++ b/sepolicy/vendor/file.te
+@@ -69,3 +69,8 @@ type vendor_data_touchreport_file, data_file_type, file_type;
+ 
+ # Wlan
+ type vendor_mac_vendor_data_file, data_file_type, file_type, mlstrustedobject;
++
++# UFS write-booster availability counter; no device controls.
++type vendor_sysfs_ufs_wb_stats, fs_type, sysfs_type;
++
++type vendor_sysfs_remoteproc_coredump, fs_type, sysfs_type;
+diff --git a/sepolicy/vendor/file_contexts b/sepolicy/vendor/file_contexts
+index 123e7ffff54f452621b74547e1e80582a3f3aef2..862fe2ad539b0d60932077f5eceaf35aa4687295 100644
+--- a/sepolicy/vendor/file_contexts
++++ b/sepolicy/vendor/file_contexts
+@@ -184,3 +184,18 @@
+ /data/vendor/mac_addr(/.*)? u:object_r:vendor_mac_vendor_data_file:s0
+ /data/vendor/mbnconfig(/.*)? u:object_r:vendor_firmware_data_file:s0
+ /vendor/bin/nv_mac u:object_r:vendor_wcnss_service_exec:s0
++
++# AOSPA QTI AIDL power HAL: init requires its executable domain.
++/(vendor|system/vendor)/bin/hw/android\.hardware\.power-service-qti u:object_r:hal_power_default_exec:s0
++
++# Pudding original HAL implementations use unique build output names.
++/vendor/bin/hw/pudding\.strongbox-service\.thales u:object_r:vendor_hal_keymint_strongbox_exec:s0
++/vendor/bin/hw/pudding\.weaver-service\.thales u:object_r:vendor_hal_weaver_default_exec:s0
++/vendor/bin/hw/pudding\.vibrator-service\.stock318 u:object_r:hal_vibrator_default_exec:s0
++
++/vendor/bin/pudding-misys-service    u:object_r:vendor_hal_pudding_misys_default_exec:s0
++
++/vendor/bin/pudding-misys-core-service    u:object_r:vendor_hal_pudding_misys_core_exec:s0
++
++# Factory trusted VM userspace image.
++/(odm|vendor/odm)/firmware_qtvm(/.*)?    u:object_r:vendor_vm_file:s0
+diff --git a/sepolicy/vendor/genfs_contexts b/sepolicy/vendor/genfs_contexts
+index c42f7b8ab6cd559c9e8f2c43909bfc96b007281f..b1a23c45bd6f7b53fbe74bec301d862da636fe75 100644
+--- a/sepolicy/vendor/genfs_contexts
++++ b/sepolicy/vendor/genfs_contexts
+@@ -106,3 +106,15 @@ genfscon sysfs /devices/platform/soc/soc:mca_strategy_wireless_revchg_class/wake
+ genfscon sysfs /devices/platform/soc/soc:mi_t1_chip/wakeup u:object_r:sysfs_wakeup:s0
+ genfscon sysfs /devices/platform/soc/soc:mi_t2_jtag/wakeup u:object_r:sysfs_wakeup:s0
+ genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display-primary/wakeup u:object_r:sysfs_wakeup:s0
++
++# Pudding touch wake-source statistics use the standard suspend-readable type.
++genfscon sysfs /devices/platform/synaptics_tcm.0/wakeup u:object_r:sysfs_wakeup:s0
++
++# Camera reads UFS write-booster buffer availability.
++genfscon sysfs /devices/platform/soc/1d84000.ufshc/attributes/wb_avail_buf u:object_r:vendor_sysfs_ufs_wb_stats:s0
++
++# Exact stock SSR dump-control nodes; do not grant writes to generic sysfs.
++genfscon sysfs /devices/platform/soc/a3380000.remoteproc-soccp/remoteproc/remoteproc0/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
++genfscon sysfs /devices/platform/soc/3000000.remoteproc-adsp/remoteproc/remoteproc1/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
++genfscon sysfs /devices/platform/soc/4080000.remoteproc-mss/remoteproc/remoteproc2/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
++genfscon sysfs /devices/platform/soc/32300000.remoteproc-cdsp/remoteproc/remoteproc3/coredump u:object_r:vendor_sysfs_remoteproc_coredump:s0
+diff --git a/sepolicy/vendor/hal_camera_default.te b/sepolicy/vendor/hal_camera_default.te
+index 2f53dbb440489e716aaa036c99f4ba8a11ebefd6..658d26d0d9cfdb1b7f46d5ade3a35f5c2ff5c443 100644
+--- a/sepolicy/vendor/hal_camera_default.te
++++ b/sepolicy/vendor/hal_camera_default.te
+@@ -67,4 +67,31 @@ allow hal_camera_default vendor_persist_sensors_file:file rw_file_perms;
+ allow hal_camera_default vendor_miev_device:chr_file { write open };
+ 
+ dontaudit hal_camera_default fs_bpf:dir search;
+-dontaudit hal_camera_default fs_bpf_vendor:dir search;
+\ No newline at end of file
++dontaudit hal_camera_default fs_bpf_vendor:dir search;
++
++# Pudding platform camera clients (including Android 16+ platform_app domains).
++allow platform_app_all { hal_aidlbgservice_service hal_postprocservice_service hal_mivimessage_service }:service_manager find;
++binder_call(platform_app_all, hal_camera_server)
++binder_call(hal_camera_server, platform_app_all)
++get_prop(platform_app_all, vendor_camera_sensor_prop)
++get_prop(platform_app_all, vendor_displayfeature_prop)
++get_prop(platform_app_all, vendor_audio_prop)
++
++# The platform signed, system UID dimming settings uses the OEM display HAL.
++hal_client_domain(system_app, vendor_hal_displayfeature_xiaomi)
++r_dir_file(system_app, vendor_sysfs_displayfeature)
++
++# Platform-signed Xiaomi Camera reads its public P3 capability property.
++get_prop(platform_app_36, vendor_camera_p3enable_prop)
++
++# Factory OpenCL reads the GPU device symlink.
++allow hal_camera_default vendor_sysfs_kgsl:lnk_file r_file_perms;
++
++# OS4 MiAlgo decrypts its algorithm sections during library initialization.
++# Matches the factory vendor policy; keep the camera HAL enforcing.
++allow hal_camera_default self:process execmem;
++
++# Factory camera scheduling reads, plus a precisely labelled UFS statistic.
++allow hal_camera_default cgroup:file { getattr open read };
++allow hal_camera_default vendor_sysfs_kgsl:file { getattr open read };
++allow hal_camera_default vendor_sysfs_ufs_wb_stats:file { getattr open read };
+diff --git a/sepolicy/vendor/hal_lineage_health_default.te b/sepolicy/vendor/hal_lineage_health_default.te
+deleted file mode 100644
+index 5859dfb8f6a9cbdbef18dfc2253f557425826b22..0000000000000000000000000000000000000000
+--- a/sepolicy/vendor/hal_lineage_health_default.te
++++ /dev/null
+@@ -1,3 +0,0 @@
+-allow hal_lineage_health_default vendor_sysfs_xm_power:dir search;
+-allow hal_lineage_health_default vendor_sysfs_qcom_battery:dir search;
+-allow hal_lineage_health_default vendor_sysfs_qcom_battery:file rw_file_perms;
+\ No newline at end of file
+diff --git a/sepolicy/vendor/property.te b/sepolicy/vendor/property.te
+index 10f671d8cb2a87495c206f1a9057ec96b8ae40bc..fd5162a2d8694fb44b0f0f34c5e0ec8336664c6b 100644
+--- a/sepolicy/vendor/property.te
++++ b/sepolicy/vendor/property.te
+@@ -46,4 +46,6 @@ vendor_public_prop(vendor_thermal_normal_prop)
+ # Touchfeature
+ vendor_restricted_prop(vendor_panel_info_prop)
+ vendor_restricted_prop(vendor_touch_hostprocess_prop)
+-vendor_restricted_prop(vendor_touchfeature_prop)
+\ No newline at end of file
++vendor_restricted_prop(vendor_touchfeature_prop)
++# Non-sensitive, read-only Wi-Fi Aware capability queried by Settings.
++vendor_public_prop(vendor_pudding_wifi_aware_capability_prop)
+diff --git a/sepolicy/vendor/property_contexts b/sepolicy/vendor/property_contexts
+index 3933994b19638837e5b989180b378b00d8811704..afd8ac55a2784ebb177197a35bab83e4c9fe9c0d 100644
+--- a/sepolicy/vendor/property_contexts
++++ b/sepolicy/vendor/property_contexts
+@@ -159,7 +159,7 @@ ro.vendor.video.style.by.layer.support u:object_r:vendor_displayfeature_prop:s0
+ ro.vendor.whitepoint_calibration_enable u:object_r:vendor_displayfeature_prop:s0
+ ro.vendor.xiaomi.bl.poll u:object_r:vendor_displayfeature_prop:s0
+ ro.vendor.xiaomi.sr.support u:object_r:vendor_displayfeature_prop:s0
+-vendor.display.enable_brightness_drm_prop u:object_r:vendor_displayfeature_prop:s0
++vendor.display.enable_brightness_drm_prop u:object_r:vendor_display_prop:s0
+ vendor.display.hwc_backlight.support u:object_r:vendor_displayfeature_prop:s0
+ vendor.display.panel.calibration.status u:object_r:vendor_displayfeature_prop:s0
+ vendor.display.resolution_aosp u:object_r:vendor_displayfeature_prop:s0
+@@ -261,3 +261,9 @@ ro.vendor.touch.touchscheduler.enable  u:object_r:vendor_touchfeature_prop:s0
+ ro.vendor.touchfeature.type            u:object_r:vendor_touchfeature_prop:s0
+ vendor.panel.                          u:object_r:vendor_panel_info_prop:s0
+ vendor.touchfeature.                   u:object_r:vendor_touchfeature_prop:s0
++
++# Original ST NFC diagnostics use NFC-owned vendor properties.
++persist.vendor.minfc.dfx.enable u:object_r:vendor_nfc_prop:s0 exact string
++vendor.minfc.dfx.test u:object_r:vendor_nfc_prop:s0 exact string
++
++ro.vendor.aware_available u:object_r:vendor_pudding_wifi_aware_capability_prop:s0 exact bool
+diff --git a/sepolicy/vendor/service_contexts b/sepolicy/vendor/service_contexts
+index 2f645679702f5d9bab3e8a1b8cce0c8e4c6bc480..b016e4c1441a741c6cd6bc8891bd15aeccafc4c6 100644
+--- a/sepolicy/vendor/service_contexts
++++ b/sepolicy/vendor/service_contexts
+@@ -55,4 +55,7 @@ vendor.xiaomi.hw.touchfeature.ITouchFeature/default          u:object_r:hal_touc
+ vendor.xiaomi.hardware.radio.IXmRadio/slot1          u:object_r:vendor_hal_telephony_service2:s0
+ vendor.xiaomi.hardware.radio.IXmRadio/slot2          u:object_r:vendor_hal_telephony_service2:s0
+ vendor.xiaomi.hardware.radio.cdc.IXmRadioCdc/slot1           u:object_r:vendor_hal_telephony_service2:s0
+-vendor.xiaomi.hardware.radio.cdc.IXmRadioCdc/slot2           u:object_r:vendor_hal_telephony_service2:s0
+\ No newline at end of file
++vendor.xiaomi.hardware.radio.cdc.IXmRadioCdc/slot2           u:object_r:vendor_hal_telephony_service2:s0
++vendor.xiaomi.hardware.misys.common.IMiSysImpl/default    u:object_r:vendor_hal_pudding_misys_service:s0
++
++vendor.xiaomi.hardware.misys.core.IMiSysCore/default    u:object_r:vendor_hal_pudding_misys_core_service:s0
+diff --git a/sepolicy/vendor/system_server.te b/sepolicy/vendor/system_server.te
+index 6e0ab1d373a961652a3d9721e404b4d6ffdbbd7a..025697fc5513cb52743eaae8196a06dd8e9fe3c5 100644
+--- a/sepolicy/vendor/system_server.te
++++ b/sepolicy/vendor/system_server.te
+@@ -6,4 +6,17 @@ hal_client_domain(system_server, vendor_hal_unsignedhexlp)
+ binder_call(system_server, hal_touchfeature_xiaomi_default)
+ 
+ allow system_server hal_touchfeature_xiaomi_default:process signal;
+-allow system_server vendor_sysfs_eud_extcon:file r_file_perms;
+\ No newline at end of file
++allow system_server vendor_sysfs_eud_extcon:file r_file_perms;
++# Android17 splits platform_app_36; retain Adreno public HAL client paths.
++hal_client_domain(platform_app_36, vendor_hal_qspmhal)
++hal_client_domain(platform_app_36, vendor_hal_unsignedhexlp)
++hal_client_domain(platform_app, vendor_hal_unsignedhexlp)
++
++# Original camera workload scheduler reads PSI, without any writes.
++allow platform_app_36 { proc_pressure_mem proc_pressure_cpu proc_pressure_io }:file r_file_perms;
++
++
++# Native AOSPA DC dimming uses stock DisplayFeature, with read-only panel verification.
++hal_client_domain(system_server, vendor_hal_displayfeature_xiaomi)
++allow system_server vendor_sysfs_displayfeature:dir search;
++allow system_server vendor_sysfs_displayfeature:file r_file_perms;
+diff --git a/sepolicy/vendor/vendor_hal_perf_default.te b/sepolicy/vendor/vendor_hal_perf_default.te
+index 792e16e7c302b38f2ca5dcf998c296f7e56a40f1..2ceb44136357e7e83b992c5668d4fed16469a8c2 100644
+--- a/sepolicy/vendor/vendor_hal_perf_default.te
++++ b/sepolicy/vendor/vendor_hal_perf_default.te
+@@ -13,4 +13,14 @@ allow vendor_hal_perf_default thermal_data_file:file r_file_perms;
+ allow vendor_hal_perf_default vendor_hal_poweroptservice_qti:dir search;
+ allow vendor_hal_perf_default vendor_hal_poweroptservice_qti:file r_file_perms;
+ allow vendor_hal_perf_default vendor_shsusrd:dir search;
+-allow vendor_hal_perf_default vendor_shsusrd:file r_file_perms;
+\ No newline at end of file
++allow vendor_hal_perf_default vendor_shsusrd:file r_file_perms;
++# Video-codec task metadata is needed by the existing Perf task-profile path.
++allow vendor_hal_perf_default mediacodec:dir search;
++allow vendor_hal_perf_default mediacodec:file r_file_perms;
++
++# Factory Perf HAL enumerates mounted F2FS storage for resource-node discovery.
++allow vendor_hal_perf_default sysfs_fs_f2fs:dir { open read search };
++
++# Read the factory F2FS tunables and enumerate existing thermal profiles.
++allow vendor_hal_perf_default sysfs_fs_f2fs:file r_file_perms;
++allow vendor_hal_perf_default thermal_data_file:dir { open read };
+diff --git a/sepolicy/vendor/vendor_sensors.te b/sepolicy/vendor/vendor_sensors.te
+index 0c31adb7b603f2658a992710b938311c174cc507..8c45aa5c04a8d1cd852c46b3ef7668becb1ee7ed 100644
+--- a/sepolicy/vendor/vendor_sensors.te
++++ b/sepolicy/vendor/vendor_sensors.te
+@@ -1,2 +1,2 @@
+ allow vendor_sensors vendor_sysfs_displayfeature:dir search;
+-allow vendor_sensors vendor_sysfs_displayfeature:file read;
++allow vendor_sensors vendor_sysfs_displayfeature:file { read getattr open };
+diff --git a/udfps/UdfpsHandler.cpp b/udfps/UdfpsHandler.cpp
+index 3869b74e836228a0eebb55e305fee744322b38f1..9c7849b6a60cda51c48295cfd952ab9d17c14505 100644
+--- a/udfps/UdfpsHandler.cpp
++++ b/udfps/UdfpsHandler.cpp
+@@ -16,6 +16,11 @@
+ #include <poll.h>
+ #include <unistd.h>
+ #include <linux/uinput.h>
++#include <sys/eventfd.h>
++#include <cerrno>
++#include <atomic>
++#include <functional>
++#include <utility>
+ 
+ #include "UdfpsHandler.h"
+ 
+@@ -43,8 +48,23 @@ static void set(const std::string& path, const T& value) {
+ 
+ class XiaomiSM8850UdfpsHander : public UdfpsHandler {
+   public:
++    ~XiaomiSM8850UdfpsHander() override {
++        if (mEventThread.joinable()) {
++            const uint64_t stop = 1;
++            const ssize_t result = TEMP_FAILURE_RETRY(write(mStopFd.get(), &stop, sizeof(stop)));
++            if (result != static_cast<ssize_t>(sizeof(stop)) && errno != EAGAIN) {
++                PLOG(FATAL) << "Stopping FOD event thread";
++            }
++            mEventThread.join();
++        }
++    }
++
+     void init(fingerprint_device_t* device) {
+         mDevice = device;
++        if (mDevice == nullptr || mDevice->extCmd == nullptr) {
++            reportObservationFailure("Fingerprint device or extension unavailable");
++            return;
++        }
+ 
+         mUinputFd.reset(open("/dev/uinput", O_WRONLY | O_NONBLOCK));
+         if (mUinputFd.get() < 0) {
+@@ -57,47 +77,67 @@ class XiaomiSM8850UdfpsHander : public UdfpsHandler {
+             ioctl(mUinputFd.get(), UI_DEV_CREATE);
+         }
+ 
+-        std::thread([this]() {
+-            android::base::unique_fd fd(open(FOD_STATUS_PATH, O_RDONLY));
+-            
+-            if (fd.get() < 0) {
+-                LOG(ERROR) << "Failed to open FOD status path";
+-                return; 
+-            }
+-
+-            struct pollfd pfd;
+-            pfd.fd = fd.get();
+-            pfd.events = POLLPRI | POLLERR;
+-
+-            char buf;
+-            bool lastState = false;
+-
+-            lseek(fd.get(), 0, SEEK_SET);
+-            read(fd.get(), &buf, 1);
+-
+-            while (true) {
+-                int ret = poll(&pfd, 1, -1);
+-                
+-                if (ret < 0) {
+-                    LOG(ERROR) << "Error polling FOD status";
+-                    std::this_thread::sleep_for(std::chrono::seconds(1));
+-                    continue;
++        mStopFd.reset(eventfd(0, EFD_CLOEXEC | EFD_NONBLOCK));
++        if (mStopFd.get() < 0) {
++            reportObservationFailure("Creating FOD stop event failed");
++            return;
++        }
++        mFodFd.reset(open(FOD_STATUS_PATH, O_RDONLY | O_CLOEXEC));
++        if (mFodFd.get() < 0) {
++            reportObservationFailure("Opening FOD status path failed");
++            return;
++        }
++        char initial;
++        if (TEMP_FAILURE_RETRY(pread(mFodFd.get(), &initial, 1, 0)) != 1
++                || (initial != '0' && initial != '1')) {
++            reportObservationFailure("Reading initial FOD state failed");
++            return;
++        }
++        mObservationAvailable.store(true);
++        mEventThread = std::thread([this, initial]() {
++            bool lastState = initial == '1';
++            if (lastState) setFingerDown(true);
++            pollfd events[2] = {{mFodFd.get(), POLLPRI | POLLERR, 0},
++                                {mStopFd.get(), POLLIN, 0}};
++            for (;;) {
++                if (poll(events, 2, -1) < 0) {
++                    if (errno == EINTR) continue;
++                    reportObservationFailure("FOD event observation failed");
++                    return;
+                 }
+-
+-                if (pfd.revents & (POLLPRI | POLLERR)) {
+-                    lseek(fd.get(), 0, SEEK_SET);
+-                    
+-                    if (read(fd.get(), &buf, 1) > 0) {
+-                        bool pressed = (buf == '1');
+-
+-                        if (pressed != lastState) {
+-                            lastState = pressed;
+-                            setFingerDown(pressed);
+-                        }
++                if (events[1].revents & POLLIN) return;
++                if ((events[0].revents | events[1].revents) & (POLLNVAL | POLLHUP)) {
++                    reportObservationFailure("FOD event descriptor closed");
++                    return;
++                }
++                if (events[1].revents & POLLERR) {
++                    reportObservationFailure("FOD stop event failed");
++                    return;
++                }
++                // sysfs POLLPRI|POLLERR is an event notification, with no timeout.
++                if (events[0].revents & (POLLPRI | POLLERR)) {
++                    char value;
++                    if (TEMP_FAILURE_RETRY(pread(mFodFd.get(), &value, 1, 0)) != 1
++                            || (value != '0' && value != '1')) {
++                        reportObservationFailure("FOD event state read failed");
++                        return;
++                    }
++                    const bool pressed = value == '1';
++                    if (pressed != lastState) {
++                        lastState = pressed;
++                        setFingerDown(pressed);
+                     }
+                 }
+             }
+-        }).detach();
++        });
++    }
++
++    bool isHardwareAvailable() const override {
++        return mObservationAvailable.load();
++    }
++
++    void setErrorCallback(std::function<void()> callback) override {
++        mErrorCallback = std::move(callback);
+     }
+ 
+     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
+@@ -139,14 +179,31 @@ class XiaomiSM8850UdfpsHander : public UdfpsHandler {
+     }
+ 
+   private:
+-    fingerprint_device_t* mDevice;
++    fingerprint_device_t* mDevice = nullptr;
++    std::atomic<bool> mObservationAvailable{false};
++    std::function<void()> mErrorCallback;
++    android::base::unique_fd mFodFd;
++    android::base::unique_fd mStopFd;
++    std::thread mEventThread;
+     android::base::unique_fd mUinputFd;
+ 
++    void reportObservationFailure(const char* reason) {
++        LOG(ERROR) << reason;
++        mObservationAvailable.store(false);
++        if (mErrorCallback) mErrorCallback();
++    }
++
+     void setFodStatus(int value) {
+         set(FOD_STATUS_PATH, value);
+     }
+ 
+     void setFingerDown(bool pressed) {
++        if (!mObservationAvailable.load()) {
++            // The observation thread already reported this failure. Binder-driven
++            // touch/cancel calls must not invoke a framework callback recursively.
++            LOG(ERROR) << "FOD operation requested after observation failure";
++            return;
++        }
+         if (pressed) {
+             mDevice->extCmd(mDevice, COMMAND_FOD_PRESS_STATUS, PARAM_FOD_PRESSED);
+         }

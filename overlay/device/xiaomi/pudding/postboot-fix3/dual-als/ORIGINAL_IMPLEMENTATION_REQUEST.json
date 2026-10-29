@@ -1,0 +1,7 @@
+{
+  "user_request": "就用原实现吧",
+  "decision": "Use original Xiaomi DualSensorPolicy and original scheduling. Rewritten XiaomiDualSensorPolicyCore is not used.",
+  "polling_exception": "Only original Xiaomi brightness policy internal scheduling specifically authorized by current user request; global no-polling constraint retained elsewhere.",
+  "stock_jar_sha256": "401e9972780f49ef09aa1067da85276766734699472777ba07d9da629f96474b",
+  "status": "Original bytecode isolated; adapter and integration not yet complete."
+}

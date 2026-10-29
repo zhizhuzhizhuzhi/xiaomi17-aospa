@@ -1,0 +1,3 @@
+on post-fs-data
+    mkdir /data/vendor/bsplog 0770 system system
+    restorecon /data/vendor/bsplog

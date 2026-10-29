@@ -1,0 +1,16 @@
+diff --git a/drivers/platform/msm/Android.mk b/drivers/platform/msm/Android.mk
+index a178856c1306fad2e608c39bd3ac6c8942bf77de..baae93b174af1b780f8ee7e9174d1aa69494e7a9 100644
+--- a/drivers/platform/msm/Android.mk
++++ b/drivers/platform/msm/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifneq ($(TARGET_BOARD_PLATFORM),qssi)
+ GSI_DLKM_PLATFORMS_LIST := taro kalama bengal monaco crow $(TRINKET)
+ 
+@@ -74,3 +76,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ 
+ endif #End of Check for target
+ endif #End of Check for qssi target
++
++endif # pudding prebuilt kernel

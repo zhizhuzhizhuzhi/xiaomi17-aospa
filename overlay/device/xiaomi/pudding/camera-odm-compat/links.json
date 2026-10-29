@@ -1,0 +1,1822 @@
+[
+  {
+    "name": "pudding_odm_compat_a4b8547c6e6e78b1",
+    "source_path": "odm/lib64/rfs/dsp/libapn_dsp_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libapn_dsp_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_44d80597b22c7024",
+    "source_path": "odm/lib64/rfs/dsp/libbitml_nsp_81na_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libbitml_nsp_81na_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_d71338728c33dc2a",
+    "source_path": "odm/lib64/rfs/dsp/libbitml_nsp_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libbitml_nsp_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_3d2f662ba26e64d2",
+    "source_path": "odm/lib64/rfs/dsp/libffthelper_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libffthelper_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_c148a8751ac69050",
+    "source_path": "odm/lib64/rfs/dsp/libhdr_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libhdr_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_4460e0b5a51754ec",
+    "source_path": "odm/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so",
+    "target_path": "vendor/lib64/rfs/dsp/libqsegnetengine_dsp_skel.so"
+  },
+  {
+    "name": "pudding_odm_compat_7f6b0af5c038eff4",
+    "source_path": "odm/lib64/camera/bitmlconfig.bin",
+    "target_path": "vendor/lib64/camera/bitmlconfig.bin"
+  },
+  {
+    "name": "pudding_odm_compat_aa7b4d81c7e91932",
+    "source_path": "odm/lib64/camera/camxfl115indices.bin",
+    "target_path": "vendor/lib64/camera/camxfl115indices.bin"
+  },
+  {
+    "name": "pudding_odm_compat_457f71c6b7b4eb43",
+    "source_path": "odm/lib64/camera/camxfl300v1indices.bin",
+    "target_path": "vendor/lib64/camera/camxfl300v1indices.bin"
+  },
+  {
+    "name": "pudding_odm_compat_a66c6a09016e9592",
+    "source_path": "odm/lib64/camera/camxfl300v2indices.bin",
+    "target_path": "vendor/lib64/camera/camxfl300v2indices.bin"
+  },
+  {
+    "name": "pudding_odm_compat_87736526fae0a267",
+    "source_path": "odm/lib64/camera/camxflcustom300indices.bin",
+    "target_path": "vendor/lib64/camera/camxflcustom300indices.bin"
+  },
+  {
+    "name": "pudding_odm_compat_1100df0c616b20e1",
+    "source_path": "odm/lib64/camera/chifdnodeconfig.bin",
+    "target_path": "vendor/lib64/camera/chifdnodeconfig.bin"
+  },
+  {
+    "name": "pudding_odm_compat_0f4628799fb84b5e",
+    "source_path": "odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin",
+    "target_path": "vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm7750.bin"
+  },
+  {
+    "name": "pudding_odm_compat_26e9fb9a692fce42",
+    "source_path": "odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin",
+    "target_path": "vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8750.bin"
+  },
+  {
+    "name": "pudding_odm_compat_ea9b9f6f4cf73c2c",
+    "source_path": "odm/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin",
+    "target_path": "vendor/lib64/camera/com.qti.chi.featurecompatibilityspecification.sm8850.bin"
+  },
+  {
+    "name": "pudding_odm_compat_3b9f04584937ccc4",
+    "source_path": "odm/lib64/camera/com.qti.ofe.profiledb.default.bin",
+    "target_path": "vendor/lib64/camera/com.qti.ofe.profiledb.default.bin"
+  },
+  {
+    "name": "pudding_odm_compat_c4f9e80be6b48bbc",
+    "source_path": "odm/lib64/camera/com.qti.ofe.profiledb.sm8850.bin",
+    "target_path": "vendor/lib64/camera/com.qti.ofe.profiledb.sm8850.bin"
+  },
+  {
+    "name": "pudding_odm_compat_9b474f1d626c7a71",
+    "source_path": "odm/lib64/camera/components/com.mi.node.fd.so",
+    "target_path": "vendor/lib64/camera/components/com.mi.node.fd.so"
+  },
+  {
+    "name": "pudding_odm_compat_de4cc579f5912a6f",
+    "source_path": "odm/lib64/camera/components/com.mi.node.mimovie.so",
+    "target_path": "vendor/lib64/camera/components/com.mi.node.mimovie.so"
+  },
+  {
+    "name": "pudding_odm_compat_b8c0caa7d772e2d0",
+    "source_path": "odm/lib64/camera/components/com.mi.node.mioisverify.so",
+    "target_path": "vendor/lib64/camera/components/com.mi.node.mioisverify.so"
+  },
+  {
+    "name": "pudding_odm_compat_bf1246940f1b632a",
+    "source_path": "odm/lib64/camera/components/com.qti.eisv2.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.eisv2.so"
+  },
+  {
+    "name": "pudding_odm_compat_ba7406199647274e",
+    "source_path": "odm/lib64/camera/components/com.qti.eisv3.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.eisv3.so"
+  },
+  {
+    "name": "pudding_odm_compat_f68052ce43141d21",
+    "source_path": "odm/lib64/camera/components/com.qti.hvx.addconstant.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hvx.addconstant.so"
+  },
+  {
+    "name": "pudding_odm_compat_a5a6f107e1b5e640",
+    "source_path": "odm/lib64/camera/components/com.qti.hvx.binning.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hvx.binning.so"
+  },
+  {
+    "name": "pudding_odm_compat_bd6204b1c8a852d4",
+    "source_path": "odm/lib64/camera/components/com.qti.hwcfg.bps.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hwcfg.bps.so"
+  },
+  {
+    "name": "pudding_odm_compat_ee7d8bae84058a8e",
+    "source_path": "odm/lib64/camera/components/com.qti.hwcfg.ife.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hwcfg.ife.so"
+  },
+  {
+    "name": "pudding_odm_compat_879a8aa123b4f232",
+    "source_path": "odm/lib64/camera/components/com.qti.hwcfg.ipe.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hwcfg.ipe.so"
+  },
+  {
+    "name": "pudding_odm_compat_87e2025de01ed84e",
+    "source_path": "odm/lib64/camera/components/com.qti.hwcfg.mctfe.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hwcfg.mctfe.so"
+  },
+  {
+    "name": "pudding_odm_compat_130b962b7d61d919",
+    "source_path": "odm/lib64/camera/components/com.qti.hwcfg.ofe.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.hwcfg.ofe.so"
+  },
+  {
+    "name": "pudding_odm_compat_659d438789040078",
+    "source_path": "odm/lib64/camera/components/com.qti.node.afbfusion.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.afbfusion.so"
+  },
+  {
+    "name": "pudding_odm_compat_5f1102bdc900ec94",
+    "source_path": "odm/lib64/camera/components/com.qti.node.aon.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.aon.so"
+  },
+  {
+    "name": "pudding_odm_compat_4945f0ed38d8baed",
+    "source_path": "odm/lib64/camera/components/com.qti.node.customhwnode.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.customhwnode.so"
+  },
+  {
+    "name": "pudding_odm_compat_9032632a69e1efad",
+    "source_path": "odm/lib64/camera/components/com.qti.node.depth.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.depth.so"
+  },
+  {
+    "name": "pudding_odm_compat_f1d360836f91d7c2",
+    "source_path": "odm/lib64/camera/components/com.qti.node.depthprovider.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.depthprovider.so"
+  },
+  {
+    "name": "pudding_odm_compat_54e013540ff63985",
+    "source_path": "odm/lib64/camera/components/com.qti.node.dewarp.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.dewarp.so"
+  },
+  {
+    "name": "pudding_odm_compat_bce9a2d5c3f9f767",
+    "source_path": "odm/lib64/camera/components/com.qti.node.dummydepth.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.dummydepth.so"
+  },
+  {
+    "name": "pudding_odm_compat_34f4eca94a15d0e9",
+    "source_path": "odm/lib64/camera/components/com.qti.node.dummyrtb.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.dummyrtb.so"
+  },
+  {
+    "name": "pudding_odm_compat_901b6702c88b1beb",
+    "source_path": "odm/lib64/camera/components/com.qti.node.dummysat.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.dummysat.so"
+  },
+  {
+    "name": "pudding_odm_compat_cdd2a4c38c59d336",
+    "source_path": "odm/lib64/camera/components/com.qti.node.eisv2.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.eisv2.so"
+  },
+  {
+    "name": "pudding_odm_compat_f08856de038a2e44",
+    "source_path": "odm/lib64/camera/components/com.qti.node.eisv3.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.eisv3.so"
+  },
+  {
+    "name": "pudding_odm_compat_c623af7be8872e3a",
+    "source_path": "odm/lib64/camera/components/com.qti.node.evadepth.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.evadepth.so"
+  },
+  {
+    "name": "pudding_odm_compat_c8de13723ed41a34",
+    "source_path": "odm/lib64/camera/components/com.qti.node.evaitof.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.evaitof.so"
+  },
+  {
+    "name": "pudding_odm_compat_780eba0af9251bc3",
+    "source_path": "odm/lib64/camera/components/com.qti.node.evawarp.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.evawarp.so"
+  },
+  {
+    "name": "pudding_odm_compat_87cf88eb7ada1cc9",
+    "source_path": "odm/lib64/camera/components/com.qti.node.evs.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.evs.so"
+  },
+  {
+    "name": "pudding_odm_compat_7c2474c69d1317b4",
+    "source_path": "odm/lib64/camera/components/com.qti.node.fcv.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.fcv.so"
+  },
+  {
+    "name": "pudding_odm_compat_b4d76a81b2342fa8",
+    "source_path": "odm/lib64/camera/components/com.qti.node.fd.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.fd.so"
+  },
+  {
+    "name": "pudding_odm_compat_53fae0ab18c3f226",
+    "source_path": "odm/lib64/camera/components/com.qti.node.formatconversion.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.formatconversion.so"
+  },
+  {
+    "name": "pudding_odm_compat_737ce209684151ca",
+    "source_path": "odm/lib64/camera/components/com.qti.node.frc.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.frc.so"
+  },
+  {
+    "name": "pudding_odm_compat_16974f472c9dc661",
+    "source_path": "odm/lib64/camera/components/com.qti.node.gme.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.gme.so"
+  },
+  {
+    "name": "pudding_odm_compat_cb0b63f353539d20",
+    "source_path": "odm/lib64/camera/components/com.qti.node.gpu.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.gpu.so"
+  },
+  {
+    "name": "pudding_odm_compat_670b4870435f7495",
+    "source_path": "odm/lib64/camera/components/com.qti.node.gyrornn.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.gyrornn.so"
+  },
+  {
+    "name": "pudding_odm_compat_23e2dc4f13ce11e3",
+    "source_path": "odm/lib64/camera/components/com.qti.node.hdl.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.hdl.so"
+  },
+  {
+    "name": "pudding_odm_compat_779e8f0fe41c5f6a",
+    "source_path": "odm/lib64/camera/components/com.qti.node.hdr10pgen.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.hdr10pgen.so"
+  },
+  {
+    "name": "pudding_odm_compat_74eed70662b5ad03",
+    "source_path": "odm/lib64/camera/components/com.qti.node.hdr10phist.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.hdr10phist.so"
+  },
+  {
+    "name": "pudding_odm_compat_ef5ee4a72d7765db",
+    "source_path": "odm/lib64/camera/components/com.qti.node.hdralign.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.hdralign.so"
+  },
+  {
+    "name": "pudding_odm_compat_3003d917330f540c",
+    "source_path": "odm/lib64/camera/components/com.qti.node.hybrid.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.hybrid.so"
+  },
+  {
+    "name": "pudding_odm_compat_a077848063decbd2",
+    "source_path": "odm/lib64/camera/components/com.qti.node.itofpreprocess.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.itofpreprocess.so"
+  },
+  {
+    "name": "pudding_odm_compat_86f1f8c09cd3d353",
+    "source_path": "odm/lib64/camera/components/com.qti.node.mctfalign.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.mctfalign.so"
+  },
+  {
+    "name": "pudding_odm_compat_09badfbd957b8d87",
+    "source_path": "odm/lib64/camera/components/com.qti.node.memcpy.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.memcpy.so"
+  },
+  {
+    "name": "pudding_odm_compat_7def69584090e14d",
+    "source_path": "odm/lib64/camera/components/com.qti.node.ml.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.ml.so"
+  },
+  {
+    "name": "pudding_odm_compat_6fcabac5e75fb37d",
+    "source_path": "odm/lib64/camera/components/com.qti.node.mlinference.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.mlinference.so"
+  },
+  {
+    "name": "pudding_odm_compat_757bbae19b9f8f35",
+    "source_path": "odm/lib64/camera/components/com.qti.node.mmfalign.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.mmfalign.so"
+  },
+  {
+    "name": "pudding_odm_compat_9fd9b70eb24a8ff7",
+    "source_path": "odm/lib64/camera/components/com.qti.node.multiport.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.multiport.so"
+  },
+  {
+    "name": "pudding_odm_compat_3837898d5a3de41b",
+    "source_path": "odm/lib64/camera/components/com.qti.node.muxer.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.muxer.so"
+  },
+  {
+    "name": "pudding_odm_compat_bd8476f02089613c",
+    "source_path": "odm/lib64/camera/components/com.qti.node.pixelstats.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.pixelstats.so"
+  },
+  {
+    "name": "pudding_odm_compat_3697700a5865e2db",
+    "source_path": "odm/lib64/camera/components/com.qti.node.qsatalign.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.qsatalign.so"
+  },
+  {
+    "name": "pudding_odm_compat_cc50b87c97736e20",
+    "source_path": "odm/lib64/camera/components/com.qti.node.rectification.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.rectification.so"
+  },
+  {
+    "name": "pudding_odm_compat_227cd1f27de1f1ea",
+    "source_path": "odm/lib64/camera/components/com.qti.node.remosaic.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.remosaic.so"
+  },
+  {
+    "name": "pudding_odm_compat_b75940198b143530",
+    "source_path": "odm/lib64/camera/components/com.qti.node.sat.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.sat.so"
+  },
+  {
+    "name": "pudding_odm_compat_f2fe8dbd81cd7aea",
+    "source_path": "odm/lib64/camera/components/com.qti.node.scorr.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.scorr.so"
+  },
+  {
+    "name": "pudding_odm_compat_519fe6e2c2d76e74",
+    "source_path": "odm/lib64/camera/components/com.qti.node.seg.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.seg.so"
+  },
+  {
+    "name": "pudding_odm_compat_db4a6d307a45af26",
+    "source_path": "odm/lib64/camera/components/com.qti.node.spdepth.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.spdepth.so"
+  },
+  {
+    "name": "pudding_odm_compat_cfd73528a13ed1ce",
+    "source_path": "odm/lib64/camera/components/com.qti.node.stich.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.stich.so"
+  },
+  {
+    "name": "pudding_odm_compat_95a3f33735dfdc64",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swaidenoiser.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swaidenoiser.so"
+  },
+  {
+    "name": "pudding_odm_compat_df8d00e073a866b7",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swaisr.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swaisr.so"
+  },
+  {
+    "name": "pudding_odm_compat_d439d86ea58e056b",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swbestats.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swbestats.so"
+  },
+  {
+    "name": "pudding_odm_compat_f6c246b43d59bd6d",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swcac.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swcac.so"
+  },
+  {
+    "name": "pudding_odm_compat_cd8365ff19671b65",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swec.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swec.so"
+  },
+  {
+    "name": "pudding_odm_compat_1c092d52c15a1bf4",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swef.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swef.so"
+  },
+  {
+    "name": "pudding_odm_compat_8007b24c65cb5c48",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swfusion.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swfusion.so"
+  },
+  {
+    "name": "pudding_odm_compat_1b7edc2e2d14cb0d",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swhme.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swhme.so"
+  },
+  {
+    "name": "pudding_odm_compat_c6fe50ef44233058",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swlsc.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swlsc.so"
+  },
+  {
+    "name": "pudding_odm_compat_77a172e4ab5a843c",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swmctf.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swmctf.so"
+  },
+  {
+    "name": "pudding_odm_compat_c450772c042194d4",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swmlremosaic.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swmlremosaic.so"
+  },
+  {
+    "name": "pudding_odm_compat_ae0ff22db7db1ccc",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swpdpc.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swpdpc.so"
+  },
+  {
+    "name": "pudding_odm_compat_1bfe596e1bf36d30",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swpreprocess.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swpreprocess.so"
+  },
+  {
+    "name": "pudding_odm_compat_035017178c6ae5ca",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swregistration.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swregistration.so"
+  },
+  {
+    "name": "pudding_odm_compat_357515ffad60f6bd",
+    "source_path": "odm/lib64/camera/components/com.qti.node.swvrt.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.node.swvrt.so"
+  },
+  {
+    "name": "pudding_odm_compat_4f4a71bbb74042f8",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.aec.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.aec.so"
+  },
+  {
+    "name": "pudding_odm_compat_d8c3e56c4b780409",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.aecexternal.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.aecexternal.so"
+  },
+  {
+    "name": "pudding_odm_compat_6d72f2bad9e87536",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.aecexternallib.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.aecexternallib.so"
+  },
+  {
+    "name": "pudding_odm_compat_8ff2e58434ee6738",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.aecwrapper.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.aecwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_246977518ecff992",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.aecxcore.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.aecxcore.so"
+  },
+  {
+    "name": "pudding_odm_compat_f2c5a71c15e6cf9b",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.af.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.af.so"
+  },
+  {
+    "name": "pudding_odm_compat_2c23d1f286ecbe98",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.afc.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.afc.so"
+  },
+  {
+    "name": "pudding_odm_compat_c7ca18b6edae4ff3",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.afd.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.afd.so"
+  },
+  {
+    "name": "pudding_odm_compat_221e4118c13251fe",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.afwrapper.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.afwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_10aacfb8390330d8",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.asd.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.asd.so"
+  },
+  {
+    "name": "pudding_odm_compat_1d3c54a899ff28bc",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.awb.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.awb.so"
+  },
+  {
+    "name": "pudding_odm_compat_debbfdba3e3c5b7b",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.awbr.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.awbr.so"
+  },
+  {
+    "name": "pudding_odm_compat_f349b001755a71e7",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.awbwrapper.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.awbwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_f0aec1cbc9406e90",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.caflogicaldriver.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.caflogicaldriver.so"
+  },
+  {
+    "name": "pudding_odm_compat_edfd5af18e80878a",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.cnndriver.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.cnndriver.so"
+  },
+  {
+    "name": "pudding_odm_compat_a261b8d0bc4f3c44",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.exampleaf.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.exampleaf.so"
+  },
+  {
+    "name": "pudding_odm_compat_02192b7f4be80bf0",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.haf.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.haf.so"
+  },
+  {
+    "name": "pudding_odm_compat_ccdafbbd34be6b7c",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.hafoverride.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.hafoverride.so"
+  },
+  {
+    "name": "pudding_odm_compat_75d559e3318f7275",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.localhistogram.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.localhistogram.so"
+  },
+  {
+    "name": "pudding_odm_compat_b3653f434f5c68ed",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.pdlib.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.pdlib.so"
+  },
+  {
+    "name": "pudding_odm_compat_ca5ee355b6b69b42",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.pdlibsony.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.pdlibsony.so"
+  },
+  {
+    "name": "pudding_odm_compat_b2237bac17f8fa83",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.pdlibwrapper.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.pdlibwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_e5f2d9cef54821e1",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.roimixer.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.roimixer.so"
+  },
+  {
+    "name": "pudding_odm_compat_2f88ef6fdce40bb2",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.roimixerlib.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.roimixerlib.so"
+  },
+  {
+    "name": "pudding_odm_compat_cfcc0eebbbc84186",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.statsgenerator.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.statsgenerator.so"
+  },
+  {
+    "name": "pudding_odm_compat_a345e7675e26b286",
+    "source_path": "odm/lib64/camera/components/com.qti.stats.tracker.so",
+    "target_path": "vendor/lib64/camera/components/com.qti.stats.tracker.so"
+  },
+  {
+    "name": "pudding_odm_compat_52e57e3e80002645",
+    "source_path": "odm/lib64/camera/components/com.qtistatic.stats.aec.so",
+    "target_path": "vendor/lib64/camera/components/com.qtistatic.stats.aec.so"
+  },
+  {
+    "name": "pudding_odm_compat_dfd651c53d8b247f",
+    "source_path": "odm/lib64/camera/components/com.qtistatic.stats.af.so",
+    "target_path": "vendor/lib64/camera/components/com.qtistatic.stats.af.so"
+  },
+  {
+    "name": "pudding_odm_compat_c3481a4b649cb6d6",
+    "source_path": "odm/lib64/camera/components/com.qtistatic.stats.awb.so",
+    "target_path": "vendor/lib64/camera/components/com.qtistatic.stats.awb.so"
+  },
+  {
+    "name": "pudding_odm_compat_347d416b05fd0b4d",
+    "source_path": "odm/lib64/camera/components/com.qtistatic.stats.pdlib.so",
+    "target_path": "vendor/lib64/camera/components/com.qtistatic.stats.pdlib.so"
+  },
+  {
+    "name": "pudding_odm_compat_f818fa660f16a50f",
+    "source_path": "odm/lib64/camera/components/com.xiaomi.node.misv2.so",
+    "target_path": "vendor/lib64/camera/components/com.xiaomi.node.misv2.so"
+  },
+  {
+    "name": "pudding_odm_compat_39942c9c932917f0",
+    "source_path": "odm/lib64/camera/components/com.xiaomi.node.misv3.so",
+    "target_path": "vendor/lib64/camera/components/com.xiaomi.node.misv3.so"
+  },
+  {
+    "name": "pudding_odm_compat_cc471091484b7bed",
+    "source_path": "odm/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so",
+    "target_path": "vendor/lib64/camera/components/libcamxdummysatsnapshotfusionwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_524b30c05ed68fcc",
+    "source_path": "odm/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so",
+    "target_path": "vendor/lib64/camera/components/libcamxdummysatsoftwarefusionwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_8009bd06a6bd0d2f",
+    "source_path": "odm/lib64/camera/components/libcamxdummysatwrapper.so",
+    "target_path": "vendor/lib64/camera/components/libcamxdummysatwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_d38e9b6f427ba061",
+    "source_path": "odm/lib64/camera/components/libcamxevainterface.so",
+    "target_path": "vendor/lib64/camera/components/libcamxevainterface.so"
+  },
+  {
+    "name": "pudding_odm_compat_8384094283c631bd",
+    "source_path": "odm/lib64/camera/components/libcamxoemsatwrapper.so",
+    "target_path": "vendor/lib64/camera/components/libcamxoemsatwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_dba747e2a9035ac0",
+    "source_path": "odm/lib64/camera/components/libdepthmapwrapper_itof.so",
+    "target_path": "vendor/lib64/camera/components/libdepthmapwrapper_itof.so"
+  },
+  {
+    "name": "pudding_odm_compat_80f4d3ba2d0dd4e5",
+    "source_path": "odm/lib64/camera/components/libdepthmapwrapper_secure.so",
+    "target_path": "vendor/lib64/camera/components/libdepthmapwrapper_secure.so"
+  },
+  {
+    "name": "pudding_odm_compat_575539dee65387b0",
+    "source_path": "odm/lib64/camera/fdconfigoffline.bin",
+    "target_path": "vendor/lib64/camera/fdconfigoffline.bin"
+  },
+  {
+    "name": "pudding_odm_compat_cf0a87e2ac224720",
+    "source_path": "odm/lib64/camera/fdconfigpreview.bin",
+    "target_path": "vendor/lib64/camera/fdconfigpreview.bin"
+  },
+  {
+    "name": "pudding_odm_compat_520bce9293228148",
+    "source_path": "odm/lib64/camera/fdconfigpreviewlite.bin",
+    "target_path": "vendor/lib64/camera/fdconfigpreviewlite.bin"
+  },
+  {
+    "name": "pudding_odm_compat_ff9b8f61851db64d",
+    "source_path": "odm/lib64/camera/fdconfigsecure.bin",
+    "target_path": "vendor/lib64/camera/fdconfigsecure.bin"
+  },
+  {
+    "name": "pudding_odm_compat_f40eab70013d5a02",
+    "source_path": "odm/lib64/camera/fdconfigvideo.bin",
+    "target_path": "vendor/lib64/camera/fdconfigvideo.bin"
+  },
+  {
+    "name": "pudding_odm_compat_5ea93ca402538b32",
+    "source_path": "odm/lib64/camera/fdconfigvideolite.bin",
+    "target_path": "vendor/lib64/camera/fdconfigvideolite.bin"
+  },
+  {
+    "name": "pudding_odm_compat_61eecdc91f99a162",
+    "source_path": "odm/lib64/camera/libmicamvendorcustom.so",
+    "target_path": "vendor/lib64/camera/libmicamvendorcustom.so"
+  },
+  {
+    "name": "pudding_odm_compat_c1fa59c9258aca81",
+    "source_path": "odm/lib64/camera/qfdserviceconfig.bin",
+    "target_path": "vendor/lib64/camera/qfdserviceconfig.bin"
+  },
+  {
+    "name": "pudding_odm_compat_6441887335086790",
+    "source_path": "odm/lib64/camx.device-impl.so",
+    "target_path": "vendor/lib64/camx.device-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_324546b3d7619fec",
+    "source_path": "odm/lib64/camx.provider-impl.so",
+    "target_path": "vendor/lib64/camx.provider-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_ba9a52dcf8c91863",
+    "source_path": "odm/lib64/com.qti.camx.chiiqutils.so",
+    "target_path": "vendor/lib64/com.qti.camx.chiiqutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_4832b78c56bb886d",
+    "source_path": "odm/lib64/com.qti.chifeaturecompatibility.so",
+    "target_path": "vendor/lib64/com.qti.chifeaturecompatibility.so"
+  },
+  {
+    "name": "pudding_odm_compat_ca50742ddff76238",
+    "source_path": "odm/lib64/com.qti.chiusecaseselector.so",
+    "target_path": "vendor/lib64/com.qti.chiusecaseselector.so"
+  },
+  {
+    "name": "pudding_odm_compat_46fcc3a6c87faea3",
+    "source_path": "odm/lib64/com.qti.custom.settings.so",
+    "target_path": "vendor/lib64/com.qti.custom.settings.so"
+  },
+  {
+    "name": "pudding_odm_compat_e44ad69afca12a3b",
+    "source_path": "odm/lib64/com.qti.feature2.afbrckt.so",
+    "target_path": "vendor/lib64/com.qti.feature2.afbrckt.so"
+  },
+  {
+    "name": "pudding_odm_compat_b4503738ccb012aa",
+    "source_path": "odm/lib64/com.qti.feature2.anchorsync.so",
+    "target_path": "vendor/lib64/com.qti.feature2.anchorsync.so"
+  },
+  {
+    "name": "pudding_odm_compat_d5b2541aea2377ad",
+    "source_path": "odm/lib64/com.qti.feature2.demux.so",
+    "target_path": "vendor/lib64/com.qti.feature2.demux.so"
+  },
+  {
+    "name": "pudding_odm_compat_2b53e8eb8b6aa95d",
+    "source_path": "odm/lib64/com.qti.feature2.derivedoffline.so",
+    "target_path": "vendor/lib64/com.qti.feature2.derivedoffline.so"
+  },
+  {
+    "name": "pudding_odm_compat_af8eddecc4e28123",
+    "source_path": "odm/lib64/com.qti.feature2.enhancedhdr.so",
+    "target_path": "vendor/lib64/com.qti.feature2.enhancedhdr.so"
+  },
+  {
+    "name": "pudding_odm_compat_3bb477e060bf1ec0",
+    "source_path": "odm/lib64/com.qti.feature2.frc.so",
+    "target_path": "vendor/lib64/com.qti.feature2.frc.so"
+  },
+  {
+    "name": "pudding_odm_compat_2181c2e7701b1016",
+    "source_path": "odm/lib64/com.qti.feature2.fusion.so",
+    "target_path": "vendor/lib64/com.qti.feature2.fusion.so"
+  },
+  {
+    "name": "pudding_odm_compat_3c507a03bc51696f",
+    "source_path": "odm/lib64/com.qti.feature2.generic.so",
+    "target_path": "vendor/lib64/com.qti.feature2.generic.so"
+  },
+  {
+    "name": "pudding_odm_compat_4b867e02d741d144",
+    "source_path": "odm/lib64/com.qti.feature2.gs.sm8850.so",
+    "target_path": "vendor/lib64/com.qti.feature2.gs.sm8850.so"
+  },
+  {
+    "name": "pudding_odm_compat_7ec234af69a25d09",
+    "source_path": "odm/lib64/com.qti.feature2.hdr.so",
+    "target_path": "vendor/lib64/com.qti.feature2.hdr.so"
+  },
+  {
+    "name": "pudding_odm_compat_82bf49a56bb76633",
+    "source_path": "odm/lib64/com.qti.feature2.mcreprocrt.so",
+    "target_path": "vendor/lib64/com.qti.feature2.mcreprocrt.so"
+  },
+  {
+    "name": "pudding_odm_compat_be28cdcc24bf74fb",
+    "source_path": "odm/lib64/com.qti.feature2.memcpy.so",
+    "target_path": "vendor/lib64/com.qti.feature2.memcpy.so"
+  },
+  {
+    "name": "pudding_odm_compat_7c2357f7f0043153",
+    "source_path": "odm/lib64/com.qti.feature2.metadataserializer.so",
+    "target_path": "vendor/lib64/com.qti.feature2.metadataserializer.so"
+  },
+  {
+    "name": "pudding_odm_compat_841331ea8c9401c8",
+    "source_path": "odm/lib64/com.qti.feature2.mfsr.so",
+    "target_path": "vendor/lib64/com.qti.feature2.mfsr.so"
+  },
+  {
+    "name": "pudding_odm_compat_ef28d364840325cf",
+    "source_path": "odm/lib64/com.qti.feature2.mfsr.titan.so",
+    "target_path": "vendor/lib64/com.qti.feature2.mfsr.titan.so"
+  },
+  {
+    "name": "pudding_odm_compat_2c3fd74948c089ab",
+    "source_path": "odm/lib64/com.qti.feature2.ml.so",
+    "target_path": "vendor/lib64/com.qti.feature2.ml.so"
+  },
+  {
+    "name": "pudding_odm_compat_6383dfcd85d71eef",
+    "source_path": "odm/lib64/com.qti.feature2.mux.so",
+    "target_path": "vendor/lib64/com.qti.feature2.mux.so"
+  },
+  {
+    "name": "pudding_odm_compat_b29cc414b1737c79",
+    "source_path": "odm/lib64/com.qti.feature2.qcfa.so",
+    "target_path": "vendor/lib64/com.qti.feature2.qcfa.so"
+  },
+  {
+    "name": "pudding_odm_compat_cb9822bb2b144557",
+    "source_path": "odm/lib64/com.qti.feature2.raw2yuvhdr.so",
+    "target_path": "vendor/lib64/com.qti.feature2.raw2yuvhdr.so"
+  },
+  {
+    "name": "pudding_odm_compat_44a0c1d930457705",
+    "source_path": "odm/lib64/com.qti.feature2.rawhdr.so",
+    "target_path": "vendor/lib64/com.qti.feature2.rawhdr.so"
+  },
+  {
+    "name": "pudding_odm_compat_1caca9cc5e21a446",
+    "source_path": "odm/lib64/com.qti.feature2.realtimeserializer.so",
+    "target_path": "vendor/lib64/com.qti.feature2.realtimeserializer.so"
+  },
+  {
+    "name": "pudding_odm_compat_0b6988d031a2998a",
+    "source_path": "odm/lib64/com.qti.feature2.rt.so",
+    "target_path": "vendor/lib64/com.qti.feature2.rt.so"
+  },
+  {
+    "name": "pudding_odm_compat_e6fa39c92076aec1",
+    "source_path": "odm/lib64/com.qti.feature2.rtmcx.so",
+    "target_path": "vendor/lib64/com.qti.feature2.rtmcx.so"
+  },
+  {
+    "name": "pudding_odm_compat_d54b8a1ebc396a6c",
+    "source_path": "odm/lib64/com.qti.feature2.rtpostproc.so",
+    "target_path": "vendor/lib64/com.qti.feature2.rtpostproc.so"
+  },
+  {
+    "name": "pudding_odm_compat_aed388ee4c832e6a",
+    "source_path": "odm/lib64/com.qti.feature2.serializer.so",
+    "target_path": "vendor/lib64/com.qti.feature2.serializer.so"
+  },
+  {
+    "name": "pudding_odm_compat_ac4f4d296a905017",
+    "source_path": "odm/lib64/com.qti.feature2.statsregeneration.so",
+    "target_path": "vendor/lib64/com.qti.feature2.statsregeneration.so"
+  },
+  {
+    "name": "pudding_odm_compat_49c93836d9caae9d",
+    "source_path": "odm/lib64/com.qti.feature2.stub.so",
+    "target_path": "vendor/lib64/com.qti.feature2.stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_420dbd7c1603f11f",
+    "source_path": "odm/lib64/com.qti.feature2.swmf.so",
+    "target_path": "vendor/lib64/com.qti.feature2.swmf.so"
+  },
+  {
+    "name": "pudding_odm_compat_b2d32112957b9192",
+    "source_path": "odm/lib64/com.qti.platformsettings.sm8850.so",
+    "target_path": "vendor/lib64/com.qti.platformsettings.sm8850.so"
+  },
+  {
+    "name": "pudding_odm_compat_895852160394a5bd",
+    "source_path": "odm/lib64/com.qti.qseeaon.so",
+    "target_path": "vendor/lib64/com.qti.qseeaon.so"
+  },
+  {
+    "name": "pudding_odm_compat_8593c40bef25d8a2",
+    "source_path": "odm/lib64/com.qti.qseeutils.so",
+    "target_path": "vendor/lib64/com.qti.qseeutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_b31bb26acf46442a",
+    "source_path": "odm/lib64/com.qti.settings.sm8850.so",
+    "target_path": "vendor/lib64/com.qti.settings.sm8850.so"
+  },
+  {
+    "name": "pudding_odm_compat_7688b592782e9a11",
+    "source_path": "odm/lib64/com.qti.sfw.settings.so",
+    "target_path": "vendor/lib64/com.qti.sfw.settings.so"
+  },
+  {
+    "name": "pudding_odm_compat_56cec6c7d02fec84",
+    "source_path": "odm/lib64/com.qti.stats.common.so",
+    "target_path": "vendor/lib64/com.qti.stats.common.so"
+  },
+  {
+    "name": "pudding_odm_compat_74e6a38d606ab1ed",
+    "source_path": "odm/lib64/com.qti.stats.sotr.so",
+    "target_path": "vendor/lib64/com.qti.stats.sotr.so"
+  },
+  {
+    "name": "pudding_odm_compat_3eb9a92daff6f82b",
+    "source_path": "odm/lib64/com.qualcomm.mcx.distortionmapper.so",
+    "target_path": "vendor/lib64/com.qualcomm.mcx.distortionmapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_0b6a80bf8983b335",
+    "source_path": "odm/lib64/com.qualcomm.mcx.linearmapper.so",
+    "target_path": "vendor/lib64/com.qualcomm.mcx.linearmapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_0df8716374c5c4c0",
+    "source_path": "odm/lib64/com.qualcomm.mcx.nonlinearmapper.so",
+    "target_path": "vendor/lib64/com.qualcomm.mcx.nonlinearmapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_ac48e57138d949d8",
+    "source_path": "odm/lib64/com.qualcomm.mcx.policy.mfl.so",
+    "target_path": "vendor/lib64/com.qualcomm.mcx.policy.mfl.so"
+  },
+  {
+    "name": "pudding_odm_compat_84f85d6298a4d091",
+    "source_path": "odm/lib64/com.qualcomm.mcx.policy.sfl.so",
+    "target_path": "vendor/lib64/com.qualcomm.mcx.policy.sfl.so"
+  },
+  {
+    "name": "pudding_odm_compat_41930a2e800d4434",
+    "source_path": "odm/lib64/com.qualcomm.qti.cslcustomhw.so",
+    "target_path": "vendor/lib64/com.qualcomm.qti.cslcustomhw.so"
+  },
+  {
+    "name": "pudding_odm_compat_a26beaae4672d4d5",
+    "source_path": "odm/lib64/com.qualcomm.qti.mcx.usecase.extension.so",
+    "target_path": "vendor/lib64/com.qualcomm.qti.mcx.usecase.extension.so"
+  },
+  {
+    "name": "pudding_odm_compat_85304674fa38c3e0",
+    "source_path": "odm/lib64/com.xiaomi.camdfx.so",
+    "target_path": "vendor/lib64/com.xiaomi.camdfx.so"
+  },
+  {
+    "name": "pudding_odm_compat_d850a446abd11020",
+    "source_path": "odm/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.extmodel.ec_diag_sys.so"
+  },
+  {
+    "name": "pudding_odm_compat_be3d0cf2861d771f",
+    "source_path": "odm/lib64/com.xiaomi.camhal.extmodel.ec_executor.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.extmodel.ec_executor.so"
+  },
+  {
+    "name": "pudding_odm_compat_e59026644f8dca17",
+    "source_path": "odm/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.extmodel.intent_aware_sys.so"
+  },
+  {
+    "name": "pudding_odm_compat_8c97694fe4d61c59",
+    "source_path": "odm/lib64/com.xiaomi.camhal.overlap.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.overlap.so"
+  },
+  {
+    "name": "pudding_odm_compat_7cfa9aec487b6bad",
+    "source_path": "odm/lib64/com.xiaomi.camhal.submodel.camxfrag.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.submodel.camxfrag.so"
+  },
+  {
+    "name": "pudding_odm_compat_827e9bfd56d032ac",
+    "source_path": "odm/lib64/com.xiaomi.camhal.submodel.chifrag.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.submodel.chifrag.so"
+  },
+  {
+    "name": "pudding_odm_compat_71b96467a8ed1d9a",
+    "source_path": "odm/lib64/com.xiaomi.camhal.submodel.ecfrag.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.submodel.ecfrag.so"
+  },
+  {
+    "name": "pudding_odm_compat_bdf646372b498b15",
+    "source_path": "odm/lib64/com.xiaomi.camhal.use_overlap.so",
+    "target_path": "vendor/lib64/com.xiaomi.camhal.use_overlap.so"
+  },
+  {
+    "name": "pudding_odm_compat_16cd7f0e880308da",
+    "source_path": "odm/lib64/com.xiaomi.customlogger.so",
+    "target_path": "vendor/lib64/com.xiaomi.customlogger.so"
+  },
+  {
+    "name": "pudding_odm_compat_bfe0c9aa3db155db",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.bigdata.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.bigdata.so"
+  },
+  {
+    "name": "pudding_odm_compat_b571b76a558a7762",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.bigdata2.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.bigdata2.so"
+  },
+  {
+    "name": "pudding_odm_compat_2da5127cf422a42c",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.client.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.client.so"
+  },
+  {
+    "name": "pudding_odm_compat_cc0bec2b5c9918d1",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.config.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.config.so"
+  },
+  {
+    "name": "pudding_odm_compat_0a6603d0d3ea57f0",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.core.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.core.so"
+  },
+  {
+    "name": "pudding_odm_compat_f942f138e7598659",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.hook.camx.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.hook.camx.so"
+  },
+  {
+    "name": "pudding_odm_compat_93a5c21fdeec9187",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.hook.mivi.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so"
+  },
+  {
+    "name": "pudding_odm_compat_b86099db4ad1e246",
+    "source_path": "odm/lib64/com.xiaomi.immunesystem.hook.mtkhal.so",
+    "target_path": "vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so"
+  },
+  {
+    "name": "pudding_odm_compat_70f4edc6c00bbc19",
+    "source_path": "odm/lib64/com.xiaomi.messagecenter.so",
+    "target_path": "vendor/lib64/com.xiaomi.messagecenter.so"
+  },
+  {
+    "name": "pudding_odm_compat_512943c306af5747",
+    "source_path": "odm/lib64/com.xiaomi.stub.camx.so",
+    "target_path": "vendor/lib64/com.xiaomi.stub.camx.so"
+  },
+  {
+    "name": "pudding_odm_compat_ad7109bdd4f1b926",
+    "source_path": "odm/lib64/com.xiaomi.stub.chi.so",
+    "target_path": "vendor/lib64/com.xiaomi.stub.chi.so"
+  },
+  {
+    "name": "pudding_odm_compat_477e580679faac22",
+    "source_path": "odm/lib64/com.xiaomi.stubv1.camx.so",
+    "target_path": "vendor/lib64/com.xiaomi.stubv1.camx.so"
+  },
+  {
+    "name": "pudding_odm_compat_f7b78a865e733415",
+    "source_path": "odm/lib64/com.xiaomi.stubv1.chi.so",
+    "target_path": "vendor/lib64/com.xiaomi.stubv1.chi.so"
+  },
+  {
+    "name": "pudding_odm_compat_84f0d09343fab980",
+    "source_path": "odm/lib64/com.xiaomi.xmdevprotection.tokmd.so",
+    "target_path": "vendor/lib64/com.xiaomi.xmdevprotection.tokmd.so"
+  },
+  {
+    "name": "pudding_odm_compat_cb25e4471c3f65dd",
+    "source_path": "odm/lib64/com.xiaomi.xmxmessage2center.so",
+    "target_path": "vendor/lib64/com.xiaomi.xmxmessage2center.so"
+  },
+  {
+    "name": "pudding_odm_compat_8a0ca82c16f5a67b",
+    "source_path": "odm/lib64/hw/camera.qcom.core.so",
+    "target_path": "vendor/lib64/hw/camera.qcom.core.so"
+  },
+  {
+    "name": "pudding_odm_compat_3bf3ba2591e0bc2d",
+    "source_path": "odm/lib64/hw/camera.qcom.sm8850.so",
+    "target_path": "vendor/lib64/hw/camera.qcom.sm8850.so"
+  },
+  {
+    "name": "pudding_odm_compat_09f630cf2da1319b",
+    "source_path": "odm/lib64/hw/camera.qcom.so",
+    "target_path": "vendor/lib64/hw/camera.qcom.so"
+  },
+  {
+    "name": "pudding_odm_compat_9c47970c74e7be1b",
+    "source_path": "odm/lib64/hw/com.qti.chi.offline.so",
+    "target_path": "vendor/lib64/hw/com.qti.chi.offline.so"
+  },
+  {
+    "name": "pudding_odm_compat_ec73007f8ef5e72c",
+    "source_path": "odm/lib64/hw/com.qti.chi.override.so",
+    "target_path": "vendor/lib64/hw/com.qti.chi.override.so"
+  },
+  {
+    "name": "pudding_odm_compat_aa00595f71dfc798",
+    "source_path": "odm/lib64/immunesystem.db.sqlite3.so",
+    "target_path": "vendor/lib64/immunesystem.db.sqlite3.so"
+  },
+  {
+    "name": "pudding_odm_compat_7fed7994ae7d84d2",
+    "source_path": "odm/lib64/libAF.so",
+    "target_path": "vendor/lib64/libAF.so"
+  },
+  {
+    "name": "pudding_odm_compat_0245803a01335ac4",
+    "source_path": "odm/lib64/libaidenoiser.so",
+    "target_path": "vendor/lib64/libaidenoiser.so"
+  },
+  {
+    "name": "pudding_odm_compat_679d1ff1fed52316",
+    "source_path": "odm/lib64/libaidenoiserv2.so",
+    "target_path": "vendor/lib64/libaidenoiserv2.so"
+  },
+  {
+    "name": "pudding_odm_compat_72b473d545bb85bb",
+    "source_path": "odm/lib64/libaisr.so",
+    "target_path": "vendor/lib64/libaisr.so"
+  },
+  {
+    "name": "pudding_odm_compat_11bcae95796f18c2",
+    "source_path": "odm/lib64/libauto_focus_stark.so",
+    "target_path": "vendor/lib64/libauto_focus_stark.so"
+  },
+  {
+    "name": "pudding_odm_compat_e42508fc47c4fd04",
+    "source_path": "odm/lib64/libbitmlengine.so",
+    "target_path": "vendor/lib64/libbitmlengine.so"
+  },
+  {
+    "name": "pudding_odm_compat_3eadb8ced5bb7ab2",
+    "source_path": "odm/lib64/libbitmlenginev2.so",
+    "target_path": "vendor/lib64/libbitmlenginev2.so"
+  },
+  {
+    "name": "pudding_odm_compat_5e8591eb2faa2507",
+    "source_path": "odm/lib64/libcamera.xiaomi.catchlog.so",
+    "target_path": "vendor/lib64/libcamera.xiaomi.catchlog.so"
+  },
+  {
+    "name": "pudding_odm_compat_db49efded8982c5c",
+    "source_path": "odm/lib64/libcamerabuffer.so",
+    "target_path": "vendor/lib64/libcamerabuffer.so"
+  },
+  {
+    "name": "pudding_odm_compat_55e838133eb52a40",
+    "source_path": "odm/lib64/libcameraheif.so",
+    "target_path": "vendor/lib64/libcameraheif.so"
+  },
+  {
+    "name": "pudding_odm_compat_3f728f018567ea29",
+    "source_path": "odm/lib64/libcameraopt_stub.so",
+    "target_path": "vendor/lib64/libcameraopt_stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_f58dd3d7f4f73859",
+    "source_path": "odm/lib64/libcamlog.so",
+    "target_path": "vendor/lib64/libcamlog.so"
+  },
+  {
+    "name": "pudding_odm_compat_13abcf125db3a1e6",
+    "source_path": "odm/lib64/libcamxasyncdumpmanager.so",
+    "target_path": "vendor/lib64/libcamxasyncdumpmanager.so"
+  },
+  {
+    "name": "pudding_odm_compat_60872907e7f606fc",
+    "source_path": "odm/lib64/libcamxcommonutils.so",
+    "target_path": "vendor/lib64/libcamxcommonutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_9a653607804aab02",
+    "source_path": "odm/lib64/libcamxcoreutils.so",
+    "target_path": "vendor/lib64/libcamxcoreutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_94ee342be77c2ba0",
+    "source_path": "odm/lib64/libcamxcsl.so",
+    "target_path": "vendor/lib64/libcamxcsl.so"
+  },
+  {
+    "name": "pudding_odm_compat_0c6db7710bf529fc",
+    "source_path": "odm/lib64/libcamxcslhw.so",
+    "target_path": "vendor/lib64/libcamxcslhw.so"
+  },
+  {
+    "name": "pudding_odm_compat_fe994287669df81d",
+    "source_path": "odm/lib64/libcamxdumpinforecorder.so",
+    "target_path": "vendor/lib64/libcamxdumpinforecorder.so"
+  },
+  {
+    "name": "pudding_odm_compat_2aef0d2293fcf2f6",
+    "source_path": "odm/lib64/libcamxexternalformatutils.so",
+    "target_path": "vendor/lib64/libcamxexternalformatutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_0c2f9526405063e0",
+    "source_path": "odm/lib64/libcamxfdengine.so",
+    "target_path": "vendor/lib64/libcamxfdengine.so"
+  },
+  {
+    "name": "pudding_odm_compat_30ec6f6eb12bd293",
+    "source_path": "odm/lib64/libcamxhexlpservicebase.so",
+    "target_path": "vendor/lib64/libcamxhexlpservicebase.so"
+  },
+  {
+    "name": "pudding_odm_compat_9a1cb0f68fd3a975",
+    "source_path": "odm/lib64/libcamxhwlfrontend.so",
+    "target_path": "vendor/lib64/libcamxhwlfrontend.so"
+  },
+  {
+    "name": "pudding_odm_compat_1ac8bfdcd1f3d49e",
+    "source_path": "odm/lib64/libcamxhwlipedriver.so",
+    "target_path": "vendor/lib64/libcamxhwlipedriver.so"
+  },
+  {
+    "name": "pudding_odm_compat_db203c740c4e59b4",
+    "source_path": "odm/lib64/libcamxhwnodecontext.so",
+    "target_path": "vendor/lib64/libcamxhwnodecontext.so"
+  },
+  {
+    "name": "pudding_odm_compat_2ce5164b31ea27ad",
+    "source_path": "odm/lib64/libcamxhwquery.so",
+    "target_path": "vendor/lib64/libcamxhwquery.so"
+  },
+  {
+    "name": "pudding_odm_compat_068e5115abf2b6da",
+    "source_path": "odm/lib64/libcamxifestriping.so",
+    "target_path": "vendor/lib64/libcamxifestriping.so"
+  },
+  {
+    "name": "pudding_odm_compat_a0f932d47a587148",
+    "source_path": "odm/lib64/libcamximageformatutils.so",
+    "target_path": "vendor/lib64/libcamximageformatutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_40b713f713fe728d",
+    "source_path": "odm/lib64/libcamxmetadata.so",
+    "target_path": "vendor/lib64/libcamxmetadata.so"
+  },
+  {
+    "name": "pudding_odm_compat_a92abbeceff8cf3c",
+    "source_path": "odm/lib64/libcamxncsdatafactory.so",
+    "target_path": "vendor/lib64/libcamxncsdatafactory.so"
+  },
+  {
+    "name": "pudding_odm_compat_4a1296db0e12ac54",
+    "source_path": "odm/lib64/libcamxods.so",
+    "target_path": "vendor/lib64/libcamxods.so"
+  },
+  {
+    "name": "pudding_odm_compat_f44d2aa71c1c91a9",
+    "source_path": "odm/lib64/libcamxofehwl.so",
+    "target_path": "vendor/lib64/libcamxofehwl.so"
+  },
+  {
+    "name": "pudding_odm_compat_686465068e5193d0",
+    "source_path": "odm/lib64/libcamxofeswl.so",
+    "target_path": "vendor/lib64/libcamxofeswl.so"
+  },
+  {
+    "name": "pudding_odm_compat_c85de30330e24f20",
+    "source_path": "odm/lib64/libcamxqsatalgo.so",
+    "target_path": "vendor/lib64/libcamxqsatalgo.so"
+  },
+  {
+    "name": "pudding_odm_compat_3fd3b2e2af4b2ee1",
+    "source_path": "odm/lib64/libcamxsettingsmanager.so",
+    "target_path": "vendor/lib64/libcamxsettingsmanager.so"
+  },
+  {
+    "name": "pudding_odm_compat_222efb61ebec309e",
+    "source_path": "odm/lib64/libcamxsocketclientutil.so",
+    "target_path": "vendor/lib64/libcamxsocketclientutil.so"
+  },
+  {
+    "name": "pudding_odm_compat_f10462b8b4bcdb63",
+    "source_path": "odm/lib64/libcamxsocketserverutil.so",
+    "target_path": "vendor/lib64/libcamxsocketserverutil.so"
+  },
+  {
+    "name": "pudding_odm_compat_d20c8ad0e4f19195",
+    "source_path": "odm/lib64/libcamxswispiqmodule.so",
+    "target_path": "vendor/lib64/libcamxswispiqmodule.so"
+  },
+  {
+    "name": "pudding_odm_compat_982bd45b9ecb9899",
+    "source_path": "odm/lib64/libcamxswlipedriver.so",
+    "target_path": "vendor/lib64/libcamxswlipedriver.so"
+  },
+  {
+    "name": "pudding_odm_compat_612c13c5bcfd7cac",
+    "source_path": "odm/lib64/libcamxswprocessalgo.so",
+    "target_path": "vendor/lib64/libcamxswprocessalgo.so"
+  },
+  {
+    "name": "pudding_odm_compat_861f5b0e677cf3cf",
+    "source_path": "odm/lib64/libcamxtintlessalgo.so",
+    "target_path": "vendor/lib64/libcamxtintlessalgo.so"
+  },
+  {
+    "name": "pudding_odm_compat_4414fb8841106f14",
+    "source_path": "odm/lib64/libcamxvppservicebase.so",
+    "target_path": "vendor/lib64/libcamxvppservicebase.so"
+  },
+  {
+    "name": "pudding_odm_compat_41f69e1dc041abc8",
+    "source_path": "odm/lib64/libchicore.so",
+    "target_path": "vendor/lib64/libchicore.so"
+  },
+  {
+    "name": "pudding_odm_compat_bc6dcae4a41950a0",
+    "source_path": "odm/lib64/libchifeature2.so",
+    "target_path": "vendor/lib64/libchifeature2.so"
+  },
+  {
+    "name": "pudding_odm_compat_d2e10b80e1699da0",
+    "source_path": "odm/lib64/libchilog.so",
+    "target_path": "vendor/lib64/libchilog.so"
+  },
+  {
+    "name": "pudding_odm_compat_45322894b5645ef1",
+    "source_path": "odm/lib64/libchinodeevautils.so",
+    "target_path": "vendor/lib64/libchinodeevautils.so"
+  },
+  {
+    "name": "pudding_odm_compat_16e9c3447b4e7f03",
+    "source_path": "odm/lib64/libchinodehmeutils.so",
+    "target_path": "vendor/lib64/libchinodehmeutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_640741e85fcab267",
+    "source_path": "odm/lib64/libcom.qti.chinodeutils.so",
+    "target_path": "vendor/lib64/libcom.qti.chinodeutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_43e4519245b5af32",
+    "source_path": "odm/lib64/libcom.xiaomi.attribute.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.attribute.so"
+  },
+  {
+    "name": "pudding_odm_compat_ae3b815e9e1df98f",
+    "source_path": "odm/lib64/libcom.xiaomi.cam.miexifmgr.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.cam.miexifmgr.so"
+  },
+  {
+    "name": "pudding_odm_compat_0a38153713303c8c",
+    "source_path": "odm/lib64/libcom.xiaomi.debug.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.debug.so"
+  },
+  {
+    "name": "pudding_odm_compat_48642eede80a3b29",
+    "source_path": "odm/lib64/libcom.xiaomi.dsac.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.dsac.so"
+  },
+  {
+    "name": "pudding_odm_compat_0fd7d7bb103ae43b",
+    "source_path": "odm/lib64/libcom.xiaomi.ecoenginemonitor.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.ecoenginemonitor.so"
+  },
+  {
+    "name": "pudding_odm_compat_f5363c14660b3aa2",
+    "source_path": "odm/lib64/libcom.xiaomi.eventcallback.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.eventcallback.so"
+  },
+  {
+    "name": "pudding_odm_compat_e1cd1ab5d09f4b55",
+    "source_path": "odm/lib64/libcom.xiaomi.grallocutils.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.grallocutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_c7df31c8ae5ab884",
+    "source_path": "odm/lib64/libcom.xiaomi.ionutils.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.ionutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_0e6f1a3df267a919",
+    "source_path": "odm/lib64/libcom.xiaomi.mawutils.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.mawutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_9f91b9f91dc47ce9",
+    "source_path": "odm/lib64/libcom.xiaomi.mawutilsold.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.mawutilsold.so"
+  },
+  {
+    "name": "pudding_odm_compat_b0e8310477eb115b",
+    "source_path": "odm/lib64/libcom.xiaomi.message_bridge.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.message_bridge.so"
+  },
+  {
+    "name": "pudding_odm_compat_aea7ef1b0c6bcbb6",
+    "source_path": "odm/lib64/libcom.xiaomi.metadatautils.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.metadatautils.so"
+  },
+  {
+    "name": "pudding_odm_compat_c1fae984b9fe9d30",
+    "source_path": "odm/lib64/libcom.xiaomi.mivid.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.mivid.so"
+  },
+  {
+    "name": "pudding_odm_compat_4032997fb74145c7",
+    "source_path": "odm/lib64/libcom.xiaomi.offcamadapter.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.offcamadapter.so"
+  },
+  {
+    "name": "pudding_odm_compat_216674862ee0e225",
+    "source_path": "odm/lib64/libcom.xiaomi.offlinefeatureintf.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.offlinefeatureintf.so"
+  },
+  {
+    "name": "pudding_odm_compat_0422fe3fe061f903",
+    "source_path": "odm/lib64/libcom.xiaomi.pluginutils.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.pluginutils.so"
+  },
+  {
+    "name": "pudding_odm_compat_a053a23ec1de50ca",
+    "source_path": "odm/lib64/libcom.xiaomi.qcomHalInsertion.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.qcomHalInsertion.so"
+  },
+  {
+    "name": "pudding_odm_compat_1c1f640a8c50b108",
+    "source_path": "odm/lib64/libcom.xiaomi.qimagebuffer.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.qimagebuffer.so"
+  },
+  {
+    "name": "pudding_odm_compat_aa47bc4a8159cfcf",
+    "source_path": "odm/lib64/libcom.xiaomi.sensorpolicy.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.sensorpolicy.so"
+  },
+  {
+    "name": "pudding_odm_compat_4f38a6b96fa351d4",
+    "source_path": "odm/lib64/libcom.xiaomi.signaltrigger.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.signaltrigger.so"
+  },
+  {
+    "name": "pudding_odm_compat_b0f98c4b416f3f32",
+    "source_path": "odm/lib64/libcom.xiaomi.threadpool.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.threadpool.so"
+  },
+  {
+    "name": "pudding_odm_compat_19dc77c2a3c4aa5d",
+    "source_path": "odm/lib64/libcom.xiaomi.timer.so",
+    "target_path": "vendor/lib64/libcom.xiaomi.timer.so"
+  },
+  {
+    "name": "pudding_odm_compat_5c1d250aeb1a479a",
+    "source_path": "odm/lib64/libDlhookDumpStates.so",
+    "target_path": "vendor/lib64/libDlhookDumpStates.so"
+  },
+  {
+    "name": "pudding_odm_compat_f817a29630d7f90c",
+    "source_path": "odm/lib64/libdscaalgo.so",
+    "target_path": "vendor/lib64/libdscaalgo.so"
+  },
+  {
+    "name": "pudding_odm_compat_df4c61b06868177a",
+    "source_path": "odm/lib64/libecoengine.so",
+    "target_path": "vendor/lib64/libecoengine.so"
+  },
+  {
+    "name": "pudding_odm_compat_ac0e4b04e729a56f",
+    "source_path": "odm/lib64/libfastmessage.so",
+    "target_path": "vendor/lib64/libfastmessage.so"
+  },
+  {
+    "name": "pudding_odm_compat_29350910fb1586cc",
+    "source_path": "odm/lib64/libGenie.so",
+    "target_path": "vendor/lib64/libGenie.so"
+  },
+  {
+    "name": "pudding_odm_compat_a138165f4eebef8d",
+    "source_path": "odm/lib64/libhme.so",
+    "target_path": "vendor/lib64/libhme.so"
+  },
+  {
+    "name": "pudding_odm_compat_70c5dd6bd704fa17",
+    "source_path": "odm/lib64/libhwliqinterface2.so",
+    "target_path": "vendor/lib64/libhwliqinterface2.so"
+  },
+  {
+    "name": "pudding_odm_compat_53b228ea7560bca7",
+    "source_path": "odm/lib64/libhwlispcffdump.so",
+    "target_path": "vendor/lib64/libhwlispcffdump.so"
+  },
+  {
+    "name": "pudding_odm_compat_74b36943a1612e52",
+    "source_path": "odm/lib64/libipebpsstriping.so",
+    "target_path": "vendor/lib64/libipebpsstriping.so"
+  },
+  {
+    "name": "pudding_odm_compat_b14b497a196a4b8d",
+    "source_path": "odm/lib64/libipebpsstriping170.so",
+    "target_path": "vendor/lib64/libipebpsstriping170.so"
+  },
+  {
+    "name": "pudding_odm_compat_cc1eace50ba66c99",
+    "source_path": "odm/lib64/libipebpsstriping480.so",
+    "target_path": "vendor/lib64/libipebpsstriping480.so"
+  },
+  {
+    "name": "pudding_odm_compat_4a0b8ea173562664",
+    "source_path": "odm/lib64/libiqdbgmgr.so",
+    "target_path": "vendor/lib64/libiqdbgmgr.so"
+  },
+  {
+    "name": "pudding_odm_compat_d4c63148c7f324f0",
+    "source_path": "odm/lib64/libisphwsetting.so",
+    "target_path": "vendor/lib64/libisphwsetting.so"
+  },
+  {
+    "name": "pudding_odm_compat_ced619e481333c70",
+    "source_path": "odm/lib64/liblocalFlickerDet.so",
+    "target_path": "vendor/lib64/liblocalFlickerDet.so"
+  },
+  {
+    "name": "pudding_odm_compat_f0b3d290e341ebc3",
+    "source_path": "odm/lib64/libmctfengine_stub.so",
+    "target_path": "vendor/lib64/libmctfengine_stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_b449432b8fd1379a",
+    "source_path": "odm/lib64/libmetatagwrapper.so",
+    "target_path": "vendor/lib64/libmetatagwrapper.so"
+  },
+  {
+    "name": "pudding_odm_compat_8aafe0e03f0c2752",
+    "source_path": "odm/lib64/libmfGhostDetection.so",
+    "target_path": "vendor/lib64/libmfGhostDetection.so"
+  },
+  {
+    "name": "pudding_odm_compat_d105ced5fd5c4c45",
+    "source_path": "odm/lib64/libmialgo_ai_vision.so",
+    "target_path": "vendor/lib64/libmialgo_ai_vision.so"
+  },
+  {
+    "name": "pudding_odm_compat_4636226175648880",
+    "source_path": "odm/lib64/libmialgoengine_custom.so",
+    "target_path": "vendor/lib64/libmialgoengine_custom.so"
+  },
+  {
+    "name": "pudding_odm_compat_07bd26e8687d49b2",
+    "source_path": "odm/lib64/libmialgoengine.so",
+    "target_path": "vendor/lib64/libmialgoengine.so"
+  },
+  {
+    "name": "pudding_odm_compat_3de6a03b55767998",
+    "source_path": "odm/lib64/libmicamera_adapter.so",
+    "target_path": "vendor/lib64/libmicamera_adapter.so"
+  },
+  {
+    "name": "pudding_odm_compat_f8a7f2bf52233bc3",
+    "source_path": "odm/lib64/libmicamera_aidl_device_adaptor.so",
+    "target_path": "vendor/lib64/libmicamera_aidl_device_adaptor.so"
+  },
+  {
+    "name": "pudding_odm_compat_3abe8a0d1e378ad2",
+    "source_path": "odm/lib64/libmicamera_aidl_device.so",
+    "target_path": "vendor/lib64/libmicamera_aidl_device.so"
+  },
+  {
+    "name": "pudding_odm_compat_114c3ee354de1997",
+    "source_path": "odm/lib64/libmicamera_aidl_provider.so",
+    "target_path": "vendor/lib64/libmicamera_aidl_provider.so"
+  },
+  {
+    "name": "pudding_odm_compat_1dceb19aa870ad11",
+    "source_path": "odm/lib64/libmicamera_aidl_utils.so",
+    "target_path": "vendor/lib64/libmicamera_aidl_utils.so"
+  },
+  {
+    "name": "pudding_odm_compat_26bde42e531c80c1",
+    "source_path": "odm/lib64/libmicamera_fps_checker.so",
+    "target_path": "vendor/lib64/libmicamera_fps_checker.so"
+  },
+  {
+    "name": "pudding_odm_compat_6800b2bf4f703ff9",
+    "source_path": "odm/lib64/libmicamera_hal_core.so",
+    "target_path": "vendor/lib64/libmicamera_hal_core.so"
+  },
+  {
+    "name": "pudding_odm_compat_c4b74a448310c0c6",
+    "source_path": "odm/lib64/libmicamera_hal_policy.so",
+    "target_path": "vendor/lib64/libmicamera_hal_policy.so"
+  },
+  {
+    "name": "pudding_odm_compat_30ea92edf04b4c1d",
+    "source_path": "odm/lib64/libmicamGlobalPool.so",
+    "target_path": "vendor/lib64/libmicamGlobalPool.so"
+  },
+  {
+    "name": "pudding_odm_compat_50c7edd819eabf99",
+    "source_path": "odm/lib64/libminikin.xiaomi.so",
+    "target_path": "vendor/lib64/libminikin.xiaomi.so"
+  },
+  {
+    "name": "pudding_odm_compat_5e9bd09a0c8f2783",
+    "source_path": "odm/lib64/libMiPhotoFilter.so",
+    "target_path": "vendor/lib64/libMiPhotoFilter.so"
+  },
+  {
+    "name": "pudding_odm_compat_14b9bd48ff46016f",
+    "source_path": "odm/lib64/libmlremosaicengine.so",
+    "target_path": "vendor/lib64/libmlremosaicengine.so"
+  },
+  {
+    "name": "pudding_odm_compat_25dcb784c6e73fd4",
+    "source_path": "odm/lib64/libmmcamera_bestats.so",
+    "target_path": "vendor/lib64/libmmcamera_bestats.so"
+  },
+  {
+    "name": "pudding_odm_compat_9e722a2ff5335eee",
+    "source_path": "odm/lib64/libmmcamera_cac.so",
+    "target_path": "vendor/lib64/libmmcamera_cac.so"
+  },
+  {
+    "name": "pudding_odm_compat_d63104549162fb86",
+    "source_path": "odm/lib64/libmmcamera_lscv35.so",
+    "target_path": "vendor/lib64/libmmcamera_lscv35.so"
+  },
+  {
+    "name": "pudding_odm_compat_9c257dd773223af7",
+    "source_path": "odm/lib64/libmmcamera_mfnr_t4.so",
+    "target_path": "vendor/lib64/libmmcamera_mfnr_t4.so"
+  },
+  {
+    "name": "pudding_odm_compat_a89da4230f835fdb",
+    "source_path": "odm/lib64/libmmcamera_mfnr.so",
+    "target_path": "vendor/lib64/libmmcamera_mfnr.so"
+  },
+  {
+    "name": "pudding_odm_compat_b36a3337b6997c89",
+    "source_path": "odm/lib64/libmmcamera_pdpc.so",
+    "target_path": "vendor/lib64/libmmcamera_pdpc.so"
+  },
+  {
+    "name": "pudding_odm_compat_b3b970cfe1842e85",
+    "source_path": "odm/lib64/libmpbase.so",
+    "target_path": "vendor/lib64/libmpbase.so"
+  },
+  {
+    "name": "pudding_odm_compat_87eaa5a6c48802e3",
+    "source_path": "odm/lib64/libofestriping.so",
+    "target_path": "vendor/lib64/libofestriping.so"
+  },
+  {
+    "name": "pudding_odm_compat_3d2e1041f05bcbad",
+    "source_path": "odm/lib64/libofflinedebugdata.so",
+    "target_path": "vendor/lib64/libofflinedebugdata.so"
+  },
+  {
+    "name": "pudding_odm_compat_4e9bd149ed276fdd",
+    "source_path": "odm/lib64/libois_channel_stub.so",
+    "target_path": "vendor/lib64/libois_channel_stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_135ec3e3034ed1c3",
+    "source_path": "odm/lib64/liboischannel.so",
+    "target_path": "vendor/lib64/liboischannel.so"
+  },
+  {
+    "name": "pudding_odm_compat_931349af910c748b",
+    "source_path": "odm/lib64/libopencv.so",
+    "target_path": "vendor/lib64/libopencv.so"
+  },
+  {
+    "name": "pudding_odm_compat_489b30d0c614452b",
+    "source_path": "odm/lib64/libopencv3a.so",
+    "target_path": "vendor/lib64/libopencv3a.so"
+  },
+  {
+    "name": "pudding_odm_compat_098d77be30a6206e",
+    "source_path": "odm/lib64/libPlatformValidatorShared.so",
+    "target_path": "vendor/lib64/libPlatformValidatorShared.so"
+  },
+  {
+    "name": "pudding_odm_compat_74903f5f07ef577a",
+    "source_path": "odm/lib64/libpostprocinfo.so",
+    "target_path": "vendor/lib64/libpostprocinfo.so"
+  },
+  {
+    "name": "pudding_odm_compat_cdcfeaf125be2be2",
+    "source_path": "odm/lib64/libqsegnet.so",
+    "target_path": "vendor/lib64/libqsegnet.so"
+  },
+  {
+    "name": "pudding_odm_compat_50152c52666c7419",
+    "source_path": "odm/lib64/libqshcamera_sensinghubapi.so",
+    "target_path": "vendor/lib64/libqshcamera_sensinghubapi.so"
+  },
+  {
+    "name": "pudding_odm_compat_6190a345b5b5c72f",
+    "source_path": "odm/lib64/libqshcamera.so",
+    "target_path": "vendor/lib64/libqshcamera.so"
+  },
+  {
+    "name": "pudding_odm_compat_9b0501f7ecc534ba",
+    "source_path": "odm/lib64/libshadowhook.so",
+    "target_path": "vendor/lib64/libshadowhook.so"
+  },
+  {
+    "name": "pudding_odm_compat_00e2d21b29d760cf",
+    "source_path": "odm/lib64/libsiminputgenutil.so",
+    "target_path": "vendor/lib64/libsiminputgenutil.so"
+  },
+  {
+    "name": "pudding_odm_compat_618cfd57b929be2f",
+    "source_path": "odm/lib64/libsimulation.so",
+    "target_path": "vendor/lib64/libsimulation.so"
+  },
+  {
+    "name": "pudding_odm_compat_1ac5948c180a3eb5",
+    "source_path": "odm/lib64/libSNPE.so",
+    "target_path": "vendor/lib64/libSNPE.so"
+  },
+  {
+    "name": "pudding_odm_compat_7922509072e0b6c9",
+    "source_path": "odm/lib64/libSnpeDspV66Stub.so",
+    "target_path": "vendor/lib64/libSnpeDspV66Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_a5ad366bb10e1621",
+    "source_path": "odm/lib64/libSnpeHta.so",
+    "target_path": "vendor/lib64/libSnpeHta.so"
+  },
+  {
+    "name": "pudding_odm_compat_37d226137b5e08a0",
+    "source_path": "odm/lib64/libSnpeHtpPrepare.so",
+    "target_path": "vendor/lib64/libSnpeHtpPrepare.so"
+  },
+  {
+    "name": "pudding_odm_compat_a29ee6b50f4693ad",
+    "source_path": "odm/lib64/libSnpeHtpV68CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV68CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_76d013d2f05b20b4",
+    "source_path": "odm/lib64/libSnpeHtpV68Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV68Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_f31164d37eb10f6a",
+    "source_path": "odm/lib64/libSnpeHtpV69CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV69CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_8deb0e6a0601a348",
+    "source_path": "odm/lib64/libSnpeHtpV69Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV69Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_4c30366cf7cf6d2c",
+    "source_path": "odm/lib64/libSnpeHtpV73CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV73CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_5a3fcf41465486ee",
+    "source_path": "odm/lib64/libSnpeHtpV73Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV73Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_d2172eafc47fa7f2",
+    "source_path": "odm/lib64/libSnpeHtpV75CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV75CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_d655c9b92e2d5523",
+    "source_path": "odm/lib64/libSnpeHtpV75Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV75Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_194972d2487a6b62",
+    "source_path": "odm/lib64/libSnpeHtpV79CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV79CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_642e58fb359c4706",
+    "source_path": "odm/lib64/libSnpeHtpV79Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV79Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_d52c8b63c0c9dc95",
+    "source_path": "odm/lib64/libSnpeHtpV81CalculatorStub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV81CalculatorStub.so"
+  },
+  {
+    "name": "pudding_odm_compat_02f849318b517bda",
+    "source_path": "odm/lib64/libSnpeHtpV81Stub.so",
+    "target_path": "vendor/lib64/libSnpeHtpV81Stub.so"
+  },
+  {
+    "name": "pudding_odm_compat_46d769c4cfd43267",
+    "source_path": "odm/lib64/libubifocus.so",
+    "target_path": "vendor/lib64/libubifocus.so"
+  },
+  {
+    "name": "pudding_odm_compat_9589d01f18cd3d1f",
+    "source_path": "odm/lib64/vendor.qti.hardware.camera.aon-service-impl.so",
+    "target_path": "vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_4d1ffdccc60df5b3",
+    "source_path": "odm/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so",
+    "target_path": "vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_91cf8f23bfaeb785",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.aidl.intentaware-V1-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_b0f477d897e31fcd",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_a9ff33b1a60bbdd9",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.aidlbgservice-V1-ndk.so"
+  },
+  {
+    "name": "pudding_odm_compat_4f70fbf76a9a21be",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_39c15abfaf29f208",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.bgservice@1.0.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0.so"
+  },
+  {
+    "name": "pudding_odm_compat_a0d839985dfafea0",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_9b3cc8a6ba98a9cf",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.camera.mivimessage-V1-ndk.so"
+  },
+  {
+    "name": "pudding_odm_compat_0e4c844983d3cc67",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-impl.so"
+  },
+  {
+    "name": "pudding_odm_compat_47692ec9369fa33f",
+    "source_path": "odm/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so",
+    "target_path": "vendor/lib64/vendor.xiaomi.hardware.postprocservice-V1-ndk.so"
+  }
+]

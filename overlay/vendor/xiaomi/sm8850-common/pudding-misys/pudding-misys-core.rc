@@ -1,0 +1,8 @@
+service vendor.pudding-misys-core /vendor/bin/pudding-misys-core-service
+    class hal
+    user root
+    group root system
+    capabilities FOWNER
+    disabled
+    oneshot
+    interface aidl vendor.xiaomi.hardware.misys.core.IMiSysCore/default

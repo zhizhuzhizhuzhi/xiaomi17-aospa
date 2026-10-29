@@ -1,0 +1,47 @@
+[
+  {
+    "group": "vibrator-stock318",
+    "name": "libaachaptics.so",
+    "source": "odm/lib64/libaachaptics.so",
+    "stock_sha256": "2d0145f9960673e1f3ac1fac970b6cfc3410bfef7bf0d50056e2b710c4c3d2b3",
+    "before_sha256": "3b0a004692dfa209969f2bb6b0637606aed596a8c134a1549016b89e938a65c0",
+    "after_sha256": "3b0a004692dfa209969f2bb6b0637606aed596a8c134a1549016b89e938a65c0",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "vibrator-stock318",
+    "name": "libagmdevice.so",
+    "source": "odm/lib64/libagmdevice.so",
+    "stock_sha256": "27b9af90fb2dbbe9b81825a164a54d7c040546555b0276eaf90bd13052f1eb25",
+    "before_sha256": "0db0db7ec835918e762636039d7fe38853574c40b1f27ad6c7128a54f460dfcb",
+    "after_sha256": "0db0db7ec835918e762636039d7fe38853574c40b1f27ad6c7128a54f460dfcb",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "vibrator-stock318",
+    "name": "vendor.hardware.vibratorCL.impl.so",
+    "source": "odm/lib64/vendor.hardware.vibratorCL.impl.so",
+    "stock_sha256": "42ab9f126040b8a641f917f66ee901e4821cc6fba3ecb825913d2a8a786bc075",
+    "before_sha256": "cbc47b93922f2d348e65c7601641186e2980e4a46046e3cf862e6b9be3fcd498",
+    "after_sha256": "cbc47b93922f2d348e65c7601641186e2980e4a46046e3cf862e6b9be3fcd498",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "vibrator-stock318",
+    "name": "vendor.hardware.vibratorfeature.IVibratorExt-V1-ndk.so",
+    "source": "vendor/lib64/vendor.hardware.vibratorfeature.IVibratorExt-V1-ndk.so",
+    "stock_sha256": "294c7a11594943bcfcf4b21e7cdebfb87ae1f0ba031ed22b6e71bda5d9f00831",
+    "before_sha256": "0bc4d58b8a8c3a60706a7ff9aad2451cf8d86e2052f61d335a74b10b0cbd3355",
+    "after_sha256": "0bc4d58b8a8c3a60706a7ff9aad2451cf8d86e2052f61d335a74b10b0cbd3355",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  },
+  {
+    "group": "vibrator-stock318",
+    "name": "vendor.xiaomi.hardware.vibratorfeature.service",
+    "source": "odm/bin/hw/vendor.xiaomi.hardware.vibratorfeature.service",
+    "stock_sha256": "efbf667aa9e932834171e0d982537ae306d87f7ed594d5cee9a255a7db05f2b1",
+    "before_sha256": "06b59546ce751d4477cb70fadd0cb5d1f2e76ab97812adb8247626fac75a4fb0",
+    "after_sha256": "06b59546ce751d4477cb70fadd0cb5d1f2e76ab97812adb8247626fac75a4fb0",
+    "patch": "private RPATH; vibrator absolute dlopen paths normalized only"
+  }
+]

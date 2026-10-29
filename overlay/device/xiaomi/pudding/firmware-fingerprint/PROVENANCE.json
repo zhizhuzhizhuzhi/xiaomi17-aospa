@@ -1,0 +1,61 @@
+{
+  "source": "verified Global335 modem.img from original full fastboot package",
+  "firmware": [
+    {
+      "name": "gfus_v1.b00",
+      "bytes": 568,
+      "sha256": "43fcadc2ce4a246cb257366719a10cd3ce79480a642650fe24dd662a32fcb8ae"
+    },
+    {
+      "name": "gfus_v1.b01",
+      "bytes": 4707008,
+      "sha256": "a2f4496ce848ef25e6544a90af730715cf16fa428690de9d150a1433bd6ffb6f"
+    },
+    {
+      "name": "gfus_v1.b02",
+      "bytes": 231,
+      "sha256": "cb5d8c3f90e0b4a076268cbd56521c51708cc249689b745c7df4a6f67f1b789a"
+    },
+    {
+      "name": "gfus_v1.b03",
+      "bytes": 2208,
+      "sha256": "bcef50ef50363fdf11c16bbf35bbd9c743ca6b82d44e17548ac3fdd78ee059e6"
+    },
+    {
+      "name": "gfus_v1.b04",
+      "bytes": 7520916,
+      "sha256": "661dc7e61bf3de2a5c03ec90383f421fbdb185d0ae18e69ef9b144266cc1aff5"
+    },
+    {
+      "name": "gfus_v1.b05",
+      "bytes": 336,
+      "sha256": "2fc7212d6e0b68171d4579c7c9f2b7b090c81f9aba147c7bc0e4c6b9d53e849f"
+    },
+    {
+      "name": "gfus_v1.b06",
+      "bytes": 203252,
+      "sha256": "97dd864bb066293cdc85f3f32531be21a6eb00e15037e676e7b01fb8633916fc"
+    },
+    {
+      "name": "gfus_v1.b07",
+      "bytes": 2208,
+      "sha256": "bcef50ef50363fdf11c16bbf35bbd9c743ca6b82d44e17548ac3fdd78ee059e6"
+    },
+    {
+      "name": "gfus_v1.b08",
+      "bytes": 4552,
+      "sha256": "613b1f21b3034383372113a286e85ae28a18860270b5294a57d238a4fc4eb473"
+    },
+    {
+      "name": "gfus_v1.mdt",
+      "bytes": 5120,
+      "sha256": "94cb1903f5fda59efe474e431393004d12a3b9791889312c5554e59980d44b16"
+    }
+  ],
+  "libgf_hal_path_patch": {
+    "old": "/vendor/firmware_mnt/image",
+    "new": "/odm/firmware",
+    "sha256": "ad6035f5229b4ee5e4b91b24ec024a61bc7ce66fc52778cbbc20b0c77dce0914",
+    "only_change": "one zero-padded rodata path; instruction bytes and signed TA files unmodified"
+  }
+}

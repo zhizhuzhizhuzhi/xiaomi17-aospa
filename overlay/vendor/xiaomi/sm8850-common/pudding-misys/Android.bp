@@ -1,0 +1,61 @@
+cc_prebuilt_library_shared {
+    name: "libpudding_misys_0",
+    srcs: ["libpudding_misys_0.so"],
+    shared_libs: ["liblog", "libcutils", "libutils", "libjsoncpp", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    vendor: true,
+}
+cc_prebuilt_library_shared {
+    name: "libpudding_misys_1",
+    srcs: ["libpudding_misys_1.so"],
+    shared_libs: ["libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    vendor: true,
+}
+cc_prebuilt_library_shared {
+    name: "libpudding_misys_2",
+    srcs: ["libpudding_misys_2.so"],
+    shared_libs: ["libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    vendor: true,
+}
+cc_prebuilt_library_shared {
+    name: "libpudding_misys_3",
+    srcs: ["libpudding_misys_3.so"],
+    shared_libs: ["libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    vendor: true,
+}
+cc_prebuilt_library_shared {
+    name: "libpudding_misys_4",
+    srcs: ["libpudding_misys_4.so"],
+    shared_libs: ["libbinder_ndk", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    vendor: true,
+}
+cc_prebuilt_binary {
+    name: "pudding-misys-service",
+    srcs: ["pudding-misys-service"],
+    shared_libs: ["libpudding_misys_1", "libpudding_misys_0", "libcutils", "libcrypto", "libz", "libbase", "liblog", "libutils", "libbinder_ndk", "libjsoncpp", "libpudding_misys_2", "libpudding_misys_3", "libpudding_misys_4", "libc++", "libc", "libm", "libdl"],
+    strip: { none: true },
+    compile_multilib: "64",
+    init_rc: ["pudding-misys.rc"],
+    vintf_fragments: ["pudding-misys.xml"],
+    vendor: true,
+}
+
+cc_prebuilt_binary {
+ name: "pudding-misys-core-service",
+ srcs: ["pudding-misys-core-service"],
+ shared_libs: ["libbase", "liblog", "libutils", "libbinder_ndk", "libpudding_misys_2", "libc++", "libc", "libm", "libdl"],
+ strip: { none: true },
+ compile_multilib: "64",
+ init_rc: ["pudding-misys-core.rc"],
+ vintf_fragments: ["pudding-misys-core.xml"],
+ vendor: true,
+}

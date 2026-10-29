@@ -1,0 +1,78 @@
+diff --git a/composer/Android.bp b/composer/Android.bp
+index 4dfa42d3adce182e82777b09fb4f8e1dc9076a55..7391bfe037c2de7bed8d014f132a64252fb6c59d 100644
+--- a/composer/Android.bp
++++ b/composer/Android.bp
+@@ -1,9 +1,30 @@
++// Stock-stack selection preserves the existing install behavior per device.
++soong_config_module_type {
++    name: "sm8550_composer_install_defaults_type",
++    module_type: "cc_defaults",
++    config_namespace: "sheng_display",
++    bool_variables: ["stock_stack"],
++    properties: ["installable"],
++}
++
++sm8550_composer_install_defaults_type {
++    name: "sm8550_composer_install_defaults",
++    soong_config_variables: {
++        stock_stack: {
++            installable: true,
++            conditions_default: {
++                installable: false,
++            },
++        },
++    },
++}
++
+ composer_srcs = ["*.cpp"]
+ 
+ cc_binary {
+ 
+     name: "vendor.qti.hardware.display.composer-service",
+-    defaults: ["qtidisplay_defaults"],
++    defaults: ["qtidisplay_defaults", "sm8550_composer_install_defaults"],
+     sanitize: {
+         integer_overflow: true,
+     },
+diff --git a/init/init.qti.display_boot.sh b/init/init.qti.display_boot.sh
+index e29ba42fd6687bd8c5d1d0bace9d901ff6840e60..8d31a9e95a1a98a980cc143c22a39cf480416824 100644
+--- a/init/init.qti.display_boot.sh
++++ b/init/init.qti.display_boot.sh
+@@ -88,7 +88,7 @@ case "$target" in
+         setprop vendor.display.enable_latch_media_content 1
+         setprop vendor.display.enable_inline_writeback 1
+         setprop vendor.display.timed_render_enable 1
+-        setprop debug.sf.disable_client_composition_cache 0
++        # Client composition caching uses the SurfaceFlinger-owned default.
+         # set property for HHG
+         if [ "$subtype_id" -eq 1 ]; then
+             setprop vendor.display.disable_system_load_check 1
+@@ -115,7 +115,7 @@ case "$target" in
+         setprop vendor.display.enable_latch_media_content 1
+         setprop vendor.display.enable_inline_writeback 0
+         setprop vendor.display.timed_render_enable 1
+-        setprop debug.sf.disable_client_composition_cache 0
++        # Client composition caching uses the SurfaceFlinger-owned default.
+         setprop vendor.display.enable_qsync_idle 1
+         ;;
+     esac
+diff --git a/qmaa/Android.bp b/qmaa/Android.bp
+index 96b5023f73e2993729f09689f7ac66fe503daf31..687976e71500e05812d3b54e91d630fe9406593d 100644
+--- a/qmaa/Android.bp
++++ b/qmaa/Android.bp
+@@ -1,14 +1,11 @@
+ soong_namespace {
+-    imports: [
+-        "hardware/qcom/display",
+-        "hardware/qcom/display/libdebug",
+-    ],
+ }
+ composer_srcs = ["*.cpp"]
+ 
+ cc_binary {
+ 
+     name: "vendor.qti.hardware.display.composer-service",
++    installable: false,
+     defaults: ["qti_qmaa_display_defaults"],
+     sanitize: {
+         integer_overflow: true,

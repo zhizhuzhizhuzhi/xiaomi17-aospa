@@ -1,0 +1,65 @@
+{
+  "source": "verified original HyperOS318 raw super backup",
+  "files": [
+    {
+      "name": "android.hardware.security.keymint-service.strongbox-thales",
+      "source": "/mnt/pudding-original318-odm/bin/hw/android.hardware.security.keymint-service.strongbox-thales",
+      "sha256": "65c4032ad570f31e35b50643e25b0f89440f3daa36647b1917b6cad37875ed04",
+      "bytes": 52392
+    },
+    {
+      "name": "android.hardware.weaver-service.thales",
+      "source": "/mnt/pudding-original318-odm/bin/hw/android.hardware.weaver-service.thales",
+      "sha256": "abeee92db8175dcf041910851cd8ae735af38aca3318250c1ce40c1b32c2638d",
+      "bytes": 52744
+    },
+    {
+      "name": "libjc_keymint-thales.so",
+      "source": "/mnt/pudding-original318-odm/lib64/libjc_keymint-thales.so",
+      "sha256": "ac18a885d6f2c9c3265bcce68c8fac81e74df92fa80ae48b0b5b120c243fedc2",
+      "bytes": 410704
+    },
+    {
+      "name": "libjc_keymint_transport-thales.so",
+      "source": "/mnt/pudding-original318-odm/lib64/libjc_keymint_transport-thales.so",
+      "sha256": "a7cf8dba7088ef7808e035acfecc8d0d5ddc92b53d2ba978b7a6b32676fec4d5",
+      "bytes": 85704
+    },
+    {
+      "name": "ese_weaver_thales.so",
+      "source": "/mnt/pudding-original318-odm/lib64/ese_weaver_thales.so",
+      "sha256": "de1d51885115c1094e8c88a6cdaf3d3a2bc5e5eeb77ee68bded94ce07c3c86d3",
+      "bytes": 68400
+    },
+    {
+      "name": "libjc_weaver_transport.so",
+      "source": "/mnt/pudding-original318-odm/lib64/libjc_weaver_transport.so",
+      "sha256": "263a3908ce0d9dd5d3540b2d5b43ca15ddd2e2d3f974b2a0b134b69c27220650",
+      "bytes": 85760
+    },
+    {
+      "name": "libkeymint_empty-thales.so",
+      "source": "/mnt/pudding-original318-odm/lib64/libkeymint_empty-thales.so",
+      "sha256": "158a5e02670a4a627eef2122628e042e14a0dcdb2cabbedf10b3a8fcbd251728",
+      "bytes": 35400
+    },
+    {
+      "name": "libweaver_empty-thales.so",
+      "source": "/mnt/pudding-original318-odm/lib64/libweaver_empty-thales.so",
+      "sha256": "bfe6116822dca49becfd50965c8058352970fc5b4478dfd1cd61499dd551ea9a",
+      "bytes": 35304
+    },
+    {
+      "name": "libcppbor_external.so",
+      "source": "/mnt/pudding-original318-vendor/lib64/libcppbor_external.so",
+      "sha256": "cb9ecb8813b641eb92da4d2a411e224b04186d99b8a57433f1bb55445ae01164",
+      "bytes": 115648
+    },
+    {
+      "name": "libcppbor.so",
+      "source": "/mnt/pudding-original318-vendor/lib64/libcppbor.so",
+      "sha256": "2b0520db432518f8c5a6b29c000c38774d1b80689e8683bb9fe80c2c0377a3f5",
+      "bytes": 115648
+    }
+  ]
+}

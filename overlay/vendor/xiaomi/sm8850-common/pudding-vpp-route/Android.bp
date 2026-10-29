@@ -1,0 +1,8 @@
+cc_library_shared {
+    name: "libpudding_vpp_legacy_route",
+    srcs: ["route.c"],
+    shared_libs: ["libdl", "liblog"],
+    compile_multilib: "64",
+    vendor: true,
+    cflags: ["-Wall", "-Werror"],
+}

@@ -1,0 +1,597 @@
+{
+    "version": "algo_v2.1.2__p3_20251009",
+    "debug": {
+        "dump": 0,
+        "print": 0,
+        "dump_dir": "/data/vendor/camera/harbo/",
+        "log_level": 4
+    },
+    "start_params": {
+        "model":{
+            "0":{
+                "name": "WIDE_QUAD",
+                "algo_type": [7],
+                "sensor_type": [1],
+                "sensor_mode": [4, 15],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999
+            },
+            "1":{
+                "name": "SUPER_TELE_QUAD",
+                "algo_type": [7],
+                "sensor_type": [3, 4],
+                "sensor_mode": [4, 15],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999
+            },
+            "2":{
+                "name": "SUPER_TELE_BINNING_2X",
+                "algo_type": [7],
+                "sensor_type": [3, 4],
+                "sensor_mode": [0],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 2,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999
+            },
+            "3":{
+                "name": "SUPER_TELE_ISZ_QUAD_8F",
+                "algo_type": [7],
+                "sensor_type": [3, 4],
+                "sensor_mode": [15],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 2,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999
+            }
+        }
+    },
+    "supported_sensor":{
+        "supported_camera_mode": [-999],
+        "supported_sensor_type": [1, 3, 4],
+        "supported_sensor_mode_binning": [0],
+        "supported_sensor_mode_quad": [4, 15]
+    },
+    "pre_crop":{
+    },
+	"anchor_pick": {
+        "open_eye_weight": 0.8,
+        "close_eye_weight": 0.2,
+        "ambiguity_weight": 1.0,
+        "capture_time_weight": 1.0
+    },
+    "WIDE_QUAD": {
+        "model":{
+            "path": "/odm/etc/camera/harbo_sr_p3_wide_fullsizequad_4frame.minn",
+            "version": "v2025.820",
+            "frame_num": [4,3],
+            "bayer_pattern": 2,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [136, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 2000, 2400, 2800, 3160],
+            "shot":   [8.465687928780644e-05, 9.213575785528677e-05, 0.00011703654748426052, 0.000141677366735554, 0.00016609673011583093, 0.0001873746160105896, 0.00020685393213353137, 0.0002674831683733981, 0.00031074260746377354, 0.0003500383769283535, 0.0004165852831429902, 0.000500020233931479, 0.0006079278809648555, 0.0007231876769857619, 0.0008382194157872979, 0.0009601149019324253, 0.0010925400570149526, 0.001196864424362831, 0.001359349607085556],
+            "gauss":   [9.896003803078202e-07, 1.1020188139809761e-06, 4.21434492636763e-07, 4.927607051286031e-07, 5.76176773847692e-07, 4.831484829992405e-07, 5.414069619291695e-07, 6.515376753668534e-07, 8.043535331125895e-07, 9.454734026803635e-07, 1.0662300837793737e-06, 1.4210432937034057e-06, 1.7781295582608436e-06, 2.271267476317007e-06, 2.5698532226670068e-06, 3.6178355458105216e-06, 4.886889200861333e-06, 5.322796961335698e-06, 6.347165433758637e-06]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.4,
+        "guide_noise": 1,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+		"correct_local_noise_back" : 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 3.5,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.88
+                },
+			    "1": {
+                    "iso_low": 100,
+                    "iso_high": 800,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.88
+                },
+                "2": {
+                    "iso_low": 800,
+                    "iso_high": 3000,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.84,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+				"3": {
+                    "iso_low": 3000,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.6,
+                    "guide_noise": 0.8,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                }
+            },
+            "1": {
+                "adrc_low": 3.5,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.84,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "1": {
+                    "iso_low": 100,
+                    "iso_high": 400,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.7,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "2": {
+                    "iso_low": 400,
+                    "iso_high": 3000,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.8,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "3": {
+                    "iso_low": 3000,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.6,
+                    "guide_noise": 0.75,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                }
+            }    
+        }
+    },
+    "SUPER_TELE_BINNING_2X": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_sr_p3_stele_binning_2x_8frame.minn",
+            "version": "v2025.814",
+            "frame_num": [8,7,6,5],
+            "bayer_pattern": 3,
+            "upscale_ratio": 2,
+            "interpolation": 0
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.1],
+            "sensor_gain_threshold": [99.0, 3.5, 1.0]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list":  [50, 100, 200, 400, 600, 800, 1000, 1300, 1600, 2000, 2400, 3000, 3600, 4500, 5400, 6400, 7200, 8000],
+            "shot": [4.1196287192232516e-05, 8.549734364954869e-05, 0.00016368958484347477, 0.00032294704946283034, 0.0004813112808968935, 0.0006393419945822139, 0.0007969260070665673, 0.0010371295181261875, 0.0012688065947049445, 0.00158737313253365, 0.001792678191925732, 0.0022217368976729123, 0.002666101096946447, 0.0033192147054723386, 0.003970079230832766, 0.004716661139360429, 0.005272761437495136, 0.005743410844014517],
+            "gauss": [3.5586129187274647e-07, 5.619291125201511e-07, 1.3343808325117335e-06, 4.6519320668474454e-07, 7.048722955803162e-07, 1.0034630162280927e-06, 1.4108847065934945e-06, 2.015878759234431e-06, 2.8330293884082175e-06, 4.182910112847407e-06, 5.557300794048627e-06, 8.109176681165608e-06, 1.1064228442193238e-05, 1.634337062122333e-05, 2.251546736755572e-05, 3.047618724450698e-05, 3.6908499360403145e-05, 4.3388795012632677e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0,
+        "guide_noise": 1,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1.0,
+                "adrc_high": 1.2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 1500,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1
+                },
+                "1": {
+                    "iso_low": 1500,
+                    "iso_high": 3200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.97
+                },
+                "2": {
+                    "iso_low": 3200,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                },
+                "3": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                }
+            },
+            "1": {
+                "adrc_low": 1.2,
+                "adrc_high": 2.0,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 1200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1
+                },
+                "1": {
+                    "iso_low": 1200,
+                    "iso_high": 3200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.97
+                },
+                "2": {
+                    "iso_low": 3200,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                },
+                "3": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                }
+            },
+            "2": {
+                "adrc_low": 2.0,
+                "adrc_high": 3.0,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 1200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "1": {
+                    "iso_low": 1200,
+                    "iso_high": 2400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                },
+                "2": {
+                    "iso_low": 2400,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                },
+                "3": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.90
+                }
+            },
+            "3": {
+                "adrc_low": 3.0,
+                "adrc_high": 4.0,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 1200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "1": {
+                    "iso_low": 1200,
+                    "iso_high": 2400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                },
+                "2": {
+                    "iso_low": 2400,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                },
+                "3": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.90
+                } 
+            },
+            "4": {
+                "adrc_low": 4.0,
+                "adrc_high": 99.0,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 1200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "1": {
+                    "iso_low": 1200,
+                    "iso_high": 2400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                },
+                "2": {
+                    "iso_low": 2400,
+                    "iso_high": 3200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                },
+                "3": {
+                    "iso_low": 3200,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.92
+                },
+                "4": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.90
+                }
+            }
+        }
+    },
+    "SUPER_TELE_QUAD": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_sr_p3_stele_fullsizequad_4frame.minn",
+            "version": "v2025.912",
+            "frame_num": [4,3],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.00015300181194230364, 0.00030384648673281364, 0.00045380757216105673, 0.000604261522714109, 0.0007525902178790796, 0.0009010754837786557, 0.0010537978430171457, 0.0012036410256843664, 0.0013614952282701184, 0.0015160254555907054, 0.0016580439847235604, 0.001799505504321122, 0.0019592753862671553, 0.002126573711737968, 0.0022502428519020038, 0.0024011978042988045],
+			"gauss": [5.289157769539088e-07, 7.641744957709307e-07, 1.0992453288357258e-06, 1.506132468875876e-06, 1.8850849566357889e-06, 2.424937849809794e-06, 2.9031166529118005e-06, 3.5853687525862672e-06, 4.183148189440544e-06, 4.952867539032013e-06, 5.862008811163832e-06, 6.6285629751898036e-06, 7.462540103612506e-06, 8.453503884690387e-06, 9.529208879636523e-06, 1.0463123423202585e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 350,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94,
+                    "guide_noise_portrait": 0.94
+                },
+                "1": {
+                    "iso_low": 350,
+                    "iso_high": 650,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.9,
+                    "guide_noise_portrait": 0.9
+                },
+                "2": {
+                    "iso_low": 650,
+                    "iso_high": 750,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.9,
+                    "guide_noise_portrait": 0.9
+                },
+                "3": {
+                    "iso_low": 750,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.9,
+                    "guide_noise_portrait": 0.88
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 150,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94,
+                    "guide_noise_portrait": 0.96
+                },
+                "1": {
+                    "iso_low": 150,
+                    "iso_high": 600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.88,
+                    "guide_noise_portrait": 0.9
+                },
+                "2": {
+                    "iso_low": 600,
+                    "iso_high": 700,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.88,
+                    "guide_noise_portrait": 0.9
+                },
+                "3": {
+                    "iso_low": 700,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.88,
+                    "guide_noise_portrait": 0.88
+                }
+            }
+        }
+    },
+    "SUPER_TELE_ISZ_QUAD_8F": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_sr_p3_stele_iszquad_8frame.minn",
+            "version": "v2025.728",
+            "frame_num": [8,7,6,5],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.0002006782369618052, 0.00039535736234525774, 0.0005970642808435158, 0.0007842980878048342, 0.0009818955210208595, 0.0011945946678498377, 0.0013904560206335196, 0.0015758129373226618, 0.0017766505012568948, 0.0019837158677362935, 0.0021611769185222135, 0.0023723889807087005, 0.0025695064776286966, 0.0027572320167194705, 0.0029396307796948893, 0.0031658461594589403],
+			"gauss": [5.257010574847268e-07, 8.097860117822277e-07, 1.2144130243796736e-06, 1.702933252345885e-06, 2.188497000245486e-06, 2.831827507115872e-06, 3.431508399412371e-06, 4.266907253941897e-06, 5.031519322074018e-06, 5.957893048808298e-06, 7.081510343516384e-06, 8.079281989219517e-06, 9.01310720604542e-06, 1.0220027928753233e-05, 1.1553639891197937e-05, 1.2949884637093515e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+		"local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 2400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                },
+                "2": {
+                    "iso_low": 2400,
+                    "iso_high": 3200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.98
+                },
+                "3": {
+                    "iso_low": 3200,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "4": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 2400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                },
+                "2": {
+                    "iso_low": 2400,
+                    "iso_high": 3200,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.98
+                },
+                "3": {
+                    "iso_low": 3200,
+                    "iso_high": 6400,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "4": {
+                    "iso_low": 6400,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.95
+                }
+            }
+        }
+    }
+}

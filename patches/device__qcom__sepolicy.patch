@@ -1,0 +1,411 @@
+diff --git a/.gitupstream b/.gitupstream
+deleted file mode 100644
+index d1eef94a2c772d6cd2e3aaa8db5fa17897e5eeef..0000000000000000000000000000000000000000
+--- a/.gitupstream
++++ /dev/null
+@@ -1 +0,0 @@
+-https://git.codelinaro.org/clo/la/device/qcom/sepolicy
+diff --git a/SEPolicy.mk b/SEPolicy.mk
+index fdd637f99b403620bc61d0f7a337a1135dd42a65..e045fa3c2f021b452b34fd46e2d37cd122274bc3 100644
+--- a/SEPolicy.mk
++++ b/SEPolicy.mk
+@@ -1,4 +1,5 @@
+ # Board specific SELinux policy variable definitions
++ifeq ($(call is-vendor-board-platform,QCOM),true)
+ SEPOLICY_PATH:= device/qcom/sepolicy
+ LOCAL_PATH := $(call my-dir)
+ 
+@@ -36,3 +37,4 @@ PRODUCT_PRIVATE_SEPOLICY_DIRS := \
+ 					    $(SEPOLICY_PATH)/generic/product/prebuilts/api/202404/public \
+ 					    $(SEPOLICY_PATH)/generic/product/prebuilts/api/202404/private
+ 
++endif
+diff --git a/generic/prebuilts/api/30.0/public/qti-testscripts.te b/generic/prebuilts/api/30.0/public/qti-testscripts.te
+index 0ae77fc7c84a063380d34e3cef3c91781263ab64..48ea0a9ffff6630903a8febc7591d5bbf9ddc242 100644
+--- a/generic/prebuilts/api/30.0/public/qti-testscripts.te
++++ b/generic/prebuilts/api/30.0/public/qti-testscripts.te
+@@ -25,4 +25,6 @@
+ # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+ # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+-type qti-testscripts, domain, mlstrustedsubject;
++userdebug_or_eng(`
++  type qti-testscripts, domain, mlstrustedsubject;
++')
+diff --git a/generic/prebuilts/api/31.0/private/qti-testscripts.te b/generic/prebuilts/api/31.0/private/qti-testscripts.te
+index 26bd72522b77cb23c37d55808b11d3ade8af500a..4bdbb83643e84e00169cc87670e40f8b3e80d30d 100644
+--- a/generic/prebuilts/api/31.0/private/qti-testscripts.te
++++ b/generic/prebuilts/api/31.0/private/qti-testscripts.te
+@@ -28,8 +28,8 @@
+ #as the exec is defined in file_context  it is hitting build
+ # error in user build  so moving out of the macro
+ type qti-testscripts_exec, system_file_type, exec_type, file_type;
+-type qti-testscripts, domain, mlstrustedsubject;
+ userdebug_or_eng(`
++  type qti-testscripts, domain, mlstrustedsubject;
+   typeattribute  qti-testscripts coredomain;
+   permissive qti-testscripts;
+   init_daemon_domain(qti-testscripts)
+diff --git a/generic/prebuilts/api/32.0/private/qti-testscripts.te b/generic/prebuilts/api/32.0/private/qti-testscripts.te
+index 26bd72522b77cb23c37d55808b11d3ade8af500a..4bdbb83643e84e00169cc87670e40f8b3e80d30d 100644
+--- a/generic/prebuilts/api/32.0/private/qti-testscripts.te
++++ b/generic/prebuilts/api/32.0/private/qti-testscripts.te
+@@ -28,8 +28,8 @@
+ #as the exec is defined in file_context  it is hitting build
+ # error in user build  so moving out of the macro
+ type qti-testscripts_exec, system_file_type, exec_type, file_type;
+-type qti-testscripts, domain, mlstrustedsubject;
+ userdebug_or_eng(`
++  type qti-testscripts, domain, mlstrustedsubject;
+   typeattribute  qti-testscripts coredomain;
+   permissive qti-testscripts;
+   init_daemon_domain(qti-testscripts)
+diff --git a/generic/private/audioserver.te b/generic/private/audioserver.te
+index 6fb9c0c12faa554be1e266129086bf9f81a15718..4ef830dfe037fc99dc05bda8aa1de4d9093ddb71 100644
+--- a/generic/private/audioserver.te
++++ b/generic/private/audioserver.te
+@@ -25,9 +25,6 @@
+ # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+ # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+-allow audioserver vendor_audioserver_service:service_manager { add find };
+-binder_call(audioserver, vendor_qtiaudiohalvendorextn)
+-
+ binder_call(audioserver,vendor_wfdservice);
+ binder_call(audioserver,vendor_sys_sxrauxd);
+ #allow access to ALSA MMAP FDs for AAudio API
+diff --git a/generic/private/compat/202504/202504.ignore.cil b/generic/private/compat/202504/202504.ignore.cil
+deleted file mode 100644
+index ad13660f3ea13988aa9a841b5e6cc1bc30f6a52c..0000000000000000000000000000000000000000
+--- a/generic/private/compat/202504/202504.ignore.cil
++++ /dev/null
+@@ -1,8 +0,0 @@
+-;; new_objects - a collection of types that have been introduced that have no
+-;;   analogue in older policy.  Thus, we do not need to map these types to
+-;;   previous ones.  Add here to pass checkapi test
+-(type new_objects)
+-(typeattribute new_objects)
+-(typeattributeset new_objects
+-  ( new_objects
+-    vendor_gppservice))
+diff --git a/generic/private/compat/30.0/30.0.cil b/generic/private/compat/30.0/30.0.cil
+index 7421e7f3ba6bdf6b0b2eb8ffa46bdbeec46ced7e..3dd4c2ddee25ed1f1ddc3a6bcbbdc9e0be4375a9 100755
+--- a/generic/private/compat/30.0/30.0.cil
++++ b/generic/private/compat/30.0/30.0.cil
+@@ -1,93 +1,60 @@
+ (typeattributeset vendor_persist_camera_prop_30_0 (vendor_persist_camera_prop))
+ (expandtypeattribute (vendor_persist_camera_prop_30_0) true)
+-(typeattribute vendor_persist_camera_prop_30_0)
+ (typeattributeset vendor_usta_app_service_30_0 (vendor_usta_app_service))
+ (expandtypeattribute (vendor_usta_app_service_30_0) true)
+-(typeattribute vendor_usta_app_service_30_0)
+ (typeattributeset vendor_qvrd_30_0 (vendor_qvrd))
+ (expandtypeattribute (vendor_qvrd_30_0) true)
+-(typeattribute vendor_qvrd_30_0)
+ (typeattributeset vendor_qtelephony_30_0 (vendor_qtelephony))
+ (expandtypeattribute (vendor_qtelephony_30_0) true)
+-(typeattribute vendor_qtelephony_30_0)
+ (typeattributeset vendor_qcc_trd_30_0 (vendor_qcc_trd))
+ (expandtypeattribute (vendor_qcc_trd_30_0) true)
+-(typeattribute vendor_qcc_trd_30_0)
+ (typeattributeset vendor_dataservice_app_30_0 (vendor_dataservice_app))
+ (expandtypeattribute (vendor_dataservice_app_30_0) true)
+-(typeattribute vendor_dataservice_app_30_0)
+ (typeattributeset vendor_seempd_30_0 (vendor_seempd))
+ (expandtypeattribute (vendor_seempd_30_0) true)
+-(typeattribute vendor_seempd_30_0)
+ (typeattributeset vendor_qcc_utils_app_30_0 (vendor_qcc_utils_app))
+ (expandtypeattribute (vendor_qcc_utils_app_30_0) true)
+-(typeattribute vendor_qcc_utils_app_30_0)
+ (typeattributeset vendor_dpmtcm_socket_30_0 (vendor_dpmtcm_socket))
+ (expandtypeattribute (vendor_dpmtcm_socket_30_0) true)
+-(typeattribute vendor_dpmtcm_socket_30_0)
+ (typeattributeset vendor_sys_video_prop_30_0 (vendor_sys_video_prop))
+ (expandtypeattribute (vendor_sys_video_prop_30_0) true)
+-(typeattribute vendor_sys_video_prop_30_0)
+ (typeattributeset vendor_qcc_app_30_0 (vendor_qcc_app))
+ (expandtypeattribute (vendor_qcc_app_30_0) true)
+-(typeattribute vendor_qcc_app_30_0)
+ (typeattributeset vendor_wfd_app_30_0 (vendor_wfd_app))
+ (expandtypeattribute (vendor_wfd_app_30_0) true)
+-(typeattribute vendor_wfd_app_30_0)
+-(typeattributeset qti-testscripts_30_0 (qti-testscripts))
+-(expandtypeattribute (qti-testscripts_30_0) true)
+-(typeattribute qti-testscripts_30_0)
+ (typeattributeset vendor_bt_prop_30_0 (vendor_bt_prop))
+ (expandtypeattribute (vendor_bt_prop_30_0) true)
+-(typeattribute vendor_bt_prop_30_0)
+ (typeattributeset vendor_mmi_sys_30_0 (vendor_mmi_sys))
+ (expandtypeattribute (vendor_mmi_sys_30_0) true)
+-(typeattribute vendor_mmi_sys_30_0)
+ (typeattributeset vendor_qspmsvc_30_0 (vendor_qspmsvc))
+ (expandtypeattribute (vendor_qspmsvc_30_0) true)
+-(typeattribute vendor_qspmsvc_30_0)
+ (typeattributeset vendor_dpmd_30_0 (vendor_dpmd))
+ (expandtypeattribute (vendor_dpmd_30_0) true)
+-(typeattribute vendor_dpmd_30_0)
+ (typeattributeset vendor_qccsyshal_hwservice_30_0 (vendor_qccsyshal_hwservice))
+ (expandtypeattribute (vendor_qccsyshal_hwservice_30_0) true)
+-(typeattribute vendor_qccsyshal_hwservice_30_0)
+ (typeattributeset vendor_vpsservice_30_0 (vendor_vpsservice))
+ (expandtypeattribute (vendor_vpsservice_30_0) true)
+-(typeattribute vendor_vpsservice_30_0)
+ (typeattributeset vendor_wfdservice_30_0 (vendor_wfdservice))
+ (expandtypeattribute (vendor_wfdservice_30_0) true)
+-(typeattribute vendor_wfdservice_30_0)
+ (typeattributeset vendor_hal_atfwd_hwservice_30_0 (vendor_hal_atfwd_hwservice))
+ (expandtypeattribute (vendor_hal_atfwd_hwservice_30_0) true)
+-(typeattribute vendor_hal_atfwd_hwservice_30_0)
+ (typeattributeset vendor_smcinvoke_device_30_0 (vendor_smcinvoke_device))
+ (expandtypeattribute (vendor_smcinvoke_device_30_0) true)
+-(typeattribute vendor_smcinvoke_device_30_0)
+ (typeattributeset vendor_persist_dpm_prop_30_0 (vendor_persist_dpm_prop))
+ (expandtypeattribute (vendor_persist_dpm_prop_30_0) true)
+-(typeattribute vendor_persist_dpm_prop_30_0)
+ (typeattributeset vendor_dun-server_30_0 (vendor_dun-server))
+ (expandtypeattribute (vendor_dun-server_30_0) true)
+-(typeattribute vendor_dun-server_30_0)
+ (typeattributeset vendor_wlc_prop_30_0 (vendor_wlc_prop))
+ (expandtypeattribute (vendor_wlc_prop_30_0) true)
+-(typeattribute vendor_wlc_prop_30_0)
+ (typeattributeset vendor_elabel_data_file_30_0 (vendor_elabel_data_file))
+ (expandtypeattribute (vendor_elabel_data_file_30_0) true)
+-(typeattribute vendor_elabel_data_file_30_0)
+ (typeattributeset vendor_fm_app_30_0 (vendor_fm_app))
+ (expandtypeattribute (vendor_fm_app_30_0) true)
+-(typeattribute vendor_fm_app_30_0)
+ (typeattributeset vendor_perfservice_30_0 (vendor_perfservice))
+ (expandtypeattribute (vendor_perfservice_30_0) true)
+-(typeattribute vendor_perfservice_30_0)
+ (typeattributeset vendor_sigmahal_hwservice_30_0 (vendor_sigmahal_hwservice))
+ (expandtypeattribute (vendor_sigmahal_hwservice_30_0) true)
+-(typeattribute vendor_sigmahal_hwservice_30_0)
+ (typeattributeset vendor_location_app_30_0 (vendor_location_app))
+ (expandtypeattribute (vendor_location_app_30_0) true)
+-(typeattribute vendor_location_app_30_0)
+ (typeattributeset vendor_seempdw_socket_30_0 (vendor_seempdw_socket))
+ (expandtypeattribute (vendor_seempdw_socket_30_0) true)
+-(typeattribute vendor_seempdw_socket_30_0)
+diff --git a/generic/private/file_contexts b/generic/private/file_contexts
+index 3393ee3e2627ba50a808b4a6cd1891a0711b5ce7..1b3b7d65400bcf3e0f2a10aa58d16259a1a13ef1 100644
+--- a/generic/private/file_contexts
++++ b/generic/private/file_contexts
+@@ -71,7 +71,6 @@
+ /(system_ext|system/system_ext)/bin/perfetto_dump\.sh           u:object_r:vendor_perfetto_dump_exec:s0
+ /(system_ext|system/system_ext)/bin/qxrsplitauxservice  u:object_r:vendor_sys_sxrauxd_exec:s0
+ /(system_ext|system/system_ext)/bin/qsguard  u:object_r:qsguard_exec:s0
+-/(system_ext|system/system_ext)/bin/qtiaudiohalvendorextn  u:object_r:vendor_qtiaudiohalvendorextn_exec:s0
+ /system_ext/bin/usbudev  u:object_r:vendor_usbudev_qti_exec:s0
+ /(system_ext|system/system_ext)/bin/imsvtdaemon u:object_r:vendor_imsvtdaemon_exec:s0
+ /(system_ext|system/system_ext)/bin/frameworks_utils_service\.sh           u:object_r:vendor_frameworksutils_launcher_exec:s0
+diff --git a/generic/private/property_contexts b/generic/private/property_contexts
+index 56d3485a59940adbc6f5c0b23c5be297f658d78c..5cee3459759c452c9f49f11827520e0ed22c57d0 100644
+--- a/generic/private/property_contexts
++++ b/generic/private/property_contexts
+@@ -51,6 +51,8 @@ ro.vendor.btstack.                         u:object_r:bluetooth_prop:s0
+ vendor.pts.                                u:object_r:bluetooth_prop:s0
+ vendor.bt.pts.                             u:object_r:bluetooth_prop:s0
+ vendor.bluetooth.                          u:object_r:bluetooth_prop:s0
++vendor.camera.aux.packagelist              u:object_r:camera2_extensions_prop:s0
++persist.vendor.camera.privapp.list         u:object_r:vendor_persist_camera_prop:s0
+ persist.vendor.ai-director.                u:object_r:vendor_persist_camera_prop:s0
+ 
+ #mm-parser
+diff --git a/generic/private/qti-testscripts.te b/generic/private/qti-testscripts.te
+index 23819b83d3843f649e162c438101038372884910..5276b43116d0ee59f65b61a4c0a587c2f78ac67c 100644
+--- a/generic/private/qti-testscripts.te
++++ b/generic/private/qti-testscripts.te
+@@ -28,8 +28,8 @@
+ #as the exec is defined in file_context  it is hitting build
+ # error in user build  so moving out of the macro
+ type qti-testscripts_exec, system_file_type, exec_type, file_type;
+-type qti-testscripts, domain, mlstrustedsubject;
+ userdebug_or_eng(`
++  type qti-testscripts, domain, mlstrustedsubject;
+   typeattribute  qti-testscripts coredomain;
+   permissive qti-testscripts;
+   init_daemon_domain(qti-testscripts)
+diff --git a/generic/private/qtiaudiohalvendorextn.te b/generic/private/qtiaudiohalvendorextn.te
+deleted file mode 100644
+index 9ea8defc7506a3b2834808a942f44047d7f1d131..0000000000000000000000000000000000000000
+--- a/generic/private/qtiaudiohalvendorextn.te
++++ /dev/null
+@@ -1,8 +0,0 @@
+-type vendor_qtiaudiohalvendorextn, domain, coredomain;
+-type vendor_qtiaudiohalvendorextn_exec, system_file_type, exec_type, file_type;
+-
+-init_daemon_domain(vendor_qtiaudiohalvendorextn)
+-
+-binder_use(vendor_qtiaudiohalvendorextn)
+-
+-allow vendor_qtiaudiohalvendorextn vendor_audioserver_service:service_manager { add find };
+diff --git a/generic/private/seapp_contexts b/generic/private/seapp_contexts
+index fc9a8e9067ff18af7e308b564b1f9785ea64a50f..4f25f4152e2681d79429ff5ddbc7c8afbabe6962 100644
+--- a/generic/private/seapp_contexts
++++ b/generic/private/seapp_contexts
+@@ -77,7 +77,6 @@ user=_app seinfo=platform name=com.qualcomm.qti.voiceai.lifelogger.service domai
+ user=_app seinfo=platform name=com.qti.qualcomm.mstatssystemservice domain=vendor_mstatservice_app type=app_data_file levelFrom=all
+ 
+ #Add new domain for QESDK_APP
+-user=system seinfo=platform name=vendor.qti.qesdk.sysservice isPrivApp=true domain=vendor_qesdk_app type=system_app_data_file
+ user=system seinfo=platform name=vendor.qti.frameworks.utils isPrivApp=true domain=vendor_qesdk_app type=system_app_data_file
+ 
+ #Add new domain for workloadclassifier
+diff --git a/generic/private/service.te b/generic/private/service.te
+index 5854a09cf12bdecdabaec9b86c7d2df81aacab86..b91f56ebdd6683838acc7a093fa5597bd99a4094 100644
+--- a/generic/private/service.te
++++ b/generic/private/service.te
+@@ -29,7 +29,6 @@
+ # Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ # SPDX-License-Identifier: BSD-3-Clause-Clear
+ 
+-type vendor_audioserver_service,         service_manager_type;
+ type vendor_cne_service,                 service_manager_type;
+ type vendor_imsdc_service,               service_manager_type;
+ type vendor_seemp_service,               service_manager_type;
+diff --git a/generic/private/service_contexts b/generic/private/service_contexts
+index 3d3aa7e9ec28abf7f790b577f7b3fa3737e7a13e..738879492d65dc2f0adc1dae017300a4708d8408 100644
+--- a/generic/private/service_contexts
++++ b/generic/private/service_contexts
+@@ -55,11 +55,12 @@ vendor.qspmsvc                                 u:object_r:vendor_qspmsvc_service
+ nfc_settings                                   u:object_r:nfc_service:s0
+ nfc.st_ext                                     u:object_r:nfc_service:s0
+ vendor.qti.qccsyshal_aidl.IQccsyshal/default   u:object_r:vendor_qccsyshal_service:s0
++vendor.qti.gnss.ILocAidlGnss/default           u:object_r:hal_gnss_service:s0
+ vendor.qvirtmgr                                u:object_r:vendor_qvirtmgr_service:s0
+ vendor.qti.qesdsys.IQesdSys/default            u:object_r:vendor_qesdk_service:s0
+ vendor.qti.hardware.radio.atcmdfwd.IAtCmdFwd/AtCmdFwdAidl u:object_r:radio_service:s0
+ vendor.qti.qvirt.IVirtualizationService/default   u:object_r:vendor_hal_qvirt_service:s0
+-android.media.audio.IHalAdapterVendorExtension/default               u:object_r:vendor_audioserver_service:s0
++android.media.audio.IHalAdapterVendorExtension/default               u:object_r:audioserver_service:s0
+ vendor.qti.hardware.systemhelperaidl.ISystemEvent/default     u:object_r:vendor_hal_systemhelper_aidl_service:s0
+ vendor.qti.hardware.systemhelperaidl.ISystemResource/default  u:object_r:vendor_hal_systemhelper_aidl_service:s0
+ vendor.qti.hardware.sigma_miracast_aidl.ISigma_miracast/default u:object_r:vendor_hal_sigma_miracast_service:s0
+diff --git a/generic/private/system_server.te b/generic/private/system_server.te
+index ceb5ae997ae85a919371ecf0fbda6d763d945b22..4e40c290388923d64d06bbe3617daa39b579e2f4 100644
+--- a/generic/private/system_server.te
++++ b/generic/private/system_server.te
+@@ -64,9 +64,8 @@ binder_call(system_server, vendor_wfdservice);
+ userdebug_or_eng(`
+   get_prop(system_server, vendor_wfd_sys_debug_prop)
+ ')
+-userdebug_or_eng(`
+-  get_prop(system_server, vendor_wfd_sys_prop)
+-')
++# WifiDisplayController reads the functional WFD R2 setting on user builds.
++get_prop(system_server, vendor_wfd_sys_prop)
+ # Allow system server to access fst,wigig system properties
+ set_prop(system_server, vendor_wigig_core_prop)
+ set_prop(system_server, vendor_fst_prop)
+@@ -94,3 +93,6 @@ get_prop(system_server, vendor_persist_rcs_prop)
+ get_prop(system_server, vendor_persist_ntn_prop)
+ get_prop(system_server, vendor_sys_location_prop)
+ binder_call(system_server, vendor_frameworksutils_launcher)
++
++# Read the frame-pacing controls used by libpenguin_impl in system windows.
++get_prop(system_server, vendor_afp_prop)
+diff --git a/generic/private/te_macros b/generic/private/te_macros
+index d2f6919c7618db8e4840bcb4203c29476c11f2bd..405158efca96f3695ba6a4347cd6e793fced7b06 100644
+--- a/generic/private/te_macros
++++ b/generic/private/te_macros
+@@ -42,11 +42,3 @@ hal_client_domain($1, vendor_hal_qesdhal)
+ hal_client_domain($1, vendor_hal_qnextgenhal)
+ ')
+ #####################################
+-
+-#####################################
+-# aksgamepad_app_access(clientdomain)
+-# allow hal_gamepad to use
+-define(`aksgamepad_app_access', `
+-hal_client_domain($1, hal_gamepad)
+-')
+-#####################################
+diff --git a/generic/private/untrusted_app.te b/generic/private/untrusted_app.te
+old mode 100644
+new mode 100755
+index 3bffac025368a9621929e02a9a65fbd88ebe4e70..1fc5947f725eda8a1716aa5842195c5e1d8af699
+--- a/generic/private/untrusted_app.te
++++ b/generic/private/untrusted_app.te
+@@ -47,6 +47,3 @@ hal_client_domain(untrusted_app, vendor_hal_unsignedhexlp)
+ 
+ # Allow access to FDs owned by Hexlp service
+ allow untrusted_app vendor_hal_hexlp_server:fd use;
+-
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app, hal_gamepad)
+diff --git a/generic/private/untrusted_app_25.te b/generic/private/untrusted_app_25.te
+old mode 100644
+new mode 100755
+index fe2fc3293fced7e2decef4610edc17572746a2ab..40a163249c536b8e1a3a9a9937980f4e68dcd46d
+--- a/generic/private/untrusted_app_25.te
++++ b/generic/private/untrusted_app_25.te
+@@ -35,6 +35,3 @@ hal_client_domain(untrusted_app_25, vendor_hal_unsignedhexlp)
+ 
+ # Allow access to FDs owned by Hexlp service
+ allow untrusted_app_25 vendor_hal_hexlp_server:fd use;
+-
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app_25, hal_gamepad)
+diff --git a/generic/private/untrusted_app_27.te b/generic/private/untrusted_app_27.te
+old mode 100644
+new mode 100755
+index b40fa472eb543b00938241012dd1db4ae40d9802..05c5c903b7134fbc9a6056039dc9daaeaccd92c9
+--- a/generic/private/untrusted_app_27.te
++++ b/generic/private/untrusted_app_27.te
+@@ -38,6 +38,3 @@ hal_client_domain(untrusted_app_27, vendor_hal_unsignedhexlp)
+ 
+ # Allow access to FDs owned by Hexlp service
+ allow untrusted_app_27 vendor_hal_hexlp_server:fd use;
+-
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app_27, hal_gamepad)
+diff --git a/generic/private/untrusted_app_29.te b/generic/private/untrusted_app_29.te
+old mode 100644
+new mode 100755
+index 50969e90dc29e1cae89b023c63f182f283fae828..dfca1e4780dbe7a52eb81d3df2e8edba3eb87783
+--- a/generic/private/untrusted_app_29.te
++++ b/generic/private/untrusted_app_29.te
+@@ -38,5 +38,3 @@ hal_client_domain(untrusted_app_29, vendor_hal_unsignedhexlp)
+ # Allow access to FDs owned by Hexlp service
+ allow untrusted_app_29 vendor_hal_hexlp_server:fd use;
+ 
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app_29, hal_gamepad)
+diff --git a/generic/private/untrusted_app_30.te b/generic/private/untrusted_app_30.te
+index 1505027d017de4192baf435c7dc513937c717460..4fc28618f5f0965dee9693c5d0bef9973af67efa 100644
+--- a/generic/private/untrusted_app_30.te
++++ b/generic/private/untrusted_app_30.te
+@@ -45,6 +45,3 @@ allow untrusted_app_30 vendor_hal_hexlp_server:fd use;
+ 
+ # allow 3-pty process access to snapx aidl
+ hal_client_domain(untrusted_app_30, vendor_hal_snapx_service_qti)
+-
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app_30, hal_gamepad)
+diff --git a/generic/private/untrusted_app_32.te b/generic/private/untrusted_app_32.te
+index f6fb1624e397e0ec4e4c0b3443b8347cc59f701e..59d64725a6cdd1a3e0164ad1d1c7ee44590f3cf3 100644
+--- a/generic/private/untrusted_app_32.te
++++ b/generic/private/untrusted_app_32.te
+@@ -46,5 +46,3 @@ hal_client_domain(untrusted_app_32, vendor_hal_unsignedhexlp)
+ # Allow access to FDs owned by Hexlp service
+ allow untrusted_app_32 vendor_hal_hexlp_server:fd use;
+ 
+-# allow app to be a client of AKS Gamepad HAL
+-hal_client_domain(untrusted_app_32, hal_gamepad)
+diff --git a/generic/product/private/compat/30.0/30.0.cil b/generic/product/private/compat/30.0/30.0.cil
+index d225937340186701430726624ebf4b9eee440f20..13d37860d1dc5d710536d87902f0ea5e62a42658 100755
+--- a/generic/product/private/compat/30.0/30.0.cil
++++ b/generic/product/private/compat/30.0/30.0.cil
+@@ -1,12 +1,8 @@
+ (typeattributeset vendor_hal_systemhelper_hwservice_30_0 (vendor_hal_systemhelper_hwservice))
+ (expandtypeattribute (vendor_hal_systemhelper_hwservice_30_0) true)
+-(typeattribute vendor_hal_systemhelper_hwservice_30_0)
+ (typeattributeset vendor_display_notch_prop_30_0 (vendor_display_notch_prop))
+ (expandtypeattribute (vendor_display_notch_prop_30_0) true)
+-(typeattribute vendor_display_notch_prop_30_0)
+ (typeattributeset vendor_systemhelper_app_30_0 (vendor_systemhelper_app))
+ (expandtypeattribute (vendor_systemhelper_app_30_0) true)
+-(typeattribute vendor_systemhelper_app_30_0)
+ (typeattributeset vendor_sys_qti_display_30_0 (vendor_sys_qti_display))
+ (expandtypeattribute (vendor_sys_qti_display_30_0) true)
+-(typeattribute vendor_sys_qti_display_30_0)

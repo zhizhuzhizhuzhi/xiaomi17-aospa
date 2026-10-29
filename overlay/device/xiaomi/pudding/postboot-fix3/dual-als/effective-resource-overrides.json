@@ -1,0 +1,17 @@
+{
+  "285540519": [
+    "bool",
+    "true",
+    "config_brightness_step_mode_supported"
+  ],
+  "285540525": [
+    "bool",
+    "true",
+    "config_gamebrightness_useprox"
+  ],
+  "286195871": [
+    "string",
+    "\"com.xiaomi.aon/com.xiaomi.aon.AonFlareService\"",
+    "config_aon_flare_component"
+  ]
+}

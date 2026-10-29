@@ -1,0 +1,16 @@
+diff --git a/Android.mk b/Android.mk
+index 308fba9d105215e6adb13871bb40d10c0de6d628..8a8067cb8b1f7cbd76a8c6e457cf9409c309e906 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ ifeq ($(TARGET_USES_QMAA),true)
+ 	KGSL_ENABLED := false
+ 	ifeq ($(TARGET_USES_QMAA_OVERRIDE_GFX),true)
+@@ -37,3 +39,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ 
+ endif # DLKM check
+ endif # KGSL_ENABLED
++
++endif # pudding prebuilt kernel

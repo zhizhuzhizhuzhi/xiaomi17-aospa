@@ -1,0 +1,62 @@
+diff --git a/qcwcn/wifi_hal/nan_pairing.cpp b/qcwcn/wifi_hal/nan_pairing.cpp
+index 818e003cb71b88958a5cdcab6208750bd2cd19a9..a7ae6d29541cd3fecd518e4ecadaac26f6c01945 100644
+--- a/qcwcn/wifi_hal/nan_pairing.cpp
++++ b/qcwcn/wifi_hal/nan_pairing.cpp
+@@ -806,7 +806,7 @@ void nan_rx_mgmt_auth(wifi_handle handle, const u8 *frame, size_t len)
+ 
+             ptksa_cache_add(info->secure_nan->ptksa, info->secure_nan->own_addr,
+                             peer->bssid, pasn_get_cipher(pasn), nanPMKLifetime,
+-                            pasn_get_ptk(pasn), NULL, NULL, pasn_get_akmp(pasn));
++                            pasn_get_ptk(pasn), NULL, NULL, pasn_get_akmp(pasn), pasn->auth_alg);
+             memset(pasn_get_ptk(pasn), 0, sizeof(struct wpa_ptk));
+         } else if (ret == -1 || mgmt->u.auth.status_code) {
+             NanPairingConfirmInd evt;
+@@ -847,7 +847,7 @@ nan_pairing_add_peer_to_list(struct wpa_secure_nan *secure_nan, u8 *mac)
+            entry->pairing_instance_id = secure_nan->pairing_id++;
+            pasn_register_callbacks(entry->pasn, secure_nan->cb_ctx,
+                                    nan_send_tx_mgmt,
+-                                   nan_pairing_validate_custom_pmkid);
++                                   nan_pairing_validate_custom_pmkid, NULL, NULL);
+            return entry;
+        }
+     }
+@@ -870,7 +870,7 @@ nan_pairing_add_peer_to_list(struct wpa_secure_nan *secure_nan, u8 *mac)
+     }
+ 
+     pasn_register_callbacks(mentry->pasn, secure_nan->cb_ctx, nan_send_tx_mgmt,
+-                            nan_pairing_validate_custom_pmkid);
++                            nan_pairing_validate_custom_pmkid, NULL, NULL);
+     wpa_pasn_reset(mentry->pasn);
+     add_to_list(&mentry->list, &secure_nan->peers);
+     return mentry;
+@@ -1147,7 +1147,7 @@ int nan_send_tx_mgmt(void *ctx, const u8 *frame_buf, size_t frame_len,
+         ptksa_cache_add(info->secure_nan->ptksa, info->secure_nan->own_addr,
+                         peer->bssid,pasn_get_cipher(pasn), 43200,
+                         pasn_get_ptk(pasn), NULL, NULL,
+-                        pasn_get_akmp(pasn));
++                        pasn_get_akmp(pasn), pasn->auth_alg);
+         nan_pairing_set_keys_from_cache(handle, info->secure_nan->own_addr,
+                                         peer->bssid,pasn_get_cipher(pasn),
+                                         pasn_get_akmp(pasn), peer->peer_role);
+diff --git a/qcwcn/wifi_hal/nan_pairing_initiator.cpp b/qcwcn/wifi_hal/nan_pairing_initiator.cpp
+index cc71aa8ecc084d7cf6386ffe4f0a0d0fb487c53e..abd885766cd145acf93aa2dfff75fee749dfba6b 100644
+--- a/qcwcn/wifi_hal/nan_pairing_initiator.cpp
++++ b/qcwcn/wifi_hal/nan_pairing_initiator.cpp
+@@ -64,7 +64,7 @@ int nan_pairing_initiator_pmksa_cache_add(struct rsn_pmksa_cache *pmksa,
+                                           u32 pmk_len)
+ {
+     if (pmksa_cache_add(pmksa, pmk, pmk_len, NULL, NULL, 0, bssid, own_addr,
+-                        NULL, WPA_KEY_MGMT_SAE, 0))
++                        NULL, WPA_KEY_MGMT_SAE, NULL, 0))
+           return 0;
+     return -1;
+ }
+@@ -84,7 +84,7 @@ int nan_pairing_initiator_pmksa_cache_get(struct rsn_pmksa_cache *pmksa,
+ 
+ void nan_pairing_initiator_pmksa_cache_flush(struct rsn_pmksa_cache *pmksa)
+ {
+-    return pmksa_cache_flush(pmksa, NULL, NULL, 0, false);
++    return pmksa_cache_flush(pmksa, NULL, NULL, 0, false, NULL);
+ }
+ 
+ void NanCommand::notifyPairingInitiatorResponse(transaction_id id, u32 pairing_id)

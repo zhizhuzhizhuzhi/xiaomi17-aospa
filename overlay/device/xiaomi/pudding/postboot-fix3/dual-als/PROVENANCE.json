@@ -1,0 +1,11 @@
+{
+  "original": "HyperOS OS3.0.335.0.XPCMIXM matched stock miui-services.jar + framework-ext-res.apk",
+  "core": "30 original smali classes; namespace relocation only. Includes DualSensorPolicy, AmbientLightRingBuffer, HysteresisLevelsImpl, SceneDetector and AON Binder interfaces. Original branches, constants and scheduling retained.",
+  "adapters": "AOSPA lifecycle/output callbacks, original listener ABI, pudding single-display fact, stock resource context, camera torch/availability callbacks. MIUI brightness-statistics callbacks have no AOSPA equivalent.",
+  "aon": "Original SceneDetector preserved. AON helper service is absent on current AOSPA; driver enables this capability only if service resolves. This is not a claim that full Xiaomi AON helper has been ported.",
+  "no_rewrite": "XiaomiDualSensorPolicyCore.java.NOT_USED is excluded.",
+  "runtime": "Read-only original-policy probe subscribed both physical light sensors successfully; source integration has not been flashed.",
+  "jar_sha256": "d89723c6f3d77b48c817b8b54dbe2d2e16c2e9f01916982cd070fae73dba9ca1",
+  "resources_sha256": "f5b8dbe4f5c5683e3e1ad7971f6bdcfe0d125cbbcbfd0cf3d82820c949e71a06",
+  "polling_authorization": "User explicitly chose original internal scheduling after proposed event-only rewrite; exception limited to original brightness policy."
+}

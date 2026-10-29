@@ -1,0 +1,56 @@
+{
+    "version": "1.1",
+    "model": [
+        {
+            "begin": 1,
+            "end": 8,
+            "denoise_strength": 0.53,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 8,
+            "end": 16,
+            "denoise_strength": 0.59,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 16,
+            "end": 24,
+            "denoise_strength": 0.71,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 24,
+            "end": 36,
+            "denoise_strength": 0.8,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 36,
+            "end": 52,
+            "denoise_strength": 0.83,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 52,
+            "end": 63,
+            "denoise_strength": 0.85,
+            "motion_strength": 0.8
+        },
+        {
+            "begin": 63,
+            "end": 100,
+            "denoise_strength": 0.88,
+            "motion_strength": 0.8
+        }
+    ],
+    "project": {
+        "resize_type": "binning",
+        "pipeline": "4k_simplify_pipeline",
+        "skip_lux": {
+            "enable": true,
+            "threthold": 340,
+            "type": "<"
+        }
+    }
+}

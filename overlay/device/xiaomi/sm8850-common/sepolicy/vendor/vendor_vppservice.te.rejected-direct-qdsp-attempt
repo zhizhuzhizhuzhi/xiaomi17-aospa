@@ -1,0 +1,5 @@
+hal_client_domain(vendor_vppservice, vendor_hal_dspmanager)
+
+# SM8850 FastRPC CDSP/NSP nodes use vendor_qdsp_device; same read access as XDSP.
+# Observed boot AVCs from vppservice/open_hal_session on fastrpc-nsp1000 and cdsp.
+allow vendor_vppservice vendor_qdsp_device:chr_file r_file_perms;

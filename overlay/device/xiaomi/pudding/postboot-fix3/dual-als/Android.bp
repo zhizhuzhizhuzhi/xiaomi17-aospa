@@ -1,0 +1,51 @@
+// Resource-only stock APK consumed by the dual ALS policy via AssetManager.
+// This is an etc payload, not an installed application.
+prebuilt_etc {
+    name: "PuddingBrightnessFrameworkResources",
+    src: "framework-ext-res.apk",
+    filename: "framework-ext-res.apk",
+    sub_dir: "pudding-brightness",
+    system_ext_specific: true,
+}
+
+
+// These declarations are compile-only. They are never packaged into the runtime JAR.
+java_library {
+    name: "PuddingStockBrightnessCompileApi",
+    srcs: ["compile-api/CompileApi.java", "StockHelpers.java", "config/HighBrightnessModeData.java"],
+    libs: ["framework"],
+    installable: false,
+}
+
+java_library {
+    name: "PuddingStockBrightnessBridge",
+    srcs: ["Entry.java", "StockHelpers.java", "ResourceOverrides.java",
+           "MiuiMultiDisplayTypeInfo.java", "config/*.java"],
+    libs: ["framework", "PuddingStockBrightnessCompileApi"],
+    compile_dex: true,
+    installable: false,
+    system_ext_specific: true,
+    optimize: { enabled: false },
+}
+
+python_binary_host {
+    name: "pudding_brightness_packager",
+    main: "package_policy.py",
+    srcs: ["package_policy.py"],
+}
+
+java_genrule {
+    name: "pudding_stock_brightness_runtime",
+    tools: ["pudding_brightness_packager"],
+    srcs: ["darkening-confirmed-policy.jar", "darkening-confirmed-policy-sha256.txt", ":PuddingStockBrightnessBridge"],
+    out: ["PuddingStockBrightness.jar"],
+    cmd: "$(location pudding_brightness_packager) --policy $(location darkening-confirmed-policy.jar) " +
+         "--sha256 $(location darkening-confirmed-policy-sha256.txt) --bridge $(location :PuddingStockBrightnessBridge) " +
+         "--out $(out)",
+}
+
+dex_import {
+    name: "PuddingStockBrightness",
+    jars: [":pudding_stock_brightness_runtime"],
+    system_ext_specific: true,
+}

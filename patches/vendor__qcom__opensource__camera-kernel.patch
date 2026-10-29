@@ -1,0 +1,62 @@
+diff --git a/Android.mk b/Android.mk
+index a9fa589e1c42b9de7ef40829e72bcbb10992dedb..e5bd647df936307ab355ecaecd46e10ed631a725 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -1,3 +1,5 @@
++# Pudding uses the matched stock kernel and modules.
++ifneq ($(TARGET_PRODUCT),aospa_pudding)
+ CAMERA_DLKM_ENABLED := true
+ ifeq ($(TARGET_KERNEL_DLKM_DISABLE), true)
+ 	ifeq ($(TARGET_KERNEL_DLKM_CAMERA_OVERRIDE), false)
+@@ -73,3 +75,5 @@ include $(DLKM_DIR)/Build_external_kernelmodule.mk
+ 
+ endif # End of check for board platform
+ endif # ifeq ($(CAMERA_DLKM_ENABLED),true)
++
++endif # pudding prebuilt kernel
+diff --git a/Kbuild b/Kbuild
+index 74cff7414c98f2c38a137623db04279254c6e2fa..d06bf31b161ef81a1434fc49c3880b708d5a3649 100644
+--- a/Kbuild
++++ b/Kbuild
+@@ -57,6 +57,8 @@ cam_include_dirs := $(shell dirname `find $(CAMERA_KERNEL_ROOT) -name '*.h'` | u
+ USERINCLUDE +=                              \
+ 	-I$(CAMERA_KERNEL_ROOT)/include/uapi/
+ # Include Kernel headers
++LINUXINCLUDE += -I$(CAMERA_GEN_DIR)
++
+ LINUXINCLUDE +=                                 \
+ 	-I$(KERNEL_ROOT)                            \
+ 	$(addprefix -I,$(cam_include_dirs))         \
+diff --git a/Makefile b/Makefile
+index 2d6503c1b066a497a741696eec6533ff3fa0aa6a..233d699667f528511163c8091b7230bf95595b51 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,18 +5,23 @@ KBUILD_OPTIONS += KERNEL_ROOT=$(ROOT_DIR)/$(KERNEL_DIR)
+ KBUILD_OPTIONS += MODNAME=camera
+ KBUILD_OPTIONS += MODNAME=cameralog
+ 
++CAMERA_GEN_DIR := $(abspath $(O)/$(M))/generated
++CAMERA_GEN_PATH := $(CAMERA_GEN_DIR)/cam_generated_h
++KBUILD_OPTIONS += CAMERA_GEN_DIR=$(CAMERA_GEN_DIR)
++
+ all: modules
+ 
+ CAMERA_COMPILE_TIME = $(shell date)
+ CAMERA_COMPILE_BY = $(shell whoami | sed 's/\\/\\\\/')
+ CAMERA_COMPILE_HOST = $(shell uname -n)
+ 
+-cam_generated_h: $(shell find . -iname "*.c") $(shell find . -iname "*.h") $(shell find . -iname "*.mk")
+-	echo '#define CAMERA_COMPILE_TIME "$(CAMERA_COMPILE_TIME)"' > cam_generated_h
+-	echo '#define CAMERA_COMPILE_BY "$(CAMERA_COMPILE_BY)"' >> cam_generated_h
+-	echo '#define CAMERA_COMPILE_HOST "$(CAMERA_COMPILE_HOST)"' >> cam_generated_h
++$(CAMERA_GEN_PATH): $(shell find . -iname "*.c") $(shell find . -iname "*.h") $(shell find . -iname "*.mk")
++	mkdir -p $(CAMERA_GEN_DIR)
++	echo '#define CAMERA_COMPILE_TIME "$(CAMERA_COMPILE_TIME)"' > $(CAMERA_GEN_PATH)
++	echo '#define CAMERA_COMPILE_BY "$(CAMERA_COMPILE_BY)"' >> $(CAMERA_GEN_PATH)
++	echo '#define CAMERA_COMPILE_HOST "$(CAMERA_COMPILE_HOST)"' >> $(CAMERA_GEN_PATH)
+ 
+-modules: cam_generated_h
++modules: $(CAMERA_GEN_PATH)
+ 
+ modules dtbs:
+ 	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules $(KBUILD_OPTIONS)

@@ -1,0 +1,682 @@
+{
+    "version": "algo_v2.1.6__p1_20251127",
+    "debug": {
+        "dump": 0,
+        "print": 0,
+        "dump_dir": "/data/vendor/camera/harbo/",
+        "log_level": 4
+    },
+    "start_params": {
+        "model":{
+            "0":{
+                "name": "WIDE_QUAD_4F",
+                "algo_type": [5],
+                "sensor_type": [1],
+                "sensor_mode": [4, 15],
+                "camera_mode": [-999],
+                "style_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 2,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "1":{
+                "name": "TELE_FULLSIZE_QUAD_4F",
+                "algo_type": [5],
+                "sensor_type": [3,4],
+                "sensor_mode": [4],
+                "camera_mode": [-999],
+                "style_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 2,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": 0,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "2":{
+                "name": "TELE_ISZ_QUAD_8F",
+                "algo_type": [5],
+                "sensor_type": [3,4],
+                "sensor_mode": [15],
+                "camera_mode": [-999],
+                "style_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 2,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "3":{
+                "name": "WIDE_QUAD_1F",
+                "algo_type": [5],
+                "sensor_type": [1],
+                "sensor_mode": [4, 15],
+                "camera_mode": [-999],
+                "style_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 2,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "4":{
+                "name": "TELE_QUAD_1F",
+                "algo_type": [5],
+                "sensor_type": [3,4],
+                "sensor_mode": [4, 15],
+                "camera_mode": [-999],
+                "style_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 1,
+                "input_frame_number_high": 2,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "5":{
+                "name": "TELE_FULLSIZE_QUAD_4F_CONCERT",
+                "algo_type": [5],
+                "sensor_type": [3,4],
+                "sensor_mode": [4],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 2,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": 0,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            },
+            "6":{
+                "name": "TELE_ISZ_QUAD_8F_CONCERT",
+                "algo_type": [5],
+                "sensor_type": [3,4],
+                "sensor_mode": [15],
+                "camera_mode": [-999],
+                "real_zoom_ratio_low": 0,
+                "real_zoom_ratio_high": 999,
+                "input_frame_number_low": 2,
+                "input_frame_number_high": 99,
+                "motion": -999,
+                "concert": -999,
+                "rawsdsr": -999,
+                "lux_index_low":0,
+                "lux_index_high":999,
+                "on_tripod": -999
+            }
+        }
+    },
+    "supported_sensor":{
+        "supported_camera_mode": [-999],
+        "supported_style_mode": [-999],
+        "supported_sensor_type": [1, 3,4],
+        "supported_sensor_mode_binning": [],
+        "supported_sensor_mode_quad": [4, 15]
+    },
+    "pre_crop":{
+
+    },
+	"anchor_pick": {
+        "open_eye_weight": 0.8,
+        "close_eye_weight": 0.2,
+        "ambiguity_weight": 1.0,
+        "capture_time_weight": 1.0
+    },
+    "WIDE_QUAD_4F": {
+        "model":{
+            "path": "/odm/etc/camera/harbo_se_p3_wide_quad_4frame.minn",
+            "version": "v2025.613",
+            "frame_num": [4,3,2,1],
+            "bayer_pattern": 0,
+            "upscale_ratio": 1,
+			"pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [136, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 2000, 2400, 2800, 3160],
+            "shot":   [8.465687928780644e-05, 9.213575785528677e-05, 0.00011703654748426052, 0.000141677366735554, 0.00016609673011583093, 0.0001873746160105896, 0.00020685393213353137, 0.0002674831683733981, 0.00031074260746377354, 0.0003500383769283535, 0.0004165852831429902, 0.000500020233931479, 0.0006079278809648555, 0.0007231876769857619, 0.0008382194157872979, 0.0009601149019324253, 0.0010925400570149526, 0.001196864424362831, 0.001359349607085556],
+            "gauss":   [9.896003803078202e-07, 1.1020188139809761e-06, 4.21434492636763e-07, 4.927607051286031e-07, 5.76176773847692e-07, 4.831484829992405e-07, 5.414069619291695e-07, 6.515376753668534e-07, 8.043535331125895e-07, 9.454734026803635e-07, 1.0662300837793737e-06, 1.4210432937034057e-06, 1.7781295582608436e-06, 2.271267476317007e-06, 2.5698532226670068e-06, 3.6178355458105216e-06, 4.886889200861333e-06, 5.322796961335698e-06, 6.347165433758637e-06]
+        },
+
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.4,
+        "guide_noise": 1,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+	"correct_local_noise_back" : 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.88
+                },
+			    "1": {
+                    "iso_low": 100,
+                    "iso_high": 800,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.88
+                },
+                "2": {
+                    "iso_low": 800,
+                    "iso_high": 3000,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.84,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+				"3": {
+                    "iso_low": 3000,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.6,
+                    "guide_noise": 0.8,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.84,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "1": {
+                    "iso_low": 100,
+                    "iso_high": 400,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.7,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "2": {
+                    "iso_low": 400,
+                    "iso_high": 3000,
+                    "denoise": 1,
+                    "sharpen": 0.5,
+                    "guide_noise": 0.8,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                },
+                "3": {
+                    "iso_low": 3000,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.6,
+                    "guide_noise": 0.75,
+				    "noise_back_luma_dark_threshold" : 0.3,
+		            "noise_back_strength" : 0.15
+                }
+            }    
+        }
+    },
+    "TELE_FULLSIZE_QUAD_4F": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_se_p3_tele_fullsize_quad_4frame.minn",
+            "version": "v2026.116",
+            "frame_num": [4,3,2,1],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.00015300181194230364, 0.00030384648673281364, 0.00045380757216105673, 0.000604261522714109, 0.0007525902178790796, 0.0009010754837786557, 0.0010537978430171457, 0.0012036410256843664, 0.0013614952282701184, 0.0015160254555907054, 0.0016580439847235604, 0.001799505504321122, 0.0019592753862671553, 0.002126573711737968, 0.0022502428519020038, 0.0024011978042988045],
+			"gauss": [5.289157769539088e-07, 7.641744957709307e-07, 1.0992453288357258e-06, 1.506132468875876e-06, 1.8850849566357889e-06, 2.424937849809794e-06, 2.9031166529118005e-06, 3.5853687525862672e-06, 4.183148189440544e-06, 4.952867539032013e-06, 5.862008811163832e-06, 6.6285629751898036e-06, 7.462540103612506e-06, 8.453503884690387e-06, 9.529208879636523e-06, 1.0463123423202585e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 300,
+                    "iso_high": 350,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                },
+                "1": {
+                    "iso_low": 350,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.9
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 150,
+                    "iso_high": 750,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.88
+                },
+                "1": {
+                    "iso_low": 750,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.8
+                }
+            }
+        }
+    },
+    "TELE_FULLSIZE_QUAD_4F_CONCERT": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_se_p3_tele_fullsize_quad_4frame.minn",
+            "version": "v2026.116",
+            "frame_num": [4,3,2,1],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.00015300181194230364, 0.00030384648673281364, 0.00045380757216105673, 0.000604261522714109, 0.0007525902178790796, 0.0009010754837786557, 0.0010537978430171457, 0.0012036410256843664, 0.0013614952282701184, 0.0015160254555907054, 0.0016580439847235604, 0.001799505504321122, 0.0019592753862671553, 0.002126573711737968, 0.0022502428519020038, 0.0024011978042988045],
+			"gauss": [5.289157769539088e-07, 7.641744957709307e-07, 1.0992453288357258e-06, 1.506132468875876e-06, 1.8850849566357889e-06, 2.424937849809794e-06, 2.9031166529118005e-06, 3.5853687525862672e-06, 4.183148189440544e-06, 4.952867539032013e-06, 5.862008811163832e-06, 6.6285629751898036e-06, 7.462540103612506e-06, 8.453503884690387e-06, 9.529208879636523e-06, 1.0463123423202585e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 300,
+                    "iso_high": 350,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.94
+                },
+                "1": {
+                    "iso_low": 350,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.9
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 150,
+                    "iso_high": 750,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.88
+                },
+                "1": {
+                    "iso_low": 750,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.8
+                }
+            }
+        }
+    },
+    "TELE_ISZ_QUAD_8F": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_se_p3_tele_isz_quad_8frame.minn",
+            "version": "v2025.827",
+            "frame_num": [8,7,6,5,4,3,2,1],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.0002006782369618052, 0.00039535736234525774, 0.0005970642808435158, 0.0007842980878048342, 0.0009818955210208595, 0.0011945946678498377, 0.0013904560206335196, 0.0015758129373226618, 0.0017766505012568948, 0.0019837158677362935, 0.0021611769185222135, 0.0023723889807087005, 0.0025695064776286966, 0.0027572320167194705, 0.0029396307796948893, 0.0031658461594589403],
+			"gauss": [5.257010574847268e-07, 8.097860117822277e-07, 1.2144130243796736e-06, 1.702933252345885e-06, 2.188497000245486e-06, 2.831827507115872e-06, 3.431508399412371e-06, 4.266907253941897e-06, 5.031519322074018e-06, 5.957893048808298e-06, 7.081510343516384e-06, 8.079281989219517e-06, 9.01310720604542e-06, 1.0220027928753233e-05, 1.1553639891197937e-05, 1.2949884637093515e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+		"local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.98
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.86
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.86
+                }
+            }
+            
+        }
+    },
+    "TELE_ISZ_QUAD_8F_CONCERT": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_se_p3_tele_isz_quad_8frame.minn",
+            "version": "v2025.827",
+            "frame_num": [8,7,6,5,4,3,2,1],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.0002006782369618052, 0.00039535736234525774, 0.0005970642808435158, 0.0007842980878048342, 0.0009818955210208595, 0.0011945946678498377, 0.0013904560206335196, 0.0015758129373226618, 0.0017766505012568948, 0.0019837158677362935, 0.0021611769185222135, 0.0023723889807087005, 0.0025695064776286966, 0.0027572320167194705, 0.0029396307796948893, 0.0031658461594589403],
+			"gauss": [5.257010574847268e-07, 8.097860117822277e-07, 1.2144130243796736e-06, 1.702933252345885e-06, 2.188497000245486e-06, 2.831827507115872e-06, 3.431508399412371e-06, 4.266907253941897e-06, 5.031519322074018e-06, 5.957893048808298e-06, 7.081510343516384e-06, 8.079281989219517e-06, 9.01310720604542e-06, 1.0220027928753233e-05, 1.1553639891197937e-05, 1.2949884637093515e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1.0,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+		"local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.98
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.86
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 300,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.96
+                },
+                "1": {
+                    "iso_low": 300,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 0.86
+                }
+            }
+            
+        }
+    },
+    "WIDE_QUAD_1F": {
+        "model":{
+            "path": "/odm/etc/camera/harbo_se_p3_wide_quad_1frame.minn",
+            "version": "v2025.0603",
+            "frame_num": [1],
+            "bayer_pattern": 2,
+            "upscale_ratio": 1,
+			"pre_process": 1
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 137, 150, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 2000, 2400, 2800, 3200],
+            "shot": [3.025315944585629e-05, 5.589406384101703e-05, 7.729261612790356e-05, 8.367206819092942e-05, 9.988888737001907e-05, 0.00012213367204723938, 0.000141901167211924, 0.00016555206279689064, 0.00018315965231957679, 0.00022681487391540005, 0.00027311211043151836, 0.0003158422359504335, 0.00036299172330584356, 0.00044781901525029556, 0.0005402727749003044, 0.000628328269597197, 0.0007143837780155406, 0.0008794506124492578, 0.0010756273799735012, 0.001301916347222324, 0.0015049426578323827],
+            "gauss":  [4.4377242147675133e-07, 5.96355278048577e-07, 8.647375011605618e-07, 9.593483127900981e-07, 3.785619355767267e-07, 4.360333605291089e-07, 5.035242907069915e-07, 4.3697940554920933e-07, 4.843743681703927e-07, 5.77845412408351e-07, 7.050662134133745e-07, 8.357858405361185e-07, 9.478282549935102e-07, 1.2318351991780219e-06, 1.6290964595100377e-06, 2.027330765486113e-06, 2.289442591063562e-06, 3.205173698006547e-06, 4.321449978306191e-06, 5.498528480529785e-06, 6.714696610288229e-06]
+			},
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.4,
+        "guide_noise": 1,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 3,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+			    "1": {
+                    "iso_low": 100,
+                    "iso_high": 400,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+                "2": {
+                    "iso_low": 400,
+                    "iso_high": 600,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+				"3": {
+                    "iso_low": 600,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                }
+            },
+            "1": {
+                "adrc_low": 3,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 50,
+                    "iso_high": 100,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+                "1": {
+                    "iso_low": 100,
+                    "iso_high": 400,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+                "2": {
+                    "iso_low": 400,
+                    "iso_high": 600,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                },
+                "3": {
+                    "iso_low": 600,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.4,
+                    "guide_noise": 0.8
+                }
+            }    
+        }
+    },
+    "TELE_QUAD_1F": {
+        "model": {
+            "path": "/odm/etc/camera/harbo_se_p3_tele_quad_1frame.minn",
+            "version": "v2025.718",
+            "frame_num": [1],
+            "bayer_pattern": 3,
+            "upscale_ratio": 1,
+            "pre_process": 1,
+            "input_unshuffle_ratio": 2
+        },
+        "frame_consistency": {
+            "luma_threshold": [0.5, 0.2],
+            "sensor_gain_threshold": [99, 1]
+        },
+        "noise_params": {
+            "interp_type": 1,
+            "iso_list": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800],
+			"shot": [0.0002006782369618052, 0.00039535736234525774, 0.0005970642808435158, 0.0007842980878048342, 0.0009818955210208595, 0.0011945946678498377, 0.0013904560206335196, 0.0015758129373226618, 0.0017766505012568948, 0.0019837158677362935, 0.0021611769185222135, 0.0023723889807087005, 0.0025695064776286966, 0.0027572320167194705, 0.0029396307796948893, 0.0031658461594589403],
+			"gauss": [5.257010574847268e-07, 8.097860117822277e-07, 1.2144130243796736e-06, 1.702933252345885e-06, 2.188497000245486e-06, 2.831827507115872e-06, 3.431508399412371e-06, 4.266907253941897e-06, 5.031519322074018e-06, 5.957893048808298e-06, 7.081510343516384e-06, 8.079281989219517e-06, 9.01310720604542e-06, 1.0220027928753233e-05, 1.1553639891197937e-05, 1.2949884637093515e-05]
+        },
+        "align": 1,
+        "align_motion": 1,
+        "sharpen": 0.0,
+        "guide_noise": 1,
+        "denoise": 1,
+        "correct_local_denoise": 1,
+        "correct_local_sharpen": 1,
+        "correct_local_guide_noise": 1,
+        "local": {
+            "0": {
+                "adrc_low": 1,
+                "adrc_high": 2,
+                "0": {
+                    "iso_low": 300,
+                    "iso_high": 350,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                },
+                "1": {
+                    "iso_low": 350,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                }
+            },
+            "1": {
+                "adrc_low": 2,
+                "adrc_high": 99,
+                "0": {
+                    "iso_low": 150,
+                    "iso_high": 25600,
+                    "denoise": 1,
+                    "sharpen": 0.0,
+                    "guide_noise": 1.0
+                }
+            }
+        }
+    }
+    
+}

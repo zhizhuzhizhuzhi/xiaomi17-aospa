@@ -1,0 +1,189 @@
+diff --git a/libs/binder/OS_android.cpp b/libs/binder/OS_android.cpp
+index 062f041ea3da4003ffcd52e813a718ec01b51a34..78fe7104f039c782112d99b18b64fd24c285b1fc 100644
+--- a/libs/binder/OS_android.cpp
++++ b/libs/binder/OS_android.cpp
+@@ -56,11 +56,17 @@ uint64_t get_trace_enabled_tags() {
+ } // namespace os
+ 
+ // Legacy trace symbol. To be removed once all of downstream rebuilds.
++#if defined(__ANDROID_VENDOR__)
++LIBBINDER_EXPORTED
++#endif
+ void atrace_begin(uint64_t tag, const char* name) {
+     os::trace_begin(tag, name);
+ }
+ 
+ // Legacy trace symbol. To be removed once all of downstream rebuilds.
++#if defined(__ANDROID_VENDOR__)
++LIBBINDER_EXPORTED
++#endif
+ void atrace_end(uint64_t tag) {
+     os::trace_end(tag);
+ }
+diff --git a/libs/ui/GraphicBuffer.cpp b/libs/ui/GraphicBuffer.cpp
+index 873b039703d9d1badd7ccb9d9979c236e43ed3ff..0d8db04159e842cad210eb7c249239eb992768a4 100644
+--- a/libs/ui/GraphicBuffer.cpp
++++ b/libs/ui/GraphicBuffer.cpp
+@@ -28,9 +28,40 @@
+ #include <utils/Trace.h>
+ 
+ #include <string>
++#include <memory>
++#include <mutex>
++#include <unordered_map>
+ 
+ namespace android {
+ 
++#if defined(LIBUI_IN_VNDK) || defined(__ANDROID_VENDOR__)
++namespace {
++struct VendorBufferMonitors {
++    std::mutex mutex;
++    std::unordered_map<const GraphicBuffer*, std::unique_ptr<DependencyMonitor>> monitors;
++};
++VendorBufferMonitors& vendorBufferMonitors() {
++    // Registry lifetime covers all buffers, including static-object teardown.
++    static auto* const state = new VendorBufferMonitors;
++    return *state;
++}
++void eraseVendorBufferMonitor(const GraphicBuffer* buffer) {
++    auto& state = vendorBufferMonitors();
++    std::lock_guard<std::mutex> lock(state.mutex);
++    state.monitors.erase(buffer);
++}
++} // namespace
++
++DependencyMonitor& GraphicBuffer::getDependencyMonitor() {
++    auto& state = vendorBufferMonitors();
++    std::lock_guard<std::mutex> lock(state.mutex);
++    auto& monitor = state.monitors[this];
++    if (!monitor) monitor = std::make_unique<DependencyMonitor>();
++    return *monitor;
++}
++#endif
++
++
+ // ===========================================================================
+ // Buffer and implementation of ANativeWindowBuffer
+ // ===========================================================================
+@@ -106,7 +137,7 @@ GraphicBuffer::GraphicBuffer()
+     usage  = 0;
+     layerCount = 0;
+     handle = nullptr;
+-    mDependencyMonitor.setToken(std::to_string(mId));
++    getDependencyMonitor().setToken(std::to_string(mId));
+ }
+ 
+ // deprecated
+@@ -159,7 +190,7 @@ GraphicBuffer::GraphicBuffer(const GraphicBufferAllocator::AllocationRequest& re
+         usage = request.usage;
+         usage_deprecated = int(usage);
+         std::string name = request.requestorName;
+-        mDependencyMonitor.setToken(name.append(":").append(std::to_string(mId)));
++        getDependencyMonitor().setToken(name.append(":").append(std::to_string(mId)));
+     }
+ }
+ 
+@@ -172,6 +203,9 @@ GraphicBuffer::~GraphicBuffer()
+     for (auto& [callback, context] : mDeathCallbacks) {
+         callback(context, mId);
+     }
++#if defined(LIBUI_IN_VNDK) || defined(__ANDROID_VENDOR__)
++    eraseVendorBufferMonitor(this);
++#endif
+ }
+ 
+ void GraphicBuffer::free_handle()
+@@ -262,7 +296,7 @@ status_t GraphicBuffer::initWithSize(uint32_t inWidth, uint32_t inHeight,
+         usage = inUsage;
+         usage_deprecated = int(usage);
+         stride = static_cast<int>(outStride);
+-        mDependencyMonitor.setToken(requestorName.append(":").append(std::to_string(mId)));
++        getDependencyMonitor().setToken(requestorName.append(":").append(std::to_string(mId)));
+     }
+     return err;
+ }
+@@ -626,7 +660,7 @@ status_t GraphicBuffer::unflatten(void const*& buffer, size_t& size, int const*&
+         name = "<Unknown>";
+     }
+ 
+-    mDependencyMonitor.setToken(name.append(":").append(std::to_string(mId)));
++    getDependencyMonitor().setToken(name.append(":").append(std::to_string(mId)));
+ 
+     buffer = static_cast<void const*>(static_cast<uint8_t const*>(buffer) + sizeNeeded);
+     size -= sizeNeeded;
+diff --git a/libs/ui/include/ui/GraphicBuffer.h b/libs/ui/include/ui/GraphicBuffer.h
+index b8d946414f44bd560ccf51f3b1c10874b4797c29..eb1de501c50555b9a5750051fc3dafb0ea800c76 100644
+--- a/libs/ui/include/ui/GraphicBuffer.h
++++ b/libs/ui/include/ui/GraphicBuffer.h
+@@ -240,7 +240,12 @@ public:
+ 
+     void addDeathCallback(GraphicBufferDeathCallback deathCallback, void* context);
+ 
++#if !defined(LIBUI_IN_VNDK) && !defined(__ANDROID_VENDOR__)
+     DependencyMonitor& getDependencyMonitor() { return mDependencyMonitor; }
++#else
++    // Per-buffer external state preserves the legacy vendor object size.
++    DependencyMonitor& getDependencyMonitor();
++#endif
+ 
+ private:
+     ~GraphicBuffer();
+@@ -309,7 +314,10 @@ private:
+     std::vector<std::pair<GraphicBufferDeathCallback, void* /*mDeathCallbackContext*/>>
+             mDeathCallbacks;
+ 
++#if !defined(LIBUI_IN_VNDK) && !defined(__ANDROID_VENDOR__)
++    // Legacy vendor binaries allocate GraphicBuffer using its old size.
+     DependencyMonitor mDependencyMonitor;
++#endif
+ };
+ 
+ } // namespace android
+diff --git a/services/surfaceflinger/QtiExtension/QtiSurfaceFlingerExtension.cpp b/services/surfaceflinger/QtiExtension/QtiSurfaceFlingerExtension.cpp
+index a25744fc10e18050dd8b2ef9ed8009ffeb34fa52..74bc13046203c84bb30c9486916cdaeb7dd65efa 100644
+--- a/services/surfaceflinger/QtiExtension/QtiSurfaceFlingerExtension.cpp
++++ b/services/surfaceflinger/QtiExtension/QtiSurfaceFlingerExtension.cpp
+@@ -656,7 +656,22 @@ void QtiSurfaceFlingerExtension::qtiSetEarlyWakeUpConfig(const sp<DisplayDevice>
+ 
+ void QtiSurfaceFlingerExtension::qtiUpdateVsyncConfiguration() {
+ #ifdef PHASE_OFFSET_EXTN
+-    if (!g_comp_ext_intf_.phaseOffsetExtnIntf || !mQtiFlinger || !mQtiFlinger->mScheduler ||
++    if (!mQtiFlinger || !mQtiFlinger->mScheduler) {
++        return;
++    }
++
++    if (std::this_thread::get_id() != mQtiFlinger->mMainThreadId) {
++        // IdleTimer can hold mModeTransitionMutex here, while the main thread
++        // holds mStateLock and waits for mModeTransitionMutex. Post without
++        // waiting so the caller can release its lock before this work runs.
++        static_cast<void>(mQtiFlinger->mScheduler->schedule([this] {
++            Mutex::Autolock lock(mQtiFlinger->mStateLock);
++            qtiUpdateVsyncConfiguration();
++        }));
++        return;
++    }
++
++    if (!g_comp_ext_intf_.phaseOffsetExtnIntf ||
+         !mQtiFlinger->mScheduler->getVsyncConfiguration_ptr()) {
+         return;
+     }
+@@ -673,8 +688,17 @@ void QtiSurfaceFlingerExtension::qtiUpdateVsyncConfiguration() {
+         // Populate the fps supported on device in mOffsetCache
+         ConditionalLock lock(mQtiFlinger->mStateLock,
+                              std::this_thread::get_id() != mQtiFlinger->mMainThreadId);
+-        const auto displayOpt = mQtiFlinger->mPhysicalDisplays.get(
+-                mQtiFlinger->getFrontInternalDisplayLocked()->getPhysicalId());
++        // Resolve the display when the queued task runs, since hotplug may
++        // have changed it after the request was posted.
++        const auto internalDisplay = mQtiFlinger->getFrontInternalDisplayLocked();
++        if (!internalDisplay) {
++            return;
++        }
++        const auto displayOpt =
++                mQtiFlinger->mPhysicalDisplays.get(internalDisplay->getPhysicalId());
++        if (!displayOpt) {
++            return;
++        }
+ 
+         const auto& display = displayOpt->get();
+         const auto& snapshot = display.snapshot();

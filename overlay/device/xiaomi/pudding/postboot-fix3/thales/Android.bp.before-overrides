@@ -1,0 +1,131 @@
+cc_prebuilt_binary {
+    name: "PuddingThalesStrongbox",
+    stem: "android.hardware.security.keymint3-service.strongbox.nxp",
+    srcs: ["runtime/android.hardware.security.keymint-service.strongbox-thales"],
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_binary {
+    name: "PuddingThalesWeaver",
+    stem: "android.hardware.weaver-service.nxp",
+    srcs: ["runtime/android.hardware.weaver-service.thales"],
+    vendor: true,
+    relative_install_path: "hw",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_ese_weaver_thales",
+    stem: "ese_weaver_thales",
+    srcs: ["runtime/ese_weaver_thales.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libcppbor",
+    stem: "libcppbor",
+    srcs: ["runtime/libcppbor.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libcppbor_external",
+    stem: "libcppbor_external",
+    srcs: ["runtime/libcppbor_external.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_keymint_thales",
+    stem: "libjc_keymint-thales",
+    srcs: ["runtime/libjc_keymint-thales.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_keymint_transport_thales",
+    stem: "libjc_keymint_transport-thales",
+    srcs: ["runtime/libjc_keymint_transport-thales.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libjc_weaver_transport",
+    stem: "libjc_weaver_transport",
+    srcs: ["runtime/libjc_weaver_transport.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libkeymint_empty_thales",
+    stem: "libkeymint_empty-thales",
+    srcs: ["runtime/libkeymint_empty-thales.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_libweaver_empty_thales",
+    stem: "libweaver_empty-thales",
+    srcs: ["runtime/libweaver_empty-thales.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "PuddingThales_vendor_xiaomi_hardware_miauthsecretd_V1_ndk",
+    stem: "vendor.xiaomi.hardware.miauthsecretd-V1-ndk",
+    srcs: ["runtime/vendor.xiaomi.hardware.miauthsecretd-V1-ndk.so"],
+    vendor: true,
+    relative_install_path: "hw/pudding-thales",
+    compile_multilib: "64",
+    strip: { none: true },
+    // Factory318 blobs, runtime dependency closure checked; no rebuilt cryptographic implementation.
+    check_elf_files: false,
+}

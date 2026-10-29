@@ -1,0 +1,11 @@
+# Platform-owned radio property: unchanged OS4 OEM actions.
+# MIUI ADD: Telephony_CallEnhance
+on property:persist.radio.restart_rild=1
+    stop vendor.qcrild
+    start vendor.qcrild
+on property:persist.radio.restart_rild=2
+    stop vendor.qcrild
+    stop vendor.qcrild2
+    start vendor.qcrild
+    start vendor.qcrild2
+# END Telephony_CallEnhance

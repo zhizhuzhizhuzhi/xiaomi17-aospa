@@ -1,0 +1,95 @@
+diff --git a/init/Android.bp b/init/Android.bp
+index 2783c9b643eba757fc0593e90107ce17c2d996c6..703542f342cfe18e6e4cc26f6856cd1b091e6851 100644
+--- a/init/Android.bp
++++ b/init/Android.bp
+@@ -96,6 +96,7 @@ init_device_sources = [
+     "uevent_dependency_graph.cpp",
+     "ueventd.cpp",
+     "ueventd_parser.cpp",
++    "vendor_init.cpp",
+ ]
+ 
+ soong_config_module_type {
+@@ -243,7 +244,10 @@ cc_defaults {
+     ],
+     whole_static_libs: [
+         "libcap",
+-    ],
++    ] + select(soong_config_variable("libinit", "vendor_init_lib"), {
++        any @ flag_val: [flag_val],
++        default: [],
++    }),
+     header_libs: ["bootimg_headers"],
+     proto: {
+         type: "lite",
+diff --git a/init/property_service.cpp b/init/property_service.cpp
+index b70057f6f53f05dad7cca99113ffc4c2a64d0175..1b9a0fc1b077c378916d17c6d9a934f0f3a86f7d 100644
+--- a/init/property_service.cpp
++++ b/init/property_service.cpp
+@@ -74,6 +74,7 @@
+ #include "subcontext.h"
+ #include "system/core/init/property_service.pb.h"
+ #include "util.h"
++#include "vendor_init.h"
+ 
+ [[maybe_unused]] static constexpr char APPCOMPAT_OVERRIDE_PROP_FOLDERNAME[] =
+         "/dev/__properties__/appcompat_override";
+@@ -1239,6 +1240,9 @@ void PropertyLoadBootDefaults() {
+         }
+     }
+ 
++    // Update with vendor-specific property runtime overrides.
++    vendor_load_properties();
++
+     property_initialize_ro_product_props();
+     property_derive_build_fingerprint();
+ 
+diff --git a/libprocessgroup/processgroup.cpp b/libprocessgroup/processgroup.cpp
+index 7648c21095bd16241db6acf0cc7861432bdfeac5..2a8aef27ad4f5ed775ab955e835a05044b88369b 100644
+--- a/libprocessgroup/processgroup.cpp
++++ b/libprocessgroup/processgroup.cpp
+@@ -213,6 +213,17 @@ bool SetTaskProfiles(pid_t tid, const std::vector<std::string>& profiles, bool u
+                                                        use_fd_cache);
+ }
+ 
++// Legacy Xiaomi camera blobs use the unmangled vendor entry point with the
++// vector<string>, tid, and fd-cache ABI. Delegate to the current implementation.
++#if defined(__ANDROID_VENDOR__)
++bool SetTaskProfilesLegacy(pid_t tid, const std::vector<std::string>& profiles,
++                           bool use_fd_cache) __asm__("SetTaskProfiles");
++bool SetTaskProfilesLegacy(pid_t tid, const std::vector<std::string>& profiles,
++                           bool use_fd_cache) {
++    return SetTaskProfiles(tid, profiles, use_fd_cache);
++}
++#endif
++
+ bool SetTaskProfiles(pid_t tid, std::initializer_list<std::string_view> profiles,
+                      bool use_fd_cache) {
+     return TaskProfiles::GetInstance().SetTaskProfiles(
+diff --git a/rootdir/init.rc b/rootdir/init.rc
+index d35afffcf47152b19f8d23f41196ca4b354212f2..6169aa438854ebca149831472d8046af5fb68a64 100644
+--- a/rootdir/init.rc
++++ b/rootdir/init.rc
+@@ -656,9 +656,9 @@ on late-fs
+ 
+ # Don't enable the bootreceiver tracing instance to save 10MB of memory
+ on late-fs
+-    setprop bootreceiver.enable 0
++    setprop sys.bootreceiver.enable 0
+ 
+-on property:ro.product.cpu.abilist64=* && property:bootreceiver.enable=1
++on property:ro.product.cpu.abilist64=* && property:sys.bootreceiver.enable=1
+     # Set up a tracing instance for system_server to monitor error_report_end events.
+     # These are sent by kernel tools like KASAN and KFENCE when a memory corruption
+     # is detected. This is only needed for 64-bit systems.
+@@ -1313,8 +1313,8 @@ on property:ro.debuggable=1
+     # Give reads to anyone for the accessibility trace folder on debug builds.
+     chmod 0775 /data/misc/a11ytrace
+ 
+-on init && property:ro.debuggable=1
+-    start console
++# Pudding daily builds keep the serial shell disabled.
++# USB ADB remains separately authenticated for bring-up.
+ 
+ # Allow other processes to run `snapshotctl` through `init`. This requires
+ # `set_prop` permission on `snapshotctl_prop`.

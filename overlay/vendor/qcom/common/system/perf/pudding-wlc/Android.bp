@@ -1,0 +1,17 @@
+cc_prebuilt_library_shared {
+    name: "libpudding_wlc_tflite",
+    srcs: ["libpudding_wlc_tflite.so"],
+    system_ext_specific: true,
+    compile_multilib: "64",
+    strip: { none: true },
+    shared_libs: ["liblog", "libpudding_wlc_textclassifier_hash", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "libpudding_wlc_textclassifier_hash",
+    srcs: ["libpudding_wlc_textclassifier_hash.so"],
+    system_ext_specific: true,
+    compile_multilib: "64",
+    strip: { none: true },
+    shared_libs: ["libc++", "libc", "libm", "libdl"],
+}

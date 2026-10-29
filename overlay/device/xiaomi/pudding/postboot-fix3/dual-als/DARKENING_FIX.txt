@@ -1,0 +1,11 @@
+2026-10-27 slow-darkening confirmation, explicitly authorized after fuxi comparison.
+Original stock-policy.jar and its original provenance remain sealed and unchanged.
+Runtime uses darkening-confirmed-policy.jar, reproduced by build_darkening_policy.py with the pinned smali tools.
+Only three rejection regions in DualSensorPolicy change: dual main, dual assist, single main.
+All require slow lux <= the same darkening threshold in addition to existing fast lux and debounce.
+29 other classes and all unrelated instructions in the changed class are identical in canonical sequential-label smali.
+No change to original scheduling, sensor takeover logic, brightening gates, DIM, curve levels or thermal/HBM limits.
+The 50-percent brighter target curve remains in the preceding commit and in native persistent device configuration.
+24 real-instruction boundary cases passed; this is not a full ART or physical-device behavioral test.
+Do not claim the whole runtime first DEX is byte-identical to the original: its three guards are intentionally different.
+Package gate: first runtime DEX equals the derived policy DEX; original stock source SHA remains pinned separately.

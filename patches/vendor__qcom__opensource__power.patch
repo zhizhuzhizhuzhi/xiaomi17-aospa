@@ -1,0 +1,39 @@
+diff --git a/Power.cpp b/Power.cpp
+index be9a1f61083a24470dfda91c9754b447b342acc8..a90a1f308e54b9fdcf774de5cbef61293d65cf6a 100644
+--- a/Power.cpp
++++ b/Power.cpp
+@@ -97,7 +97,15 @@ constexpr size_t enum_size() {
+ ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
+     LOG(INFO) << "Power setMode: " << static_cast<int32_t>(type) << " to: " << enabled;
+ #ifdef MODE_EXT
+-    if (setDeviceSpecificMode(type, enabled)) {
++    bool supported = false;
++    if (isDeviceSpecificModeSupported(type, &supported)) {
++        if (!supported) {
++            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
++        }
++        if (!setDeviceSpecificMode(type, enabled)) {
++            return ndk::ScopedAStatus::fromExceptionCodeWithMessage(
++                    EX_ILLEGAL_STATE, "Device-specific power mode operation failed");
++        }
+         return ndk::ScopedAStatus::ok();
+     }
+ #endif
+diff --git a/config/canoe/powerhint.xml b/config/canoe/powerhint.xml
+index 3efbfb594d6d5fc1bc4d9827006fa6f3993907ef..b7ba1a407ca956ad7d07ffe8d98d1f1521184129 100644
+--- a/config/canoe/powerhint.xml
++++ b/config/canoe/powerhint.xml
+@@ -7,6 +7,13 @@
+ -->
+ <HintConfigs>
+     <Powerhint>
++        <!-- Native EXPENSIVE_RENDERING: preserve P3 while color conversion is active.
++             Canoe level 5 matches the stock 120 Hz large-composition GPU floor.
++             Power HAL releases the lock when SurfaceFlinger ends the scene. -->
++        <Config Id="0x000010A5" Enable="true" Target="canoe" Timeout="0"
++                Resources="0x42804000, 5" />
++
++
+         <!--video encode 30 fps-->
+         <Config
+             Id="0x00001203" Enable="true" Target="canoe,alor,alor_interposer"

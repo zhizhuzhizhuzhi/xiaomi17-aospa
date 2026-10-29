@@ -1,0 +1,7 @@
+2026-10-23 device b0f603a8 pudding; stock 6.5.000250.0 platform signed.
+Vendor metadata discovery patch restores photo-pixel menu: 12.5M -> 50M actually clicked.
+50M output IMG_20261023_000050.jpg 8192x6144 4410608 bytes.
+12.5M output IMG_20261023_000212.jpg 4096x3072 3529954 bytes.
+Camera provider PID 7469 survived both captures; SNPE forward status 0.
+Required runtime dependencies: stock335 libcdsprpc.so and matched335 CDSP firmware plus unsigned shell. CN318 non-CDSP radio firmware unchanged, all files hash compared.
+Front, video, restart persistence and unified package still require verification.
