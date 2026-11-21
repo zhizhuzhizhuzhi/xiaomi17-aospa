@@ -82,5 +82,3 @@ OUT_DIR=out-pudding-user python3 ../aospa-pudding-kit/scripts/package.py "$PWD" 
 - `dependencies.json`：输入哈希清单。
 - `scripts/`：准备、构建和 Fastboot 打包。
 - `licenses/`：上游许可证。
-
-本仓库整理的是当前源码快照，含后置光感防误降亮修改。本次检查不代表重新完成全量编译或实机验证，详见 [验证记录](docs/VALIDATION.md)。

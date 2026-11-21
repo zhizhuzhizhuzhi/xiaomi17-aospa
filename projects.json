@@ -382,7 +382,6 @@
       "overlays/PuddingNativeFaceSettingsOverlay/res/values/config.xml",
       "postboot-fix3/camera-firmware/PROVENANCE.json",
       "postboot-fix3/camera/Android.bp",
-      "postboot-fix3/camera/VALIDATION.txt",
       "postboot-fix3/camera/camera-l8-d.before-vendor-keys.smali",
       "postboot-fix3/camera/camera-recipe.json",
       "postboot-fix3/camera/camera-vendor-keys-fix.patch",
@@ -405,7 +404,6 @@
       "postboot-fix3/dual-als/PROVENANCE.json",
       "postboot-fix3/dual-als/ResourceOverrides.java",
       "postboot-fix3/dual-als/StockHelpers.java",
-      "postboot-fix3/dual-als/VALIDATION.json",
       "postboot-fix3/dual-als/build-development-artifact.sh",
       "postboot-fix3/dual-als/build_darkening_policy.py",
       "postboot-fix3/dual-als/bytecode-preservation-audit.json",
@@ -806,7 +804,6 @@
       "overlays/PuddingNativeFaceSettingsOverlay/res/values/config.xml": "c753144885f747923e937aa2d2a5b0a5a8086830f922effe15120dd5b77bbbdc",
       "postboot-fix3/camera-firmware/PROVENANCE.json": "30c9fd6f1bd0d5f6e7deb1673fecd9afbfc60d01330bd6df376eeb368a6d95c3",
       "postboot-fix3/camera/Android.bp": "f3d30e714404fa78f1e4ca57393a912d8be91723c0f0ef36f3ed37eeef727bda",
-      "postboot-fix3/camera/VALIDATION.txt": "91dc6193c8c55e9d74ff1681c566b0451bea956ea3b4e665154e4ab8dbb8af84",
       "postboot-fix3/camera/camera-l8-d.before-vendor-keys.smali": "5b4e9fb67abee405c5841bf7ebe8affa444bc8622ba359ef0137a099799bbe9e",
       "postboot-fix3/camera/camera-recipe.json": "36517c3156e515b318c0e8f50ae137ad2ffa35572b7546e0bd3f680a8ed245c6",
       "postboot-fix3/camera/camera-vendor-keys-fix.patch": "02f8e81d1f499285567783fd084b2f622ce8c86b97c3cd7d25ed7fc011469f52",
@@ -829,7 +826,6 @@
       "postboot-fix3/dual-als/PROVENANCE.json": "16f1250f3163aec6e63647b5ac1ccc3c305d192f9935e454b7d33c315ae41c16",
       "postboot-fix3/dual-als/ResourceOverrides.java": "c86deb4a3999a4b8c7f070e95ba1044db0b642c0001c23446fb646a6d22b7f06",
       "postboot-fix3/dual-als/StockHelpers.java": "a939437615e4d523fbdcbbc54cc87cb82bbde4bd2ee716b373bb2ce801d53fb7",
-      "postboot-fix3/dual-als/VALIDATION.json": "57c274cd4e0b859fd35410b0570bf2e2fd17b9a3bedd776965522f8c7dba4d28",
       "postboot-fix3/dual-als/build-development-artifact.sh": "686ee211b20aac9c5675963b892f1fc422b9b86730ea97b139316a7c92f89121",
       "postboot-fix3/dual-als/build_darkening_policy.py": "3926ccba60817d73a977ccdc04d23657bf131ac834161d802d23e610cf91fb81",
       "postboot-fix3/dual-als/bytecode-preservation-audit.json": "8591e75ffd7b38041f2488d3c7f1ea269b0affb0ded0d2f12987b9c3b962a733",
@@ -1230,7 +1226,6 @@
       "overlays/PuddingNativeFaceSettingsOverlay/res/values/config.xml": 436,
       "postboot-fix3/camera-firmware/PROVENANCE.json": 436,
       "postboot-fix3/camera/Android.bp": 436,
-      "postboot-fix3/camera/VALIDATION.txt": 436,
       "postboot-fix3/camera/camera-l8-d.before-vendor-keys.smali": 436,
       "postboot-fix3/camera/camera-recipe.json": 436,
       "postboot-fix3/camera/camera-vendor-keys-fix.patch": 436,
@@ -1253,7 +1248,6 @@
       "postboot-fix3/dual-als/PROVENANCE.json": 436,
       "postboot-fix3/dual-als/ResourceOverrides.java": 436,
       "postboot-fix3/dual-als/StockHelpers.java": 436,
-      "postboot-fix3/dual-als/VALIDATION.json": 436,
       "postboot-fix3/dual-als/build-development-artifact.sh": 436,
       "postboot-fix3/dual-als/build_darkening_policy.py": 436,
       "postboot-fix3/dual-als/bytecode-preservation-audit.json": 436,
@@ -1780,11 +1774,6 @@
         "sha256": "f3d30e714404fa78f1e4ca57393a912d8be91723c0f0ef36f3ed37eeef727bda"
       },
       {
-        "path": "postboot-fix3/camera/VALIDATION.txt",
-        "before_sha256": null,
-        "sha256": "91dc6193c8c55e9d74ff1681c566b0451bea956ea3b4e665154e4ab8dbb8af84"
-      },
-      {
         "path": "postboot-fix3/camera/camera-l8-d.before-vendor-keys.smali",
         "before_sha256": null,
         "sha256": "5b4e9fb67abee405c5841bf7ebe8affa444bc8622ba359ef0137a099799bbe9e"
@@ -1893,11 +1882,6 @@
         "path": "postboot-fix3/dual-als/StockHelpers.java",
         "before_sha256": null,
         "sha256": "a939437615e4d523fbdcbbc54cc87cb82bbde4bd2ee716b373bb2ce801d53fb7"
-      },
-      {
-        "path": "postboot-fix3/dual-als/VALIDATION.json",
-        "before_sha256": null,
-        "sha256": "57c274cd4e0b859fd35410b0570bf2e2fd17b9a3bedd776965522f8c7dba4d28"
       },
       {
         "path": "postboot-fix3/dual-als/build-development-artifact.sh",

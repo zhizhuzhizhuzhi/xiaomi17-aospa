@@ -41,4 +41,4 @@ For user, select `user` and use `OUT_DIR=out-pudding-user`. The matched 6.12 pre
 
 Public defaults use development signing. Private APK certificate overrides are opt-in through `PUDDING_RELEASE_KEYS` with matching key/module definitions. `PUDDING_AVB_KEY_PATH` selects an existing AVB key. Selecting user does not perform release signing.
 
-This packages the current source snapshot, including rear-light darkening protection. It is not a new full-build or hardware-validation claim. See [VALIDATION.md](docs/VALIDATION.md) and [licensing](LICENSE.md).
+See [licensing](LICENSE.md).
